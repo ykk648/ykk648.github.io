@@ -6,7 +6,7 @@
       <title>车牌识别工作时间轴</title>
       <link href="/posts/19204/"/>
       <url>/posts/19204/</url>
-      <content type="html"><![CDATA[<p>最近放弃了带遮挡的人脸识别，投身车牌识别的大业，这里的车牌识别是基于国内的、多种类的、恶劣条件下的，可以成为Real or Wild的plate recognition，将时间线和所做工作总结如下，主要同步自实验室的私有gitlab。</p><a id="more"></a><hr><h2 id="说下gitlab"><a href="#说下gitlab" class="headerlink" title="说下gitlab"></a>说下gitlab</h2><p>恰巧guyhub被微软收购了，未来可能会退出CN版的guyhub，当然如果是这样，外网guyhub应该是访问不了了，而国内的服务一定是遵守社会主义核心价值观，像host这样的开源库可能就要被灭绝了。</p><p>我们实验室内部代码交流和项目协作主要使用gitlab，一方面代码不便于在github公开仓库上共享，另一方面放着服务器不搭个写代码的平台也说不过去。gitlab的功能一定是比github更强大更丰富的，目前使用的功能还是比较少，对于git比较熟，所以也算得心应手。</p><hr><h2 id="开源库HyperLPR"><a href="#开源库HyperLPR" class="headerlink" title="开源库HyperLPR"></a>开源库HyperLPR</h2><p><a href="https://github.com/zeusees/HyperLPR" target="_blank" rel="noopener">HyperLPR</a>是基于深度学习的高性能中文车牌识别开源库，这里做一些研究，目前发现的问题有：</p><ul><li>EasyPR的数据集准确率并不高，大概60%？远达不到宣称的90%</li><li>框架使用深度学习，训练网络时数据集应该不够多，效果差强人意</li></ul><p>目前发现的优点有：</p><ul><li>端到端的神经网络训练模型进行车牌字符识别</li><li>代码比较轻量</li></ul><h3 id="工作流程分析"><a href="#工作流程分析" class="headerlink" title="工作流程分析"></a>工作流程分析</h3><p>对HyperLPR一个完整的车牌识别工作流程进行分析：</p><ol><li>batch.py  批量处理工具 批量读取文件调用pipline</li><li>pipline调用SimpleRecognizePlate函数（SimpleRecognizePlateByE2E ？）</li><li>detectPlateRough 传入灰度图 参数如下<ul><li>resize_h </li><li>en_scale</li><li>top_bottom_padding_rate</li></ul></li><li>调用模型’./model/cascade.xml’ 使用opencv中CascadeClassifier的detectMultiScale多尺度检测</li><li>车牌粗定位完成 进行SimplePredict 使用”./model/plate_type.h5”模型确定车牌类别（神经网络）</li><li>如果车型判断成功 对车牌进行bitwise_not二值化反色处理</li><li>调用finemapping中的精定位算法findContoursAndDrawBoundingBox</li><li>调用finemapping中的”./model/model12.h5”左右边界回归  进行垂直精定位算法finemappingVertical</li><li>调用e2e 使用模型”./model/ocr_plate_all_w_rnn_2.h5” 端到端字符识别  只输出不使用？</li><li>校正完成 使用segmentation中的slidingWindowsEval 进行文字分割和识别</li><li>置信度判断和输出</li></ol><p>注意事项：</p><ul><li>ocr_plate_all_gru.h5 作为序列模型效果更好，但是更慢  以上过程中未使用</li></ul><hr><p>## </p><p>### </p><hr>]]></content>
+      <content type="html"><![CDATA[<p>最近放弃了带遮挡的人脸识别，投身车牌识别的大业，这里的车牌识别是基于国内的、多种类的、恶劣条件下的，可以成为Real or Wild的plate recognition，将时间线和所做工作总结如下，主要同步自实验室的私有gitlab。</p><a id="more"></a><hr><h2 id="说下gitlab"><a href="#说下gitlab" class="headerlink" title="说下gitlab"></a>说下gitlab</h2><p>恰巧guyhub被微软收购了，未来可能会退出CN版的guyhub，当然如果是这样，外网guyhub应该是访问不了了，而国内的服务一定是遵守社会主义核心价值观，像host这样的开源库可能就要被灭绝了。</p><p>我们实验室内部代码交流和项目协作主要使用gitlab，一方面代码不便于在github公开仓库上共享，另一方面放着服务器不搭个写代码的平台也说不过去。gitlab的功能一定是比github更强大更丰富的，目前使用的功能还是比较少，对于git比较熟，所以也算得心应手。</p><hr><h2 id="开源库HyperLPR"><a href="#开源库HyperLPR" class="headerlink" title="开源库HyperLPR"></a>开源库HyperLPR</h2><p><a href="https://github.com/zeusees/HyperLPR" target="_blank" rel="noopener">HyperLPR</a>是基于深度学习的高性能中文车牌识别开源库，这里做一些研究，目前发现的问题有：</p><ul><li>EasyPR的数据集准确率并不高，大概60%？远达不到宣称的90%</li><li>框架使用深度学习，训练网络时数据集应该不够多，效果差强人意</li></ul><p>目前发现的优点有：</p><ul><li>端到端的神经网络训练模型进行车牌字符识别</li><li>代码比较轻量</li></ul><h3 id="工作流程分析"><a href="#工作流程分析" class="headerlink" title="工作流程分析"></a>工作流程分析</h3><p>对HyperLPR一个完整的车牌识别工作流程进行分析：</p><ol><li>batch.py  批量处理工具 批量读取文件调用pipline</li><li>pipline调用SimpleRecognizePlate函数（SimpleRecognizePlateByE2E ？）</li><li>detectPlateRough 传入灰度图 参数如下<ul><li>resize_h </li><li>en_scale</li><li>top_bottom_padding_rate</li></ul></li><li>调用模型’./model/cascade.xml’ 使用opencv中CascadeClassifier的detectMultiScale多尺度检测</li><li>车牌粗定位完成 进行SimplePredict 使用”./model/plate_type.h5”模型确定车牌类别（神经网络）</li><li>如果车型判断成功 对车牌进行bitwise_not二值化反色处理</li><li>调用finemapping中的精定位算法findContoursAndDrawBoundingBox</li><li>调用finemapping中的”./model/model12.h5”左右边界回归  进行垂直精定位算法finemappingVertical</li><li>调用e2e 使用模型”./model/ocr_plate_all_w_rnn_2.h5” 端到端字符识别  只输出不使用？</li><li>校正完成 使用segmentation中的slidingWindowsEval 进行文字分割和识别</li><li>置信度判断和输出</li></ol><p>注意事项：</p><ul><li>ocr_plate_all_gru.h5 作为序列模型效果更好，但是更慢  以上过程中未使用</li></ul><h3 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h3><h3 id="模型的训练程序"><a href="#模型的训练程序" class="headerlink" title="模型的训练程序"></a>模型的训练程序</h3><h3 id="框架的改进思路"><a href="#框架的改进思路" class="headerlink" title="框架的改进思路"></a>框架的改进思路</h3><hr><p>## </p><p>### </p><hr>]]></content>
       
       <categories>
           
@@ -640,9 +640,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 扯淡 </tag>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -817,11 +817,11 @@
       
         <tags>
             
+            <tag> Markdown </tag>
+            
             <tag> Hexo </tag>
             
             <tag> Tools </tag>
-            
-            <tag> Markdown </tag>
             
             <tag> Github </tag>
             
@@ -844,9 +844,9 @@
       
         <tags>
             
-            <tag> Markdown </tag>
-            
             <tag> 扯淡 </tag>
+            
+            <tag> Markdown </tag>
             
         </tags>
       

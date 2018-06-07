@@ -5,9 +5,9 @@
   <subtitle>Carpe diem</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://ykksmile.top/"/>
+  <link href="https://ykksmile.top/"/>
   <updated>2018-06-07T07:18:19.054Z</updated>
-  <id>http://ykksmile.top/</id>
+  <id>https://ykksmile.top/</id>
   
   <author>
     <name>Ykk</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>dorahacks</title>
-    <link href="http://ykksmile.top/posts/8806/"/>
-    <id>http://ykksmile.top/posts/8806/</id>
+    <link href="https://ykksmile.top/posts/8806/"/>
+    <id>https://ykksmile.top/posts/8806/</id>
     <published>2018-06-07T07:05:05.000Z</published>
     <updated>2018-06-07T07:18:19.054Z</updated>
     
@@ -50,8 +50,8 @@
   
   <entry>
     <title>车牌识别工作时间轴</title>
-    <link href="http://ykksmile.top/posts/19204/"/>
-    <id>http://ykksmile.top/posts/19204/</id>
+    <link href="https://ykksmile.top/posts/19204/"/>
+    <id>https://ykksmile.top/posts/19204/</id>
     <published>2018-06-05T11:46:23.000Z</published>
     <updated>2018-06-05T14:41:58.299Z</updated>
     
@@ -63,25 +63,25 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
-      <category term="比赛" scheme="http://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
+      <category term="比赛" scheme="https://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
     
     
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
+      <category term="Python" scheme="https://ykksmile.top/tags/Python/"/>
     
-      <category term="MachineLearning" scheme="http://ykksmile.top/tags/MachineLearning/"/>
+      <category term="MachineLearning" scheme="https://ykksmile.top/tags/MachineLearning/"/>
     
-      <category term="DeepLearning" scheme="http://ykksmile.top/tags/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://ykksmile.top/tags/DeepLearning/"/>
     
-      <category term="PlateRecogniton" scheme="http://ykksmile.top/tags/PlateRecogniton/"/>
+      <category term="PlateRecogniton" scheme="https://ykksmile.top/tags/PlateRecogniton/"/>
     
   </entry>
   
   <entry>
     <title>2018华为网赛云主机操作合集</title>
-    <link href="http://ykksmile.top/posts/14112/"/>
-    <id>http://ykksmile.top/posts/14112/</id>
+    <link href="https://ykksmile.top/posts/14112/"/>
+    <id>https://ykksmile.top/posts/14112/</id>
     <published>2018-05-18T11:17:36.000Z</published>
     <updated>2018-06-05T11:45:57.289Z</updated>
     
@@ -93,19 +93,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
-      <category term="比赛" scheme="http://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
+      <category term="比赛" scheme="https://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
     
     
-      <category term="Linux" scheme="http://ykksmile.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://ykksmile.top/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>有遮挡的人脸识别论文阅读整理</title>
-    <link href="http://ykksmile.top/posts/9363/"/>
-    <id>http://ykksmile.top/posts/9363/</id>
+    <link href="https://ykksmile.top/posts/9363/"/>
+    <id>https://ykksmile.top/posts/9363/</id>
     <published>2018-05-14T02:29:36.000Z</published>
     <updated>2018-06-05T11:46:02.036Z</updated>
     
@@ -117,21 +117,21 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
-      <category term="比赛" scheme="http://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
+      <category term="比赛" scheme="https://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
     
     
-      <category term="MachineLearning" scheme="http://ykksmile.top/tags/MachineLearning/"/>
+      <category term="MachineLearning" scheme="https://ykksmile.top/tags/MachineLearning/"/>
     
-      <category term="FaceRecognition" scheme="http://ykksmile.top/tags/FaceRecognition/"/>
+      <category term="FaceRecognition" scheme="https://ykksmile.top/tags/FaceRecognition/"/>
     
   </entry>
   
   <entry>
     <title>机器学习路线和清单</title>
-    <link href="http://ykksmile.top/posts/17158/"/>
-    <id>http://ykksmile.top/posts/17158/</id>
+    <link href="https://ykksmile.top/posts/17158/"/>
+    <id>https://ykksmile.top/posts/17158/</id>
     <published>2018-05-12T03:03:45.000Z</published>
     <updated>2018-06-05T11:44:35.455Z</updated>
     
@@ -143,21 +143,21 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
-      <category term="机器学习" scheme="http://ykksmile.top/categories/Notes/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="https://ykksmile.top/categories/Notes/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
+      <category term="Python" scheme="https://ykksmile.top/tags/Python/"/>
     
-      <category term="MachineLearning" scheme="http://ykksmile.top/tags/MachineLearning/"/>
+      <category term="MachineLearning" scheme="https://ykksmile.top/tags/MachineLearning/"/>
     
   </entry>
   
   <entry>
     <title>华为2018网络大赛超纲内容整理</title>
-    <link href="http://ykksmile.top/posts/27479/"/>
-    <id>http://ykksmile.top/posts/27479/</id>
+    <link href="https://ykksmile.top/posts/27479/"/>
+    <id>https://ykksmile.top/posts/27479/</id>
     <published>2018-04-20T05:28:46.000Z</published>
     <updated>2018-06-05T11:45:18.491Z</updated>
     
@@ -169,25 +169,25 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
-      <category term="比赛" scheme="http://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
+      <category term="比赛" scheme="https://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
     
     
-      <category term="大数据" scheme="http://ykksmile.top/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+      <category term="大数据" scheme="https://ykksmile.top/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
-      <category term="云计算" scheme="http://ykksmile.top/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+      <category term="云计算" scheme="https://ykksmile.top/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
     
-      <category term="Docker" scheme="http://ykksmile.top/tags/Docker/"/>
+      <category term="Docker" scheme="https://ykksmile.top/tags/Docker/"/>
     
-      <category term="微服务" scheme="http://ykksmile.top/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="微服务" scheme="https://ykksmile.top/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
   <entry>
     <title>华为2018软件精英挑战赛初赛记录</title>
-    <link href="http://ykksmile.top/posts/59415/"/>
-    <id>http://ykksmile.top/posts/59415/</id>
+    <link href="https://ykksmile.top/posts/59415/"/>
+    <id>https://ykksmile.top/posts/59415/</id>
     <published>2018-04-16T12:58:36.000Z</published>
     <updated>2018-06-04T12:48:20.268Z</updated>
     
@@ -199,19 +199,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
     
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
+      <category term="Python" scheme="https://ykksmile.top/tags/Python/"/>
     
-      <category term="MachineLearning" scheme="http://ykksmile.top/tags/MachineLearning/"/>
+      <category term="MachineLearning" scheme="https://ykksmile.top/tags/MachineLearning/"/>
     
   </entry>
   
   <entry>
     <title>C程序在linux下的segmentation-fault（core-dumped）</title>
-    <link href="http://ykksmile.top/posts/38716/"/>
-    <id>http://ykksmile.top/posts/38716/</id>
+    <link href="https://ykksmile.top/posts/38716/"/>
+    <id>https://ykksmile.top/posts/38716/</id>
     <published>2018-04-16T12:46:32.000Z</published>
     <updated>2018-06-04T12:48:20.282Z</updated>
     
@@ -223,19 +223,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
     
-      <category term="Linux" scheme="http://ykksmile.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://ykksmile.top/tags/Linux/"/>
     
-      <category term="C" scheme="http://ykksmile.top/tags/C/"/>
+      <category term="C" scheme="https://ykksmile.top/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>使用pycharm来进行git版本控制</title>
-    <link href="http://ykksmile.top/posts/26852/"/>
-    <id>http://ykksmile.top/posts/26852/</id>
+    <link href="https://ykksmile.top/posts/26852/"/>
+    <id>https://ykksmile.top/posts/26852/</id>
     <published>2018-04-08T08:32:04.000Z</published>
     <updated>2018-06-04T12:48:20.253Z</updated>
     
@@ -247,19 +247,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
     
-      <category term="Git" scheme="http://ykksmile.top/tags/Git/"/>
+      <category term="Git" scheme="https://ykksmile.top/tags/Git/"/>
     
-      <category term="Pycharm" scheme="http://ykksmile.top/tags/Pycharm/"/>
+      <category term="Pycharm" scheme="https://ykksmile.top/tags/Pycharm/"/>
     
   </entry>
   
   <entry>
     <title>leetcode数组思路总结</title>
-    <link href="http://ykksmile.top/posts/47967/"/>
-    <id>http://ykksmile.top/posts/47967/</id>
+    <link href="https://ykksmile.top/posts/47967/"/>
+    <id>https://ykksmile.top/posts/47967/</id>
     <published>2018-03-12T08:46:29.000Z</published>
     <updated>2018-06-04T12:48:20.206Z</updated>
     
@@ -271,19 +271,19 @@
     
     </summary>
     
-      <category term="Codes" scheme="http://ykksmile.top/categories/Codes/"/>
+      <category term="Codes" scheme="https://ykksmile.top/categories/Codes/"/>
     
     
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
+      <category term="Python" scheme="https://ykksmile.top/tags/Python/"/>
     
-      <category term="Leetcode" scheme="http://ykksmile.top/tags/Leetcode/"/>
+      <category term="Leetcode" scheme="https://ykksmile.top/tags/Leetcode/"/>
     
   </entry>
   
   <entry>
     <title>leetcode位运算思路总结</title>
-    <link href="http://ykksmile.top/posts/24951/"/>
-    <id>http://ykksmile.top/posts/24951/</id>
+    <link href="https://ykksmile.top/posts/24951/"/>
+    <id>https://ykksmile.top/posts/24951/</id>
     <published>2018-03-12T07:07:20.000Z</published>
     <updated>2018-06-04T12:48:20.219Z</updated>
     
@@ -295,19 +295,19 @@
     
     </summary>
     
-      <category term="Codes" scheme="http://ykksmile.top/categories/Codes/"/>
+      <category term="Codes" scheme="https://ykksmile.top/categories/Codes/"/>
     
     
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
+      <category term="Python" scheme="https://ykksmile.top/tags/Python/"/>
     
-      <category term="Leetcode" scheme="http://ykksmile.top/tags/Leetcode/"/>
+      <category term="Leetcode" scheme="https://ykksmile.top/tags/Leetcode/"/>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="http://ykksmile.top/posts/8/"/>
-    <id>http://ykksmile.top/posts/8/</id>
+    <link href="https://ykksmile.top/posts/8/"/>
+    <id>https://ykksmile.top/posts/8/</id>
     <published>2018-03-11T16:00:00.000Z</published>
     <updated>2018-06-04T12:48:20.634Z</updated>
     
@@ -320,8 +320,8 @@
   
   <entry>
     <title>面试准备阅读列表</title>
-    <link href="http://ykksmile.top/posts/55073/"/>
-    <id>http://ykksmile.top/posts/55073/</id>
+    <link href="https://ykksmile.top/posts/55073/"/>
+    <id>https://ykksmile.top/posts/55073/</id>
     <published>2018-03-07T08:07:00.000Z</published>
     <updated>2018-06-05T11:41:22.523Z</updated>
     
@@ -333,17 +333,17 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
     
-      <category term="MachineLearning" scheme="http://ykksmile.top/tags/MachineLearning/"/>
+      <category term="MachineLearning" scheme="https://ykksmile.top/tags/MachineLearning/"/>
     
   </entry>
   
   <entry>
     <title>google机器学习速成课程总结</title>
-    <link href="http://ykksmile.top/posts/61970/"/>
-    <id>http://ykksmile.top/posts/61970/</id>
+    <link href="https://ykksmile.top/posts/61970/"/>
+    <id>https://ykksmile.top/posts/61970/</id>
     <published>2018-03-05T06:13:00.000Z</published>
     <updated>2018-06-04T12:48:20.176Z</updated>
     
@@ -355,21 +355,21 @@
     
     </summary>
     
-      <category term="Notes" scheme="http://ykksmile.top/categories/Notes/"/>
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
     
     
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
+      <category term="Python" scheme="https://ykksmile.top/tags/Python/"/>
     
-      <category term="MachineLearning" scheme="http://ykksmile.top/tags/MachineLearning/"/>
+      <category term="MachineLearning" scheme="https://ykksmile.top/tags/MachineLearning/"/>
     
-      <category term="TensorFlow" scheme="http://ykksmile.top/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="https://ykksmile.top/tags/TensorFlow/"/>
     
   </entry>
   
   <entry>
     <title>关于Python元类metaclass和在ORM中的应用</title>
-    <link href="http://ykksmile.top/posts/29034/"/>
-    <id>http://ykksmile.top/posts/29034/</id>
+    <link href="https://ykksmile.top/posts/29034/"/>
+    <id>https://ykksmile.top/posts/29034/</id>
     <published>2018-01-24T11:02:34.000Z</published>
     <updated>2018-06-04T12:48:20.154Z</updated>
     
@@ -381,17 +381,17 @@
     
     </summary>
     
-      <category term="Codes" scheme="http://ykksmile.top/categories/Codes/"/>
+      <category term="Codes" scheme="https://ykksmile.top/categories/Codes/"/>
     
     
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
+      <category term="Python" scheme="https://ykksmile.top/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="http://ykksmile.top/posts/7/"/>
-    <id>http://ykksmile.top/posts/7/</id>
+    <link href="https://ykksmile.top/posts/7/"/>
+    <id>https://ykksmile.top/posts/7/</id>
     <published>2018-01-16T16:00:00.000Z</published>
     <updated>2018-06-04T12:48:20.633Z</updated>
     
@@ -404,8 +404,8 @@
   
   <entry>
     <title></title>
-    <link href="http://ykksmile.top/posts/6/"/>
-    <id>http://ykksmile.top/posts/6/</id>
+    <link href="https://ykksmile.top/posts/6/"/>
+    <id>https://ykksmile.top/posts/6/</id>
     <published>2018-01-11T16:00:00.000Z</published>
     <updated>2018-06-04T12:48:20.633Z</updated>
     
@@ -418,8 +418,8 @@
   
   <entry>
     <title>蓄水池抽样证明以及例题</title>
-    <link href="http://ykksmile.top/posts/62400/"/>
-    <id>http://ykksmile.top/posts/62400/</id>
+    <link href="https://ykksmile.top/posts/62400/"/>
+    <id>https://ykksmile.top/posts/62400/</id>
     <published>2018-01-04T13:44:51.000Z</published>
     <updated>2018-06-04T12:48:20.047Z</updated>
     
@@ -431,19 +431,19 @@
     
     </summary>
     
-      <category term="Codes" scheme="http://ykksmile.top/categories/Codes/"/>
+      <category term="Codes" scheme="https://ykksmile.top/categories/Codes/"/>
     
     
-      <category term="算法" scheme="http://ykksmile.top/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://ykksmile.top/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="Java" scheme="http://ykksmile.top/tags/Java/"/>
+      <category term="Java" scheme="https://ykksmile.top/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>关于二叉树的算法题</title>
-    <link href="http://ykksmile.top/posts/17951/"/>
-    <id>http://ykksmile.top/posts/17951/</id>
+    <link href="https://ykksmile.top/posts/17951/"/>
+    <id>https://ykksmile.top/posts/17951/</id>
     <published>2017-12-18T12:31:28.000Z</published>
     <updated>2018-06-04T12:48:20.023Z</updated>
     
@@ -455,19 +455,19 @@
     
     </summary>
     
-      <category term="Codes" scheme="http://ykksmile.top/categories/Codes/"/>
+      <category term="Codes" scheme="https://ykksmile.top/categories/Codes/"/>
     
     
-      <category term="算法" scheme="http://ykksmile.top/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://ykksmile.top/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="Java" scheme="http://ykksmile.top/tags/Java/"/>
+      <category term="Java" scheme="https://ykksmile.top/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="http://ykksmile.top/posts/5/"/>
-    <id>http://ykksmile.top/posts/5/</id>
+    <link href="https://ykksmile.top/posts/5/"/>
+    <id>https://ykksmile.top/posts/5/</id>
     <published>2017-12-15T16:00:00.000Z</published>
     <updated>2018-06-04T12:48:20.632Z</updated>
     

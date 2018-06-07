@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="VPN问题和科学上网地址"><meta name="keywords" content="Ubuntu,VPN"><meta name="author" content="Ykk,undefined"><meta name="copyright" content="Ykk"><title>VPN问题和科学上网地址 | Ykk</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.4"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://unpkg.com"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitment@latest/style/default.css"><script src="https://unpkg.com/gitment@latest/dist/gitment.browser.js"></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  localSearch: {"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}"},"path":"search.xml"}
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VPN选择"><span class="toc-number">2.</span> <span class="toc-text">VPN选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#科学上网-google镜像"><span class="toc-number">3.</span> <span class="toc-text">科学上网-google镜像</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://blog-1252404748.cos.ap-chengdu.myqcloud.com/avatar.jpg"></div><div class="author-info__name text-center">Ykk</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/cloisonne" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">43</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">34</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">6</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://blog-1252404748.cos.ap-chengdu.myqcloud.com/bg-1.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Ykk</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/about">About</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">VPN问题和科学上网地址</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-07-23</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Notes/">Notes</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1,240</span><span class="post-meta__separator">|</span><span>Reading time: 6 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div id="post-content"><p>因为需要访问<code>GNU Radio</code>，需要翻墙，很自然的想到在Ubuntu16.04里使用VPN。<br>遇到的问题是VPN无法正常启动服务，<del>至今仍未解决</del>,<strong>该问题已经解决</strong>。</p>
+<a id="more"></a>
+<hr>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
+<p>问题主要是在Ubuntu16.04系统中使用VPN无法启动服务，syslog如下：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: &lt;error&gt; [1469281506.9518] platform-linux: <span class="keyword">do</span>-change-link[9]: failure changing link: failure 19 (没有那个设备)</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: &lt;warn&gt;  [1469281506.9518] device (ppp0): failed to <span class="built_in">disable</span> userspace IPv6LL address handling</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 gnome-session[3306]: Gjs-Message: JS LOG: Removing a network device that was not added</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: &lt;info&gt;  [1469281506.9549] devices removed (path: /sys/devices/virtual/net/ppp0, iface: ppp0)</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: ** Message: nm-pptp-ppp-plugin: (nm_phasechange): status 1 / phase <span class="string">'dead'</span></span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: ** Message: nm-pptp-ppp-plugin: (nm_exit_notify): cleaning up</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 pptp[5371]: nm-pptp-service-5359 warn[decaps_hdlc:pptp_gre.c:220]: short <span class="built_in">read</span> (-1): Input/output error</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 pptp[5371]: nm-pptp-service-5359 warn[decaps_hdlc:pptp_gre.c:232]: pppd may have shutdown, see pppd <span class="built_in">log</span></span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 pptp[5386]: nm-pptp-service-5359 <span class="built_in">log</span>[callmgr_main:pptp_callmgr.c:245]: Closing connection (unhandled)</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 pptp[5386]: nm-pptp-service-5359 <span class="built_in">log</span>[ctrlp_rep:pptp_ctrl.c:259]: Sent control packet <span class="built_in">type</span> is 12 <span class="string">'Call-Clear-Request'</span></span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 pppd[5366]: Exit.</span><br><span class="line">Jul 23 21:45:06 tyler-QTJ5 pptp[5386]: nm-pptp-service-5359 <span class="built_in">log</span>[call_callback:pptp_callmgr.c:84]: Closing connection (call state)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>和自己的网络状况以及VPN的设置有关</p>
+</blockquote>
+<hr>
+<h3 id="VPN选择"><a href="#VPN选择" class="headerlink" title="VPN选择"></a>VPN选择</h3><ol>
+<li><strong>Lantern</strong>: <a href="https://github.com/getlantern/forum/issues/833" target="_blank" rel="noopener">https://github.com/getlantern/forum/issues/833</a>  <strong>每月800M免费流量，WIN10旧版本无限流量</strong></li>
+<li><strong>天行VPN</strong></li>
+</ol>
+<hr>
+<h3 id="科学上网-google镜像"><a href="#科学上网-google镜像" class="headerlink" title="科学上网-google镜像"></a>科学上网-google镜像</h3><ol>
+<li><strong>快搜</strong>: <a href="http://so.chongbuluo.com/" target="_blank" rel="noopener">http://so.chongbuluo.com/</a>   // 比较推荐</li>
+<li><strong>谷歌镜像大全</strong>: <a href="http://google.adwiki.cn/" target="_blank" rel="noopener">http://google.adwiki.cn/</a> </li>
+</ol>
+<hr>
+<p><code>以下为转载：</code></p>
+<blockquote>
+</blockquote>
+<p> 原版页面：</p>
+<p><a href="https://go.coolnull.com/" target="_blank" rel="noopener">https://go.coolnull.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://google.suanfazu.com/" target="_blank" rel="noopener">http://google.suanfazu.com/</a> （整合搜索，非原版，相对稳定）</p>
+<p><a href="https://g.jikewenku.cn/" target="_blank" rel="noopener">https://g.jikewenku.cn/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://g.chenjx.cn/" target="_blank" rel="noopener">https://g.chenjx.cn/</a> （无广告，体验良好</p>
+<p><a href="https://g.namaho.com/" target="_blank" rel="noopener">https://g.namaho.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://g.starmoe.xyz/" target="_blank" rel="noopener">https://g.starmoe.xyz/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://g.linuxeye.com" target="_blank" rel="noopener">https://g.linuxeye.com</a> （无广告，搜索体验良好）</p>
+<p><a href="https://g.inspire-energy.com.cn/" target="_blank" rel="noopener">https://g.inspire-energy.com.cn/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://www.ytso.cc/" target="_blank" rel="noopener">https://www.ytso.cc/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://soguge.ga" target="_blank" rel="noopener">https://soguge.ga</a> （无广告，搜索体验良好）</p>
+<p><a href="https://ggg.eeload.com/" target="_blank" rel="noopener">https://ggg.eeload.com/</a> （无广告，体验良好）</p>
+<p><a href="https://letsgg.tk/" target="_blank" rel="noopener">https://letsgg.tk/</a> （无广告，体验良好）</p>
+<p><a href="https://google.kfd.me/" target="_blank" rel="noopener">https://google.kfd.me/</a> （先访问主站，然后点击google）</p>
+<p><a href="https://www.guge.xxx/" target="_blank" rel="noopener">https://www.guge.xxx/</a> （无广告，体验良好）</p>
+<p><a href="http://ljy2345.esy.es/" target="_blank" rel="noopener">http://ljy2345.esy.es/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://gg.aiorai.com/" target="_blank" rel="noopener">http://gg.aiorai.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://ggso.gq/" target="_blank" rel="noopener">http://ggso.gq/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://gg.qwghq.com/" target="_blank" rel="noopener">http://gg.qwghq.com/</a> （无广告，体验良好）</p>
+<p><a href="http://bc60042.byethost13.com/" target="_blank" rel="noopener">http://bc60042.byethost13.com/</a> （无广告，体验良好）</p>
+<p><a href="http://gc.ihuan.me/" target="_blank" rel="noopener">http://gc.ihuan.me/</a>  （无广告，体验良好）</p>
+<p><a href="http://www.nginxgoogle.com/" target="_blank" rel="noopener">http://www.nginxgoogle.com/</a> （无广告，体验良好）</p>
+<p><a href="https://julianhuang.cc/" target="_blank" rel="noopener">https://julianhuang.cc/</a> （无广告，体验良好）</p>
+<p><a href="http://baidusb.tk/" target="_blank" rel="noopener">http://baidusb.tk/</a> （无广告，体验良好）</p>
+<p><a href="http://45.78.38.197/" target="_blank" rel="noopener">http://45.78.38.197/</a> （无广告，体验良好）</p>
+<p><a href="https://ggso.co/" target="_blank" rel="noopener">https://ggso.co/</a> （无广告，体验良好）</p>
+<p><a href="http://glgoo.jsylhs.com/" target="_blank" rel="noopener">http://glgoo.jsylhs.com/</a> （有广告，体验一般）</p>
+<p><a href="https://g.hancel.net/" target="_blank" rel="noopener">https://g.hancel.net/</a> （无广告，体验良好）</p>
+<p><a href="https://g.v2fr.ml" target="_blank" rel="noopener">https://g.v2fr.ml</a> （无广告，搜索体验良好）</p>
+<p><a href="http://scholar.hntvchina.com/" target="_blank" rel="noopener">http://scholar.hntvchina.com/</a> （无广告，体验良好）</p>
+<p><a href="http://lujinjie.win/" target="_blank" rel="noopener">http://lujinjie.win/</a> （无广告，体验良好）</p>
+<p><a href="http://so.biochen.com/" target="_blank" rel="noopener">http://so.biochen.com/</a> （无广告，体验良好）</p>
+<p><a href="http://gg.huwaige.com/" target="_blank" rel="noopener">http://gg.huwaige.com/</a> （有弹窗广告，体验不是很好）</p>
+<p><a href="http://guge.ro.lt/" target="_blank" rel="noopener">http://guge.ro.lt/</a> （有弹窗广告，体验不是很好）</p>
+<p><a href="http://free.8090st.com/" target="_blank" rel="noopener">http://free.8090st.com/</a> （有弹窗广告，体验不是很好）</p>
+<p><a href="https://fq.yanke.info" target="_blank" rel="noopener">https://fq.yanke.info</a> （无广告，搜索体验良好）</p>
+<p><a href="https://g.glv.io/" target="_blank" rel="noopener">https://g.glv.io/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://www.jumper.site/" target="_blank" rel="noopener">http://www.jumper.site/</a> （无广告，体验良好）</p>
+<p><a href="http://3.zzq2.com/" target="_blank" rel="noopener">http://3.zzq2.com/</a> （无广告，体验良好）</p>
+<p><a href="https://ggso.me/" target="_blank" rel="noopener">https://ggso.me/</a> （无广告，体验良好）</p>
+<p><a href="http://fuckbaidu.bid" target="_blank" rel="noopener">http://fuckbaidu.bid</a>  （已被污染，建议访问对应ip地址：<a href="http://198.12.101.102/）" target="_blank" rel="noopener">http://198.12.101.102/）</a></p>
+<p><a href="http://forkgil.com/" target="_blank" rel="noopener">http://forkgil.com/</a> （无广告，体验良好）</p>
+<p><a href="https://aigg.info" target="_blank" rel="noopener">https://aigg.info</a> （无广告，体验良好）</p>
+<p><a href="https://g.wxbit.com/" target="_blank" rel="noopener">https://g.wxbit.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://g.fity.cn/" target="_blank" rel="noopener">http://g.fity.cn/</a> （无广告，体验良好）</p>
+<p><a href="https://ykooh.com/" target="_blank" rel="noopener">https://ykooh.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://www.onk6.com" target="_blank" rel="noopener">https://www.onk6.com</a> （无广告，体验良好）</p>
+<blockquote>
+<p>谷歌学术</p>
+</blockquote>
+<p><a href="https://xueshu.glgoo.org/" target="_blank" rel="noopener">https://xueshu.glgoo.org/</a> </p>
+<p><a href="http://gg.qwghq.com/scholar/" target="_blank" rel="noopener">http://gg.qwghq.com/scholar/</a></p>
+<p><a href="http://xueshu.51google.pw/" target="_blank" rel="noopener">http://xueshu.51google.pw/</a></p>
+<p><a href="https://ggso.co/scholar" target="_blank" rel="noopener">https://ggso.co/scholar</a></p>
+<p><a href="https://www.scholar.live/" target="_blank" rel="noopener">https://www.scholar.live/</a> </p>
+<p><a href="https://g.glv.io/extdomains/scholar.google.com/" target="_blank" rel="noopener">https://g.glv.io/extdomains/scholar.google.com/</a></p>
+<blockquote>
+<p>变种网页：</p>
+</blockquote>
+<p><a href="http://www.gfsousou.cn/" target="_blank" rel="noopener">http://www.gfsousou.cn/</a> （谷粉搜搜）</p>
+<p><a href="http://www.51google.pw/" target="_blank" rel="noopener">http://www.51google.pw/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://www.dcrss.com/" target="_blank" rel="noopener">https://www.dcrss.com/</a> （google学术和网页）</p>
+<p><a href="http://www.ibying.com/" target="_blank" rel="noopener">http://www.ibying.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://www.ssdao.com/" target="_blank" rel="noopener">http://www.ssdao.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="https://gfsoso.8090st.com/" target="_blank" rel="noopener">https://gfsoso.8090st.com/</a> （无广告，搜索体验良好）</p>
+<p><a href="http://lige.aclstack.com/" target="_blank" rel="noopener">http://lige.aclstack.com/</a> （无广告，体验良好）</p>
+<p><a href="http://g.sjswdh.com/" target="_blank" rel="noopener">http://g.sjswdh.com/</a> （无广告，体验良好）</p>
+<p><a href="http://search.twcc.com/" target="_blank" rel="noopener">http://search.twcc.com/</a>  （无广告，体验良好）</p>
+<p><a href="http://wangye.wallpai.com/" target="_blank" rel="noopener">http://wangye.wallpai.com/</a> （无广告，体验良好）</p>
+<p><a href="https://www.tlss.space/" target="_blank" rel="noopener">https://www.tlss.space/</a> （无广告，体验良好）</p>
+<p><a href="http://google.aiorai.com/" target="_blank" rel="noopener">http://google.aiorai.com/</a> （有广告，体验一般）</p>
+<p><a href="http://mob.wallpai.com/" target="_blank" rel="noopener">http://mob.wallpai.com/</a> （有广告，体验还行）</p>
+<p><a href="http://www.gfss.cc/" target="_blank" rel="noopener">http://www.gfss.cc/</a> （有广告，体验还行）</p>
+<p><a href="https://www.googto.com/" target="_blank" rel="noopener">https://www.googto.com/</a> （<a href="https://www.googto.net）" target="_blank" rel="noopener">https://www.googto.net）</a></p>
+<p><a href="http://fcczp3.huwaige.com/" target="_blank" rel="noopener">http://fcczp3.huwaige.com/</a> （有广告，体验一般）</p>
+<p><a href="http://www.gfsswy.com/" target="_blank" rel="noopener">http://www.gfsswy.com/</a> （无广告，体验良好）</p>
+<p><a href="http://www.gycc.com/" target="_blank" rel="noopener">http://www.gycc.com/</a> （无广告，体验良好）</p>
+<p><a href="http://fcczp6.huwaige.com/" target="_blank" rel="noopener">http://fcczp6.huwaige.com/</a> （有广告，体验一般） </p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ykk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://ykksmile.top/posts/40055/">http://ykksmile.top/posts/40055/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ubuntu/">Ubuntu</a><a class="post-meta__tags" href="/tags/VPN/">VPN</a></div><div class="social-share" data-disabled="google,facebook,twitter"></div><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/posts/9/"><i class="fa fa-chevron-left">  </i><span></span></a></div><div class="next-post pull-right"><a href="/posts/17629/"><span>博客搭建过程和工具总结</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitment-container"></div><script>var gitment = new Gitment({
+  owner: 'cloisonne',
+  repo: 'cloisonne.github.io',
+  oauth: {
+    client_id: 'd6cdb36f97d08963e9cc',
+    client_secret: '32f854846bf95d283ee654337570bbed41f69f03'
+  }
+})
+gitment.render('gitment-container')</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2018 By Ykk<span>   </span><i class="fa fa-heart animated infinite pulse"></i></div><div class="framework-info"><span>Hosted by   </span><a href="https://pages.coding.me"><span>Coding Pages </span></a><!--span.footer-separator |--><!--i(class='fa fa-heart animated infinite pulse')--><!--span= _p('footer.theme') + ' - '--><span> &amp; </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.4"></script><script src="/js/fancybox.js?version=1.5.4"></script><script src="/js/sidebar.js?version=1.5.4"></script><script src="/js/copy.js?version=1.5.4"></script><script src="/js/fireworks.js?version=1.5.4"></script><script src="/js/transition.js?version=1.5.4"></script><script src="/js/scroll.js?version=1.5.4"></script><script src="/js/head.js?version=1.5.4"></script></body></html>

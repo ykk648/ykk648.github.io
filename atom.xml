@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ykksmile.top/"/>
-  <updated>2018-06-05T14:41:58.299Z</updated>
+  <updated>2018-06-07T07:05:05.152Z</updated>
   <id>http://ykksmile.top/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>dorahacks</title>
+    <link href="http://ykksmile.top/posts/8806/"/>
+    <id>http://ykksmile.top/posts/8806/</id>
+    <published>2018-06-07T07:05:05.000Z</published>
+    <updated>2018-06-07T07:05:05.152Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><hr><p>## </p><p>### </p><hr><p>## </p><p>### </p><hr><p>## </p><p>### </p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;hr&gt;
+&lt;p&gt;## &lt;/p&gt;
+&lt;p&gt;### &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;## &lt;/p&gt;
+&lt;p&gt;### &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;## &lt;/p&gt;
+&lt;p&gt;### &lt;/p&gt;
+&lt;hr&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>车牌识别工作时间轴</title>
@@ -443,32 +475,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>针对Titanic问题的各种分类器stacking和XGBoost解法</title>
-    <link href="http://ykksmile.top/posts/32063/"/>
-    <id>http://ykksmile.top/posts/32063/</id>
-    <published>2017-12-15T14:28:52.000Z</published>
-    <updated>2018-06-04T12:48:19.959Z</updated>
-    
-    <content type="html"><![CDATA[<p>在典型feature engineering的情况下，使用xgboost和堆叠（仍然有一层xgboost），达到的Public Score都是0.79，相对比较优秀。另有遗传算法，不知道参数如何获得，score 0.88。</p><a id="more"></a><hr><p>使用jupyter notebook，Python3.5，WIN10下Pycharm搭建环境。</p><hr><h2 id="feature-engineering"><a href="#feature-engineering" class="headerlink" title="feature engineering"></a>feature engineering</h2><p>主要包括数据读入，特征选择，数据清洗，特征处理。</p><h3 id="reading-using-Pandas"><a href="#reading-using-Pandas" class="headerlink" title="reading using Pandas"></a>reading using Pandas</h3><p>pandas读入的是DataFrame结构：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train_df = pd.read_csv(&apos;data\\train.csv&apos;) # path from windows</span><br><span class="line">test_df = pd.read_csv(&apos;data\\test.csv&apos;)</span><br><span class="line">combine = [train_df, test_df] # list</span><br></pre></td></tr></table></figure><p>可以直接对其操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">train_df.head()</span><br><span class="line">train_df.tail()</span><br><span class="line">train_df.info()</span><br><span class="line">train_df.describe()</span><br><span class="line">train_df.describe(include=[&apos;O&apos;]) # object</span><br></pre></td></tr></table></figure></p><h3 id="feature-select"><a href="#feature-select" class="headerlink" title="feature select"></a>feature select</h3><p>使用matplotlib和seaborn进行visualized analyze，包括：</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在典型feature engineering的情况下，使用xgboost和堆叠（仍然有一层xgboost），达到的Public Score都是0.79，相对比较优秀。另有遗传算法，不知道参数如何获得，score 0.88。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Kaggle" scheme="http://ykksmile.top/categories/Kaggle/"/>
-    
-    
-      <category term="Python" scheme="http://ykksmile.top/tags/Python/"/>
-    
-      <category term="MachineLearning" scheme="http://ykksmile.top/tags/MachineLearning/"/>
-    
-      <category term="XGBoost" scheme="http://ykksmile.top/tags/XGBoost/"/>
     
   </entry>
   

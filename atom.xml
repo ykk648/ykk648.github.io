@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ykksmile.top/"/>
-  <updated>2018-06-07T07:18:19.054Z</updated>
+  <updated>2018-06-12T04:52:47.278Z</updated>
   <id>https://ykksmile.top/</id>
   
   <author>
@@ -17,34 +17,54 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>dorahacks</title>
-    <link href="https://ykksmile.top/posts/8806/"/>
-    <id>https://ykksmile.top/posts/8806/</id>
-    <published>2018-06-07T07:05:05.000Z</published>
-    <updated>2018-06-07T07:18:19.054Z</updated>
+    <title>计算机网络面试知识点总结</title>
+    <link href="https://ykksmile.top/posts/54431/"/>
+    <id>https://ykksmile.top/posts/54431/</id>
+    <published>2018-06-11T09:16:56.000Z</published>
+    <updated>2018-06-12T04:52:47.278Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><hr><p>## </p><p>### </p><hr><p>## </p><p>### </p><hr><p>## </p><p>### </p><hr>]]></content>
+    <content type="html"><![CDATA[<p>一方面是在找工作之前对计算机网络/通信网络的回顾，另一方面准备深信服网络技术大赛。基于《计算机网络》第五版。</p><a id="more"></a><hr><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="网络硬件"><a href="#网络硬件" class="headerlink" title="网络硬件"></a>网络硬件</h3><p>点到点 p2p<br>单播 unicasting<br>广播 broadcasting<br>组播 multicasting</p><h4 id="个域网-PAN"><a href="#个域网-PAN" class="headerlink" title="个域网 PAN"></a>个域网 PAN</h4><h4 id="局域网-LAN"><a href="#局域网-LAN" class="headerlink" title="局域网 LAN"></a>局域网 LAN</h4><p>接入点 AP access point<br>无线路由器 wireless router<br>基站 base station<br>WiFi IEEE 802.111<br>以太网 Ethernet 802.3</p><h4 id="域域网-MAN"><a href="#域域网-MAN" class="headerlink" title="域域网 MAN"></a>域域网 MAN</h4><h4 id="广域网-WAN"><a href="#广域网-WAN" class="headerlink" title="广域网 WAN"></a>广域网 WAN</h4><p>主机 host<br>子网 subnet<br>交换机 switch<br>路由器 router<br>ISP internet service provider<br>路由算法  转发算法</p><h4 id="互联网络"><a href="#互联网络" class="headerlink" title="互联网络"></a>互联网络</h4><h3 id="网络软件"><a href="#网络软件" class="headerlink" title="网络软件"></a>网络软件</h3><p>网络体系结构 network architecture<br>协议栈 protocol stack</p><h4 id="层次设计"><a href="#层次设计" class="headerlink" title="层次设计"></a>层次设计</h4><p>检错编码 error detection<br>纠错编码 error correction<br>路由 routing<br>寻址 addressing<br>命名 naming<br>统计复用 statistical multiplexing<br>拥塞 congestion<br>服务质量 qos queality of service</p><h4 id="面向连接和无连接"><a href="#面向连接和无连接" class="headerlink" title="面向连接和无连接"></a>面向连接和无连接</h4><h4 id="服务原语"><a href="#服务原语" class="headerlink" title="服务原语"></a>服务原语</h4><h4 id="服务与协议"><a href="#服务与协议" class="headerlink" title="服务与协议"></a>服务与协议</h4><h3 id="参考模型"><a href="#参考模型" class="headerlink" title="参考模型"></a>参考模型</h3><h4 id="OSI"><a href="#OSI" class="headerlink" title="OSI"></a>OSI</h4><ul><li>物理层 physical layer</li><li>数据链路层 data link layer</li><li>网络层 network layer</li><li>传输层 transport layer</li><li>会话层 session layer</li><li>表示层 presentation layer</li><li>应用层 application layer</li></ul><h4 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h4><ul><li>链路层</li><li>互联网层</li><li>传输层</li><li>应用层</li></ul><p>最终模型 </p><ul><li>物理层</li><li>数据链路层</li><li>网络层</li><li>传输层</li><li>应用层</li></ul><p>OSI 7层   TCP/IP 4层</p><h3 id="网络实例"><a href="#网络实例" class="headerlink" title="网络实例"></a>网络实例</h3><h4 id="因特网"><a href="#因特网" class="headerlink" title="因特网"></a>因特网</h4><ul><li>ARPANET</li><li>NSFNET</li></ul><p>Internet体系结构</p><p>连接到ISP：DSL Digital Subscriber Line</p><h4 id="3G"><a href="#3G" class="headerlink" title="3G"></a>3G</h4><p>宽带码分多址 WCDMA wideband code division multiple access<br>无线网络控制器 RNC radio network controller<br>核心网 core network<br>LTE long term evolution</p><h4 id="802-11"><a href="#802-11" class="headerlink" title="802.11"></a>802.11</h4><p>无线局域网</p><p>正交频分复用 OFDM orthogonal frequency division multiplexing<br>载波侦听多路访问 CSMA carrier sense multiple access</p><h4 id="RFID-传感器"><a href="#RFID-传感器" class="headerlink" title="RFID 传感器"></a>RFID 传感器</h4><h3 id="网络标准化"><a href="#网络标准化" class="headerlink" title="网络标准化"></a>网络标准化</h3><p>ITU international telecommunication union<br>ISO international standards organization</p><h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><h3 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h3><h4 id="傅里叶分析和带宽"><a href="#傅里叶分析和带宽" class="headerlink" title="傅里叶分析和带宽"></a>傅里叶分析和带宽</h4><p>带宽 bandwidth<br>基带 baseband</p><h4 id="信道最大传输速率"><a href="#信道最大传输速率" class="headerlink" title="信道最大传输速率"></a>信道最大传输速率</h4><p>尼奎斯特定理<br>香农公式 最大比特率 = Blog2（1+S/N） B带宽 S/N 信噪比</p><h4 id="传输介质"><a href="#传输介质" class="headerlink" title="传输介质"></a>传输介质</h4><ul><li>双绞线 twisted pair</li><li>同轴电缆 coaxial cable</li><li>fiber</li></ul><h3 id="无线传输"><a href="#无线传输" class="headerlink" title="无线传输"></a>无线传输</h3><p>宽频技术：</p><ul><li>跳频扩频</li><li>直接序列扩频</li><li>超宽带通信 UWB</li></ul><h3 id="无线电-微波-红外-光通信-卫星"><a href="#无线电-微波-红外-光通信-卫星" class="headerlink" title="无线电 微波 红外 光通信 卫星"></a>无线电 微波 红外 光通信 卫星</h3><h3 id="数字调制与多路复用"><a href="#数字调制与多路复用" class="headerlink" title="数字调制与多路复用"></a>数字调制与多路复用</h3>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;hr&gt;
-&lt;p&gt;## &lt;/p&gt;
-&lt;p&gt;### &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;## &lt;/p&gt;
-&lt;p&gt;### &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;## &lt;/p&gt;
-&lt;p&gt;### &lt;/p&gt;
-&lt;hr&gt;
-
-      
+      &lt;p&gt;一方面是在找工作之前对计算机网络/通信网络的回顾，另一方面准备深信服网络技术大赛。基于《计算机网络》第五版。&lt;/p&gt;
     
     </summary>
     
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
+    
+      <category term="面试" scheme="https://ykksmile.top/categories/Notes/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="ComputerNetwork" scheme="https://ykksmile.top/tags/ComputerNetwork/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记一次参加dorahacks黑客马拉松的经历</title>
+    <link href="https://ykksmile.top/posts/8806/"/>
+    <id>https://ykksmile.top/posts/8806/</id>
+    <published>2018-06-07T07:05:05.000Z</published>
+    <updated>2018-06-12T07:07:39.012Z</updated>
+    
+    <content type="html"><![CDATA[<p>在6月2号，参加了dorahacks的黑客马拉松活动，即连续24小时编程比赛，打造一款产品。整体来说比赛一般，参与人数很少，并且小团体严重，后期感觉有互相换票的嫌疑，不过对于我自己来说，临时学习了区块链的知识，并与师弟一起，利用24小时，从零开发了一款基于区块链的APP（我负责后台，师弟负责前台）。</p><a id="more"></a><hr><h2 id="仓库地址"><a href="#仓库地址" class="headerlink" title="仓库地址"></a>仓库地址</h2><p><a href="https://github.com/cloisonne/blockchain" target="_blank" rel="noopener">基于区块链的记忆app的服务端</a><br><a href="https://github.com/cloisonne/Drifting" target="_blank" rel="noopener">基于区块链的心情漂流APP </a></p><hr><h2 id="针对blockchain做的改进"><a href="#针对blockchain做的改进" class="headerlink" title="针对blockchain做的改进"></a>针对blockchain做的改进</h2><h3 id="增加block属性"><a href="#增加block属性" class="headerlink" title="增加block属性"></a>增加block属性</h3><p>改进了block属性，以与记忆app（一款基于区块链的心情分享、漂流瓶社交应用）配合。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_block</span><span class="params">(self, proof: int, my_message: str, previous_hash: Optional[str])</span> -&gt; Dict[str, Any]:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    生成新块</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    :参数proof: 工作量证明算法给出的证明</span></span><br><span class="line"><span class="string">    :参数previous_hash: 上一个块的哈希值</span></span><br><span class="line"><span class="string">    :return: 一个新块</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    block = &#123;</span><br><span class="line">        <span class="string">'index'</span>: len(self.chain) + <span class="number">1</span>,</span><br><span class="line">        <span class="string">'my_message'</span>: my_message,</span><br><span class="line">        <span class="string">'timestamp'</span>: time(),</span><br><span class="line">        <span class="string">'transactions'</span>: self.current_transactions,</span><br><span class="line">        <span class="string">'proof'</span>: proof,</span><br><span class="line">        <span class="string">'previous_hash'</span>: previous_hash <span class="keyword">or</span> self.hash(self.chain[<span class="number">-1</span>]),</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h3 id="加入web端，与flask交互"><a href="#加入web端，与flask交互" class="headerlink" title="加入web端，与flask交互"></a>加入web端，与flask交互</h3><p>php实现 需要搭建apache+php环境。</p><h3 id="修改了挖矿等方法的method"><a href="#修改了挖矿等方法的method" class="headerlink" title="修改了挖矿等方法的method"></a>修改了挖矿等方法的method</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/mine', methods=['GET','POST'])</span></span><br></pre></td></tr></table></figure><h3 id="post-test"><a href="#post-test" class="headerlink" title="post_test"></a>post_test</h3><p>用于模拟post，发送挖矿请求。</p><hr><h2 id="PHP界面的实现"><a href="#PHP界面的实现" class="headerlink" title="PHP界面的实现"></a>PHP界面的实现</h2><p>效果如图：</p><p><img src="https://blog-1252404748.cos.ap-chengdu.myqcloud.com/images/php-blockchain.png" alt="区块链前端"></p><p>基于folk的php代码，根据flask后台改造了区块链前端。</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align=<span class="string">"center"</span>&gt;</span><br><span class="line">&lt;form class="form-inline" action="index.php?port=&lt;?php echo $_REQUEST["port"]?&gt;&amp;mine=1" method="POST"&gt;</span><br><span class="line">  &lt;div class="form-group"&gt;</span><br><span class="line">&lt;label &gt;输入message：&lt;/label&gt;</span><br><span class="line">&lt;input type="text" class="form-control" id="my_message" name="my_message"&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;button type="submit" class="btn btn-primary"&gt;发送消息&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure><hr>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在6月2号，参加了dorahacks的黑客马拉松活动，即连续24小时编程比赛，打造一款产品。整体来说比赛一般，参与人数很少，并且小团体严重，后期感觉有互相换票的嫌疑，不过对于我自己来说，临时学习了区块链的知识，并与师弟一起，利用24小时，从零开发了一款基于区块链的APP（我负责后台，师弟负责前台）。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Notes" scheme="https://ykksmile.top/categories/Notes/"/>
+    
+      <category term="比赛" scheme="https://ykksmile.top/categories/Notes/%E6%AF%94%E8%B5%9B/"/>
+    
+    
+      <category term="区块链" scheme="https://ykksmile.top/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+      <category term="PHP" scheme="https://ykksmile.top/tags/PHP/"/>
+    
+      <category term="安卓" scheme="https://ykksmile.top/tags/%E5%AE%89%E5%8D%93/"/>
     
   </entry>
   
@@ -53,9 +73,9 @@
     <link href="https://ykksmile.top/posts/19204/"/>
     <id>https://ykksmile.top/posts/19204/</id>
     <published>2018-06-05T11:46:23.000Z</published>
-    <updated>2018-06-05T14:41:58.299Z</updated>
+    <updated>2018-06-12T06:25:29.053Z</updated>
     
-    <content type="html"><![CDATA[<p>最近放弃了带遮挡的人脸识别，投身车牌识别的大业，这里的车牌识别是基于国内的、多种类的、恶劣条件下的，可以成为Real or Wild的plate recognition，将时间线和所做工作总结如下，主要同步自实验室的私有gitlab。</p><a id="more"></a><hr><h2 id="说下gitlab"><a href="#说下gitlab" class="headerlink" title="说下gitlab"></a>说下gitlab</h2><p>恰巧guyhub被微软收购了，未来可能会退出CN版的guyhub，当然如果是这样，外网guyhub应该是访问不了了，而国内的服务一定是遵守社会主义核心价值观，像host这样的开源库可能就要被灭绝了。</p><p>我们实验室内部代码交流和项目协作主要使用gitlab，一方面代码不便于在github公开仓库上共享，另一方面放着服务器不搭个写代码的平台也说不过去。gitlab的功能一定是比github更强大更丰富的，目前使用的功能还是比较少，对于git比较熟，所以也算得心应手。</p><hr><h2 id="开源库HyperLPR"><a href="#开源库HyperLPR" class="headerlink" title="开源库HyperLPR"></a>开源库HyperLPR</h2><p><a href="https://github.com/zeusees/HyperLPR" target="_blank" rel="noopener">HyperLPR</a>是基于深度学习的高性能中文车牌识别开源库，这里做一些研究，目前发现的问题有：</p><ul><li>EasyPR的数据集准确率并不高，大概60%？远达不到宣称的90%</li><li>框架使用深度学习，训练网络时数据集应该不够多，效果差强人意</li></ul><p>目前发现的优点有：</p><ul><li>端到端的神经网络训练模型进行车牌字符识别</li><li>代码比较轻量</li></ul><h3 id="工作流程分析"><a href="#工作流程分析" class="headerlink" title="工作流程分析"></a>工作流程分析</h3><p>对HyperLPR一个完整的车牌识别工作流程进行分析：</p><ol><li>batch.py  批量处理工具 批量读取文件调用pipline</li><li>pipline调用SimpleRecognizePlate函数（SimpleRecognizePlateByE2E ？）</li><li>detectPlateRough 传入灰度图 参数如下<ul><li>resize_h </li><li>en_scale</li><li>top_bottom_padding_rate</li></ul></li><li>调用模型’./model/cascade.xml’ 使用opencv中CascadeClassifier的detectMultiScale多尺度检测</li><li>车牌粗定位完成 进行SimplePredict 使用”./model/plate_type.h5”模型确定车牌类别（神经网络）</li><li>如果车型判断成功 对车牌进行bitwise_not二值化反色处理</li><li>调用finemapping中的精定位算法findContoursAndDrawBoundingBox</li><li>调用finemapping中的”./model/model12.h5”左右边界回归  进行垂直精定位算法finemappingVertical</li><li>调用e2e 使用模型”./model/ocr_plate_all_w_rnn_2.h5” 端到端字符识别  只输出不使用？</li><li>校正完成 使用segmentation中的slidingWindowsEval 进行文字分割和识别</li><li>置信度判断和输出</li></ol><p>注意事项：</p><ul><li>ocr_plate_all_gru.h5 作为序列模型效果更好，但是更慢  以上过程中未使用</li></ul><h3 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h3><h3 id="模型的训练程序"><a href="#模型的训练程序" class="headerlink" title="模型的训练程序"></a>模型的训练程序</h3><h3 id="框架的改进思路"><a href="#框架的改进思路" class="headerlink" title="框架的改进思路"></a>框架的改进思路</h3><hr><p>## </p><p>### </p><hr>]]></content>
+    <content type="html"><![CDATA[<p>最近放弃了带遮挡的人脸识别，投身车牌识别的大业，这里的车牌识别是基于国内的、多种类的、恶劣条件下的，可以成为Real or Wild的plate recognition，将时间线和所做工作总结如下，主要同步自实验室的私有gitlab。</p><a id="more"></a><hr><h2 id="说下gitlab"><a href="#说下gitlab" class="headerlink" title="说下gitlab"></a>说下gitlab</h2><p>恰巧guyhub被微软收购了，未来可能会退出CN版的guyhub，当然如果是这样，外网guyhub应该是访问不了了，而国内的服务一定是遵守社会主义核心价值观，像host这样的开源库可能就要被灭绝了。</p><p>我们实验室内部代码交流和项目协作主要使用gitlab，一方面代码不便于在github公开仓库上共享，另一方面放着服务器不搭个写代码的平台也说不过去。gitlab的功能一定是比github更强大更丰富的，目前使用的功能还是比较少，对于git比较熟，所以也算得心应手。</p><hr><h2 id="开源库HyperLPR"><a href="#开源库HyperLPR" class="headerlink" title="开源库HyperLPR"></a>开源库HyperLPR</h2><p><a href="https://github.com/zeusees/HyperLPR" target="_blank" rel="noopener">HyperLPR</a>是基于深度学习的高性能中文车牌识别开源库，这里做一些研究，目前发现的问题有：</p><ul><li>EasyPR的数据集准确率并不高，大概60%？远达不到宣称的90%</li><li>框架使用深度学习，训练网络时数据集应该不够多，效果差强人意</li></ul><p>目前发现的优点有：</p><ul><li>端到端的神经网络训练模型进行车牌字符识别</li><li>代码比较轻量</li></ul><h3 id="工作流程分析"><a href="#工作流程分析" class="headerlink" title="工作流程分析"></a>工作流程分析</h3><p>对HyperLPR一个完整的车牌识别工作流程进行分析：</p><ol><li>batch.py  批量处理工具 批量读取文件调用pipline</li><li>pipline调用SimpleRecognizePlate函数（SimpleRecognizePlateByE2E ？）</li><li>detectPlateRough 传入灰度图 参数如下<ul><li>resize_h </li><li>en_scale</li><li>top_bottom_padding_rate</li></ul></li><li>调用模型’./model/cascade.xml’ 使用opencv中CascadeClassifier的detectMultiScale多尺度检测</li><li>车牌粗定位完成 进行SimplePredict 使用”./model/plate_type.h5”模型确定车牌类别（神经网络）</li><li>如果车型判断成功 对车牌进行bitwise_not二值化反色处理</li><li>调用finemapping中的精定位算法findContoursAndDrawBoundingBox</li><li>调用finemapping中的”./model/model12.h5”左右边界回归  进行垂直精定位算法finemappingVertical</li><li>调用e2e 使用模型”./model/ocr_plate_all_w_rnn_2.h5” 端到端字符识别  只输出不使用？</li><li>校正完成 使用segmentation中的slidingWindowsEval 进行文字分割和识别</li><li>置信度判断和输出</li></ol><p>注意事项：</p><ul><li>ocr_plate_all_gru.h5 作为序列模型效果更好，但是更慢  以上过程中未使用</li></ul><h3 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h3><p>完整修改了测试程序，并进行了正确率测试，大部分特殊车牌不支持，少数几种车牌识别率低于20%。</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plate_recogniton</span><span class="params">(real_path)</span>:</span></span><br><span class="line">    plate_real = real_path[:<span class="number">-4</span>].split(<span class="string">'\\'</span>)[<span class="number">-1</span>][:<span class="number">8</span>]</span><br><span class="line">    plate_real_list.append(plate_real)</span><br><span class="line">    print(<span class="string">'plate_real:'</span> + str(plate_real))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> real_path.endswith(<span class="string">".jpg"</span>) <span class="keyword">or</span> real_path.endswith(<span class="string">".png"</span>) <span class="keyword">or</span> real_path.endswith(<span class="string">".JPG"</span>):</span><br><span class="line">        image =  cv_imread(real_path)</span><br><span class="line">        <span class="comment"># print(type(image))</span></span><br><span class="line">        <span class="comment"># image,res  = model.SimpleRecognizePlateByE2E(image)</span></span><br><span class="line">        res = model.SimpleRecognizePlateByE2E(image)</span><br><span class="line">        max_res = [<span class="string">'null'</span>,<span class="number">0</span>,[<span class="number">862.01999999999998</span>, <span class="number">924.0</span>, <span class="number">178.03504678726196</span>, <span class="number">52.0</span>]]</span><br><span class="line">        res.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>],reverse=<span class="keyword">True</span>)</span><br><span class="line">        <span class="keyword">if</span> len(res) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> len(res) &gt;= <span class="number">1</span>:</span><br><span class="line">            max_res = res[<span class="number">0</span>]</span><br><span class="line">        print(res)</span><br><span class="line">        plate_predict = max_res[<span class="number">0</span>]</span><br><span class="line">        print(<span class="string">'plate_predict:'</span> + plate_predict)</span><br><span class="line">        plate_predict_list.append(plate_predict)</span><br></pre></td></tr></table></figure><h3 id="模型的训练程序"><a href="#模型的训练程序" class="headerlink" title="模型的训练程序"></a>模型的训练程序</h3><h3 id="框架的改进思路"><a href="#框架的改进思路" class="headerlink" title="框架的改进思路"></a>框架的改进思路</h3><hr><p>## </p><p>### </p><hr>]]></content>
     
     <summary type="html">
     
@@ -461,20 +481,6 @@
       <category term="算法" scheme="https://ykksmile.top/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="Java" scheme="https://ykksmile.top/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://ykksmile.top/posts/5/"/>
-    <id>https://ykksmile.top/posts/5/</id>
-    <published>2017-12-15T16:00:00.000Z</published>
-    <updated>2018-06-04T12:48:20.632Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
     
   </entry>
   

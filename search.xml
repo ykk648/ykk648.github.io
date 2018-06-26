@@ -3,10 +3,83 @@
   
     
     <entry>
+      <title>数据库和操作系统笔试题总结（针对19校招</title>
+      <link href="/posts/23140/"/>
+      <url>/posts/23140/</url>
+      <content type="html"><![CDATA[<p>总结19年校招遇到的数据库和操作系统笔试面试题，分门别类，放好备用。</p><a id="more"></a><hr><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="题目总结"><a href="#题目总结" class="headerlink" title="题目总结"></a>题目总结</h3><ol><li><p>数据库中存在学生表S、课程表C和学生选课表SC三个表，它们的结构如下：S(S#，SN，SEX，AGE，DEPT)C(C#，CN)SC(S#，C#，GRADE)其中：S#为学号，SN为姓名，SEX为性别，AGE为年龄，DEPT为系别，C#为课程号，CN为课程名，GRADE为成绩。请检索选修课程号为C2的学生中成绩最高的学号。( )</p><p> SELECT S# FORM SC WHERE C#=“C2” AND GRADE＞＝ALL (SELECT GRADE FORM SC WHERE C#=“C</p></li><li><p>数据库保护主要包括<strong>__</strong>、<strong>__</strong>、<strong>__</strong>和<strong>__</strong>。</p></li></ol><p>数据的安全性、完整性、并发控制、数据库恢复等 </p><ol start="3"><li>数据库中事务的四大特性（ACID）</li></ol><p>原子性 一致性 隔离性 持久性</p><hr><h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p><strong>死锁产生的必要条件</strong>：</p><ul><li><p>互斥条件：进程要求对所分配的资源进行排他性控制，即在一段时间内某资源仅为一个进程所占用。此时若有其他进程请求该资源，则请求进程只能等待。</p></li><li><p>不剥夺条件：进程所获得的资源在未使用完毕之前，不能被其他进程强行夺走，即只能由获得该资源的进程自己来释放。</p></li><li><p>请求和保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。</p></li><li><p>循环等待条件：存在一种进程资源的循环等待链，连中每一个进程已获得的资源同时被链中下一个进程所请求。</p></li></ul><p><strong>死锁避免</strong>：</p><ol><li>预防死锁(摒弃除1以外的条件)</li><li>避免死锁(银行家算法)</li><li>检测死锁(资源分配图)</li><li>解除死锁<ul><li>剥夺资源</li><li>撤销进程</li></ul></li></ol><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><p>引入线程是为了减少程序在并发执行时所付出的时空开销。</p><p>定义：</p><p>一、进程是具有一定独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的一个独立单位。<br>二、线程是进程的一个实体，是CPU调度和分派的基本单位，他是比进程更小的能独立运行的基本单位，线程自己基本上不拥有系统资源，只拥有一点在运行中必不可少的资源（如程序计数器，一组寄存器和栈），一个线程可以创建和撤销另一个线程；</p><p>进程和线程的关系：</p><p>（1）一个线程只能属于一个进程，而一个进程可以有多个线程，但至少有一个线程。<br>（2）资源分配给进程，同一进程的所有线程共享该进程的所有资源。<br>（3）线程在执行过程中，需要协作同步。不同进程的线程间要利用消息通信的办法实现同步。<br>（4）处理机分给线程，即真正在处理机上运行的是线程。<br>（5）线程是指进程内的一个执行单元，也是进程内的可调度实体。<br>线程与进程的区别：<br>（1）调度：线程作为调度和分配的基本单位，进程作为拥有资源的基本单位。<br>（2）并发性：不仅进程之间可以并发执行，同一个进程的多个线程之间也可以并发执行。<br>（3）拥有资源：进程是拥有资源的一个独立单位，线程不拥有系统资源，但可以访问隶属于进程的资源。<br>（4）系统开销：在创建或撤销进程的时候，由于系统都要为之分配和回收资源，导致系统的明显大于创建或撤销线程时的开销。但进程有独立的地址空间，进程崩溃后，在保护模式下不会对其他的进程产生影响，而线程只是一个进程中的不同的执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但是在进程切换时，耗费的资源较大，效率要差些。</p><p>线程的划分尺度小于进程，使得多线程程序的并发性高。</p><p>另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大的提高了程序运行效率。</p><p>线程在执行过程中，每个独立的线程有一个程序运行的入口，顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，有应用程序提供多个线程执行控制。</p><p>从逻辑角度看，多线程的意义子啊与一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</p><p><img src="https://blog-1252404748.cos.ap-chengdu.myqcloud.com/images/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B.png" alt="进程线程"></p><hr><p>### </p><hr>]]></content>
+      
+      <categories>
+          
+          <category> 就业 </category>
+          
+          <category> DataBase </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> DataBase </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>leetcode中Hashtable思路总结</title>
+      <link href="/posts/5454/"/>
+      <url>/posts/5454/</url>
+      <content type="html"><![CDATA[<p>暂时没什么前言。</p><a id="more"></a><hr><h3 id="Happy-Number"><a href="#Happy-Number" class="headerlink" title="Happy Number"></a>Happy Number</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Time:  O(k), where k is the steps to be happy number</span></span><br><span class="line"><span class="comment"># Space: O(k)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Write an algorithm to determine if a number is "happy".</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># A happy number is a number defined by the following process: </span></span><br><span class="line"><span class="comment"># Starting with any positive integer, replace the number by the sum </span></span><br><span class="line"><span class="comment"># of the squares of its digits, and repeat the process until </span></span><br><span class="line"><span class="comment"># the number equals 1 (where it will stay), or it loops endlessly </span></span><br><span class="line"><span class="comment"># in a cycle which does not include 1. Those numbers for which </span></span><br><span class="line"><span class="comment"># this process ends in 1 are happy numbers.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Example: 19 is a happy number</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 1^2 + 9^2 = 82</span></span><br><span class="line"><span class="comment"># 8^2 + 2^2 = 68</span></span><br><span class="line"><span class="comment"># 6^2 + 8^2 = 100</span></span><br><span class="line"><span class="comment"># 1^2 + 0^2 + 0^2 = 1</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># @param &#123;integer&#125; n</span></span><br><span class="line">    <span class="comment"># @return &#123;boolean&#125;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isHappy</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        lookup = &#123;&#125;</span><br><span class="line">        <span class="keyword">while</span> n != <span class="number">1</span> <span class="keyword">and</span> n <span class="keyword">not</span> <span class="keyword">in</span> lookup:</span><br><span class="line">            lookup[n] = <span class="keyword">True</span></span><br><span class="line">            n = self.nextNumber(n)</span><br><span class="line">        <span class="keyword">return</span> n == <span class="number">1</span> <span class="comment"># True</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nextNumber</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        new = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> str(n):</span><br><span class="line">            new += int(char)**<span class="number">2</span></span><br><span class="line"><span class="keyword">return</span> new</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isHappy</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"><span class="keyword">while</span>(n!=<span class="number">1</span>)&#123;</span><br><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(n!=<span class="number">0</span>)&#123;</span><br><span class="line">sum += Math.pow((n%<span class="number">10</span>),<span class="number">2</span>);</span><br><span class="line">n/=<span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(set.contains(sum))&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">set.add(sum);</span><br><span class="line">n=sum;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>### </p><hr><p>### </p><hr>]]></content>
+      
+      <categories>
+          
+          <category> 就业 </category>
+          
+          <category> DataStructure </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>数据结构笔试题总结（针对19校招</title>
+      <link href="/posts/44954/"/>
+      <url>/posts/44954/</url>
+      <content type="html"><![CDATA[<p>总结19年校招遇到的数据结构笔试面试题，分门别类，放好备用。</p><a id="more"></a><hr><h3 id="赫夫曼树"><a href="#赫夫曼树" class="headerlink" title="赫夫曼树"></a>赫夫曼树</h3><p><a href="https://blog.csdn.net/wtfmonking/article/details/17150499" target="_blank" rel="noopener">哈夫曼树 C语言实现</a></p><p><strong>路径长度</strong>：<br>从树中一个结点到另一个结点之间的分支构成两个节点的路径，路径上的分支数目称作路径长度。</p><p><strong>WPL带权路径长度</strong>：<br>路径长度与节点上权的乘积。</p><p><code>WPL最短的树叫做赫夫曼树。</code></p><p><strong>赫夫曼编码</strong>：</p><p>字符集d1 d2 d3… 频率w1 w2 w3…</p><p>d为结点 w为权值构造赫夫曼树 左分支代表0 右分支代表1 根节点到叶子结点所经过的0和1的序列，即为赫夫曼编码。</p><p><strong>构造规则</strong>：</p><p>假设有n个权值，则构造出的哈夫曼树有n个叶子结点。 n个权值分别设为 w1、w2、…、wn，则哈夫曼树的构造规则为：</p><p>(1) 将w1、w2、…，wn看成是有n 棵树的森林(每棵树仅有一个结点)；</p><p>(2) 在森林中选出两个根结点的权值最小的树合并，作为一棵新树的左、右子树，且新树的根结点权值为其左、右子树根结点权值之和；</p><p>(3)从森林中删除选取的两棵树，并将新树加入森林；</p><p>(4)重复(2)、(3)步，直到森林中只剩一棵树为止，该树即为所求得的哈夫曼树。</p><hr><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ol><li>设数组定义为a[60][70]，每个元素占2个存储单元，数组按照<code>列优先存储</code>，元素a[0][0]的地址为1024，那么元素a[32][58]的地址为（8048）</li></ol><p>a[60][70]有60行、70列，a[32][58]位于整个数组的33行、59列处，因为数组按照列优先存储，所以a[32][58]前面一共有</p><p>(59-1)<em>60+(33-1)=58</em>60+32=3512个元素，每个元素占2个存储单元，则一共占3512*2=7024个存储单元，</p><p>又因为a[32][58]的地址在2个存储单元的最前端，所以其地址为1024+7024=8048</p><hr><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><ol><li>设有序表中有1000个元素,则用二分查找查找元素X最多需要比较【 】次.</li></ol><p>比较10次。<br>1个元素的时候比较1次<br>2~3个元素比较2次<br>4~7个元素比较3次<br>8~15                4<br>16~31              5<br>32~63              6<br>64~127            7<br>128~255          8<br>256~511          9<br>512~1023       10<br>就是log2n取整后 +1</p><ol><li>下列排序算法中不能保证每趟排序至少能将一个元素放到其最终的位置上的是( )。</li></ol><p>A．快速排序<br>B．希尔排序<br>C．堆排序<br>D．起泡排序</p><p>B</p><ol><li>对大量数据排序(100万个),多种排序方法中,哪种最快、效率最高</li></ol><p>快速排序&gt;堆排序&gt;归并排序&gt;插入排序  数据达到10000000 堆排序优于快速排序</p><p><a href="https://blog.csdn.net/wqf363/article/details/1604458" target="_blank" rel="noopener">各种排序查询的算法效率比较</a></p><hr><h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><ol><li>已知一棵二叉树，如果先序遍历的节点顺序是：ADCEFGHB，中序遍历是：CDFEGHAB，则后序遍历结果为：（） </li></ol><p>CFHGEDBA</p><p>先序遍历简单记为：根左右<br>中序遍历简单记为：左根右<br>后序遍历简单记为：左右根 </p><hr><h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><ol><li>若某表最常用的操作是在最后一个结点之后插入一个结点或删除最后一个结点。则采用（ ）存储方式最节省运算时间。</li></ol><p>双循环链表能够通过头结点的前驱就是尾结点，能够迅速找到尾结点，然后进行插入和删除操作</p><ol><li>已知一个线性表（38，25，74，63，52，48），假定采用散列函数h(key)=key%7计算散列地址，并散列存储在散列表A[0..6]中，若采用线性探测方法解决冲突，则在该散列表上进行等概率成功查找的平均查找长度为<strong>_</strong></li></ol><p>如果一个元素存入时，进行了N次散列，相应的查找次数也是N，所以38，25，63这三个元素的查找长度为1，74的查找长度为2，48的查找长度为3，52的查找长度为4。所以平均查找长度为：(1+1+1+2+3+4)/6=2。 </p>]]></content>
+      
+      <categories>
+          
+          <category> 就业 </category>
+          
+          <category> DataStructure </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> DataStructure </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>深信服复赛准备知识点</title>
       <link href="/posts/42224/"/>
       <url>/posts/42224/</url>
-      <content type="html"><![CDATA[<p>准备深信服复赛。主要侧重安全部分（深信服是一家做安全的公司啊）。</p><a id="more"></a><hr><h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><h3 id="VPN概述"><a href="#VPN概述" class="headerlink" title="VPN概述"></a>VPN概述</h3><p><strong>VPN定义</strong>：</p><blockquote><p>依靠ISP或者NSP在公用网络基础设施上构建的专用的安全数据通信网络。</p></blockquote><p><strong>核心技术</strong>： <code>隧道技术</code></p><p><strong>PN分类</strong>：</p><ul><li>Access VPN</li><li>LAN-LAN VPN</li></ul><p>IPSec GRE 位于网络层、SSL位于应用层、L2TP PPTP位于网络接口层。</p><p><strong>常用技术</strong>：</p><ol><li>隧道技术</li><li>加解密技术<ul><li>对称加密  IDEA <code>AES</code> RC <code>DES</code></li><li>非对称加密 ECCC <code>RSA</code> Rabin Elgamal</li></ul></li><li>身份认证技术<br> PKI体系，CA认证中心管理（Certificate Authority）。<br> 实例：HTTPS</li></ol><h3 id="IPSec"><a href="#IPSec" class="headerlink" title="IPSec"></a>IPSec</h3><p><strong>开放的协议族</strong>：<br><img src="https://blog-1252404748.cos.ap-chengdu.myqcloud.com/images/IPSec%E5%8D%8F%E8%AE%AE%E6%97%8F.png" alt="IPSec架构"></p><p><strong>IPSec工作模式</strong>：</p><ol><li>传输模式<br> 主机到主机之间，子啊包头后面插IPSec包头</li><li>隧道模式<br> 私网与私网之间，添加新的IP头和IPSec头</li></ol><p><strong>通信协议</strong>：</p><ol><li>AH  Authentication Header 协议号51<ul><li>无连接数据完整性</li><li>数据源认证</li><li>抗重放服务</li></ul></li><li>ESP 封装安全有效载荷 （DES AES）  协议号50<ul><li>AH的功能</li><li>数据保密</li><li>有限的数据流保护</li></ul></li></ol><p><strong>IKE协商</strong>：<br>为IPSec协商生成密钥，建立SA Security Association<br>两个阶段：</p><ul><li>IKE阶段1<ul><li>主模式<br>  SA交换、密钥交换、IP交换及验证，使用6条ISAKMP</li><li>野蛮模式 Aggressive<br>  三个交互包</li></ul></li><li>IKE阶段2<br>  协商IPSec参数</li></ul><p><strong>DPD解决VPN隧道黑洞</strong>： 超时计时器</p><p><strong>注意：</strong></p><ul><li>NAT下，只有ESP 隧道模式可用</li><li>NAT-T解决多个IPSec VPN （为ESP增加了UDP头）</li></ul><p><strong>深信服VPN优势</strong>：</p><ol><li>WebAgent （自动寻址</li><li>更细致的权限粒度</li><li>线路探测</li></ol><h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><p>##</p>]]></content>
+      <content type="html"><![CDATA[<p>准备深信服复赛。主要侧重安全部分（深信服是一家做安全的公司啊）。</p><a id="more"></a><hr><h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><h3 id="VPN概述"><a href="#VPN概述" class="headerlink" title="VPN概述"></a>VPN概述</h3><p><strong>VPN定义</strong>：</p><blockquote><p>依靠ISP或者NSP在公用网络基础设施上构建的专用的安全数据通信网络。</p></blockquote><p><strong>核心技术</strong>： <code>隧道技术</code></p><p><strong>VPN分类</strong>：</p><ul><li>Access VPN</li><li>LAN-LAN VPN</li></ul><p>IPSec GRE 位于网络层、SSL位于应用层、L2TP PPTP位于网络接口层。</p><p><strong>常用技术</strong>：</p><ol><li>隧道技术</li><li>加解密技术<ul><li>对称加密  IDEA <code>AES</code> RC <code>DES</code></li><li>非对称加密 ECCC <code>RSA</code> Rabin Elgamal</li></ul></li><li>身份认证技术<br> PKI体系，CA认证中心管理（Certificate Authority）。<br> 实例：HTTPS</li></ol><h3 id="IPSec"><a href="#IPSec" class="headerlink" title="IPSec"></a>IPSec</h3><p><strong>开放的协议族</strong>：<br><img src="https://blog-1252404748.cos.ap-chengdu.myqcloud.com/images/IPSec%E5%8D%8F%E8%AE%AE%E6%97%8F.png" alt="IPSec架构"></p><p><strong>IPSec工作模式</strong>：</p><ol><li>传输模式<br> 主机到主机之间，子啊包头后面插IPSec包头</li><li>隧道模式<br> 私网与私网之间，添加新的IP头和IPSec头</li></ol><p><strong>通信协议</strong>：</p><ol><li>AH  Authentication Header 协议号51<ul><li>无连接数据完整性</li><li>数据源认证</li><li>抗重放服务</li></ul></li><li>ESP 封装安全有效载荷 （DES AES）  协议号50<ul><li>AH的功能</li><li>数据保密</li><li>有限的数据流保护</li></ul></li></ol><p><strong>IKE协商</strong>：<br>为IPSec协商生成密钥，建立SA Security Association<br>两个阶段：</p><ul><li>IKE阶段1<ul><li>主模式<br>  SA交换、密钥交换、IP交换及验证，使用6条ISAKMP</li><li>野蛮模式 Aggressive<br>  三个交互包</li></ul></li><li>IKE阶段2<br>  协商IPSec参数</li></ul><p><strong>DPD解决VPN隧道黑洞</strong>： 超时计时器</p><p><strong>注意：</strong></p><ul><li>NAT下，只有ESP 隧道模式可用</li><li>NAT-T解决多个IPSec VPN （为ESP增加了UDP头）</li></ul><p><strong>深信服VPN优势</strong>：</p><ol><li>WebAgent （自动寻址</li><li>更细致的权限粒度</li><li>线路探测</li></ol><h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><p>##</p>]]></content>
       
       <categories>
           
@@ -35,7 +108,7 @@
           
           <category> Notes </category>
           
-          <category> 面试 </category>
+          <category> 就业 </category>
           
       </categories>
       
@@ -545,9 +618,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -568,9 +641,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -591,9 +664,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -614,9 +687,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> 爬虫 </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -782,9 +855,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 扯淡 </tag>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -805,11 +878,11 @@
       
         <tags>
             
-            <tag> VPN </tag>
-            
             <tag> LTE </tag>
             
             <tag> GSM </tag>
+            
+            <tag> VPN </tag>
             
             <tag> IPsec </tag>
             
@@ -989,11 +1062,11 @@
       
         <tags>
             
+            <tag> Markdown </tag>
+            
             <tag> Hexo </tag>
             
             <tag> Tools </tag>
-            
-            <tag> Markdown </tag>
             
             <tag> Github </tag>
             
@@ -1016,9 +1089,9 @@
       
         <tags>
             
-            <tag> Markdown </tag>
-            
             <tag> 扯淡 </tag>
+            
+            <tag> Markdown </tag>
             
         </tags>
       

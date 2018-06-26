@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="数据结构笔试题总结（针对19校招"><meta name="keywords" content="DataStructure"><meta name="author" content="Ykk,undefined"><meta name="copyright" content="Ykk"><title>数据结构笔试题总结（针对19校招 | Ykk</title><link rel="shortcut icon" href="/my-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://unpkg.com"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitment/style/default.min.css"><script src="https://cdn.jsdelivr.net/npm/gitment/dist/gitment.browser.min.js"></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#赫夫曼树"><span class="toc-number">1.</span> <span class="toc-text">赫夫曼树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">2.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序"><span class="toc-number">3.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树"><span class="toc-number">4.</span> <span class="toc-text">二叉树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-number">5.</span> <span class="toc-text">链表</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://blog-1252404748.cos.ap-chengdu.myqcloud.com/avatar.jpg"></div><div class="author-info__name text-center">Ykk</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/cloisonne" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">47</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">43</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://blog-1252404748.cos.ap-chengdu.myqcloud.com/bg-1.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Ykk</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/about">About</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/resume">Resume</a></span></div><div id="post-info"><div id="post-title">数据结构笔试题总结（针对19校招</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-06-26</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/就业/">就业</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/就业/DataStructure/">DataStructure</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1,056</span><span class="post-meta__separator">|</span><span>Reading time: 4 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>总结19年校招遇到的数据结构笔试面试题，分门别类，放好备用。</p>
+<a id="more"></a>
+<hr>
+<h3 id="赫夫曼树"><a href="#赫夫曼树" class="headerlink" title="赫夫曼树"></a>赫夫曼树</h3><p><a href="https://blog.csdn.net/wtfmonking/article/details/17150499" target="_blank" rel="noopener">哈夫曼树 C语言实现</a></p>
+<p><strong>路径长度</strong>：<br>从树中一个结点到另一个结点之间的分支构成两个节点的路径，路径上的分支数目称作路径长度。</p>
+<p><strong>WPL带权路径长度</strong>：<br>路径长度与节点上权的乘积。</p>
+<p><code>WPL最短的树叫做赫夫曼树。</code></p>
+<p><strong>赫夫曼编码</strong>：</p>
+<p>字符集d1 d2 d3… 频率w1 w2 w3…</p>
+<p>d为结点 w为权值构造赫夫曼树 左分支代表0 右分支代表1 根节点到叶子结点所经过的0和1的序列，即为赫夫曼编码。</p>
+<p><strong>构造规则</strong>：</p>
+<p>假设有n个权值，则构造出的哈夫曼树有n个叶子结点。 n个权值分别设为 w1、w2、…、wn，则哈夫曼树的构造规则为：</p>
+<p>(1) 将w1、w2、…，wn看成是有n 棵树的森林(每棵树仅有一个结点)；</p>
+<p>(2) 在森林中选出两个根结点的权值最小的树合并，作为一棵新树的左、右子树，且新树的根结点权值为其左、右子树根结点权值之和；</p>
+<p>(3)从森林中删除选取的两棵树，并将新树加入森林；</p>
+<p>(4)重复(2)、(3)步，直到森林中只剩一棵树为止，该树即为所求得的哈夫曼树。</p>
+<hr>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ol>
+<li>设数组定义为a[60][70]，每个元素占2个存储单元，数组按照<code>列优先存储</code>，元素a[0][0]的地址为1024，那么元素a[32][58]的地址为（8048）</li>
+</ol>
+<p>a[60][70]有60行、70列，a[32][58]位于整个数组的33行、59列处，因为数组按照列优先存储，所以a[32][58]前面一共有</p>
+<p>(59-1)<em>60+(33-1)=58</em>60+32=3512个元素，每个元素占2个存储单元，则一共占3512*2=7024个存储单元，</p>
+<p>又因为a[32][58]的地址在2个存储单元的最前端，所以其地址为1024+7024=8048</p>
+<hr>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><ol>
+<li>设有序表中有1000个元素,则用二分查找查找元素X最多需要比较【 】次.</li>
+</ol>
+<p>比较10次。<br>1个元素的时候比较1次<br>2~3个元素比较2次<br>4~7个元素比较3次<br>8~15                4<br>16~31              5<br>32~63              6<br>64~127            7<br>128~255          8<br>256~511          9<br>512~1023       10<br>就是log2n取整后 +1</p>
+<ol>
+<li>下列排序算法中不能保证每趟排序至少能将一个元素放到其最终的位置上的是( )。</li>
+</ol>
+<p>A．快速排序<br>B．希尔排序<br>C．堆排序<br>D．起泡排序</p>
+<p>B</p>
+<ol>
+<li>对大量数据排序(100万个),多种排序方法中,哪种最快、效率最高</li>
+</ol>
+<p>快速排序&gt;堆排序&gt;归并排序&gt;插入排序  数据达到10000000 堆排序优于快速排序</p>
+<p><a href="https://blog.csdn.net/wqf363/article/details/1604458" target="_blank" rel="noopener">各种排序查询的算法效率比较</a></p>
+<hr>
+<h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><ol>
+<li>已知一棵二叉树，如果先序遍历的节点顺序是：ADCEFGHB，中序遍历是：CDFEGHAB，则后序遍历结果为：（） </li>
+</ol>
+<p>CFHGEDBA</p>
+<p>先序遍历简单记为：根左右<br>中序遍历简单记为：左根右<br>后序遍历简单记为：左右根 </p>
+<hr>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><ol>
+<li>若某表最常用的操作是在最后一个结点之后插入一个结点或删除最后一个结点。则采用（ ）存储方式最节省运算时间。</li>
+</ol>
+<p>双循环链表能够通过头结点的前驱就是尾结点，能够迅速找到尾结点，然后进行插入和删除操作</p>
+<ol>
+<li>已知一个线性表（38，25，74，63，52，48），假定采用散列函数h(key)=key%7计算散列地址，并散列存储在散列表A[0..6]中，若采用线性探测方法解决冲突，则在该散列表上进行等概率成功查找的平均查找长度为<strong>_</strong></li>
+</ol>
+<p>如果一个元素存入时，进行了N次散列，相应的查找次数也是N，所以38，25，63这三个元素的查找长度为1，74的查找长度为2，48的查找长度为3，52的查找长度为4。所以平均查找长度为：(1+1+1+2+3+4)/6=2。 </p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ykk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://ykksmile.top/posts/44954/">https://ykksmile.top/posts/44954/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DataStructure/">DataStructure</a></div><div class="social-share" data-disabled="google,facebook,twitter"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/posts/5454/"><i class="fa fa-chevron-left">  </i><span>leetcode中Hashtable思路总结</span></a></div><div class="next-post pull-right"><a href="/posts/42224/"><span>深信服复赛准备知识点</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitment-container"></div><script>var gitment = new Gitment({
+  owner: 'cloisonne',
+  repo: 'cloisonne.github.io',
+  oauth: {
+    client_id: 'd6cdb36f97d08963e9cc',
+    client_secret: '32f854846bf95d283ee654337570bbed41f69f03'
+  }
+})
+gitment.render('gitment-container')</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2018 By Ykk</div><div class="framework-info"><span>Driven By   </span><a href="https://pages.coding.me"><span>Coding Pages </span></a><!--span.footer-separator |--><!--i(class='fa fa-heart animated infinite pulse')--><!--span= _p('footer.theme') + ' - '--><span> &amp; </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="icp"><a><span>陕ICP备18010505号</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script src="/js/search/local-search.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

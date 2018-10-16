@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="十个深度学习高频面试问题"><meta name="keywords" content="MachineLearning,DeepLearning"><meta name="author" content="Ykk,undefined"><meta name="copyright" content="Ykk"><title>十个深度学习高频面试问题 | Ykk</title><link rel="shortcut icon" href="/my-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://unpkg.com"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitment/style/default.min.css"><script src="https://cdn.jsdelivr.net/npm/gitment/dist/gitment.browser.min.js"></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、过拟合-欠拟合"><span class="toc-number">1.</span> <span class="toc-text">一、过拟合/欠拟合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#降低过拟合"><span class="toc-number">1.1.</span> <span class="toc-text">降低过拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#降低欠拟合"><span class="toc-number">1.2.</span> <span class="toc-text">降低欠拟合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、公式推导"><span class="toc-number">2.</span> <span class="toc-text">二、公式推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BP反向传播的4个基本公式"><span class="toc-number">2.1.</span> <span class="toc-text">BP反向传播的4个基本公式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、激活函数"><span class="toc-number">3.</span> <span class="toc-text">三、激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分类"><span class="toc-number">3.1.</span> <span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么引入非线性激活函数"><span class="toc-number">3.2.</span> <span class="toc-text">为什么引入非线性激活函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么relu"><span class="toc-number">3.3.</span> <span class="toc-text">为什么relu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#relu的优缺点"><span class="toc-number">3.4.</span> <span class="toc-text">relu的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#leaky-relu"><span class="toc-number">3.5.</span> <span class="toc-text">leaky-relu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他激活函数"><span class="toc-number">3.6.</span> <span class="toc-text">其他激活函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、正则化问题"><span class="toc-number">4.</span> <span class="toc-text">四、正则化问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BN是一种正则化方法，见上面（参数初始化）"><span class="toc-number">4.1.</span> <span class="toc-text">BN是一种正则化方法，见上面（参数初始化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#L1-L2-范数正则化"><span class="toc-number">4.2.</span> <span class="toc-text">L1/L2 范数正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dropout"><span class="toc-number">4.3.</span> <span class="toc-text">dropout</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、正负样本不均衡"><span class="toc-number">5.</span> <span class="toc-text">五、正负样本不均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、梯度消失和梯度爆炸"><span class="toc-number">6.</span> <span class="toc-text">六、梯度消失和梯度爆炸</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链式求导"><span class="toc-number">6.1.</span> <span class="toc-text">链式求导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">6.2.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、-CNN"><span class="toc-number">7.</span> <span class="toc-text">七、 CNN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结构"><span class="toc-number">7.1.</span> <span class="toc-text">结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特点"><span class="toc-number">7.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#感受野"><span class="toc-number">7.3.</span> <span class="toc-text">感受野</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂度分析"><span class="toc-number">7.4.</span> <span class="toc-text">复杂度分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、-RNN-LSTM"><span class="toc-number">8.</span> <span class="toc-text">八、 RNN LSTM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、"><span class="toc-number">9.</span> <span class="toc-text">九、</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#补充"><span class="toc-number">9.1.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#完整机器学习项目流程"><span class="toc-number">9.1.1.</span> <span class="toc-text">完整机器学习项目流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线性与非线性"><span class="toc-number">9.1.2.</span> <span class="toc-text">线性与非线性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#归一化"><span class="toc-number">9.1.3.</span> <span class="toc-text">归一化</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://blog-1252404748.cos.ap-chengdu.myqcloud.com/avatar.jpg"></div><div class="author-info__name text-center">Ykk</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/cloisonne" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">51</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">43</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">12</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://blog-1252404748.cos.ap-chengdu.myqcloud.com/bg-1.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Ykk</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/about">About</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/resume">Resume</a></span></div><div id="post-info"><div id="post-title">十个深度学习高频面试问题</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-10-16</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/就业/">就业</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1,277</span><span class="post-meta__separator">|</span><span>Reading time: 4 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>总结十个深度学习高频面试问题。</p>
+<a id="more"></a>
+<hr>
+<h2 id="一、过拟合-欠拟合"><a href="#一、过拟合-欠拟合" class="headerlink" title="一、过拟合/欠拟合"></a>一、过拟合/欠拟合</h2><h3 id="降低过拟合"><a href="#降低过拟合" class="headerlink" title="降低过拟合"></a>降低过拟合</h3><p>首先是数据角度，然后是特征角度，模型角度，分算法的角度。</p>
+<ul>
+<li>数据角度<ul>
+<li>增加数据（GAN，图像增强，NLP机器翻译）</li>
+<li>交叉验证k-fold</li>
+<li>bootstrapping out of bag包外估计</li>
+</ul>
+</li>
+<li>特征角度<ul>
+<li>特征选择</li>
+<li>降维</li>
+</ul>
+</li>
+<li>模型角度<ul>
+<li>正则化罚参数（看后面正则化）</li>
+<li>更简单模型</li>
+<li>减少迭代次数</li>
+<li>集成学习（RF，GBDT） （<strong>关于GBDT XGboost后面</strong>）</li>
+</ul>
+</li>
+<li>分算法的角度<ul>
+<li>SVM  —— 引入松弛变量</li>
+<li>决策树 —— 剪枝（预剪枝，后剪枝）</li>
+<li>深度学习<ul>
+<li>dropout bagging所有模型独立，训练到收敛，dropout共享参数，训练一小部分</li>
+<li>batch normalization  BN归一化+训练每个batch得到方差+求均值方差的期望调整BN函数</li>
+</ul>
+</li>
+<li>BP<ul>
+<li>early stopping</li>
+<li>regularization</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="降低欠拟合"><a href="#降低欠拟合" class="headerlink" title="降低欠拟合"></a>降低欠拟合</h3><p>从特征角度和模型角度（包括正则化）</p>
+<ul>
+<li>加入新的特征<ul>
+<li>交叉组合特征（联想深度学习一般步骤）</li>
+<li>深度学习： 因子分解，deep-crossing，自编码器</li>
+</ul>
+</li>
+<li>增加模型复杂度<ul>
+<li>线性：增加高次项</li>
+<li>神经网络：增加层数和神经元</li>
+</ul>
+</li>
+<li>减小正则化系数</li>
+</ul>
+<hr>
+<h2 id="二、公式推导"><a href="#二、公式推导" class="headerlink" title="二、公式推导"></a>二、公式推导</h2><h3 id="BP反向传播的4个基本公式"><a href="#BP反向传播的4个基本公式" class="headerlink" title="BP反向传播的4个基本公式"></a>BP反向传播的4个基本公式</h3><p>利用链式法则求梯度下降法的梯度（每日一推）</p>
+<hr>
+<h2 id="三、激活函数"><a href="#三、激活函数" class="headerlink" title="三、激活函数"></a>三、激活函数</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>sigmoid</li>
+<li>tanh</li>
+<li>relu</li>
+</ul>
+<h3 id="为什么引入非线性激活函数"><a href="#为什么引入非线性激活函数" class="headerlink" title="为什么引入非线性激活函数"></a>为什么引入非线性激活函数</h3><p>深层神经网络不再是线性，可以逼近任何函数</p>
+<h3 id="为什么relu"><a href="#为什么relu" class="headerlink" title="为什么relu"></a>为什么relu</h3><ul>
+<li>sigmoid 梯度不好求</li>
+<li>深层网络  sigmoid 梯度消失（见梯度爆炸和梯度消失）</li>
+<li>relu使网络稀疏，缓解过拟合</li>
+</ul>
+<h3 id="relu的优缺点"><a href="#relu的优缺点" class="headerlink" title="relu的优缺点"></a>relu的优缺点</h3><ul>
+<li>分段线性，梯度大（不会梯度消失）—，收敛快，使一部分神经元为0，使网络稀疏</li>
+<li>某些神经元不会被激活</li>
+</ul>
+<h3 id="leaky-relu"><a href="#leaky-relu" class="headerlink" title="leaky-relu"></a>leaky-relu</h3><p>max(0,z)+a*min(0,z)   a为小值  a=-1为绝对值整流  a可学习为参数化整流</p>
+<h3 id="其他激活函数"><a href="#其他激活函数" class="headerlink" title="其他激活函数"></a>其他激活函数</h3><ul>
+<li>线性</li>
+<li>softmax</li>
+<li>径向基函数RBF</li>
+<li>softplus</li>
+<li>硬双曲正切</li>
+</ul>
+<hr>
+<h2 id="四、正则化问题"><a href="#四、正则化问题" class="headerlink" title="四、正则化问题"></a>四、正则化问题</h2><p>正则化参数引入先验分布，降低复杂度，提高泛化能力</p>
+<h3 id="BN是一种正则化方法，见上面（参数初始化）"><a href="#BN是一种正则化方法，见上面（参数初始化）" class="headerlink" title="BN是一种正则化方法，见上面（参数初始化）"></a>BN是一种正则化方法，见上面（参数初始化）</h3><h3 id="L1-L2-范数正则化"><a href="#L1-L2-范数正则化" class="headerlink" title="L1/L2 范数正则化"></a>L1/L2 范数正则化</h3><ul>
+<li>L1 先验：拉普拉斯分布  使特征稀疏，便于提取</li>
+<li>L2 先验：高斯分布  防止过拟合，提高泛化</li>
+</ul>
+<h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><p>集成方法bagging，多个数据集，重复采样</p>
+<p>dropout，从基础网络去除部分单元后的子网络</p>
+<hr>
+<h2 id="五、正负样本不均衡"><a href="#五、正负样本不均衡" class="headerlink" title="五、正负样本不均衡"></a>五、正负样本不均衡</h2><ul>
+<li>采样<ul>
+<li>上采样 小众类多份</li>
+<li>下采样 大众类剔除一部分</li>
+<li>减少信息损失<ul>
+<li>EasyEnsemble —— ensemble 模型融合 多次下采样</li>
+<li>BalanceCascade —— boosting 增量训练 先训练下采样，正确的不放回，再训练第二个分类器</li>
+<li>NearMiss —— KNN挑选大众样本</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据合成<ul>
+<li>SMOTE方法 样本生成更多数据</li>
+</ul>
+</li>
+<li>加权/罚函数</li>
+<li>一分类或异常检测（高斯分布）</li>
+</ul>
+<hr>
+<h2 id="六、梯度消失和梯度爆炸"><a href="#六、梯度消失和梯度爆炸" class="headerlink" title="六、梯度消失和梯度爆炸"></a>六、梯度消失和梯度爆炸</h2><h3 id="链式求导"><a href="#链式求导" class="headerlink" title="链式求导"></a>链式求导</h3><p>激活函数求导，大于一，导致梯度爆炸，小于一，梯度消失</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>预训练加微调 DBN寻找局部最优（<strong>DBN</strong>）</li>
+<li>梯度剪切 设置梯度的阈值 防止梯度爆炸</li>
+<li>正则化 防止梯度爆炸</li>
+<li>relu leakyrelu elu等激活函数</li>
+<li>BN</li>
+<li>残差结构</li>
+<li>LSTM</li>
+</ul>
+<hr>
+<h2 id="七、-CNN"><a href="#七、-CNN" class="headerlink" title="七、 CNN"></a>七、 CNN</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><ul>
+<li>左<ul>
+<li>去均值</li>
+<li>归一化</li>
+<li>PCA</li>
+</ul>
+</li>
+<li>中<ul>
+<li>CONV 卷积  局部感知，权值共享</li>
+<li>RELU 激励 激活函数，收敛快，求梯度简单</li>
+<li>POOL 池化  区域平均，降维</li>
+</ul>
+</li>
+<li>右<ul>
+<li>FC 全连接</li>
+</ul>
+</li>
+</ul>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>局部感知- 局部特征</li>
+<li>权重共享 - 降低训练难度</li>
+<li>池化 - 降维</li>
+<li>多层次</li>
+</ul>
+<h3 id="感受野"><a href="#感受野" class="headerlink" title="感受野"></a>感受野</h3><p>感受野是卷积神经网络(CNN)每一层输出的特征图(feature map)上的像素点在原始输入图像上映射的区域大小</p>
+<p>增大的方法： dilated空洞卷积，池化，增大卷积核</p>
+<p> RF = 1 #待计算的feature map上的感受野大小<br>　　for layer in （top layer To down layer）:<br>　　　　RF = ((RF -1)* stride) + fsize<br>　　　　<br>后一层的fsize-1，乘上stride，然后加上当前层的fsize</p>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><ul>
+<li>时间复杂度</li>
+</ul>
+<p>M2K2CinCout<br>M 每个卷积核输出特征图的边长<br>K 每个卷积核的边长<br>Cin 输入通道数<br>Cout 输出通道数</p>
+<ul>
+<li>空间复杂度</li>
+</ul>
+<p>累加K2CinCout 与输入数据大小无关</p>
+<hr>
+<h2 id="八、-RNN-LSTM"><a href="#八、-RNN-LSTM" class="headerlink" title="八、 RNN LSTM"></a>八、 RNN LSTM</h2><hr>
+<h2 id="九、"><a href="#九、" class="headerlink" title="九、"></a>九、</h2><hr>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><h4 id="完整机器学习项目流程"><a href="#完整机器学习项目流程" class="headerlink" title="完整机器学习项目流程"></a>完整机器学习项目流程</h4><ol>
+<li>抽象建模</li>
+<li>获取数据</li>
+<li>特征预处理</li>
+<li>训练模型调优</li>
+<li>模型诊断</li>
+<li>模型融合</li>
+<li>上线</li>
+</ol>
+<h4 id="线性与非线性"><a href="#线性与非线性" class="headerlink" title="线性与非线性"></a>线性与非线性</h4><ul>
+<li>线性分类器解释性好，复杂度低  LR 贝叶斯 单层感知机 线性回归</li>
+<li>非线性拟合能力强  决策树 RF GBDT 多层感知机</li>
+<li>SVM 看线性核还是高斯核</li>
+</ul>
+<h4 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h4><p>优点： 提高梯度下降法的速度，有可能提高精度</p>
+<ul>
+<li>线性归一化</li>
+<li>标准差归一化</li>
+<li>非线性归一化</li>
+</ul>
+<p>caution: 概率模型不需要归一化，比如决策树，RF ； LR不用归一化 ； SVM 欧氏距离，要做归一化</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ykk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://ykksmile.top/posts/60220/">https://ykksmile.top/posts/60220/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MachineLearning/">MachineLearning</a><a class="post-meta__tags" href="/tags/DeepLearning/">DeepLearning</a></div><div class="social-share" data-disabled="google,facebook,twitter"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/posts/59325/"><span>做过的几个项目总结</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitment-container"></div><script>var gitment = new Gitment({
+  owner: 'cloisonne',
+  repo: 'cloisonne.github.io',
+  oauth: {
+    client_id: 'd6cdb36f97d08963e9cc',
+    client_secret: '32f854846bf95d283ee654337570bbed41f69f03'
+  }
+})
+gitment.render('gitment-container')</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2018 By Ykk</div><div class="framework-info"><span>Driven By   </span><a href="https://pages.coding.me"><span>Coding Pages </span></a><!--span.footer-separator |--><!--i(class='fa fa-heart animated infinite pulse')--><!--span= _p('footer.theme') + ' - '--><span> &amp; </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="icp"><a><span>陕ICP备18010505号</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script src="/js/search/local-search.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

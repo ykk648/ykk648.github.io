@@ -4,16 +4,38 @@
 
     
   <url>
+    <loc>https://ykksmile.top/posts/60220/</loc>
+    <lastmod>2018-10-16T08:14:18.330Z</lastmod>
+    <data>
+        <display>
+        <title>十个深度学习高频面试问题</title>
+        <pubTime>2018-10-16T06:55:46.000Z</pubTime>
+        
+        <tag>MachineLearning</tag>
+         
+        <tag>DeepLearning</tag>
+         
+         
+           
+             
+              <breadCrumb title="就业" url="https://ykksmile.top/categories/%E5%B0%B1%E4%B8%9A/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ykksmile.top/posts/59325/</loc>
-    <lastmod>2018-10-16T06:01:55.641Z</lastmod>
+    <lastmod>2018-10-16T07:04:20.941Z</lastmod>
     <data>
         <display>
         <title>做过的几个项目总结</title>
         <pubTime>2018-10-16T05:17:24.000Z</pubTime>
         
-        <tag>Notes</tag>
+        <tag>MachineLearning</tag>
          
-        <tag>科研</tag>
+        <tag>DeepLearning</tag>
          
          
            
@@ -338,9 +360,9 @@
         <title>睿思图片爬取实战（附代码）</title>
         <pubTime>2017-11-02T07:24:46.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>爬虫</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -360,9 +382,9 @@
         <title>python爬虫第一课-requests库</title>
         <pubTime>2017-10-27T11:52:21.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>爬虫</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -917,9 +939,9 @@
         <title>Python爬虫总结（附拉勾网多进程代理池爬虫）</title>
         <pubTime>2017-11-11T06:14:19.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>爬虫</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -939,9 +961,9 @@
         <title>python爬虫第二课-BeautifulSoup</title>
         <pubTime>2017-10-28T15:03:56.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>爬虫</tag>
+         
+        <tag>Python</tag>
          
          
            

@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前言又是一次很久没有更新博客，主要是忙于期末复习和期末考试，还有随后项目的进展，做了一些诸如状态机结构体之类的paperwork，在此总结和展望。">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>２个多月的近况 - TylerLuan</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="２个多月的近况">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-02-12 16:29" pubdate>
+        2017年2月12日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">２个多月的近况</h1>
+            
+            <div class="markdown-body">
+              <h2 id="intro">前言</h2>又是一次很久没有更新博客，主要是忙于期末复习和期末考试，还有随后项目的进展，做了一些诸如状态机结构体之类的paperwork，在此总结和展望。
+
+
+<span id="more"></span>
+
+<hr>
+<h3 id="期末考试的感想"><a href="#期末考试的感想" class="headerlink" title="期末考试的感想"></a>期末考试的感想</h3><p>期末考试我复习还是很认真的，考的主要有以下几门课：</p>
+<ul>
+<li><strong>计算智能</strong></li>
+<li><strong>人工智能</strong></li>
+<li><strong>机器学习</strong></li>
+<li><strong>算法设计</strong></li>
+</ul>
+<p>几门课相关性很强，范围大抵就是神经网络、深度学习、优化问题等，方向是最前沿的方向，自己也比较喜欢，可能以后有缘再见吧。</p>
+<p>写这篇文的时候是2月12号，喔，补的好晚，2月5号，也就是大年初十就来学校了，这个与文章无关，就不提了。</p>
+<p>上学期的考试成绩都已经出了，几门课虽然复习的很好，但是分数真的差强人意，感觉老师压分严重，并且都患有精神疾病，在这里吐槽一句大概不会有人骂我吧，<code>这个烂学校</code>。</p>
+<p>所以我认真复习了这么久的结果是什么呢，什么也没得到，如果我当初没有考上研究生，肯定就不会放弃出国留学的机会，也许人生就不一样了。哪有这么多可能，接受现实吧孩子。</p>
+<p>项目上，进展缓慢，主要是在做多蜂窝模块的路由和负载均衡，每天看着iptable敲着route命令调试着看似高端其实一点也不友好的开发板，不止一次在内心提醒自己，<code>你千万不能去做运维啊，你爸妈养你可不是让你去考CCIE的</code>，苦笑脸～</p>
+<hr>
+<h3 id="未来要做的工作（技术向）"><a href="#未来要做的工作（技术向）" class="headerlink" title="未来要做的工作（技术向）"></a>未来要做的工作（技术向）</h3><p>关于<code>博客</code>：</p>
+<ul>
+<li>希望把友情链接做成一个单一的界面</li>
+<li>希望能加入集成持续部署</li>
+<li>精力足够的话还是租个服务器能做更多事</li>
+<li>好好维护</li>
+</ul>
+<p>关于<code>技术</code>：</p>
+<p>现在重心还是放在java web，以找工作为导向，刷些算法题，增量学习。其他感兴趣的方向有：</p>
+<ul>
+<li>docker</li>
+<li>js/nodejs</li>
+<li>python后端</li>
+<li>爬虫</li>
+</ul>
+<p>关于<code>项目</code>：</p>
+<ul>
+<li>C的串口编程</li>
+<li>C的socket编程</li>
+<li>策略路由</li>
+<li>负载均衡</li>
+<li>IPsec</li>
+</ul>
+<hr>
+<h3 id="未来要做的事（人生向）"><a href="#未来要做的事（人生向）" class="headerlink" title="未来要做的事（人生向）"></a>未来要做的事（人生向）</h3><p>买的雅思4-11明天就能到了，争取在6月份考过雅思吧，目标移民澳洲。</p>
+<p>也不期望第一次考雅思成绩能多好，但至少保证4个6，这样可以做EA的职业评估，拿本科学历通过华盛顿协议来评估一个通信工程师就好。</p>
+<p>如果能考到4个7那更好，但是移民打分还是不够，还差5分（算上州担保了），结婚是不可能了，这5分可以靠naati：</p>
+<p><strong>naati今年要改革，改革完不知道国内还能不能考</strong>。</p>
+<p>还可以等到25岁，但是我24岁就要面临国内的校招，找工作了，冲突。</p>
+<p>最后的方案是考完雅思申请EA认证后刷<code>PTE</code>（EA认证不承认PTE，但是澳洲移民局承认啊），希望能多考几次PTE然后刷到<code>4个79=雅思4个8</code>，这样在研二就能够打够分数申请189的澳洲移民签证了。</p>
+<p>毕业就可以去澳洲找工作，无缝衔接。</p>
+<p>至于，工作好不好找，有没有国内待遇好，还有我国内211的硕士学历就算废了，这些到时候在考虑吧。</p>
+<hr>
+<h3 id="感情问题"><a href="#感情问题" class="headerlink" title="感情问题"></a>感情问题</h3><p>过年的时候，感情出了一些问题。（<code>敲黑板 单身狗就不能有感情问题了吗？</code>）</p>
+<p>到现在也没怎么解决，但是好像已经能接受这样的现实了，就算是备胎也好，我有什么办法呢。</p>
+<p>时间的车轮滚滚向前，真的不能再拿出更多余的精力来放在这上面了，明年面临校招的找工作考验，今年还要着急考雅思考PTE努力移民，孩子，在这种人生的十字路口，每步都要谨慎，不然会粉身碎骨的。</p>
+<p>对于谈恋爱这件事，其实也是挺期待的，如果有了女朋友，大概做什么的动力都能多一些，不会这么孤独的像现在一样每天自己吃饭，一天也说不了几句话。</p>
+<p>但是如果你不是我的，我也不会做过多的期待，单身有单身的好处，我大可出去环游世界，放浪形骸，天地这么大，一个人走也挺好的。</p>
+<p>写了这么多，是不是应该放个图，就晒我的朋友圈吧。</p>
+<p><img src="http://o7myibfc7.bkt.clouddn.com/1691432232.jpg?imageView2/2/h/400/" srcset="/img/loading.gif" lazyload alt="自己的朋友圈"></p>
+<p>图片是鬼怪，三句话是：</p>
+<pre><code>天冷了许多
+
+听说冬天之所以这么冷
+
+是为了告诉大家，身边的人的温暖有多重要
+</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Essays/">Essays</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/about-makefile">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一个简单的makefile</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/about-git">
+                        <span class="hidden-mobile">关于git命令和博客迁移同步方案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

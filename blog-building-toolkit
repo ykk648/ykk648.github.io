@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前言长期记录，很多东西都是边学边做，要培养自己规范记录的习惯。
+
+还不怎么熟悉图床和图链的使用，暂时就用文字叙述，主要还是给自己看。">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>博客搭建过程和工具总结 - TylerLuan</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="博客搭建过程和工具总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-07-18 21:42" pubdate>
+        2016年7月18日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">博客搭建过程和工具总结</h1>
+            
+            <div class="markdown-body">
+              <h2 id="intro">前言</h2>长期记录，很多东西都是边学边做，要培养自己规范记录的习惯。
+
+<p>还不怎么熟悉图床和图链的使用，暂时就用文字叙述，主要还是给自己看。</p>
+<span id="more"></span>
+<h2 id="2018-3-8更新"><a href="#2018-3-8更新" class="headerlink" title="2018.3.8更新"></a>2018.3.8更新</h2><ul>
+<li>加入了插件<a target="_blank" rel="noopener" href="https://github.com/rozbo/hexo-abbrlink/">hexo-abbrlink</a> 目前文章ID为随机数，解决了gitment laber不够短的问题</li>
+</ul>
+<hr>
+<h2 id="2018-3-7更新"><a href="#2018-3-7更新" class="headerlink" title="2018.3.7更新"></a>2018.3.7更新</h2><ul>
+<li>修改了gitment生成ID的方式，参考<a target="_blank" rel="noopener" href="http://xichen.pub/2018/01/31/2018-01-31-gitment/">添加Gitment评论系统踩过的坑</a></li>
+<li>增加了插件hexo-admin，踩坑，删除nodejs插件目录后重装恢复，增加了hexo编辑文档的方式<pre><code>  cnpm install
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="2018-1-23更新"><a href="#2018-1-23更新" class="headerlink" title="2018.1.23更新"></a>2018.1.23更新</h2><ul>
+<li>用python写了gitment自动初始化工具</li>
+</ul>
+<hr>
+<h2 id="2018-1-22更新"><a href="#2018-1-22更新" class="headerlink" title="2018.1.22更新"></a>2018.1.22更新</h2><ul>
+<li>加入了<a target="_blank" rel="noopener" href="https://github.com/imsun/gitment/">gitment</a>评论，修改了gitment的css样式，匹配了我的blog</li>
+<li>在留言板中也加入了gitment</li>
+</ul>
+<hr>
+<h2 id="2018-1-17更新"><a href="#2018-1-17更新" class="headerlink" title="2018.1.17更新"></a>2018.1.17更新</h2><ul>
+<li>新建了一个wordpress小站<a target="_blank" rel="noopener" href="https://ykk.000webhostapp.com/">我的文字小站</a>，托管在三蛋空间</li>
+<li>之前换了友言评论，差强人意，有时间换成gitment</li>
+<li>修改主站，增加了跳转链接<a target="_blank" rel="noopener" href="http://ykksmile.top/writing">http://ykksmile.top/writing</a>,并修改了博客左边栏适配</li>
+<li>考虑要不要自己新开一个主题，原作者不更新了，我还有足够的精力吗？</li>
+</ul>
+<hr>
+<h2 id="博客搭建过程"><a href="#博客搭建过程" class="headerlink" title="博客搭建过程"></a>博客搭建过程</h2><ul>
+<li>博客搭建主要是依赖<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html" title="Hexo中文主页">Hexo</a>，这是一个<code>快速、简洁且高效的博客框架</code>，支持的主题十分丰富。</li>
+<li>搭建环境是Ubuntu 16.04，因为之前做毕设课题是<code>SDN</code>和<code>物联网</code>，硬件驱动都是在Linux中编译；后面研究方向又是集中在<code>GNU Radio</code>上，所以早早的就进了Linux这个大坑。</li>
+<li>在Linux里遇到炒鸡多的问题，就连装个QQ也折腾了好久，好多东西比如<code>Ubuntu中文站</code>都是后来才知道的。后面会再开一贴记录Linux折腾的过程，之前的大多不记得了，就从今往后吧。</li>
+</ul>
+<hr>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><p>做静态主页必然是要从<a target="_blank" rel="noopener" href="https://github.com/" title="Github主页">Github</a>入手：</p>
+<ul>
+<li>注册账号，建立repository，使用Github提供的Github Pages。</li>
+<li>部署Hexo，需要前置程序：<ul>
+<li>Node.js</li>
+<li>Git</li>
+</ul>
+</li>
+<li>安装和建站（省去folder）：<pre><code> npm install -g hexo-cli
+ hexo init
+ npm install
+</code></pre>
+</li>
+<li>学习使用git命令，下载主题仓库<pre><code>     git clone URL
+</code></pre>
+</li>
+<li>基础命令<pre><code> hexo new [layout] &lt;title&gt;
+ hexo clean
+ hexo g
+ hexo s
+</code></pre>
+</li>
+<li>主题修改过后使用部署插件<pre><code> npm install hexo-deployer-git --save
+ hexo deploy
+</code></pre>
+</li>
+<li>这里Github部署使用SSH，需要在官网匹配一个公钥，注意branch的填写<blockquote>
+<p>初始地址：<a target="_blank" rel="noopener" href="http://cloisonne.github.io/">http://cloisonne.github.io/</a> (cloisonne为我的ID)</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="补充-关于nodejs的安装"><a href="#补充-关于nodejs的安装" class="headerlink" title="补充-关于nodejs的安装"></a>补充-关于nodejs的安装</h3><p>官网直接下载完整包 <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> node-v-linux-x64/bin<br>ls<br>./node -v<br></code></pre></td></tr></table></figure>
+
+<p>设置全局：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">ln -s /home/node-v-linux-x64/bin/node /usr/<span class="hljs-built_in">local</span>/bin/node<br>ln -s /home/node-v-linux-x64/bin/npm /usr/<span class="hljs-built_in">local</span>/bin/npm<br></code></pre></td></tr></table></figure>
+
+<p>后面安装的hexo目录位于nodejs/bin 也需要设置全局</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo ln -s /opt/node-v4.4.7-linux-x64/bin/hexo /usr/<span class="hljs-built_in">local</span>/bin/hexo<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="补充-Windows下nodejs的问题"><a href="#补充-Windows下nodejs的问题" class="headerlink" title="补充-Windows下nodejs的问题"></a>补充-Windows下nodejs的问题</h3><p>国内npm被墙 采用淘宝镜像<a target="_blank" rel="noopener" href="https://npm.taobao.org/">cnpm</a></p>
+<pre><code>$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+</code></pre>
+<h3 id="补充-关于私钥公钥的生成"><a href="#补充-关于私钥公钥的生成" class="headerlink" title="补充-关于私钥公钥的生成"></a>补充-关于私钥公钥的生成</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs verilog">$ git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> user<span class="hljs-variable">.name</span> <span class="hljs-string">&quot;cloisonne&quot;</span><br>$ git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> user<span class="hljs-variable">.email</span> <span class="hljs-string">&quot;tylerluan@163.com&quot;</span><br>$ ssh-keygen -t rsa -C <span class="hljs-string">&quot;tylerluan@163.com&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>生成两个文件id_rsa和id_rsa.pub 公钥位于<code>id_rsa.pub</code></p>
+<h3 id="Next主题"><a href="#Next主题" class="headerlink" title="Next主题"></a>Next主题</h3><p>一开始是使用的<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/" title="干净整洁的主题">Next主题</a>，这个主题的好处在于有很强大的说明文档。<br>利用自带的<code>_config.yml</code>可以完成基础的定制，也借助它我熟悉了Hexo的主要框架和一个blog的主要结构。</p>
+<blockquote>
+<p>在Next中首先遇到的问题在于如何修改底部标签，事实上如果了解Hexo主题的开发过程，这一问题就很好解决。<br>自己摸索找到了<code>theme/layout/_partial</code>这里放着关于布局的JavaScript文件。</p>
+</blockquote>
+<p>包括学习Markdown，并且发表第一篇post，过程一直很顺利，后面<a target="_blank" rel="noopener" href="http://duoshuo.com/" title="多说评论系统主页">多说</a>在手机适配端出现了问题，恰逢毕业季，很久都未解决，迫不得已放弃。</p>
+<h3 id="Yelee主题"><a href="#Yelee主题" class="headerlink" title="Yelee主题"></a>Yelee主题</h3><p>后来看上了<a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia" title="Yilia主题">Yilia</a>主题，主题特点是简单，注重对内容的突出。但是简单就意味着缺少了很多功能，比如搜索等等，<a target="_blank" rel="noopener" href="https://github.com/MOxFIVE/hexo-theme-yelee" title="Yelee主题">Yelee</a>正是在Yilia基础上更改的主题，增加了很多可用的功能。</p>
+<blockquote>
+<p>本主题基于主题 Hexo-Theme-Yilia 修改而来，在此再次感谢原作者 Litten。修复了一些 bugs，改变了大量的样式，添加了不少特性。对原主题百般折腾后，发觉变动越来越大，索性就发布个新主题了，主题随我微博名 “夜Yelee” 。个人喜欢简洁的样式，重视内容的浏览，同时希望作为个人网站的博客，能稍微凸显出博主个性。各种修改折腾大抵基于以上考虑。</p>
+</blockquote>
+<p>这里附上Yelee主题使用说明，基本配置大致都有了：<a target="_blank" rel="noopener" href="http://moxfive.coding.me/yelee/" title="Yelee主题使用说明">Yelee主题使用说明</a></p>
+<ul>
+<li>关于修改左边栏上方的<strong>Overlay</strong>配色，这一段代码写在<code>yelee/source/js/main.js</code></li>
+<li>关于如何解决Hexo置顶问题：<a target="_blank" rel="noopener" href="http://www.netcan666.com/2015/11/22/%E8%A7%A3%E5%86%B3Hexo%E7%BD%AE%E9%A1%B6%E9%97%AE%E9%A2%98/" title="解决Hexo置顶问题">解决Hexo置顶问题 </a></li>
+<li>多说样式的修改：<a target="_blank" rel="noopener" href="http://moxfive.xyz/2015/09/29/duoshuo-style/" title="对多说评论的改造">多说样式折腾记录 — 添加 UA 浏览器标识、旋转头像等 </a></li>
+</ul>
+<h3 id="各种插件"><a href="#各种插件" class="headerlink" title="各种插件"></a>各种插件</h3><p>Hexo的各种插件，包括sitemap、rss、git部署等等：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install hexo-generator-index --save<br>npm install hexo-generator-archive --save<br>npm install hexo-generator-category --save<br>npm install hexo-generator-tag --save<br>npm install hexo-server --save<br>npm install hexo-deployer-git --save<br>npm install hexo-deployer-heroku --save<br>npm install hexo-deployer-rsync --save<br>npm install hexo-deployer-openshift --save<br>npm install hexo-renderer-marked@0.2 --save<br>npm install hexo-renderer-stylus@0.2 --save<br>npm install hexo-generator-feed@1 --save<br>npm install hexo-generator-sitemap@1 --save<br>npm install hexo-generator-baidu-sitemap --save<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>置顶插件</strong></p>
+<pre><code>    $ npm uninstall hexo-generator-index --save
+$ npm install hexo-generator-index-pin-top --save
+</code></pre>
+<p>第三方插件，主要有：</p>
+<p> <del>- 多说评论</del></p>
+<ul>
+<li>百度统计</li>
+<li>不蒜子统计</li>
+<li>sitemap</li>
+<li>RSS</li>
+</ul>
+<h3 id="coding部署"><a href="#coding部署" class="headerlink" title="coding部署"></a>coding部署</h3><p>因为百度屏蔽了Github的抓取，为了让百度能够正常抓取，这里借鉴了知乎<br><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/30898326/" title="如何解决百度爬虫无法爬取搭建在Github上的个人博客的问题">如何解决百度爬虫无法爬取搭建在Github上的个人博客的问题</a><br>完成了Github和国内Coding的共同部署，并通过DNS实现了国内访问Coding，国外访问Github。</p>
+<p>附上Deploy的配置（Github的branch <code>master</code>可以省略）：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">deploy:<br>- type: git<br>  repo: https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/cloisonne/</span>cloisonne.github.io<br>- type: git<br>  repo: https:<span class="hljs-regexp">//gi</span>t.coding.net<span class="hljs-regexp">/cloisonne/</span>cloisonne.git<br>  branch: coding-pages<br></code></pre></td></tr></table></figure>
+
+<p><del>登录方式依然是SSH，SSH隔段时间就要重新输入密码，最近还在寻找更好的方式。</del></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus">deploy:<br>- type: git<br>  repo: git@github<span class="hljs-selector-class">.com</span>:cloisonne/cloisonne<span class="hljs-selector-class">.github</span><span class="hljs-selector-class">.io</span><span class="hljs-selector-class">.git</span><br>- type: git<br>  repo: git@git<span class="hljs-selector-class">.coding</span><span class="hljs-selector-class">.net</span>:cloisonne/cloisonne<span class="hljs-selector-class">.git</span><br>  branch: coding-pages<br></code></pre></td></tr></table></figure>
+
+<p>已解决每次需要输入密码的问题。</p>
+<h3 id="域名和DNS"><a href="#域名和DNS" class="headerlink" title="域名和DNS"></a>域名和DNS</h3><p>因为主要是以学习为主，这里使用了免费的<a target="_blank" rel="noopener" href="http://www.dot.tk/zh/index.html?lang=zh/" title="注册Dot TK域名">tk域名</a>，注册了<del><a target="_blank" rel="noopener" href="http://smileykk.tk/">http://smileykk.tk</a></del>　已换成<a target="_blank" rel="noopener" href="http://ykksmile.top/">http://ykksmile.top</a></p>
+<blockquote>
+<p>注意tk域名目前免费最大时长为12小时，建议一次注册选择最大时长，注册时间选错了可以注销重新申请。</p>
+</blockquote>
+<p>DNS使用了流行的<a target="_blank" rel="noopener" href="https://www.dnspod.cn/" title="好用的DNS工具">DNSPod</a>,具体过程比较简单，参考了<a target="_blank" rel="noopener" href="http://bblove.me/2015/11/25/how-to-solve-the-problem-that-github-blocks-the-baidu-spider/" title="参考的DNS方案">解决 Github Pages 禁止百度爬虫的方法</a></p>
+<ul>
+<li>将域名解析到DNSPod提供的地址</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">f1g1ns1<span class="hljs-selector-class">.dnspod</span><span class="hljs-selector-class">.net</span><br>f1g1ns2<span class="hljs-selector-class">.dnspod</span>.net<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>修改DNSPod解析记录</li>
+<li>添加Github的CNAME文件,添加Coding自定义域名</li>
+</ul>
+<h3 id="TiddlyWiki"><a href="#TiddlyWiki" class="headerlink" title="TiddlyWiki"></a>TiddlyWiki</h3><p>TiddlyWiki是一个轻量级的静态的个人wiki工具，具体使用方法参考TigglyWiki的官方文档：</p>
+<p>在Hexo中的应用：</p>
+<blockquote>
+<p>放在theme/source/wiki/index.html 即可通过<code>http://URL/wiki/</code>访问</p>
+</blockquote>
+<p>TiddlyWiki的Markdown插件安装：</p>
+<blockquote>
+<p>To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:</p>
+</blockquote>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">$:<span class="hljs-regexp">/plugins/</span>tiddlywiki/markdown<br></code></pre></td></tr></table></figure>
+
+<h2 id="工具链接"><a href="#工具链接" class="headerlink" title="工具链接"></a>工具链接</h2><h3 id="网站搭建"><a href="#网站搭建" class="headerlink" title="网站搭建"></a>网站搭建</h3><ol>
+<li><strong>My blog</strong>: <a target="_blank" rel="noopener" href="http://smileykk.tk/">http://smileykk.tk</a> / <a target="_blank" rel="noopener" href="http://cloisonne.github.io/">http://cloisonne.github.io</a> / <a target="_blank" rel="noopener" href="http://cloisonne.coding.me/cloisonne">http://cloisonne.coding.me/cloisonne</a></li>
+<li><strong>GitHub</strong>: <a target="_blank" rel="noopener" href="https://github.com/cloisonne">https://github.com/cloisonne</a></li>
+<li><strong>Coding</strong>: <a target="_blank" rel="noopener" href="https://coding.net/">https://coding.net/</a></li>
+<li><strong>Hexo</strong>: <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn">https://hexo.io/zh-cn</a></li>
+<li><strong>Node.js</strong>: <a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></li>
+<li><strong>Next主题</strong>: <a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/">http://theme-next.iissnan.com</a></li>
+<li><strong>Yelee主题</strong>: <a target="_blank" rel="noopener" href="http://moxfive.coding.me/yelee">http://moxfive.coding.me/yelee</a></li>
+<li><strong>favicon制作</strong>: <a target="_blank" rel="noopener" href="http://www.atool.org/ico.php">http://www.atool.org/ico.php</a></li>
+<li><strong>淘宝npm镜像</strong>： <a target="_blank" rel="noopener" href="https://npm.taobao.org/">https://npm.taobao.org/</a></li>
+</ol>
+<h3 id="网站维护"><a href="#网站维护" class="headerlink" title="网站维护"></a>网站维护</h3><ol>
+<li><del>多说评论系统: <a target="_blank" rel="noopener" href="http://duoshuo.com/">http://duoshuo.com/</a></del></li>
+<li><strong>DNSPod</strong>: <a target="_blank" rel="noopener" href="https://www.dnspod.cn/">https://www.dnspod.cn</a></li>
+<li><strong>TK域名注册</strong>: <a target="_blank" rel="noopener" href="http://www.dot.tk/zh/index.html?lang=zh">http://www.dot.tk/zh/index.html?lang=zh</a></li>
+<li><strong>域名管理freenom</strong>: <a target="_blank" rel="noopener" href="https://my.freenom.com/clientarea.php">https://my.freenom.com/clientarea.php</a></li>
+<li><strong>站长工具大全</strong>: <a target="_blank" rel="noopener" href="http://tool.lusongsong.com/">http://tool.lusongsong.com/</a></li>
+</ol>
+<h3 id="相关学习"><a href="#相关学习" class="headerlink" title="相关学习"></a>相关学习</h3><ol>
+<li><strong>小书匠Markdown编辑器</strong>: <a target="_blank" rel="noopener" href="http://markdown.xiaoshujiang.com/">http://markdown.xiaoshujiang.com/</a></li>
+<li><strong>简书</strong>: <a target="_blank" rel="noopener" href="http://www.jianshu.com/">http://www.jianshu.com</a></li>
+<li><strong>TiddlyWiki</strong>: <a target="_blank" rel="noopener" href="http://tiddlywiki.com/">http://tiddlywiki.com/</a></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Notes/">Notes</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Markdown/">Markdown</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Tools/">Tools</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Github/">Github</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Ubuntu-VPN-problems">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VPN问题和科学上网地址</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/the-meaning-of-this-blog">
+                        <span class="hidden-mobile">我为什么要建这样一个blog</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

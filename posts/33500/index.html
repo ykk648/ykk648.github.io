@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前言最近研究LInux下的socket编程，这里做一个基础总结和对两份代码的分析。一个是路由表转发，一个是二层帧转发。">
+  <meta name="author" content="tyler luan">
+  <meta name="keywords" content="">
+  
+  <title>利用socket实现路由表和二层帧转发 - ykk648&#39;s hub</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>ykk648's hub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/vidar-nordli-mathisen-OTTIkYClEyI-unsplash.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="利用socket实现路由表和二层帧转发">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-11-04 22:29" pubdate>
+        2016年11月4日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      41
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">利用socket实现路由表和二层帧转发</h1>
+            
+            <div class="markdown-body">
+              <h2 id="intro">前言</h2>最近研究LInux下的socket编程，这里做一个基础总结和对两份代码的分析。一个是路由表转发，一个是二层帧转发。
+
+
+<span id="more"></span>
+
+<hr>
+<p><a href="/posts/33500/#%E8%B7%AF%E7%94%B1%E8%A1%A8MAC%E8%BD%AC%E5%8F%91%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90">太长不看，直接看代码的传送门</a></p>
+<h3 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h3><p><img src="http://o7myibfc7.bkt.clouddn.com/0_1301456076yzy7.gif.jpeg?imageView2/2/h/400/" srcset="/img/loading.gif" lazyload alt="封装过程"></p>
+<p>常用的头结构，这里没包括ICMP头。</p>
+<p><strong>MAC头结构</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">/*位于/usr/include/net/ethernet.h</span><br><span class="hljs-comment">数据帧定义，头14个字节，尾4个字节*/</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">MAC_FRAME_HEADER</span></span><br><span class="hljs-class">&#123;</span><br> <span class="hljs-keyword">char</span> m_cDstMacAddress[<span class="hljs-number">6</span>];    <span class="hljs-comment">//目的mac地址</span><br> <span class="hljs-keyword">char</span> m_cSrcMacAddress[<span class="hljs-number">6</span>];    <span class="hljs-comment">//源mac地址</span><br> <span class="hljs-keyword">short</span> m_cType;       　　　　　<span class="hljs-comment">//上一层协议类型，如0x0800代表上一层是IP协议，0x0806为arp</span><br>&#125;__attribute__((packed))MAC_FRAME_HEADER,*PMAC_FRAME_HEADER;<br><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">MAC_FRAME_TAIL</span></span><br><span class="hljs-class">&#123;</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m_sCheckSum;    <span class="hljs-comment">//数据帧尾校验和</span><br>&#125;__attribute__((packed))MAC_FRAME_TAIL, *PMAC_FRAME_TAIL;<br></code></pre></td></tr></table></figure>
+
+<p><strong>IP头结构</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 自定义 /netinet/ip.h</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">IP_HEADER</span> </span><br><span class="hljs-class">&#123;</span><br> <span class="hljs-keyword">char</span> m_cVersionAndHeaderLen;     　　<span class="hljs-comment">//版本信息(前4位)，头长度(后4位)</span><br> <span class="hljs-keyword">char</span> m_cTypeOfService;      　　　　　 <span class="hljs-comment">// 服务类型8位</span><br> <span class="hljs-keyword">short</span> m_sTotalLenOfPacket;    　　　　<span class="hljs-comment">//数据包长度</span><br> <span class="hljs-keyword">short</span> m_sPacketID;      　　　　　　　 <span class="hljs-comment">//数据包标识</span><br> <span class="hljs-keyword">short</span> m_sSliceinfo;      　　　　　　　  <span class="hljs-comment">//分片使用</span><br> <span class="hljs-keyword">char</span> m_cTTL;        　　　　　　　　　　<span class="hljs-comment">//存活时间</span><br> <span class="hljs-keyword">char</span> m_cTypeOfProtocol;    　　　　　 <span class="hljs-comment">//协议类型</span><br> <span class="hljs-keyword">short</span> m_sCheckSum;      　　　　　　 <span class="hljs-comment">//校验和</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m_uiSourIp;     　　　　　<span class="hljs-comment">//源ip</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m_uiDestIp;     　　　　　<span class="hljs-comment">//目的ip</span><br>&#125; __attribute__((packed))IP_HEADER, *PIP_HEADER ;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://o7myibfc7.bkt.clouddn.com/IPheader.jpg" srcset="/img/loading.gif" lazyload alt="IP头结构"></p>
+<p><strong>tcp头结构</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">TCP_HEADER</span> </span><br><span class="hljs-class">&#123;</span><br> <span class="hljs-keyword">short</span> m_sSourPort;        　　　　　　<span class="hljs-comment">// 源端口号16bit</span><br> <span class="hljs-keyword">short</span> m_sDestPort;       　　　　　　 <span class="hljs-comment">// 目的端口号16bit</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m_uiSequNum;       　　<span class="hljs-comment">// 序列号32bit</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> m_uiAcknowledgeNum;  <span class="hljs-comment">// 确认号32bit</span><br> <span class="hljs-keyword">short</span> m_sHeaderLenAndFlag;      　　<span class="hljs-comment">// 前4位：TCP头长度；中6位：保留；后6位：标志位</span><br> <span class="hljs-keyword">short</span> m_sWindowSize;       　　　　　<span class="hljs-comment">// 窗口大小16bit</span><br> <span class="hljs-keyword">short</span> m_sCheckSum;        　　　　　 <span class="hljs-comment">// 检验和16bit</span><br> <span class="hljs-keyword">short</span> m_surgentPointer;      　　　　 <span class="hljs-comment">// 紧急数据偏移量16bit</span><br>&#125;__attribute__((packed))TCP_HEADER, *PTCP_HEADER;<br><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">TCP_OPTIONS</span></span><br><span class="hljs-class">&#123;</span><br> <span class="hljs-keyword">char</span> m_ckind;<br> <span class="hljs-keyword">char</span> m_cLength;<br> <span class="hljs-keyword">char</span> m_cContext[<span class="hljs-number">32</span>];<br>&#125;__attribute__((packed))TCP_OPTIONS, *PTCP_OPTIONS;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://o7myibfc7.bkt.clouddn.com/TCPheader.jpg" srcset="/img/loading.gif" lazyload alt="TCP头"></p>
+<p><strong>UDP头结构</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">UDP_HEADER</span> </span><br><span class="hljs-class">&#123;</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> m_usSourPort;    　　　<span class="hljs-comment">// 源端口号16bit</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> m_usDestPort;    　　　<span class="hljs-comment">// 目的端口号16bit</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> m_usLength;    　　　　<span class="hljs-comment">// 数据包长度16bit</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> m_usCheckSum;    　　<span class="hljs-comment">// 校验和16bit</span><br>&#125;__attribute__((packed))UDP_HEADER, *PUDP_HEADER;<br></code></pre></td></tr></table></figure>
+
+<p><img src="http://o7myibfc7.bkt.clouddn.com/UDPheader.jpg" srcset="/img/loading.gif" lazyload alt="UDP头"></p>
+<p><strong>原始套接字编程</strong></p>
+<p>原始套接字编程主要是涉及到packet，这里给出packet的man文件：</p>
+<p><a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man7/packet.7.html">PACKET</a></p>
+<hr>
+<h3 id="路由表MAC转发代码分析"><a href="#路由表MAC转发代码分析" class="headerlink" title="路由表MAC转发代码分析"></a>路由表MAC转发代码分析</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;linux/if_ether.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;netpacket/packet.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;net/ethernet.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;define.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;net/if.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ctype.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;arpa/inet.h&gt;</span></span><br><span class="hljs-comment">//#include &lt;arpa/inet.h&gt;</span><br><span class="hljs-comment">//#include &lt;linux/in.h&gt;</span><br><br><span class="hljs-comment">//extern int errno;</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span>	errno</span><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> errno;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br><br><span class="hljs-keyword">int</span> sockfd;<br><span class="hljs-keyword">char</span> recvbuf[<span class="hljs-number">2048</span>];<br><span class="hljs-keyword">int</span> R_table_id =<span class="hljs-number">-1</span>;<br><span class="hljs-keyword">int</span> R_table_sum=<span class="hljs-number">0</span>;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">RTable</span> <span class="hljs-title">mytable</span>[10];</span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ReadFile</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 读取配置文件</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">FindMe</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 查找IP对应的MAC地址</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sends</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 发送给MAC地址</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getvol</span><span class="hljs-params">(<span class="hljs-keyword">char</span> g)</span></span>; <span class="hljs-comment">// 返回ASCII码</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span> </span>&#123;<br>	ReadFile();<br><br>	<span class="hljs-keyword">if</span>((sockfd=socket(PF_PACKET,SOCK_RAW,htons(ETH_P_IP)))&lt;<span class="hljs-number">0</span>)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Can Not Create Raw Socket\n&quot;</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>	&#125;<br><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>		<span class="hljs-keyword">int</span> n_read=recvfrom(sockfd,recvbuf,<span class="hljs-number">2048</span>,<span class="hljs-number">0</span>,<span class="hljs-literal">NULL</span>,<span class="hljs-literal">NULL</span>);<br>		<span class="hljs-keyword">if</span>(n_read&lt;<span class="hljs-number">42</span>)&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error When Receive Message\n&quot;</span>);<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>		&#125;<br>		<span class="hljs-keyword">char</span>*p =recvbuf;<br>		<span class="hljs-keyword">int</span> n=<span class="hljs-number">0xff</span>;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;MAC address:	%.2x:%02x:%02x:%02x:%02x:%02x	====&gt;	%.2x:%02x:%02x:%02x:%02x:%02x\n&quot;</span>,p[<span class="hljs-number">6</span>]&amp;n,p[<span class="hljs-number">7</span>]&amp;n,p[<span class="hljs-number">8</span>]&amp;n,p[<span class="hljs-number">9</span>]&amp;n,p[<span class="hljs-number">10</span>]&amp;n,p[<span class="hljs-number">11</span>]&amp;n,p[<span class="hljs-number">0</span>]&amp;n,p[<span class="hljs-number">1</span>]&amp;n,p[<span class="hljs-number">2</span>]&amp;n,p[<span class="hljs-number">3</span>]&amp;n,p[<span class="hljs-number">4</span>]&amp;n,p[<span class="hljs-number">5</span>]&amp;n);<br>		p=recvbuf+<span class="hljs-number">26</span>;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;IP:	%d.%d.%d.%d	  ===&gt;	%d.%d.%d.%d\n&quot;</span>,p[<span class="hljs-number">0</span>]&amp;n,p[<span class="hljs-number">1</span>]&amp;n,p[<span class="hljs-number">2</span>]&amp;n,p[<span class="hljs-number">3</span>]&amp;n,p[<span class="hljs-number">4</span>]&amp;n,p[<span class="hljs-number">5</span>]&amp;n,p[<span class="hljs-number">6</span>]&amp;n,p[<span class="hljs-number">7</span>]&amp;n);<br>		R_table_id = FindMe(p+<span class="hljs-number">4</span>);<br>		<span class="hljs-keyword">if</span>(R_table_id == <span class="hljs-number">-1</span>)<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Not Find In Route\n&quot;</span>);<br>		<span class="hljs-keyword">else</span>&#123;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Find In Route %s\n&quot;</span>,mytable[R_table_id].eth);<br>			sends();<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ReadFile</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-comment">// 读取本地配置文件</span><br>	FILE *fp = fopen(<span class="hljs-string">&quot;conf.file&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>);<br>	<span class="hljs-keyword">if</span>(fp == <span class="hljs-literal">NULL</span>)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ERROR WHNE READING!\n&quot;</span>);<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-keyword">char</span> *p;<br>	<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>,i=<span class="hljs-number">0</span>,Rt=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">int</span> n=<span class="hljs-number">0xff</span>;<br>	<span class="hljs-keyword">char</span> temp[<span class="hljs-number">2048</span>];<br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> t[<span class="hljs-number">4</span>];<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;NOW READING!\n&quot;</span>);<br>	<span class="hljs-keyword">while</span>(!feof(fp))&#123;<br>	<span class="hljs-built_in">fscanf</span>(fp,<span class="hljs-string">&quot;%s %s %d.%d.%d.%d\n&quot;</span>,mytable[Rt].eth,temp,&amp;t[<span class="hljs-number">0</span>],&amp;t[<span class="hljs-number">1</span>],&amp;t[<span class="hljs-number">2</span>],&amp;t[<span class="hljs-number">3</span>]);<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>,k=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">17</span>;i+=<span class="hljs-number">3</span>)<br>   		mytable[Rt].mac[k++] = (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>)(<span class="hljs-number">16</span>*getvol(temp[i]) + getvol(temp[i+<span class="hljs-number">1</span>]));<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">4</span>;i++)<br>		<span class="hljs-built_in">memcpy</span>(mytable[Rt].ip+i,&amp;t[i],<span class="hljs-number">1</span>);<br>	p = mytable[Rt].mac;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d DST %s MAC: %.2x:%02x:%02x:%02x:%02x:%02x &quot;</span>,R_table_sum,mytable[Rt].eth,p[<span class="hljs-number">0</span>]&amp;n,p[<span class="hljs-number">1</span>]&amp;n,p[<span class="hljs-number">2</span>]&amp;n,p[<span class="hljs-number">3</span>]&amp;n,p[<span class="hljs-number">4</span>]&amp;n,p[<span class="hljs-number">5</span>]&amp;n);<br>	p = mytable[Rt].ip;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;IP: %d.%d.%d.%d\n&quot;</span>,p[<span class="hljs-number">0</span>]&amp;n,p[<span class="hljs-number">1</span>]&amp;n,p[<span class="hljs-number">2</span>]&amp;n,p[<span class="hljs-number">3</span>]&amp;n);<br>	R_table_sum++;<br>	Rt++;<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d READING END!\n&quot;</span>,R_table_sum);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">FindMe</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *mp)</span></span>&#123;<span class="hljs-comment">//get the index in router table</span><br>   <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>   <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;R_table_sum;i++)<br>   &#123;<br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">memcmp</span>(mp,mytable[i].ip,<span class="hljs-number">3</span>) == <span class="hljs-number">0</span>)<br>       	<span class="hljs-keyword">return</span> i;<br>   &#125;<br>   <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sends</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">//int i=0,n=0xff,</span><br>	<span class="hljs-keyword">int</span> len=<span class="hljs-number">0</span>;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_ll</span> <span class="hljs-title">sa</span>;</span><br>	<span class="hljs-built_in">memset</span>(&amp;sa,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br>	sa.sll_family = AF_PACKET;<br>	sa.sll_halen = <span class="hljs-number">6</span>;<br>	sa.sll_ifindex = if_nametoindex(mytable[R_table_id].eth);<br>	sa.sll_protocol = <span class="hljs-number">0x0800</span>;<br>	<span class="hljs-built_in">memcpy</span>(&amp;sa.sll_addr,mytable[R_table_id].mac,<span class="hljs-number">6</span>);<br>	<span class="hljs-built_in">memcpy</span>(recvbuf,mytable[R_table_id].mac,<span class="hljs-number">6</span>);<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphead</span> *<span class="hljs-title">iph</span> =</span> (struct iphead *)(recvbuf+<span class="hljs-number">14</span>); <span class="hljs-comment">// 去掉MAC头 得到IP头</span><br>	len = <span class="hljs-number">16</span>*iph-&gt;ip_len[<span class="hljs-number">0</span>] + iph-&gt;ip_len[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 数据报长度</span><br>	<span class="hljs-keyword">int</span> retval = sendto(sockfd, recvbuf, <span class="hljs-number">14</span>+len, <span class="hljs-number">0</span>, (struct sockaddr*)&amp;sa, <span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br>	<span class="hljs-keyword">if</span>(retval == <span class="hljs-number">-1</span>)&#123;<br>		perror(<span class="hljs-string">&quot;Sends Error&quot;</span>);<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getvol</span><span class="hljs-params">(<span class="hljs-keyword">char</span> g)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">isalpha</span>(g))<br>		<span class="hljs-keyword">return</span> (<span class="hljs-number">10</span>+g-<span class="hljs-string">&#x27;a&#x27;</span>);<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> (g-<span class="hljs-string">&#x27;0&#x27;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>这里的IP头结构为自定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphead</span>&#123;</span><br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_hl:<span class="hljs-number">4</span>,ip_v:<span class="hljs-number">4</span>;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_tos;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_len[<span class="hljs-number">2</span>];<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_id;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_off;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_ttl;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_p;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_sum;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ip_src;<br><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ip_dst;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>程序接收完整的一个socket packet，进行包头的分解，然后根据配置文件的IP和MAC对应关系进行转发。</p>
+<hr>
+<h3 id="socket二层帧转发代码分析"><a href="#socket二层帧转发代码分析" class="headerlink" title="socket二层帧转发代码分析"></a>socket二层帧转发代码分析</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;linux/if_packet.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;linux/if_ether.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/ioctl.h&gt;</span>	<span class="hljs-comment">//for netdevice</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;linux/if_arp.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _GNU_SOURCE </span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stddef.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;dirent.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/select.h&gt;</span>	<span class="hljs-comment">//for select()</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> max(a,b) ((a)&gt;(b)?(a):(b)) </span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ETH_FRAME_LEN  500</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NICNUM 2	<span class="hljs-comment">//要接收的网卡数量为2，默认为eth0和eth1</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RECVDEBUG</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SENDDEBUG</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">EthernetInfo</span> &#123;</span><br>	<span class="hljs-keyword">int</span> dev;		<span class="hljs-comment">//是否存在？</span><br>	<span class="hljs-keyword">int</span> active;	<span class="hljs-comment">//是否被激活；</span><br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> mac_local[<span class="hljs-number">8</span>];	<span class="hljs-comment">//本地网卡的MAC地址</span><br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> mac_next[<span class="hljs-number">8</span>];	<span class="hljs-comment">//下一跳的MAC地址</span><br>	&#125; EthernetInfo;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ipheader</span> &#123;</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_hl:<span class="hljs-number">4</span>, ip_v:<span class="hljs-number">4</span>; <span class="hljs-comment">/* this means that each member is 4 bits */</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_tos;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_len;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_id;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_off;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_ttl;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_p;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_sum;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ip_src;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ip_dst;<br>&#125;; <span class="hljs-comment">/* total ip header length: 20 bytes (=160 bits) */</span><br><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">itimerval</span> <span class="hljs-title">monitor_interval</span>;</span> 		<span class="hljs-comment">//系统定时器连续时间间隔</span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">monitor_timer</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lookupethdev</span><span class="hljs-params">(EthernetInfo *eif)</span></span>;<br> <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i, m, n, cnt;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_ll</span> <span class="hljs-title">sockadr</span>[2], <span class="hljs-title">adrfrom</span>;</span> <span class="hljs-comment">//数据链路层使用的网络参数结构体</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ifreq</span> <span class="hljs-title">ifst</span>[2];</span><br>	<span class="hljs-keyword">int</span> sock[<span class="hljs-number">2</span>];	<span class="hljs-comment">//两个网卡上接收，这几个参数也得增加</span><br>	<span class="hljs-keyword">char</span> *devname[] = &#123;<span class="hljs-string">&quot;eth0&quot;</span>,<span class="hljs-string">&quot;eth1&quot;</span>&#125;;<br>	EthernetInfo ethinfo[NICNUM];<span class="hljs-comment">//存放本地网卡硬件地址</span><br><br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>  *buffer;<br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *data;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ipheader</span> *<span class="hljs-title">iphdr</span>;</span><br><br>	fd_set rset; <span class="hljs-comment">//for select()</span><br>	<span class="hljs-keyword">int</span> maxfd;<br><br>	lookupethdev(&amp;ethinfo);<br>	m = <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;In Main ---\n Eth%d&#x27;s MAC  %x:%x:%x:%x:%x:%x\n&quot;</span>, m, ethinfo[m].mac_local[<span class="hljs-number">0</span>], ethinfo[m].mac_local[<span class="hljs-number">1</span>], ethinfo[m].mac_local[<span class="hljs-number">2</span>], ethinfo[m].mac_local[<span class="hljs-number">3</span>], ethinfo[m].mac_local[<span class="hljs-number">4</span>], ethinfo[m].mac_local[<span class="hljs-number">5</span>]);<br>	buffer = (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>*)<span class="hljs-built_in">malloc</span>(ETH_FRAME_LEN); <span class="hljs-comment">//mem for buffer</span><br>	data = buffer + <span class="hljs-number">14</span>; <span class="hljs-comment">//data in the frame</span><br><br>	<span class="hljs-keyword">for</span>(n=<span class="hljs-number">0</span>; n&lt;NICNUM; n++)&#123; <span class="hljs-comment">// 两个网卡分别socket和bind</span><br>		<span class="hljs-keyword">if</span> ((sock[n]=socket(AF_PACKET,SOCK_RAW,htons(ETH_P_ALL)))==<span class="hljs-number">-1</span>)&#123;<br>			perror(<span class="hljs-string">&quot;When creat raw socket: &quot;</span>);<br>			<span class="hljs-built_in">exit</span>(EXIT_FAILURE);<br>		&#125;<br><br>		<span class="hljs-built_in">strcpy</span>(ifst[n].ifr_name,devname[n]);<br>		ioctl(sock[n],SIOCGIFINDEX,&amp;ifst[n]);   <span class="hljs-comment">//根据名字获取网卡的index号码</span><br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; Eth%d--&gt; ifst.ifr_ifindex = %d \n&quot;</span>,n,ifst[n].ifr_ifindex);<br><br>		sockadr[n].sll_family   = AF_PACKET;<br>		sockadr[n].sll_protocol = htons(ETH_P_ALL);<br>		sockadr[n].sll_ifindex  = ifst[n].ifr_ifindex;<br><br>		<span class="hljs-comment">// socket bind</span><br>		i = bind(sock[n], &amp;(sockadr[n]), <span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br>		<span class="hljs-keyword">if</span>(i != <span class="hljs-number">0</span>)&#123;<br>			perror(<span class="hljs-string">&quot;Binding False: &quot;</span>);<br>			<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Binding Sock[%d] successfully\n&quot;</span>, n);<br>		&#125;<span class="hljs-comment">//--for--</span><br><br>		monitor_interval.it_interval.tv_sec = <span class="hljs-number">0</span>;<br>		monitor_interval.it_interval.tv_usec = <span class="hljs-number">0</span>;<br>		monitor_interval.it_value.tv_sec = <span class="hljs-number">2</span>;<br>		monitor_interval.it_value.tv_usec = <span class="hljs-number">0</span>; <span class="hljs-comment">//定时器周期</span><br>		signal(SIGALRM,monitor_timer); <span class="hljs-comment">//将定时器到达信号连接到monitor_timer子程序</span><br>		setitimer(ITIMER_REAL,&amp;monitor_interval,<span class="hljs-literal">NULL</span>); <span class="hljs-comment">//启动连续的定时器中断</span><br>	<br>		<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>			cnt++;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;---------------cnt = %d------------\n&quot;</span>, cnt);<br>			FD_ZERO(&amp;rset);<br>			maxfd = <span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">for</span>(n=<span class="hljs-number">0</span>; n&lt;NICNUM; n++)&#123;<br>				FD_SET(sock[n], &amp;rset);<br>				maxfd = max(sock[n], maxfd);<br>			&#125;<br>			maxfd = maxfd + <span class="hljs-number">1</span>;<br><br>			<span class="hljs-keyword">if</span>(select(maxfd, &amp;rset, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>)  &lt; <span class="hljs-number">1</span>)<br>				<span class="hljs-keyword">continue</span>;<span class="hljs-comment">//没有期望的接收事件发生，继续等待</span><br><br>			<span class="hljs-keyword">for</span> (n = <span class="hljs-number">0</span>; n &lt;NICNUM; n++)&#123;<br>				<span class="hljs-keyword">if</span> (FD_ISSET(sock[n], &amp;rset) == <span class="hljs-number">0</span>)<br>					<span class="hljs-keyword">continue</span>;	<span class="hljs-comment">//判断哪个套接字上发生了事件，没有，继续判断下一个</span><br><br>				recvfrom(sock[n], buffer, ETH_FRAME_LEN, <span class="hljs-number">0</span>, (struct sockaddr*)&amp;adrfrom, <span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br><br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> RECVDEBUG</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Eth%d-----ProtocAtFrom ＝ %d DestMac: &quot;</span>, n, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">6</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;   SourceMac: &quot;</span>, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">6</span>; i&lt;<span class="hljs-number">12</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  FrameType = %2x-%2x\n&quot;</span>,  buffer[<span class="hljs-number">12</span>],  buffer[<span class="hljs-number">13</span>]);<br>				<span class="hljs-keyword">if</span>(buffer[<span class="hljs-number">12</span>] != <span class="hljs-number">0x08</span> || buffer[<span class="hljs-number">13</span>] != <span class="hljs-number">0x00</span>)<br>					<span class="hljs-keyword">continue</span>; <span class="hljs-comment">//不是IP帧，不再往下执行，跳回接收</span><br>				iphdr =  (struct ipheader *)  (&amp;buffer[<span class="hljs-number">14</span>]);	<span class="hljs-comment">//确定IP首部地址</span><br>				data = (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *)&amp;(iphdr-&gt;ip_dst);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;S_IP = %8x  %d.%d.%d.%d\n&quot;</span>, iphdr-&gt;ip_dst, data[<span class="hljs-number">0</span>], data[<span class="hljs-number">1</span>], data[<span class="hljs-number">2</span>], data[<span class="hljs-number">3</span>]);<br>				<span class="hljs-comment">//注意：网络字节顺序（int==0x0b00a8c0 －&gt; 192.168.0.11）</span><br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> RECVDEBUG</span><br><br>				<span class="hljs-comment">//开始转发－－目的MAC暂且全1－－&gt;数据链路层广播方式－－仅仅对于双网卡方式！</span><br>				m = (n + <span class="hljs-number">1</span>) % <span class="hljs-number">1</span>; <span class="hljs-comment">// m=2？？？？？</span><br>				sockadr[m].sll_family   = AF_PACKET;<br>				sockadr[m].sll_protocol = htons(ETH_P_IP);<br>				sockadr[m].sll_ifindex  = ifst[m].ifr_ifindex;<br>				sockadr[m].sll_hatype   = ARPHRD_ETHER;<br>				sockadr[m].sll_pkttype  = PACKET_OTHERHOST;<br>				sockadr[m].sll_halen    = ETH_ALEN;<br>				<span class="hljs-built_in">memcpy</span>(sockadr[m].sll_addr, ethinfo[m].mac_local, ETH_ALEN);<br>				<span class="hljs-built_in">memset</span>(buffer, <span class="hljs-number">0xff</span>, ETH_ALEN); <span class="hljs-comment">// Mac全1</span><br>				<span class="hljs-built_in">memcpy</span>(buffer+ETH_ALEN,  ethinfo[m].mac_local, ETH_ALEN);<br>				buffer[<span class="hljs-number">12</span>] = <span class="hljs-number">0x08</span>;<br>				buffer[<span class="hljs-number">13</span>] = <span class="hljs-number">0x00</span>;<br><br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> SENDDEBUG</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Sendto  Eth%d-----ProtocAtFrom ＝ %d DestMac: &quot;</span>, n, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">6</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;   SourceMac: &quot;</span>, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">6</span>; i&lt;<span class="hljs-number">12</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  FrameType = %2x-%2x IPSize = 0x%x\n&quot;</span>,  buffer[<span class="hljs-number">12</span>],  buffer[<span class="hljs-number">13</span>], iphdr-&gt;ip_len);<br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> SENDDEBUG</span><br><br>				i = sendto(sock[m],buffer,iphdr-&gt;ip_len + <span class="hljs-number">14</span>,<span class="hljs-number">0</span>,(struct sockaddr*)&amp;sockadr[m],<span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br>				<span class="hljs-keyword">if</span>(i ==<span class="hljs-number">-1</span>)&#123;<br>					perror(<span class="hljs-string">&quot;Error --&gt; When sendto: &quot;</span>);<br>				&#125;<br>				<span class="hljs-keyword">else</span><br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Sendto Success eth%d --&gt; eth%d Size = %d\n&quot;</span>, n, m, iphdr-&gt;ip_len);<br>			&#125; <span class="hljs-comment">//---for---end---</span><br>		&#125;<span class="hljs-comment">//--while--</span><br>&#125;<br><br><span class="hljs-comment">// 查询系统配置文件以获得网卡MAC地址 不适合Ubuntu 用ioctl重写</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lookupethdev</span><span class="hljs-params">(EthernetInfo *eif)</span></span>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-comment">//----------------------------------定时器------------------------------------------</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">monitor_timer</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i,j,k,l,m,n;<br>	<span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> timer_counter;<br>	monitor_interval.it_interval.tv_sec = <span class="hljs-number">0</span>;<br>	monitor_interval.it_interval.tv_usec = <span class="hljs-number">0</span>;<br>	monitor_interval.it_value.tv_sec = <span class="hljs-number">2</span>;<br>	monitor_interval.it_value.tv_usec = <span class="hljs-number">0</span>; <span class="hljs-comment">//定时器周期:100ms</span><br>	setitimer(ITIMER_REAL,&amp;monitor_interval,<span class="hljs-literal">NULL</span>); <br>	timer_counter++;	<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Codes/">Codes</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Socket/">Socket</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/54406/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于git命令和博客迁移同步方案</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/61374/">
+                        <span class="hidden-mobile">正则表达式和一些常用文本处理命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/ykk648" target="_blank" rel="nofollow noopener"><span>ykk648</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前言记录自己在Ubuntu系统学习和建设中遇到的问题和解决方案，一些小tip选择加入[TiddlyWiki](/wiki)">
+  <meta name="author" content="tyler luan">
+  <meta name="keywords" content="">
+  
+  <title>使用Ubuntu系统中遇到的问题 - ykk648&#39;s hub</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>ykk648's hub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/vidar-nordli-mathisen-OTTIkYClEyI-unsplash.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="使用Ubuntu系统中遇到的问题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-08-14 17:10" pubdate>
+        2016年8月14日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">使用Ubuntu系统中遇到的问题</h1>
+            
+            <div class="markdown-body">
+              <h2 id="intro">前言</h2>记录自己在Ubuntu系统学习和建设中遇到的问题和解决方案，一些小tip选择加入[TiddlyWiki](/wiki)
+
+
+<span id="more"></span>
+
+<h2 id="Ubuntu系统问题"><a href="#Ubuntu系统问题" class="headerlink" title="Ubuntu系统问题"></a>Ubuntu系统问题</h2><h3 id="删除显示为deinstall的linux内核"><a href="#删除显示为deinstall的linux内核" class="headerlink" title="删除显示为deinstall的linux内核"></a>删除显示为deinstall的linux内核</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">uname</span> -a  <br><span class="hljs-attribute">dpkg</span> --get-selections|grep linux  <br><span class="hljs-attribute">sudo</span> dpkg -P linux-image-<span class="hljs-number">3</span>.<span class="hljs-number">5</span>.<span class="hljs-number">0</span>-<span class="hljs-number">4</span>[<span class="hljs-number">2</span>-<span class="hljs-number">9</span>]-generic  <br><span class="hljs-attribute">sudo</span> dpkg -P linux-image-<span class="hljs-number">3</span>.<span class="hljs-number">5</span>.<span class="hljs-number">0</span>-<span class="hljs-number">51</span>-generic <br></code></pre></td></tr></table></figure>
+
+<h3 id="嵌入式上的wifi网络"><a href="#嵌入式上的wifi网络" class="headerlink" title="嵌入式上的wifi网络"></a>嵌入式上的wifi网络</h3><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">sudo nano /etc/wp<span class="hljs-built_in">a_supplicant</span>/wp<span class="hljs-built_in">a_supplicant</span>.conf<br></code></pre></td></tr></table></figure>
+
+<p>添加</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">network=&#123;<br>    <span class="hljs-attribute">ssid</span>=<span class="hljs-string">&quot;The_ESSID_from_earlier&quot;</span><br>    <span class="hljs-attribute">psk</span>=<span class="hljs-string">&quot;Your_wifi_password&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>重启接口</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> ifup wlan<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="嵌入式上如何启动图形界面"><a href="#嵌入式上如何启动图形界面" class="headerlink" title="嵌入式上如何启动图形界面"></a>嵌入式上如何启动图形界面</h3><p>在shell中输入：<code>startx</code> 或者 <code>init 5</code></p>
+<p>为了在Linux启动时直接进入Console界面，我们可以编辑/etc/inittab文件。找到id:5: initdefault:这一行，将它改为id:3:initdefault:后重新启动系统即可。我们看到，简简单单地将5改为3，就能实现启动时进入X-window图形操作界面或Console字符界面的转换，这是因为Linux操作系统有六种不同的运行级(run level)，在不同的运行级下，系统有着不同的状态，这六种运行级分别为：<br>0：停机(记住不要把initdefault 设置为0，因为这样会使Linux无法启动 )<br>1：单用户模式，就像Win9X下的安全模式。<br>2：多用户，但是没有 NFS 。<br>3：完全多用户模式，标准的运行级。<br>4：一般不用，在一些特殊情况下可以用它来做一些事情。<br>5：X11，即进到 X-window 系统。<br>6：重新启动 (记住不要把initdefault 设置为6，因为这样会使Linux不断地重新启动)。</p>
+<h3 id="旧版本ubuntu无法更新问题"><a href="#旧版本ubuntu无法更新问题" class="headerlink" title="旧版本ubuntu无法更新问题"></a>旧版本ubuntu无法更新问题</h3><p>旧版本已经不再支持，需要换用old源：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk">deb http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring main universe restricted multiverse<br>deb-src http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring main universe restricted multiverse<br><br>deb http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-security main universe restricted multiverse<br>deb-src http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-security main universe restricted multiverse<br><br>deb http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-updates main universe restricted multiverse<br>deb-src http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-updates main universe restricted multiverse<br><br>deb http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-backports main restricted universe multiverse<br>deb-src http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-backports main restricted universe multiverse<br><br>deb http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-proposed main restricted universe multiverse<br>deb-src http:<span class="hljs-regexp">//</span>old-releases.ubuntu.com<span class="hljs-regexp">/ubuntu/</span> raring-proposed main restricted universe multiverse<br></code></pre></td></tr></table></figure>
+
+<p>源文件的地址：</p>
+<blockquote>
+<p>/etc/apt/sources.list</p>
+</blockquote>
+<h3 id="删除多余内核"><a href="#删除多余内核" class="headerlink" title="删除多余内核"></a>删除多余内核</h3><p>解决boot分区空间不足。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo dpkg --get-selections |grep linux<br>uname -a<br>sudo apt-get purge linux-headers-&amp;linux-image-<br>sudo update-grub<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="linux下的文件和文件夹权限问题"><a href="#linux下的文件和文件夹权限问题" class="headerlink" title="linux下的文件和文件夹权限问题"></a>linux下的文件和文件夹权限问题</h3><p>ubuntu下查看权限的命令为：</p>
+<pre><code>ls -l filename
+</code></pre>
+<p>ubuntu下设置权限的命令为：</p>
+<blockquote>
+<p>一共有10位数<br>其中： 最前面那个 - 代表的是类型<br>中间那三个 rw- 代表的是所有者（user）<br>然后那三个 rw- 代表的是组群（group）<br>最后那三个 r– 代表的是其他人（other）</p>
+</blockquote>
+<blockquote>
+<p>后面那9位数：<br>r 表示文件可以被读（read）<br>w 表示文件可以被写（write）<br>x 表示文件可以被执行（如果它是程序的话）<br>- 表示相应的权限还没有被授予</p>
+</blockquote>
+<p>现在该说说修改文件权限了</p>
+<p>在终端输入：</p>
+<p>chmod o+w xxx.xxx</p>
+<p>表示给其他人授予写xxx.xxx这个文件的权限</p>
+<p>chmod go-rw xxx.xxx</p>
+<p>表示删除xxx.xxx中组群和其他人的读和写的权限</p>
+<p><code>其中：</code></p>
+<p>u 代表所有者（user）</p>
+<p>g 代表所有者所在的组群（group）</p>
+<p>o 代表其他人，但不是u和g （other）</p>
+<p>a 代表全部的人，也就是包括u，g和o</p>
+<p>r 表示文件可以被读（read）</p>
+<p>w 表示文件可以被写（write）</p>
+<p>x 表示文件可以被执行（如果它是程序的话）</p>
+<p>rwx也可以用数字来代替</p>
+<p>r ————4</p>
+<p>w ———–2</p>
+<p>x ————1</p>
+<p>- ————0</p>
+<p><code>行动：</code></p>
+<p>+ 表示添加权限</p>
+<p>- 表示删除权限</p>
+<p>= 表示使之成为唯一的权限</p>
+<p>当大家都明白了上面的东西之后，那么我们常见的以下的一些权限就很容易都明白了：</p>
+<p>-rw——- (600) 只有所有者才有读和写的权限</p>
+<p>-rw-r–r– (644) 只有所有者才有读和写的权限，组群和其他人只有读的权限</p>
+<p>-rwx—— (700) 只有所有者才有读，写，执行的权限</p>
+<p>-rwxr-xr-x (755) 只有所有者才有读，写，执行的权限，组群和其他人只有读和执行的权限</p>
+<p>-rwx–x–x (711) 只有所有者才有读，写，执行的权限，组群和其他人只有执行的权限</p>
+<p>-rw-rw-rw- (666) 每个人都有读写的权限</p>
+<p>-rwxrwxrwx (777) 每个人都有读写和执行的权限</p>
+<p>转载自：<a target="_blank" rel="noopener" href="http://www.linuxsky.org/doc/newbie/200801/220.html">http://www.linuxsky.org/doc/newbie/200801/220.html</a><br>若分配给某个文件所有权限，则利用下面的命令：</p>
+<p><code>sudo chmod -R 777</code> 文件或文件夹的名字（其中sudo是管理员权限）</p>
+<hr>
+<h2 id="grub2手动引导命令"><a href="#grub2手动引导命令" class="headerlink" title="grub2手动引导命令"></a>grub2手动引导命令</h2><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gams">grub rescue&gt; ls  <span class="hljs-comment">//查看分区</span><br>grub rescue&gt; ls (hd0,gpt8) <span class="hljs-comment">//寻找根分区</span><br>grub rescue&gt; <span class="hljs-keyword">set</span><br>grub <span class="hljs-comment">rescue&gt; set  prefix=(hd0,gpt8)</span>/boot/<span class="hljs-comment">grub</span><br>grub <span class="hljs-comment">rescue&gt; set  root=hd0,gpt8</span><br>grub <span class="hljs-comment">rescue&gt; insmod normal</span><br>grub <span class="hljs-comment">rescue&gt; normal</span><br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Gnome3问题"><a href="#Gnome3问题" class="headerlink" title="Gnome3问题"></a>Gnome3问题</h2><hr>
+<ul>
+<li><strong>对Gnome3的感受就是爱并折磨着～</strong></li>
+</ul>
+<h3 id="fcitx和ibus在gnome3下的冲突问题"><a href="#fcitx和ibus在gnome3下的冲突问题" class="headerlink" title="fcitx和ibus在gnome3下的冲突问题"></a>fcitx和ibus在gnome3下的冲突问题</h3><p>因为在Ubuntu下对搜狗输入法的痴爱（皮肤和WIN下的皮肤通用，并且词库强大），必须使用fcitx来作为输入法管理工具，而gnome3和ibus是绑定关系，天然的gnome3自带ibus，二者冲突导致了fcitx在QT4等界面下会出现失效，盲目卸载ibus还会出现系统设置崩溃的问题。</p>
+<ul>
+<li>对于ibus的看法</li>
+</ul>
+<blockquote>
+<p>ibus是gnome3的天然输入法，盲目卸载可能会导致问题，最关键的两个套件包括<strong>ibus-gtk</strong>和<strong>ibus-gtk2</strong>，其余的ibus组件可以卸载目前没有发现问题。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo apt-get remove ibus<br>sudo apt-get autoremove<br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li>fcitx的配置</li>
+</ul>
+<blockquote>
+<p>出问题的时候不妨尝试<strong>卸载fcitx和搜狗输入法</strong>，然后重新安装搜狗输入法和fcitx</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install fcitx-pinyin<br>im-config -s fcitx -z all_ALL<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时 /etc/X11/xinit/xinput.d/fcitx 应为</p>
+</blockquote>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">XIM</span>=fcitx<br><span class="hljs-attr">XIM_PROGRAM</span>=/usr/bin/fcitx<br><span class="hljs-attr">XIM_ARGS</span>=<span class="hljs-string">&quot;&quot;</span><br><span class="hljs-attr">GTK_IM_MODULE</span>=fcitx<br><span class="hljs-attr">QT4_IM_MODULE</span>=fcitx<br><span class="hljs-attr">DEPENDS</span>=<span class="hljs-string">&quot;fcitx&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可通过查看环境变量来判断</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">env | grep fcitx<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>也可以通过fcitx自带的诊断工具<code>fcitx-diagnose</code></p>
+</blockquote>
+<ul>
+<li><strong>提示</strong></li>
+</ul>
+<p>在init文件中直接export <em>fcitx</em> 变量的方法不可取！</p>
+<hr>
+<h2 id="Ubuntu工具收集"><a href="#Ubuntu工具收集" class="headerlink" title="Ubuntu工具收集"></a>Ubuntu工具收集</h2><h3 id="Boot-repair"><a href="#Boot-repair" class="headerlink" title="Boot-repair"></a>Boot-repair</h3><p>修复双系统引导</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs smali">sudo -i<span class="hljs-built_in"></span><br><span class="hljs-built_in">add-apt-repository </span>ppa:yannubuntu/boot-repair &amp;&amp; apt-get update<br>apt-get install -y boot-repair &amp;&amp; boot-repair<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="grub神器-GRUB-Customizer"><a href="#grub神器-GRUB-Customizer" class="headerlink" title="grub神器 GRUB Customizer"></a>grub神器 GRUB Customizer</h3><ul>
+<li>地址</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://launchpad.net/grub-customizer">Grub Customizer</a></p>
+<ul>
+<li>安装方法</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo add-apt-repository ppa:danielrichter2007/grub-customizer<br>sudo apt-get update<br>sudo apt-get install grub-customizer<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>一些tips</li>
+</ul>
+<p>利用Grub Customizer可以轻松的对Ubuntu自带的grub引导进行管理，同时可以很方便地写入MBR，从而对WIN和Linux双系统进行引导管理。</p>
+<p><strong>Grub Customizer可以定制启动时的grub界面</strong></p>
+<p>事实上可以直接编辑<code>/boot/grub/grub.cfg</code>文件进行相应的配置，有了Grub Customizer更为方便。</p>
+<h3 id="shadowsocks-QT5-科学上网"><a href="#shadowsocks-QT5-科学上网" class="headerlink" title="shadowsocks-QT5 科学上网"></a>shadowsocks-QT5 科学上网</h3><p><a target="_blank" rel="noopener" href="https://github.com/shadowsocks/shadowsocks-qt5">shdowsocks-QT5</a></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs smali">sudo<span class="hljs-built_in"> add-apt-repository </span>ppa:hzwhuang/ss-qt5<br>sudo apt-get update<br>sudo apt-get install shadowsocks-qt5<br></code></pre></td></tr></table></figure>
+
+<p><code>注意</code>: 注意如果代理类型是SOCKS5，请在系统设置的HTTP代理一栏留空。若代理类型是HTTP(S)，请在SOCKS5代理一栏留空</p>
+<h3 id="wine-qq和搜狗输入法"><a href="#wine-qq和搜狗输入法" class="headerlink" title="wine-qq和搜狗输入法"></a>wine-qq和搜狗输入法</h3><blockquote>
+<p>使用<a target="_blank" rel="noopener" href="http://www.ubuntukylin.com/application/">优麒麟</a>提供的deb安装包安装，没有太大困难。</p>
+</blockquote>
+<hr>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Notes/">Notes</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Gnome3/">Gnome3</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/11561/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">无法识别主控的情况下如何“软修复”一个扩容U盘</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/40055/">
+                        <span class="hidden-mobile">VPN问题和科学上网地址</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/ykk648" target="_blank" rel="nofollow noopener"><span>ykk648</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

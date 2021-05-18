@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="前言Google新出的16小时机器学习速成课程，主要针对TensorFlow，记一些重点。主题不支持MathJax，公式省略。">
+  <meta name="author" content="tyler luan">
+  <meta name="keywords" content="">
+  
+  <title>google机器学习速成课程总结 - ykk648&#39;s hub</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>ykk648's hub</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/vidar-nordli-mathisen-OTTIkYClEyI-unsplash.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="google机器学习速成课程总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-03-05 14:13" pubdate>
+        2018年3月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">google机器学习速成课程总结</h1>
+            
+            <div class="markdown-body">
+              <h2 id="intro">前言</h2>Google新出的16小时机器学习速成课程，主要针对TensorFlow，记一些重点。主题不支持MathJax，公式省略。
+
+
+<span id="more"></span>
+
+<hr>
+<h2 id="机器学习概念"><a href="#机器学习概念" class="headerlink" title="机器学习概念"></a>机器学习概念</h2><hr>
+<h3 id="机器学习主要术语"><a href="#机器学习主要术语" class="headerlink" title="机器学习主要术语"></a>机器学习主要术语</h3><h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><p>在简单线性回归中，标签是我们要预测的事物，即 y 变量。标签可以是小麦未来的价格、图片中显示的动物品种、音频剪辑的含义或任何事物。</p>
+<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><p>在简单线性回归中，特征是输入变量，即 x 变量。简单的机器学习项目可能会使用单个特征，而比较复杂的机器学习项目可能会使用数百万个特征，按如下方式指定：</p>
+<p>在垃圾邮件检测器示例中，特征可能包括：</p>
+<ul>
+<li>电子邮件文本中的字词</li>
+<li>发件人的地址</li>
+<li>发送电子邮件的时段</li>
+<li>电子邮件中包含“一种奇怪的把戏”这样的短语。</li>
+</ul>
+<h4 id="样本"><a href="#样本" class="headerlink" title="样本"></a>样本</h4><p>样本是指数据的特定实例：x。（我们采用粗体 x 表示它是一个矢量。）我们将样本分为以下两类：</p>
+<ul>
+<li>有标签样本</li>
+<li>无标签样本</li>
+</ul>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>模型定义了特征与标签之间的关系。例如，垃圾邮件检测模型可能会将某些特征与“垃圾邮件”紧密联系起来。我们来重点介绍一下模型生命周期的两个阶段：</p>
+<ul>
+<li><p>训练表示创建或学习模型。也就是说，您向模型展示有标签样本，让模型逐渐学习特征与标签之间的关系。</p>
+</li>
+<li><p>推断表示将训练后的模型应用于无标签样本。也就是说，您使用训练后的模型来做出有用的预测 (y’)。</p>
+</li>
+</ul>
+<h4 id="回归与分类"><a href="#回归与分类" class="headerlink" title="回归与分类"></a>回归与分类</h4><ul>
+<li><p>回归模型可预测连续值。例如，回归模型做出的预测可回答如下问题：</p>
+</li>
+<li><p>分类模型可预测离散值。例如，分类模型做出的预测可回答如下问题：</p>
+</li>
+</ul>
+<hr>
+<h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><p>过</p>
+<hr>
+<h3 id="训练与损失"><a href="#训练与损失" class="headerlink" title="训练与损失"></a>训练与损失</h3><p>损失是对糟糕预测的惩罚。也就是说，损失是一个数值，表示对于单个样本而言模型预测的准确程度。如果模型的预测完全准确，则损失为零，否则损失会较大。训练模型的目标是从所有样本中找到一组平均损失“较小”的权重和偏差。</p>
+<ul>
+<li><p>平方损失（又称为 L2 损失）</p>
+</li>
+<li><p>均方误差 (MSE)</p>
+<p>  求出各个样本的所有平方损失之和，然后除以样本数量</p>
+</li>
+</ul>
+<hr>
+<h3 id="降低损失-Reducing-Loss"><a href="#降低损失-Reducing-Loss" class="headerlink" title="降低损失(Reducing Loss)"></a>降低损失(Reducing Loss)</h3><ul>
+<li><p>迭代方法</p>
+</li>
+<li><p>梯度下降法</p>
+</li>
+<li><p>学习速率</p>
+</li>
+<li><p>优化学习速率</p>
+</li>
+<li><p>随机梯度下降法（SGD）</p>
+<p>  小批量随机梯度下降法（小批量 SGD）是介于全批量迭代与 SGD 之间的折衷方案。小批量通常包含 10-1000 个随机选择的样本。小批量 SGD 可以减少 SGD 中的杂乱样本数量，但仍然比全批量更高效。</p>
+</li>
+</ul>
+<hr>
+<h3 id="使用-TensorFlow-的起始步骤"><a href="#使用-TensorFlow-的起始步骤" class="headerlink" title="使用 TensorFlow 的起始步骤"></a>使用 TensorFlow 的起始步骤</h3><table>
+<thead>
+<tr>
+<th>工具包</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Estimator (tf.estimator)</td>
+<td>高级 OOP API</td>
+</tr>
+<tr>
+<td>tf.layers/tf.losses/tf.metrics</td>
+<td>用于常见模型组件的库</td>
+</tr>
+<tr>
+<td>TensorFlow</td>
+<td>低级 API</td>
+</tr>
+</tbody></table>
+<p>TensorFlow 由以下两个组件组成：</p>
+<ul>
+<li>图协议缓冲区（Protocol Buffers）</li>
+<li>执行（分布式）图的运行时</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><br><span class="hljs-comment"># Set up a linear classifier.</span><br>classifier = tf.estimator.LinearClassifier()<br><br><span class="hljs-comment"># Train the model on some example data.</span><br>classifier.train(input_fn=train_input_fn, steps=<span class="hljs-number">2000</span>)<br><br><span class="hljs-comment"># Use it to predict.</span><br>predictions = classifier.predict(input_fn=predict_input_fn)<br></code></pre></td></tr></table></figure>
+
+<p>一个例子：<br>    在 TensorFlow 中使用 LinearRegressor 类并基于单个输入特征预测各城市街区的房屋价值中位数<br>    使用均方根误差 (RMSE) 评估模型预测的准确率<br>    通过调整模型的超参数提高模型准确率</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">import</span> math<br><br><span class="hljs-keyword">from</span> IPython <span class="hljs-keyword">import</span> display<br><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> cm<br><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> gridspec<br><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><span class="hljs-keyword">from</span> tensorflow.python.data <span class="hljs-keyword">import</span> Dataset<br><br>tf.logging.set_verbosity(tf.logging.ERROR)<br>pd.options.display.max_rows = <span class="hljs-number">10</span><br>pd.options.display.float_format = <span class="hljs-string">&#x27;&#123;:.1f&#125;&#x27;</span>.<span class="hljs-built_in">format</span><br><br>california_housing_dataframe = pd.read_csv(<span class="hljs-string">&quot;https://storage.googleapis.com/ml_universities/california_housing_train.csv&quot;</span>, sep=<span class="hljs-string">&quot;,&quot;</span>)<br><br><span class="hljs-comment"># 随机化处理</span><br>california_housing_dataframe = california_housing_dataframe.reindex(<br>    np.random.permutation(california_housing_dataframe.index))<br>california_housing_dataframe[<span class="hljs-string">&quot;median_house_value&quot;</span>] /= <span class="hljs-number">1000.0</span><br>california_housing_dataframe<br><br><span class="hljs-comment"># 检查数据</span><br>california_housing_dataframe.describe()<br><br><span class="hljs-comment"># Define the input feature: total_rooms.</span><br>my_feature = california_housing_dataframe[[<span class="hljs-string">&quot;total_rooms&quot;</span>]]<br><br><span class="hljs-comment"># Configure a numeric feature column for total_rooms.</span><br>feature_columns = [tf.feature_column.numeric_column(<span class="hljs-string">&quot;total_rooms&quot;</span>)]<br><br><span class="hljs-comment"># Define the label.</span><br>targets = california_housing_dataframe[<span class="hljs-string">&quot;median_house_value&quot;</span>]<br><br><span class="hljs-comment"># Use gradient descent as the optimizer for training the model.</span><br>my_optimizer=tf.train.GradientDescentOptimizer(learning_rate=<span class="hljs-number">0.0000001</span>)<br><br><span class="hljs-comment"># 梯度裁剪 (gradient clipping)</span><br>my_optimizer = tf.contrib.estimator.clip_gradients_by_norm(my_optimizer, <span class="hljs-number">5.0</span>)<br><br><span class="hljs-comment"># Configure the linear regression model with our feature columns and optimizer.</span><br><span class="hljs-comment"># Set a learning rate of 0.0000001 for Gradient Descent.</span><br>linear_regressor = tf.estimator.LinearRegressor(<br>    feature_columns=feature_columns,<br>    optimizer=my_optimizer<br>)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_input_fn</span>(<span class="hljs-params">features, targets, batch_size=<span class="hljs-number">1</span>, shuffle=<span class="hljs-literal">True</span>, num_epochs=<span class="hljs-literal">None</span></span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;Trains a linear regression model of one feature.</span><br><span class="hljs-string">  </span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">      features: pandas DataFrame of features</span><br><span class="hljs-string">      targets: pandas DataFrame of targets</span><br><span class="hljs-string">      batch_size: Size of batches to be passed to the model</span><br><span class="hljs-string">      shuffle: True or False. Whether to shuffle the data.</span><br><span class="hljs-string">      num_epochs: Number of epochs for which data should be repeated. None = repeat indefinitely</span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">      Tuple of (features, labels) for next data batch</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>  <br>    <span class="hljs-comment"># Convert pandas data into a dict of np arrays.</span><br>    features = &#123;key:np.array(value) <span class="hljs-keyword">for</span> key,value <span class="hljs-keyword">in</span> <span class="hljs-built_in">dict</span>(features).items()&#125;                                           <br> <br>    <span class="hljs-comment"># Construct a dataset, and configure batching/repeating</span><br>    ds = Dataset.from_tensor_slices((features,targets)) <span class="hljs-comment"># warning: 2GB limit</span><br>    ds = ds.batch(batch_size).repeat(num_epochs)<br>    <br>    <span class="hljs-comment"># Shuffle the data, if specified</span><br>    <span class="hljs-keyword">if</span> shuffle:<br>      ds = ds.shuffle(buffer_size=<span class="hljs-number">10000</span>)<br>    <br>    <span class="hljs-comment"># Return the next batch of data</span><br>    features, labels = ds.make_one_shot_iterator().get_next()<br>    <span class="hljs-keyword">return</span> features, labels<br>	<br>_ = linear_regressor.train(<br>    input_fn = <span class="hljs-keyword">lambda</span>:my_input_fn(my_feature, targets),<br>    steps=<span class="hljs-number">100</span><br>)<br><br><span class="hljs-comment"># Create an input function for predictions.</span><br><span class="hljs-comment"># Note: Since we&#x27;re making just one prediction for each example, we don&#x27;t </span><br><span class="hljs-comment"># need to repeat or shuffle the data here.</span><br>prediction_input_fn =<span class="hljs-keyword">lambda</span>: my_input_fn(my_feature, targets, num_epochs=<span class="hljs-number">1</span>, shuffle=<span class="hljs-literal">False</span>)<br><br><span class="hljs-comment"># Call predict() on the linear_regressor to make predictions.</span><br>predictions = linear_regressor.predict(input_fn=prediction_input_fn)<br><br><span class="hljs-comment"># Format predictions as a NumPy array, so we can calculate error metrics.</span><br>predictions = np.array([item[<span class="hljs-string">&#x27;predictions&#x27;</span>][<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> predictions])<br><br><span class="hljs-comment"># Print Mean Squared Error and Root Mean Squared Error.</span><br>mean_squared_error = metrics.mean_squared_error(predictions, targets)<br>root_mean_squared_error = math.sqrt(mean_squared_error)<br><span class="hljs-built_in">print</span> <span class="hljs-string">&quot;Mean Squared Error (on training data): %0.3f&quot;</span> % mean_squared_error<br><span class="hljs-built_in">print</span> <span class="hljs-string">&quot;Root Mean Squared Error (on training data): %0.3f&quot;</span> % root_mean_squared_error<br><br><br></code></pre></td></tr></table></figure>
+
+<p>写成一个函数：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train_model</span>(<span class="hljs-params">learning_rate, steps, batch_size, input_feature=<span class="hljs-string">&quot;total_rooms&quot;</span></span>):</span><br>  <span class="hljs-string">&quot;&quot;&quot;Trains a linear regression model of one feature.</span><br><span class="hljs-string">  </span><br><span class="hljs-string">  Args:</span><br><span class="hljs-string">    learning_rate: A `float`, the learning rate.</span><br><span class="hljs-string">    steps: A non-zero `int`, the total number of training steps. A training step</span><br><span class="hljs-string">      consists of a forward and backward pass using a single batch.</span><br><span class="hljs-string">    batch_size: A non-zero `int`, the batch size.</span><br><span class="hljs-string">    input_feature: A `string` specifying a column from `california_housing_dataframe`</span><br><span class="hljs-string">      to use as input feature.</span><br><span class="hljs-string">  &quot;&quot;&quot;</span><br>  <br>  periods = <span class="hljs-number">10</span><br>  steps_per_period = steps / periods<br><br>  my_feature = input_feature<br>  my_feature_data = california_housing_dataframe[[my_feature]]<br>  my_label = <span class="hljs-string">&quot;median_house_value&quot;</span><br>  targets = california_housing_dataframe[my_label]<br><br>  <span class="hljs-comment"># Create feature columns</span><br>  feature_columns = [tf.feature_column.numeric_column(my_feature)]<br>  <br>  <span class="hljs-comment"># Create input functions</span><br>  training_input_fn = <span class="hljs-keyword">lambda</span>:my_input_fn(my_feature_data, targets, batch_size=batch_size)<br>  prediction_input_fn = <span class="hljs-keyword">lambda</span>: my_input_fn(my_feature_data, targets, num_epochs=<span class="hljs-number">1</span>, shuffle=<span class="hljs-literal">False</span>)<br>  <br>  <span class="hljs-comment"># Create a linear regressor object.</span><br>  my_optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)<br>  my_optimizer = tf.contrib.estimator.clip_gradients_by_norm(my_optimizer, <span class="hljs-number">5.0</span>)<br>  linear_regressor = tf.estimator.LinearRegressor(<br>      feature_columns=feature_columns,<br>      optimizer=my_optimizer<br>  )<br><br>  <span class="hljs-comment"># Set up to plot the state of our model&#x27;s line each period.</span><br>  plt.figure(figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">6</span>))<br>  plt.subplot(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)<br>  plt.title(<span class="hljs-string">&quot;Learned Line by Period&quot;</span>)<br>  plt.ylabel(my_label)<br>  plt.xlabel(my_feature)<br>  sample = california_housing_dataframe.sample(n=<span class="hljs-number">300</span>)<br>  plt.scatter(sample[my_feature], sample[my_label])<br>  colors = [cm.coolwarm(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.linspace(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, periods)]<br><br>  <span class="hljs-comment"># Train the model, but do so inside a loop so that we can periodically assess</span><br>  <span class="hljs-comment"># loss metrics.</span><br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;Training model...&quot;</span><br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;RMSE (on training data):&quot;</span><br>  root_mean_squared_errors = []<br>  <span class="hljs-keyword">for</span> period <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (<span class="hljs-number">0</span>, periods):<br>    <span class="hljs-comment"># Train the model, starting from the prior state.</span><br>    linear_regressor.train(<br>        input_fn=training_input_fn,<br>        steps=steps_per_period<br>    )<br>    <span class="hljs-comment"># Take a break and compute predictions.</span><br>    predictions = linear_regressor.predict(input_fn=prediction_input_fn)<br>    predictions = np.array([item[<span class="hljs-string">&#x27;predictions&#x27;</span>][<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> predictions])<br>    <br>    <span class="hljs-comment"># Compute loss.</span><br>    root_mean_squared_error = math.sqrt(<br>        metrics.mean_squared_error(predictions, targets))<br>    <span class="hljs-comment"># Occasionally print the current loss.</span><br>    <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;  period %02d : %0.2f&quot;</span> % (period, root_mean_squared_error)<br>    <span class="hljs-comment"># Add the loss metrics from this period to our list.</span><br>    root_mean_squared_errors.append(root_mean_squared_error)<br>    <span class="hljs-comment"># Finally, track the weights and biases over time.</span><br>    <span class="hljs-comment"># Apply some math to ensure that the data and line are plotted neatly.</span><br>    y_extents = np.array([<span class="hljs-number">0</span>, sample[my_label].<span class="hljs-built_in">max</span>()])<br>    <br>    weight = linear_regressor.get_variable_value(<span class="hljs-string">&#x27;linear/linear_model/%s/weights&#x27;</span> % input_feature)[<span class="hljs-number">0</span>]<br>    bias = linear_regressor.get_variable_value(<span class="hljs-string">&#x27;linear/linear_model/bias_weights&#x27;</span>)<br><br>    x_extents = (y_extents - bias) / weight<br>    x_extents = np.maximum(np.minimum(x_extents,<br>                                      sample[my_feature].<span class="hljs-built_in">max</span>()),<br>                           sample[my_feature].<span class="hljs-built_in">min</span>())<br>    y_extents = weight * x_extents + bias<br>    plt.plot(x_extents, y_extents, color=colors[period]) <br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;Model training finished.&quot;</span><br><br>  <span class="hljs-comment"># Output a graph of loss metrics over periods.</span><br>  plt.subplot(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>)<br>  plt.ylabel(<span class="hljs-string">&#x27;RMSE&#x27;</span>)<br>  plt.xlabel(<span class="hljs-string">&#x27;Periods&#x27;</span>)<br>  plt.title(<span class="hljs-string">&quot;Root Mean Squared Error vs. Periods&quot;</span>)<br>  plt.tight_layout()<br>  plt.plot(root_mean_squared_errors)<br><br>  <span class="hljs-comment"># Output a table with calibration data.</span><br>  calibration_data = pd.DataFrame()<br>  calibration_data[<span class="hljs-string">&quot;predictions&quot;</span>] = pd.Series(predictions)<br>  calibration_data[<span class="hljs-string">&quot;targets&quot;</span>] = pd.Series(targets)<br>  display.display(calibration_data.describe())<br><br>  <span class="hljs-built_in">print</span> <span class="hljs-string">&quot;Final RMSE (on training data): %0.2f&quot;</span> % root_mean_squared_error<br></code></pre></td></tr></table></figure>
+
+<p><strong>常用超参数</strong></p>
+<ul>
+<li>steps：是指训练迭代的总次数。一步计算一批样本产生的损失，然后使用该值修改模型的权重一次。</li>
+<li>batch size：是指单步的样本数量（随机选择）。例如，SGD 的批量大小为 1。</li>
+</ul>
+<p><strong>方便变量</strong></p>
+<pre><code>periods：控制报告的粒度。例如，如果 periods 设为 7 且 steps 设为 70，则练习将每 10 步（或 7 次）输出一次损失值。与超参数不同，我们不希望您修改 periods 的值。请注意，修改 periods 不会更改您的模型所学习的内容。
+</code></pre>
+<p><strong>合成特征和离群值</strong></p>
+<ul>
+<li>合成特征</li>
+<li>识别离群值</li>
+<li>截取离群值<br>  离群值设置为相对合理的最小值或最大值来进一步改进模型拟合情况。</li>
+</ul>
+<hr>
+<h3 id="过拟合和泛化"><a href="#过拟合和泛化" class="headerlink" title="过拟合和泛化"></a>过拟合和泛化</h3><p>以下三项基本假设阐明了泛化：</p>
+<ul>
+<li>我们从分布中随机抽取独立同分布 (i.i.d) 的样本。换言之，样本之间不会互相影响。（另一种解释：i.i.d. 是表示变量随机性的一种方式）。</li>
+<li>分布是平稳的；即分布在数据集内不会发生变化。</li>
+<li>我们从同一分布的数据划分中抽取样本。</li>
+</ul>
+<hr>
+<h3 id="拆分数据"><a href="#拆分数据" class="headerlink" title="拆分数据"></a>拆分数据</h3><ul>
+<li>训练集 - 用于训练模型的子集。</li>
+<li>测试集 - 用于测试训练后模型的子集。</li>
+</ul>
+<hr>
+<h3 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h3><h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><ul>
+<li>映射数值</li>
+<li>映射字符串（onehot encoding</li>
+<li>映射分类（枚举）值</li>
+</ul>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>避免很少使用的离散特征值</li>
+<li>最好具有清晰明确的含义</li>
+<li>不要将“神奇”的值与实际数据混为一谈（异常值</li>
+<li>考虑上游不稳定性<h4 id="数据清理"><a href="#数据清理" class="headerlink" title="数据清理"></a>数据清理</h4></li>
+</ul>
+<ol>
+<li>缩放特征值<ul>
+<li>帮助梯度下降法更快速地收敛。</li>
+<li>帮助避免“NaN 陷阱”。在这种陷阱中，模型中的一个数值变成 NaN（例如，当某个值在训练期间超出浮点精确率限制时），并且模型中的所有其他数值最终也会因数学运算而变成 NaN。</li>
+<li>帮助模型为每个特征确定合适的权重。如果没有进行特征缩放，则模型会对范围较大的特征投入过多精力。</li>
+</ul>
+</li>
+<li>处理极端离群值<ul>
+<li>对数缩放</li>
+<li>限制特征值</li>
+</ul>
+</li>
+<li>分箱（划分范围</li>
+<li>清查</li>
+</ol>
+<hr>
+<h3 id="特征组合-Feature-Crosses"><a href="#特征组合-Feature-Crosses" class="headerlink" title="特征组合(Feature Crosses)"></a>特征组合(Feature Crosses)</h3><h4 id="对非线性规律进行编码"><a href="#对非线性规律进行编码" class="headerlink" title="对非线性规律进行编码"></a>对非线性规律进行编码</h4><p>特征组合是指通过将两个或多个输入特征相乘来对特征空间中的非线性规律进行编码的合成特征。“cross”（组合）这一术语来自 cross product（向量积）。</p>
+<h4 id="组合独热矢量"><a href="#组合独热矢量" class="headerlink" title="组合独热矢量"></a>组合独热矢量</h4><p>对独热编码进行特征组合，则会得到可解读为逻辑连接的二元特征</p>
+<p>线性学习器可以很好地扩展到大量数据。对大规模数据集使用特征组合是学习高度复杂模型的一种有效策略。</p>
+<hr>
+<h3 id="简化正则化-Regularization-for-Simplicity-：L₂-正则化"><a href="#简化正则化-Regularization-for-Simplicity-：L₂-正则化" class="headerlink" title="简化正则化 (Regularization for Simplicity)：L₂ 正则化"></a>简化正则化 (Regularization for Simplicity)：L₂ 正则化</h3><p>通过降低复杂模型的复杂度来防止过拟合，这种原则称为正则化。<br>以最小化损失和复杂度为目标，这称为<code>结构风险最小化</code>.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Notes/">Notes</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MachineLearning/">MachineLearning</a>
+                    
+                      <a class="hover-with-bg" href="/tags/TensorFlow/">TensorFlow</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/55073/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">面试准备阅读列表</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/29034/">
+                        <span class="hidden-mobile">关于Python元类metaclass和在ORM中的应用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/ykk648" target="_blank" rel="nofollow noopener"><span>ykk648</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

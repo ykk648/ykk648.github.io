@@ -16,7 +16,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="前言记录自己在Ubuntu系统学习和建设中遇到的问题和解决方案，一些小tip选择加入[TiddlyWiki](/wiki)">
+  <meta name="description" content="记录自己在Ubuntu系统学习和建设中遇到的问题和解决方案，一些小tip选择加入TiddlyWiki">
   <meta name="author" content="tyler luan">
   <meta name="keywords" content="">
   
@@ -238,9 +238,7 @@
             <h1 style="display: none">使用Ubuntu系统中遇到的问题</h1>
             
             <div class="markdown-body">
-              <h2 id="intro">前言</h2>记录自己在Ubuntu系统学习和建设中遇到的问题和解决方案，一些小tip选择加入[TiddlyWiki](/wiki)
-
-
+              <p>记录自己在Ubuntu系统学习和建设中遇到的问题和解决方案，一些小tip选择加入<a href="/wiki">TiddlyWiki</a></p>
 <span id="more"></span>
 
 <h2 id="Ubuntu系统问题"><a href="#Ubuntu系统问题" class="headerlink" title="Ubuntu系统问题"></a>Ubuntu系统问题</h2><h3 id="删除显示为deinstall的linux内核"><a href="#删除显示为deinstall的linux内核" class="headerlink" title="删除显示为deinstall的linux内核"></a>删除显示为deinstall的linux内核</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">uname</span> -a  <br><span class="hljs-attribute">dpkg</span> --get-selections|grep linux  <br><span class="hljs-attribute">sudo</span> dpkg -P linux-image-<span class="hljs-number">3</span>.<span class="hljs-number">5</span>.<span class="hljs-number">0</span>-<span class="hljs-number">4</span>[<span class="hljs-number">2</span>-<span class="hljs-number">9</span>]-generic  <br><span class="hljs-attribute">sudo</span> dpkg -P linux-image-<span class="hljs-number">3</span>.<span class="hljs-number">5</span>.<span class="hljs-number">0</span>-<span class="hljs-number">51</span>-generic <br></code></pre></td></tr></table></figure>

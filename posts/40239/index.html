@@ -16,11 +16,11 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="leetcode位运算题解和总结，使用Python完成，未来选择性的加入lintcode题解。">
+  <meta name="description" content="">
   <meta name="author" content="tyler luan">
   <meta name="keywords" content="">
   
-  <title>leetcode位运算思路总结 - ykk648&#39;s hub</title>
+  <title>traffic-flow-prediction - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -160,12 +160,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/safar-safarov-LKsHwgzyk7c-unsplash.jpg') no-repeat center center;
+         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/vidar-nordli-mathisen-OTTIkYClEyI-unsplash.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="leetcode位运算思路总结">
+            <span class="h2" id="subtitle" title="traffic-flow-prediction">
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2018-03-12 15:07" pubdate>
-        2018年3月12日 下午
+      <time datetime="2021-05-21 17:52" pubdate>
+        2021年5月21日 下午
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      585 字
+      0 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      1
        分钟
     </span>
   
@@ -235,77 +235,16 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">leetcode位运算思路总结</h1>
+            <h1 style="display: none">traffic-flow-prediction</h1>
             
             <div class="markdown-body">
-              <p>leetcode位运算题解和总结，使用Python完成，未来选择性的加入lintcode题解。</p>
-<span id="more"></span>
-
-<hr>
-<p>Python3题解及刷题完成度详见gayhub：</p>
-<div class="github-widget" data-repo="cloisonne/LeetCode"></div>
-
-<hr>
-<h3 id="Single-Number："><a href="#Single-Number：" class="headerlink" title="Single Number："></a>Single Number：</h3><p>对数组中的元素一一异或，相同的数异或=0。</p>
-<p>实现异或的两种方式：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_xor</span>(<span class="hljs-params">self,a,b</span>):</span><br>	<span class="hljs-keyword">return</span> a^b<br><span class="hljs-comment"># or</span><br><span class="hljs-keyword">import</span> operator<br><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce<br><br><span class="hljs-keyword">return</span> reduce(operator.xor, A)<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="Single-Number-Ⅱ"><a href="#Single-Number-Ⅱ" class="headerlink" title="Single Number Ⅱ"></a>Single Number Ⅱ</h3><p>其他元素出现3次，使用统计方法或者位运算。<br>位运算解法和其他元素出现4次时的解法：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-comment"># one 出现一次  two 出现两次  three 出现三次</span><br>one, two = <span class="hljs-number">0</span><br>one, two = (~x &amp; one) | (x &amp; ~one &amp; ~two), (~x &amp; two) | (x &amp; one)<br>one, two, three = (~x &amp; one) | (x &amp; ~one &amp; ~two &amp; ~three), (~x &amp; two) | (x &amp; one), (~x &amp; three) | (x &amp; two)<br></code></pre></td></tr></table></figure>
-<p>使用counter计算：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">import</span> collections<br><span class="hljs-keyword">return</span> (collections.Counter(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(nums))*<span class="hljs-number">3</span>) - collections.Counter(nums)).keys()[<span class="hljs-number">0</span>]<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="Single-Number-Ⅲ"><a href="#Single-Number-Ⅲ" class="headerlink" title="Single Number Ⅲ"></a>Single Number Ⅲ</h3><p>两个元素出现一次，其他元素出现两次<br>全部异或，得到xor，获得bit：</p>
-<pre><code>bit = xor &amp; ~xor
-</code></pre>
-<p>bit是两个数第一个不相同的位</p>
-<pre><code>result[bool(i&amp;bit)] ^= i
-</code></pre>
-<p>其他数异或下来都是0 ， 这两个数异或下来的bool值一个是1 一个是0，成功分到了一个数组中。</p>
-<hr>
-<h3 id="Reverse-Bits"><a href="#Reverse-Bits" class="headerlink" title="Reverse Bits"></a>Reverse Bits</h3><p>二进制翻转，原数右移一位，赋给result，result左移一位：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs py">result = <span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):<br>	result &lt;&lt;= <span class="hljs-number">1</span><br>	result |= n&amp;<span class="hljs-number">1</span> <span class="hljs-comment"># 取右边第一位</span><br>	n &gt;&gt;= <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
-
-<p>使用zfill（返回指定长度的字符串–右对齐）的一行解：</p>
-<pre><code>return int(bin(n)[2:].zfill(32)[::-1], 2) # bin()开头是0b
-</code></pre>
-<p>Q:<code>如果该方法被大量调用，或者用于处理超大数据（Bulk data）时有什么优化方法？</code></p>
-<p>A:将数字分成8份，每份只能是0-15，记录0-15的翻转值，array或者map：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] reverseHex = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[] &#123;<span class="hljs-number">0</span>, <span class="hljs-number">8</span>, <span class="hljs-number">4</span>, <span class="hljs-number">12</span>, <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">6</span>, <span class="hljs-number">14</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>, <span class="hljs-number">5</span>, <span class="hljs-number">13</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">7</span>, <span class="hljs-number">15</span>&#125;;<br><br><span class="hljs-comment">// you need treat n as an unsigned value</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">reverseBits</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> rev = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>        rev = (rev &lt;&lt; <span class="hljs-number">4</span>) + reverseHex[n &amp; <span class="hljs-number">0xF</span>];<br>        n &gt;&gt;&gt;= <span class="hljs-number">4</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> rev;<br>&#125;<br></code></pre></td></tr></table></figure>
-<hr>
-<h3 id="Number-of-1-Bits"><a href="#Number-of-1-Bits" class="headerlink" title="Number of 1 Bits"></a>Number of 1 Bits</h3><p>求出二进制数中1的个数</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hammingWeight</span>(<span class="hljs-params">self, n</span>):</span><br>	result = <span class="hljs-number">0</span><br>	<span class="hljs-keyword">while</span> n:<br>		n &amp;= n - <span class="hljs-number">1</span><br>		result += <span class="hljs-number">1</span><br>	<span class="hljs-keyword">return</span> result<br></code></pre></td></tr></table></figure>
-
-<p><code>n&amp;(n-1)的妙用</code>:</p>
-<pre><code>n与n-1的区别在于,对于n,从右向左数的第一个&quot;1&quot;开始一直到右,和n-1,完全相反
-n&amp;(n-1)作用：将n的二进制表示中的最低位为1的改为0
-</code></pre>
-<hr>
-<h3 id="Bitwise-AND-of-Numbers-Range"><a href="#Bitwise-AND-of-Numbers-Range" class="headerlink" title="Bitwise AND of Numbers Range"></a>Bitwise AND of Numbers Range</h3><hr>
+              <span id="more"></span>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Codes/">Codes</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Leetcode/">Leetcode</a>
-                    
-                  </div>
                 
               </div>
               
@@ -320,9 +259,9 @@ n&amp;(n-1)作用：将n的二进制表示中的最低位为1的改为0
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/34024/">
+                      <a href="/posts/54211/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2021年新的开始</span>
+                        <span class="hidden-mobile">robust-face-recognition</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -330,8 +269,8 @@ n&amp;(n-1)作用：将n的二进制表示中的最低位为1的改为0
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/55073/">
-                        <span class="hidden-mobile">面试准备阅读列表</span>
+                      <a href="/posts/34024/">
+                        <span class="hidden-mobile">2021年新的开始</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

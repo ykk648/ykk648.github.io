@@ -18,22 +18,23 @@
   <meta name="author" content="tyler luan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="学习了一下makefile的写法，写了一个比较简单的makefile。">
+    <meta name="description" content="整理使用numpy遇到的问题，后续可能加入其他科学计算库。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个简单的makefile">
-<meta property="og:url" content="http://example.com/posts/30483/index.html">
+<meta property="og:title" content="numpy的tips合集">
+<meta property="og:url" content="http://example.com/posts/32080/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="学习了一下makefile的写法，写了一个比较简单的makefile。">
+<meta property="og:description" content="整理使用numpy遇到的问题，后续可能加入其他科学计算库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2017-02-12T14:48:44.000Z">
-<meta property="article:modified_time" content="2021-05-18T11:55:23.769Z">
+<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20210917-Firefox_ZH-CN0575885603_UHD.jpg">
+<meta property="article:published_time" content="2021-12-22T09:51:38.000Z">
+<meta property="article:modified_time" content="2021-12-22T10:02:00.108Z">
 <meta property="article:author" content="tyler luan">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Makefile">
+<meta property="article:tag" content="Numpy">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20210917-Firefox_ZH-CN0575885603_UHD.jpg">
   
   
-  <title>一个简单的makefile - ykk648&#39;s hub</title>
+  <title>numpy的tips合集 - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -174,12 +175,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/vidar-nordli-mathisen-OTTIkYClEyI-unsplash.jpg') no-repeat center center;
+         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20210917-Firefox_ZH-CN0575885603_UHD.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="一个简单的makefile">
+            <span class="h2" id="subtitle" title="numpy的tips合集">
               
             </span>
 
@@ -189,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2017-02-12 22:48" pubdate>
-        2017年2月12日 晚上
+      <time datetime="2021-12-22 17:51" pubdate>
+        2021年12月22日 下午
       </time>
     </span>
   
@@ -200,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      310 字
     </span>
   
 
@@ -209,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      3 分钟
     </span>
   
 
@@ -246,25 +247,17 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一个简单的makefile</h1>
+            <h1 style="display: none">numpy的tips合集</h1>
             
             <div class="markdown-body">
-              <p>学习了一下makefile的写法，写了一个比较简单的makefile。</p>
+              <p>整理使用numpy遇到的问题，后续可能加入其他科学计算库。</p>
 <span id="more"></span>
 
-<hr>
-<p>学习参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/OpenShiFt/p/4313351.html/">http://www.cnblogs.com/OpenShiFt/p/4313351.html/</a></p>
-<p><code>makefile</code></p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs makefile">CC = gcc<br>CFLAGS +=<br>LDFLAGS +=<br>EXEC = main<br>OBJS = main.c function.c<br><br><span class="hljs-section">all: <span class="hljs-variable">$(EXEC)</span></span><br><br><span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>: all</span><br><br><span class="hljs-section">main: <span class="hljs-variable">$(OBJS)</span></span><br>	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(LDFLAGS)</span> <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span><br><br><span class="hljs-section">clean:</span><br>	-rm -f <span class="hljs-variable">$(EXEC)</span> *.elf *.gdb *.o *.a<br><br><span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>: clean</span><br></code></pre></td></tr></table></figure>
+<h4 id="bool与np-bool"><a href="#bool与np-bool" class="headerlink" title="bool与np.bool_"></a>bool与np.bool_</h4><p>在输出json时遇到json不认识numpy的bool_，需要做一个bool的强制转换，此外json中null = None</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">arr=np.array([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>])<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(arr[<span class="hljs-number">1</span>]&gt;arr[<span class="hljs-number">0</span>]))<br><span class="hljs-comment"># numpy.bool_</span><br></code></pre></td></tr></table></figure>
 
-<p><code>function.c</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX 5</span><br><br><span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[MAX] = &#123;<span class="hljs-number">2</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>,<span class="hljs-number">8</span>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">()</span></span>&#123;<br><br>	<span class="hljs-keyword">int</span> i;<br>	<span class="hljs-keyword">int</span> n=<span class="hljs-number">0</span>;<br><br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;MAX;i++)<br>		n+=<span class="hljs-built_in">array</span>[i];<br>	<span class="hljs-keyword">return</span> n;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">int</span> max;<br><br>	max=<span class="hljs-built_in">array</span>[i];<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;MAX;i++)&#123;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-built_in">array</span>[i] &gt; max)<br>			max = <span class="hljs-built_in">array</span>[i];<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> max;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="对img-mask的操作"><a href="#对img-mask的操作" class="headerlink" title="对img mask的操作"></a>对img mask的操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">mask = []<br>mask = np.repeat(mask, <span class="hljs-number">3</span>, axis=<span class="hljs-number">0</span>).transpose((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)).astype(np.uint8)<br>mask = mask * <span class="hljs-number">255</span><br>mask = mask[np.newaxis, :, :]<br>mask = mask[<span class="hljs-literal">None</span>, :, :]	<br></code></pre></td></tr></table></figure>
 
-<p><code>include.h</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> len 5</span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[])</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i;<br>	<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;len;i++)<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;array[%d] : %d\n&quot;</span>,i,<span class="hljs-built_in">array</span>[i]);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><code>main.c</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;include.h&quot;</span></span><br><span class="hljs-comment">//#include &quot;function.c&quot;</span><br><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[];<br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">()</span></span>;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>	<span class="hljs-keyword">int</span> sum_m,max_m;<br>	sum_m = sum();<br>	max_m = max();<br>	<span class="hljs-comment">//int len = sizeof(array);</span><br>	print(<span class="hljs-built_in">array</span>);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;sum: %d , max: %d\n&quot;</span>,sum_m,max_m);<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -274,7 +267,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Codes/">Codes</a>
+                      <a class="hover-with-bg" href="/categories/Notes/">Notes</a>
                     
                   </div>
                 
@@ -282,9 +275,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Makefile/">Makefile</a>
+                      <a class="hover-with-bg" href="/tags/Numpy/">Numpy</a>
                     
                   </div>
                 
@@ -301,9 +292,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/20316/">
+                      <a href="/posts/42935/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">python爬虫第一课-requests库</span>
+                        <span class="hidden-mobile">我的速查表合集</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -311,8 +302,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/64516/">
-                        <span class="hidden-mobile">２个多月的近况</span>
+                      <a href="/posts/34787/">
+                        <span class="hidden-mobile">自用的代理方案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

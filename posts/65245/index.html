@@ -7,36 +7,36 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="之前写的两篇文章历史久远，很多东西已经失效了，最近几年的工作中一般会把一些tips记在confluence上，但confluence毕竟属于公司内网，如果在家里不方便访问（考虑搭一个公网confluence），所以把一些超高频问题记在自己的blog上。">
   <meta name="author" content="tyler luan">
   <meta name="keywords" content="">
-  <meta name="description" content="之前写的两篇文章历史久远，很多东西已经失效了，最近几年的工作中一般会把一些tips记在confluence上，但confluence毕竟属于公司内网，如果在家里不方便访问（考虑搭一个公网confluence），所以把一些超高频问题记在自己的blog上。">
+  
+    <meta name="description" content="之前写的两篇文章历史久远，很多东西已经失效了，最近几年的工作中一般会把一些tips记在confluence上，但confluence毕竟属于公司内网，如果在家里不方便访问（考虑搭一个公网confluence），所以把一些超高频问题记在自己的blog上。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu tips合集[2022]">
+<meta property="og:title" content="ubuntu tips合集">
 <meta property="og:url" content="http://example.com/posts/65245/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
 <meta property="og:description" content="之前写的两篇文章历史久远，很多东西已经失效了，最近几年的工作中一般会把一些tips记在confluence上，但confluence毕竟属于公司内网，如果在家里不方便访问（考虑搭一个公网confluence），所以把一些超高频问题记在自己的blog上。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/tmux.png">
-<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/pathlib.png">
+<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg">
 <meta property="article:published_time" content="2021-12-13T07:10:08.000Z">
-<meta property="article:modified_time" content="2021-12-17T10:03:50.582Z">
+<meta property="article:modified_time" content="2021-12-24T09:45:02.928Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Ubuntu">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Gnome3">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/tmux.png">
+<meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg">
   
-  <title>ubuntu tips合集[2022] - ykk648&#39;s hub</title>
+  
+  <title>ubuntu tips合集 - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -73,7 +73,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -182,7 +182,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ubuntu tips合集[2022]">
+            <span class="h2" id="subtitle" title="ubuntu tips合集">
               
             </span>
 
@@ -203,7 +203,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      723 字
+      2.5k 字
     </span>
   
 
@@ -212,7 +212,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      21 分钟
     </span>
   
 
@@ -249,7 +249,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ubuntu tips合集[2022]</h1>
+            <h1 style="display: none">ubuntu tips合集</h1>
             
             <div class="markdown-body">
               <p>之前写的两篇文章历史久远，很多东西已经失效了，最近几年的工作中一般会把一些tips记在confluence上，但confluence毕竟属于公司内网，如果在家里不方便访问（考虑搭一个公网confluence），所以把一些超高频问题记在自己的blog上。</p>
@@ -276,9 +276,12 @@
 </li>
 </ul>
 <h4 id="pytorch"><a href="#pytorch" class="headerlink" title="pytorch"></a>pytorch</h4><p><a target="_blank" rel="noopener" href="https://pytorch.org/get-started/locally/">official site</a>,   <a target="_blank" rel="noopener" href="https://anaconda.org/pytorch/repo">conda pytorch</a></p>
-<h3 id="CheatSheet"><a href="#CheatSheet" class="headerlink" title="CheatSheet"></a>CheatSheet</h3><h4 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h4><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/tmux.png" srcset="/img/loading.gif" lazyload style="max-width: 50%;" />
+<h4 id="opencv-python3-cuda"><a href="#opencv-python3-cuda" class="headerlink" title="opencv python3 cuda"></a>opencv python3 cuda</h4><p><a target="_blank" rel="noopener" href="https://learnopencv.com/opencv-dnn-with-gpu-support/">https://learnopencv.com/opencv-dnn-with-gpu-support/</a></p>
+<p>其中<code>FAST_MATH</code>是加速选项， 影响精度</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs shell">除了文档中的以外：<br>pip install opencv-python<br><br>coa base_py38_torch18_tf2<br><br>cmake \<br>      -D CMAKE_BUILD_TYPE=RELEASE \<br>      -D CMAKE_INSTALL_PREFIX=/usr/local \<br>      -D INSTALL_PYTHON_EXAMPLES=OFF \<br>      -D INSTALL_C_EXAMPLES=OFF \<br>      -D OPENCV_ENABLE_NONFREE=ON \<br>      -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-4.5.4/modules \<br>      -D BUILD_OPENCV_PYTHON2=OFF \<br>      -D ENABLE_FAST_MATH=ON \<br>      -D CUDA_FAST_MATH=ON \<br>      -D BUILD_OPENCV_PYTHON3=ON \<br>      -D PYTHON_DEFAULT_EXECUTABLE=$(python -c &quot;import sys; print(sys.executable)&quot;) \<br>      -D PYTHON3_EXECUTABLE=$(which python3) \<br>      -D PYTHON_INCLUDE_DIR=$(python3 -c &quot;from distutils.sysconfig import get_python_inc; print(get_python_inc())&quot;) \<br>      -D PYTHON_INCLUDE_DIR2=$(python3 -c &quot;from os.path import dirname; from distutils.sysconfig import get_config_h_filename; print(dirname(get_config_h_filename()))&quot;) \<br>      -D PYTHON_LIBRARY=$(python3 -c &quot;from distutils.sysconfig import get_config_var;from os.path import dirname,join ; print(join(dirname(get_config_var(&#x27;LIBPC&#x27;)),get_config_var(&#x27;LDLIBRARY&#x27;)))&quot;) \<br>      -D PYTHON3_NUMPY_INCLUDE_DIRS=$(python3 -c &quot;import numpy; print(numpy.get_include())&quot;) \<br>      -D PYTHON3_PACKAGES_PATH=$(python3 -c &quot;from distutils.sysconfig import get_python_lib; print(get_python_lib())&quot;) \<br>      -D BUILD_EXAMPLES=OFF \<br>      -D WITH_CUDA=ON \<br>      -D WITH_CUDNN=ON \<br>      -D OPENCV_DNN_CUDA=ON \<br>      -D WITH_CUBLAS=ON \<br>      -D CUDNN_VERSION=8.2 \<br>      -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-11.1 \<br>      -D OpenCL_LIBRARY=/usr/local/cuda-11.1/lib64/libOpenCL.so \<br>      -D OpenCL_INCLUDE_DIR=/usr/local/cuda-11.1/include/ \<br>      ..<br><br>make -j20<br>sudo make install<br>sudo ldconfig<br><br>cd /opt/anaconda3/envs/base_py38_torch18_tf2/lib/python3.8/site-packages/<br>ln -sf /usr/local/lib/python3.8/dist-packages/cv2/cv2.cpython-38-x86_64-linux-gnu.so cv2.so<br></code></pre></td></tr></table></figure>
 
-<h4 id="pathlib"><a href="#pathlib" class="headerlink" title="pathlib"></a>pathlib</h4><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/pathlib.png" srcset="/img/loading.gif" lazyload style="max-width:50%;" />
+
+
 
             </div>
             <hr>
@@ -520,7 +523,7 @@
       var typing = Fluid.plugins.typing;
       var title = document.getElementById('subtitle').title;
       
-      typing(title)
+        typing(title);
       
     })(window, document);
   </script>

@@ -7,18 +7,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="走楼梯和挖金矿两个例子，解析动态规划的由来和算法结构。然后是剑指offer的剪绳子问题。——其实就是斐波那契和一个2^n-1，用python两行就写完了，但是违背了练习算法的初衷，尽量都用java完成。">
   <meta name="author" content="tyler luan">
   <meta name="keywords" content="">
-  <meta name="description" content="走楼梯和挖金矿两个例子，解析动态规划的由来和算法结构。然后是剑指offer的剪绳子问题。——其实就是斐波那契和一个2^n-1，用python两行就写完了，但是违背了练习算法的初衷，尽量都用java完成。">
+  
+    <meta name="description" content="走楼梯和挖金矿两个例子，解析动态规划的由来和算法结构。然后是剑指offer的剪绳子问题。——其实就是斐波那契和一个2^n-1，用python两行就写完了，但是违背了练习算法的初衷，尽量都用java完成。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划的三个例子">
 <meta property="og:url" content="http://example.com/posts/55495/index.html">
@@ -34,6 +34,7 @@
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://o7myibfc7.bkt.clouddn.com/%E9%87%91%E7%9F%BF1.jpg">
+  
   
   <title>动态规划的三个例子 - ykk648&#39;s hub</title>
 
@@ -72,7 +73,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -211,7 +212,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8 分钟
+      21 分钟
     </span>
   
 
@@ -539,7 +540,7 @@
       var typing = Fluid.plugins.typing;
       var title = document.getElementById('subtitle').title;
       
-      typing(title)
+        typing(title);
       
     })(window, document);
   </script>

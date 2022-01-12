@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211231-JonesBeachHarpSeal_ZH-CN9584238333_UHD.jpg">
 <meta property="article:published_time" content="2021-12-27T10:24:57.000Z">
-<meta property="article:modified_time" content="2022-01-10T11:24:18.389Z">
+<meta property="article:modified_time" content="2022-01-12T06:48:52.069Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Essays">
 <meta name="twitter:card" content="summary_large_image">
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      5.5k 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      46 分钟
     </span>
   
 
@@ -368,7 +368,67 @@
 </ol>
 <p>此外，T2T可以使用Performer代替Transformer以降低GPU占用 （Rethinking transformer based set prediction for object detection）</p>
 <hr>
-<h4 id="Attention-is-all-you-need"><a href="#Attention-is-all-you-need" class="headerlink" title="Attention is all you need"></a>Attention is all you need</h4><p>todo</p>
+<h4 id="Attention-is-all-you-need"><a href="#Attention-is-all-you-need" class="headerlink" title="Attention is all you need"></a>Attention is all you need</h4><p>用于机器翻译，保持encoder-decoder结构，完全抛弃rnn和cnn，使用transformer架构</p>
+<p>提出self-attention，包括query key value，由三个不同的权值矩阵得到</p>
+<p>提出multi head attention，等于多个self-attention的ensemble</p>
+<p>引入位置编码(position embedding)</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220111095625685.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="3D-Face-Reconstruction"><a href="#3D-Face-Reconstruction" class="headerlink" title="3D Face Reconstruction"></a>3D Face Reconstruction</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d2fb5b8147ca">3DMM</a>(3D morphable models )三维可变形人脸模型，每张脸表现为texture和shape的叠加，</p>
+<p>基于传统方法model fit构建数据训练3DMM CNN，</p>
+<h4 id="3DDFA-amp-3DDFA-V2"><a href="#3DDFA-amp-3DDFA-V2" class="headerlink" title="3DDFA &amp; 3DDFA_V2"></a>3DDFA &amp; 3DDFA_V2</h4><p>3DDFA(3D Dense Face Alignment) 使用PNNC(Projected Normalized Coordinate Code) 作为特征预测，而PRNet使用UV</p>
+<p>提出PAC(pose adaptive convolution),在语义一致性位置进行卷积</p>
+<p>loss上分为参数距离（parameter distance cost）和顶点距离（vertex distance cost）,一个最小化参数误差，一个最小化顶点距离，提高3DMM形变能力</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220111111909095.png" srcset="/img/loading.gif" lazyload></p>
+<p>此外提出对训练数据大角度的增强，构建大姿态人脸库来训练模型</p>
+<p>3DDFA_V2，针对3DDFA进行了提速，主要包括三点：</p>
+<ul>
+<li>landmark-regression regularization 加速拟合</li>
+<li>mata-joint optimization 动态组合loss，加速拟合</li>
+<li>3d aided short-video-synthesis 使用静止图片生成短视频训练数据，提高video上的对齐效果</li>
+</ul>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220111113843858.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="DECA"><a href="#DECA" class="headerlink" title="DECA"></a>DECA</h4><p><a target="_blank" rel="noopener" href="https://flame.is.tue.mpg.de/">FLAME</a></p>
+<p>DECA模型分为粗糙的人脸重建Ec（resnet50构成）,精细的人脸重建Ed。具体的Ec包括了相机c，反射率ɑ，光照l，形状β，姿态θ，表情Ψ。Ed包括了细节δ。</p>
+<p>粗糙模型的损失包括了人脸关键点的损失 Llmk，眼睛闭合的损失 Leye，基于照片的损失 Lpho，ID损失 Lid，形状连续损失 Lsc，正则化损失 Lreg。</p>
+<p>精细的人脸重建损失，包含了照片细节损失 LphoD， ID-MRF损失 Lmrf，软对称性损失 Lsym，细节正则化损失 LregD。</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220111140747470.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="Deep3DFaceRecon"><a href="#Deep3DFaceRecon" class="headerlink" title="Deep3DFaceRecon"></a>Deep3DFaceRecon</h4><p>对R-Net提取的人脸相关系数进行重建，加入identity loss（arcface），引入光度损失（robust photometric loss）和关键点损失（landmark location loss），</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220111141426885.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="Detailed3DFace"><a href="#Detailed3DFace" class="headerlink" title="Detailed3DFace"></a>Detailed3DFace</h4><p>首先提供一个<a target="_blank" rel="noopener" href="https://facescape.nju.edu.cn/Page_Data/">数据集</a></p>
+<p>包含120G , TU models（938ID*20expression）和bilinear model</p>
+<p>一个生成detail 3D face的demo,没有开源landmark检测器，代码中使用dlib替代</p>
+<p>预测置换贴图（displacement map）使用pix2pixHD结构，使用dynamic details synthesis结合19个关键表情预测细节</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220111143916975.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用<a target="_blank" rel="noopener" href="https://github.com/yanght321/Detailed3DFace">Detailed3DFace</a> 可以获得：</p>
+<p>一份半脸obj，一张UV贴图，一张对应的displacement map，20张其他表情的displacement map，和简单重建结果</p>
+<p>使用zbrush重建结果：</p>
+<img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220111142851054.png" srcset="/img/loading.gif" lazyload style="max-width: 30%;" />
+
+<hr>
+<h4 id="帝国理工组"><a href="#帝国理工组" class="headerlink" title="帝国理工组"></a>帝国理工组</h4><p><strong>基础</strong></p>
+<p>3D模态（3D modalities） 包括 texture shape normals(法线) expression</p>
+<p>帝国理工的<strong>LSFM</strong> <a target="_blank" rel="noopener" href="https://github.com/menpo/lsfm">https://github.com/menpo/lsfm</a> ， 中提到了<strong>MeIn3D</strong>数据集，包含10000张人脸，数据无法下载，参考<a target="_blank" rel="noopener" href="https://github.com/menpo/lsfm/issues/27">https://github.com/menpo/lsfm/issues/27</a></p>
+<p><strong>CFHM</strong> Combining 3d morphable models: A large scale face-and-head model 2019  一种人脸和人头大规模模型</p>
+<p><strong>MICC</strong> 53个人头数据 <a target="_blank" rel="noopener" href="http://www.micc.unifi.it/vim/3dfaces-dataset/index.html#!prettyPhoto">http://www.micc.unifi.it/vim/3dfaces-dataset/index.html#!prettyPhoto</a></p>
+<h5 id="TBGAN"><a href="#TBGAN" class="headerlink" title="TBGAN"></a>TBGAN</h5><p>创新点： 提出一种trunk-branch architecture(主干分支结构)，生成将texture和geometry耦合在一起的人脸</p>
+<p>使用MeIn3D数据集， 将shape texture normals所有数据在UV平面对齐，以便输入GAN网络，增加一个表情识别网络，以操纵生成人脸的表情，基于CFHM将面部映射到头部</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220112143606102.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="GANFit-amp-Fast-GANFit"><a href="#GANFit-amp-Fast-GANFit" class="headerlink" title="GANFit &amp; Fast-GANFit"></a>GANFit &amp; Fast-GANFit</h5><p>已经商业化，不会开源</p>
+<p>其中ps和pe与3DMM一致，pt是由人脸latent提取UV map的网络，也就是shape使用3dmm，texture使用GAN生成，</p>
+<p>加入一些loss保证GAN的生成质量，包括identity loss / content loss / pixel loss / landmark loss</p>
+<p>最终结果使用MICC数据集评价</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220112144643819.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="OSTeC"><a href="#OSTeC" class="headerlink" title="OSTeC"></a>OSTeC</h5><p>为了解决3d数据难以采集的问题，用2D生成器生成多角度的2D图片，然后构建3D数据集，用于训练3DMM</p>
+<p>模型开源，需要申请</p>
+<p>图片生成使用stylegan2，loss包括photometric loss(光度损失)，identity loss, perceptual loss(感知损失), landmark loss， 渐进式生成纹理，最终stitching成一个UV map</p>
+<p>能够达到GANFit的水平（10000张真实3d数据）：</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220112144738247.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="AvatarMe-amp-AvatarMe"><a href="#AvatarMe-amp-AvatarMe" class="headerlink" title="AvatarMe &amp; AvatarMe++"></a>AvatarMe &amp; AvatarMe++</h5><p>用于实现 accurate facial skin diffuse and specular reflection,  self-occlusion and subsurface scattering approximation  （准确的面部皮肤漫反射和镜面反射、自遮挡和次表面散射近似）</p>
+<p>先使用3dmm推理图片获得shape texture normals，然后进行超分获得高分辨率uv map，使用网络转换为4类漫反射 镜面反射 等贴图，进行光源渲染，然后计算loss</p>
+<p>结果可以很好的使用任意图片进行3d重建，同时生成不同的光源渲染：</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220112144827024.png" srcset="/img/loading.gif" lazyload></p>
 
             </div>
             <hr>

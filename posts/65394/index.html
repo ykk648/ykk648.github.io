@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211228-OreamnosAmericanus_ZH-CN6731612431_UHD.jpg">
 <meta property="article:published_time" content="2022-01-07T06:28:42.000Z">
-<meta property="article:modified_time" content="2022-01-07T07:48:03.702Z">
+<meta property="article:modified_time" content="2022-02-07T08:27:53.366Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Essays">
 <meta name="twitter:card" content="summary_large_image">
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      314 字
+      1.1k 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分钟
+      10 分钟
     </span>
   
 
@@ -253,10 +253,35 @@
               <p>2022年论文阅读笔记合集</p>
 <span id="more"></span>
 
+<h3 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3><h4 id="ConvNeXt"><a href="#ConvNeXt" class="headerlink" title="ConvNeXt"></a>ConvNeXt</h4><p>基于ResNet50，仿照Swin Transformer进行网络结构和trick的修改，使得conv结构再次超越transformer结构，证明ViT的精度提升大部分来自于更现代的trick，而非来自于transformer本身。</p>
+<p>核心理论是conv可以替代transformer结构，自注意力可以被dw conv替代。</p>
+<p>但是7*7的卷积在边缘设备（轻量级模型）上不友好，同时transformer中的MHSA(multi head self-attention)在INT8量化中不友好，所以实际上今年conv和transformer的改进对工业界影响都很有限，更多的变成了一个google和meta堆卡的比赛。</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220113103915565.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="ViT-Transfomer"><a href="#ViT-Transfomer" class="headerlink" title="ViT Transfomer"></a>ViT Transfomer</h3><h4 id="MAE"><a href="#MAE" class="headerlink" title="MAE"></a>MAE</h4><p>何凯明，基于ViT思想，仿照BERT的完形填空思路，提出一种简单的masked autoencoder，使用非对称的encoder-decoder结构，通过对image进行shuffle mask，encoder学习可见区域，decoder对图像进行重建，作为自监督预训练模型，作为预训练的backbone在下游任务取得好的效果。</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220107143727824.png" srcset="/img/loading.gif" lazyload></p>
 <p>对预训练模型采用finetune和linear probing(最后一层)两种方式，finetune的效果更好，一个反常识的地方是采用高达75%的mask ratio，认为图片信息的冗余很大，增大mask ratio可以强迫ViT学习图像的抽象信息。</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220107150435778.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="3D-Human-Digitization"><a href="#3D-Human-Digitization" class="headerlink" title="3D Human Digitization"></a>3D Human Digitization</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenguowen21/article/details/82793994">SMPL</a></p>
+<h4 id="ROMP"><a href="#ROMP" class="headerlink" title="ROMP"></a>ROMP</h4><p>one shot 单目多人3D mesh回归，三个head同时回归出body center ，camera map和SMPL map,</p>
+<p>提出CAR（Collision-Aware Representation）解决歧义问题，使得人体中心能够分开</p>
+<p>loss包括body center loss和mesh parameter loss，</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220114114706232.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Physics-based-Human-Motion-Estimation"><a href="#Physics-based-Human-Motion-Estimation" class="headerlink" title="Physics-based Human Motion Estimation"></a>Physics-based Human Motion Estimation</h3><p>通过运动学优化方法构建pose estimation的训练集，来代替实际动捕数据。</p>
+<p>代码未开源，实际效果较好。</p>
+<p><strong>loss：</strong></p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220207161720461.png" srcset="/img/loading.gif" lazyload alt="image-20220207161720461"></p>
+<p>针对约40s的视频序列，做离线处理，其中pose是常见的姿态估计loss，smooth使用kinematic acceleration penalty使运动流畅</p>
+<p>physics物理优化loss包括三个部分： </p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220207161743207.png" srcset="/img/loading.gif" lazyload alt="image-20220207161743207"></p>
+<p>通过inverse dynamics计算的广义力与实际力相似：  </p>
+<p>广义力 = 关节内力 + 地面接触力</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220207161754416.png" srcset="/img/loading.gif" lazyload alt="image-20220207161754416"></p>
+<p>在脚与地面接触时，每个接触点要尽可能接近地面：</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220207161816222.png" srcset="/img/loading.gif" lazyload alt="image-20220207161816222"></p>
+<p>穿透地面的惩罚：</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220207161832527.png" srcset="/img/loading.gif" lazyload alt="image-20220207161832527"></p>
+<p>预先提供了人体序列坐标和接触力ft^c（其中地面接触力可能是标注获得）</p>
 
             </div>
             <hr>

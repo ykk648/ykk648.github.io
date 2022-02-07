@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211231-JonesBeachHarpSeal_ZH-CN9584238333_UHD.jpg">
 <meta property="article:published_time" content="2021-12-27T10:24:57.000Z">
-<meta property="article:modified_time" content="2022-01-12T06:48:52.069Z">
+<meta property="article:modified_time" content="2022-01-19T09:53:49.692Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Essays">
 <meta name="twitter:card" content="summary_large_image">
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.5k 字
+      7.8k 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      46 分钟
+      65 分钟
     </span>
   
 
@@ -285,10 +285,10 @@
 <li>identity loss</li>
 </ul>
 <hr>
-<h4 id="HifiFace"><a href="#HifiFace" class="headerlink" title="HifiFace"></a>HifiFace</h4><p>复现效果可以</p>
+<h4 id="HifiFace"><a href="#HifiFace" class="headerlink" title="HifiFace"></a>HifiFace</h4><p>复现效果可以，3D特征使用deep3dfacerecon，人脸特征使用curricularface, mask使用HRNet</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220110165703904.png" srcset="/img/loading.gif" lazyload></p>
 <p>预处理上，训练集VGGFace2，使用人脸特征+3D特征，其中3D特征使用其中的表情和动作，人脸特征使用</p>
-<p>训练中，分为低分辨率和高分辨率两个分支，低分辨率使用1/4 feature size，方便身份和属性解耦</p>
+<p>训练中，分为低分辨率和高分辨率两个分支，低分辨率使用1/4 feature size，方便身份和属性解耦，</p>
 <p>同时SFF（semantic facial fusion module）会预测mask，解决遮挡和面部边缘融合问题</p>
 <p>loss上，shape loss / id loss / segmentation loss / reconstruction loss / cycle loss / lpips loss</p>
 <hr>
@@ -429,6 +429,50 @@
 <p>先使用3dmm推理图片获得shape texture normals，然后进行超分获得高分辨率uv map，使用网络转换为4类漫反射 镜面反射 等贴图，进行光源渲染，然后计算loss</p>
 <p>结果可以很好的使用任意图片进行3d重建，同时生成不同的光源渲染：</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220112144827024.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3D-Human-Digitization"><a href="#3D-Human-Digitization" class="headerlink" title="3D Human Digitization"></a>3D Human Digitization</h3><p><a target="_blank" rel="noopener" href="https://github.com/digital-standard/ThreeDPoseTracker">TDPT</a></p>
+<h4 id="Contact-Human-Dynamics"><a href="#Contact-Human-Dynamics" class="headerlink" title="Contact Human Dynamics"></a>Contact Human Dynamics</h4><p>基于openpose和MTC（Monocular Total Capture），分别提2D和3D pose，使用运动估计，对姿态和脚贴地有更好的支持。</p>
+<p>其中运动学优化使用<a target="_blank" rel="noopener" href="https://github.com/ethz-adrl/towr">Towr</a></p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220119150733562.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="HuMoR"><a href="#HuMoR" class="headerlink" title="HuMoR"></a>HuMoR</h4><p>与contact human dynamics师出同门，第一篇contact human是用towr做运动学优化，第二篇humor提出了CVAE（conditional variational autoencoder）方法，是用编解码器去预测前后帧的运动学参数。</p>
+<p>humor优化分 3 个阶段进行，第 1 和第 2 阶段是使用姿势先验和平滑（即 <a target="_blank" rel="noopener" href="https://github.com/nghorbani/human_body_prior">VPoser-t 基线</a>）进行初始化，第 3 阶段是使用 HuMoR 运动先验进行全面优化。</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220119151139829.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="DeepMotion"><a href="#DeepMotion" class="headerlink" title="DeepMotion"></a>DeepMotion</h4><p>阅读deepmotion的API文档，发现提到<strong>poseEstimation.footLockingMode</strong>，很显然是对脚部锁定增加了额外选项</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/DeepMotion/Animate-3D-REST-API">https://github.com/DeepMotion/Animate-3D-REST-API</a></p>
+<p>参考deepmotion官网，deepmotion的运动学计算主要由motion brain完成，在英特尔宣传片中提到motion brain使用英特尔CPU加速技术进行优化，应该是运动学优化，和GPU无关</p>
+<p><a target="_blank" rel="noopener" href="https://www.deepmotion.com/ai-motion-brain">https://www.deepmotion.com/ai-motion-brain</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3acpP_WfqJY&amp;t=32s">https://www.youtube.com/watch?v=3acpP_WfqJY&amp;t=32s</a></p>
+<p>在deepmotion演示视频中看到pose estimation一样非常抖动</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Edia1conVAY">https://www.youtube.com/watch?v=Edia1conVAY</a></p>
+<p>deepmotion也在做移动端适配工作，提到三步骤：constructs 3D human motion + physically simulates the result + retargets the  motion to a desired character rig</p>
+<p>Optimized for both speed and  footprint on PC and mobile, our industry leading Body Tracking &amp;  Interaction SDK constructs 3D human motion, physically simulates the  result, and retargets the motion to a desired character rig - all at  run-time. Available for Windows, Linux, and mobile platforms.</p>
+<p><a target="_blank" rel="noopener" href="https://www.deepmotion.com/3d-body-tracking">https://www.deepmotion.com/3d-body-tracking</a></p>
+<p>查阅发现UE4本身在17年就出现了foot locking插件</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uqsXmH4KBls">https://www.youtube.com/watch?v=uqsXmH4KBls</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.unrealengine.com/marketplace/en-US/product/advanced-locomotion-system-v1">https://www.unrealengine.com/marketplace/en-US/product/advanced-locomotion-system-v1</a></p>
+<p>使用locomotion做动画的实践</p>
+<p>[<a target="_blank" rel="noopener" href="https://thousun.github.io/2021/07/24/No.%20002%20Advanced%20locomotion%E6%8B%86%E8%A7%A3%E2%80%94P1.ABP/]">https://thousun.github.io/2021/07/24/No.%20002%20Advanced%20locomotion%E6%8B%86%E8%A7%A3%E2%80%94P1.ABP/]</a>(<a target="_blank" rel="noopener" href="https://thousun.github.io/2021/07/24/No">https://thousun.github.io/2021/07/24/No</a>. 002 Advanced locomotion拆解—P1.ABP/)</p>
+<p>查看最新版本的animate 3D更新日志：</p>
+<ul>
+<li><strong>Improved Ground Motions:</strong> Animation quality will see an improvement for ground motions that involve weight on hands, feet and other joints.</li>
+<li><strong>Improved Ground Contact:</strong> General overall improved animation quality for limb ground contact and anti-tilting.</li>
+<li><strong>Improved Tracking of Slower Movements:</strong> Real-time motions that are slower will see improved tracking.</li>
+</ul>
+<p>通过对手 脚 关节重量的调整，优化了接地动作</p>
+<p>提升身体各部分的接地质量</p>
+<p><a target="_blank" rel="noopener" href="https://blog.deepmotion.com/2021/10/22/v34/">https://blog.deepmotion.com/2021/10/22/v34/</a></p>
+<p>猜测deepmotion的离线处理主要由pose estimation + motion brain，motion brain的运动学优化与locomotion类似，需要大量cpu算力，并且无法做到实时</p>
+<p>不排除在这个运动学优化的过程中，deepmotion增加了深度学习替代某些环节</p>
+<p>最新推出的移动端应该进行了优化或者阉割，或者将某些计算步骤上云</p>
+<hr>
+<h4 id="PIFuHD-amp-MonoPort-amp-NeuralBody"><a href="#PIFuHD-amp-MonoPort-amp-NeuralBody" class="headerlink" title="PIFuHD &amp; MonoPort &amp; NeuralBody"></a>PIFuHD &amp; MonoPort &amp; NeuralBody</h4><p>思路很好，但one-shot做人体3D重建，效果太差了。</p>
+<ul>
+<li>之前的pifu最大输入尺寸限制到512<em>512，pifuhd将输入尺寸提高到1024</em>1024</li>
+<li>分为两个level，一个level是1024降采样到512，提取128分辨率的特征；另一个fine level，输入1024，提取512分辨率的特征</li>
+</ul>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220119152835967.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
 
             </div>
             <hr>

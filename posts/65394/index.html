@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211228-OreamnosAmericanus_ZH-CN6731612431_UHD.jpg">
 <meta property="article:published_time" content="2022-01-07T06:28:42.000Z">
-<meta property="article:modified_time" content="2022-02-07T08:27:53.366Z">
+<meta property="article:modified_time" content="2022-02-10T06:53:19.712Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Essays">
 <meta name="twitter:card" content="summary_large_image">
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.3k 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      12 分钟
     </span>
   
 
@@ -262,11 +262,16 @@
 <p>对预训练模型采用finetune和linear probing(最后一层)两种方式，finetune的效果更好，一个反常识的地方是采用高达75%的mask ratio，认为图片信息的冗余很大，增大mask ratio可以强迫ViT学习图像的抽象信息。</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220107150435778.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="3D-Human-Digitization"><a href="#3D-Human-Digitization" class="headerlink" title="3D Human Digitization"></a>3D Human Digitization</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenguowen21/article/details/82793994">SMPL</a></p>
+<h3 id="3D-Human-Digitization"><a href="#3D-Human-Digitization" class="headerlink" title="3D Human Digitization"></a>3D Human Digitization</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenguowen21/article/details/82793994">SMPL</a>   <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f594850b8467">FPN U-NET FCN对比</a></p>
 <h4 id="ROMP"><a href="#ROMP" class="headerlink" title="ROMP"></a>ROMP</h4><p>one shot 单目多人3D mesh回归，三个head同时回归出body center ，camera map和SMPL map,</p>
 <p>提出CAR（Collision-Aware Representation）解决歧义问题，使得人体中心能够分开</p>
 <p>loss包括body center loss和mesh parameter loss，</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220114114706232.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="Mediapipe-Hands"><a href="#Mediapipe-Hands" class="headerlink" title="Mediapipe Hands"></a>Mediapipe Hands</h4><p>分为两个stage，第一个阶段使用palm detector（FPN结构），原因更好检测，并且正方形可以减少anchor数量，数据上除了wild数据还构建了不同光影和背景的仿真数据：</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220210145237180.png" srcset="/img/loading.gif" lazyload alt="image-20220210145237180"></p>
+<p>第二部分是hand landmark model，提供21点x,y,z，以及手部出现概率和左右手分类结果，</p>
+<p>手部出现概率用于重置tracking状态（tracking也是mediapipe提速的利器）</p>
+<hr>
 <h3 id="Physics-based-Human-Motion-Estimation"><a href="#Physics-based-Human-Motion-Estimation" class="headerlink" title="Physics-based Human Motion Estimation"></a>Physics-based Human Motion Estimation</h3><p>通过运动学优化方法构建pose estimation的训练集，来代替实际动捕数据。</p>
 <p>代码未开源，实际效果较好。</p>
 <p><strong>loss：</strong></p>

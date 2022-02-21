@@ -18,22 +18,22 @@
   <meta name="author" content="tyler luan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="因为需要访问GNU Radio，需要翻墙，很自然的想到在Ubuntu16.04里使用VPN。遇到的问题是VPN无法正常启动服务，至今仍未解决,该问题已经解决。">
+    <meta name="description" content="因为需要访问GNU Radio，需要科学学习，很自然的想到在Ubuntu16.04里使用NPV。遇到的问题是NPV无法正常启动服务，至今仍未解决,该问题已经解决。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VPN问题和科学上网地址">
+<meta property="og:title" content="NPV问题和科学学习地址">
 <meta property="og:url" content="http://example.com/posts/40055/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="因为需要访问GNU Radio，需要翻墙，很自然的想到在Ubuntu16.04里使用VPN。遇到的问题是VPN无法正常启动服务，至今仍未解决,该问题已经解决。">
+<meta property="og:description" content="因为需要访问GNU Radio，需要科学学习，很自然的想到在Ubuntu16.04里使用NPV。遇到的问题是NPV无法正常启动服务，至今仍未解决,该问题已经解决。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-07-23T13:20:38.000Z">
-<meta property="article:modified_time" content="2021-05-18T11:56:34.798Z">
+<meta property="article:modified_time" content="2022-02-21T09:07:03.373Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Ubuntu">
 <meta property="article:tag" content="VPN">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>VPN问题和科学上网地址 - ykk648&#39;s hub</title>
+  <title>NPV问题和科学学习地址 - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -179,7 +179,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="VPN问题和科学上网地址">
+            <span class="h2" id="subtitle" title="NPV问题和科学学习地址">
               
             </span>
 
@@ -246,28 +246,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">VPN问题和科学上网地址</h1>
+            <h1 style="display: none">NPV问题和科学学习地址</h1>
             
             <div class="markdown-body">
-              <p>因为需要访问<code>GNU Radio</code>，需要翻墙，很自然的想到在Ubuntu16.04里使用VPN。<br>遇到的问题是VPN无法正常启动服务，<del>至今仍未解决</del>,<strong>该问题已经解决</strong>。</p>
+              <p>因为需要访问<code>GNU Radio</code>，需要科学学习，很自然的想到在Ubuntu16.04里使用NPV。<br>遇到的问题是NPV无法正常启动服务，<del>至今仍未解决</del>,<strong>该问题已经解决</strong>。</p>
 <span id="more"></span>
 
 <hr>
 <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><blockquote>
-<p>问题主要是在Ubuntu16.04系统中使用VPN无法启动服务，syslog如下：</p>
+<p>问题主要是在Ubuntu16.04系统中使用NPV无法启动服务，syslog如下：</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: &lt;error&gt; [1469281506.9518] platform-linux: do-change-link[9]: failure changing link: failure 19 (没有那个设备)<br>Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: &lt;warn&gt;  [1469281506.9518] device (ppp0): failed to <span class="hljs-built_in">disable</span> userspace IPv6LL address handling<br>Jul 23 21:45:06 tyler-QTJ5 gnome-session[3306]: Gjs-Message: JS LOG: Removing a network device that was not added<br>Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: &lt;info&gt;  [1469281506.9549] devices removed (path: /sys/devices/virtual/net/ppp0, iface: ppp0)<br>Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: ** Message: nm-pptp-ppp-plugin: (nm_phasechange): status 1 / phase <span class="hljs-string">&#x27;dead&#x27;</span><br>Jul 23 21:45:06 tyler-QTJ5 NetworkManager[2597]: ** Message: nm-pptp-ppp-plugin: (nm_exit_notify): cleaning up<br>Jul 23 21:45:06 tyler-QTJ5 pptp[5371]: nm-pptp-service-5359 warn[decaps_hdlc:pptp_gre.c:220]: short <span class="hljs-built_in">read</span> (-1): Input/output error<br>Jul 23 21:45:06 tyler-QTJ5 pptp[5371]: nm-pptp-service-5359 warn[decaps_hdlc:pptp_gre.c:232]: pppd may have shutdown, see pppd <span class="hljs-built_in">log</span><br>Jul 23 21:45:06 tyler-QTJ5 pptp[5386]: nm-pptp-service-5359 <span class="hljs-built_in">log</span>[callmgr_main:pptp_callmgr.c:245]: Closing connection (unhandled)<br>Jul 23 21:45:06 tyler-QTJ5 pptp[5386]: nm-pptp-service-5359 <span class="hljs-built_in">log</span>[ctrlp_rep:pptp_ctrl.c:259]: Sent control packet <span class="hljs-built_in">type</span> is 12 <span class="hljs-string">&#x27;Call-Clear-Request&#x27;</span><br>Jul 23 21:45:06 tyler-QTJ5 pppd[5366]: Exit.<br>Jul 23 21:45:06 tyler-QTJ5 pptp[5386]: nm-pptp-service-5359 <span class="hljs-built_in">log</span>[call_callback:pptp_callmgr.c:84]: Closing connection (call state)<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>和自己的网络状况以及VPN的设置有关</p>
+<p>和自己的网络状况以及NPV的设置有关</p>
 </blockquote>
 <hr>
-<h3 id="VPN选择"><a href="#VPN选择" class="headerlink" title="VPN选择"></a>VPN选择</h3><ol>
-<li><strong>Lantern</strong>: <a target="_blank" rel="noopener" href="https://github.com/getlantern/forum/issues/833">https://github.com/getlantern/forum/issues/833</a>  <strong>每月800M免费流量，WIN10旧版本无限流量</strong></li>
-<li><strong>天行VPN</strong></li>
+<h3 id="NPV选择"><a href="#NPV选择" class="headerlink" title="NPV选择"></a>NPV选择</h3><ol>
+<li><strong>lantteerrnn</strong>: <a target="_blank" rel="noopener" href="https://github.com/getlantern/forum/issues/833">https://github.com/getlantern/forum/issues/833</a>  <strong>每月800M免费流量，WIN10旧版本无限流量</strong></li>
+<li><strong>天行NPV</strong></li>
 </ol>
 <hr>
-<h3 id="科学上网-google镜像"><a href="#科学上网-google镜像" class="headerlink" title="科学上网-google镜像"></a>科学上网-google镜像</h3><ol>
+<h3 id="科学学习-google镜像"><a href="#科学学习-google镜像" class="headerlink" title="科学学习-google镜像"></a>科学学习-google镜像</h3><ol>
 <li><strong>快搜</strong>: <a target="_blank" rel="noopener" href="http://so.chongbuluo.com/">http://so.chongbuluo.com/</a>   // 比较推荐</li>
 <li><strong>谷歌镜像大全</strong>: <a target="_blank" rel="noopener" href="http://google.adwiki.cn/">http://google.adwiki.cn/</a> </li>
 </ol>

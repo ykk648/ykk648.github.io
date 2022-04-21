@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg">
 <meta property="article:published_time" content="2021-12-13T07:10:08.000Z">
-<meta property="article:modified_time" content="2022-03-02T08:22:08.228Z">
+<meta property="article:modified_time" content="2022-04-19T09:32:46.672Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Ubuntu">
 <meta property="article:tag" content="Linux">
@@ -202,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      4.4k 字
     </span>
   
 
@@ -211,7 +211,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26 分钟
+      37 分钟
     </span>
   
 
@@ -255,6 +255,18 @@
 <span id="more"></span>
 
 <h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><h4 id="查找父进程并杀死"><a href="#查找父进程并杀死" class="headerlink" title="查找父进程并杀死"></a>查找父进程并杀死</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">htop # 查看PID<br>cat /proc/$PID/status | grep PPid # 父进程ID<br>kill -9 $PPid<br></code></pre></td></tr></table></figure>
+
+<h4 id="系统监测"><a href="#系统监测" class="headerlink" title="系统监测"></a>系统监测</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 磁盘</span><br>sudo iotop -oP<br><span class="hljs-meta">#</span><span class="bash"> 内存</span><br>htop<br><span class="hljs-meta">#</span><span class="bash"> GPU</span><br>nvidia-smi<br></code></pre></td></tr></table></figure>
+
+<h4 id="多卡"><a href="#多卡" class="headerlink" title="多卡"></a>多卡</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs py">os.environ[<span class="hljs-string">&quot;CUDA_VISIBLE_DEVICES&quot;</span>] = <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-comment"># python</span><br>export CUDA_VISIBLE_DEVICES=<span class="hljs-number">0</span> <span class="hljs-comment"># sh</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="timezone"><a href="#timezone" class="headerlink" title="timezone"></a>timezone</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">tzselect<br>sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime<br>sudo hwclock --systohc<br>date<br></code></pre></td></tr></table></figure>
+
+<h4 id="无法与-nvidia-driver-通信"><a href="#无法与-nvidia-driver-通信" class="headerlink" title="无法与 nvidia driver 通信"></a>无法与 nvidia driver 通信</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 适用内核更新导致，or reinstall cuda dirver</span><br>ls /usr/src | grep nvidia<br>sudo apt install dkms<br>sudo dkms install -m nvidia -v ***.**.**<br></code></pre></td></tr></table></figure>
+
+<h4 id="解压乱码"><a href="#解压乱码" class="headerlink" title="解压乱码"></a>解压乱码</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">unzip -O CP936 filename.zip<br></code></pre></td></tr></table></figure>
+
+
 
 
 
@@ -318,6 +330,23 @@
 <h4 id="pathlib"><a href="#pathlib" class="headerlink" title="pathlib"></a>pathlib</h4><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/pathlib.png" srcset="/img/loading.gif" lazyload style="max-width:50%;" />
 
 <h4 id="git"><a href="#git" class="headerlink" title="git"></a>git</h4><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/git_command.jpeg" srcset="/img/loading.gif" lazyload style="max-width:50%;" />
+
+<hr>
+<h3 id="装机"><a href="#装机" class="headerlink" title="装机"></a>装机</h3><h4 id="bootable-device"><a href="#bootable-device" class="headerlink" title="bootable device"></a>bootable device</h4><p><a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/index.html">ventoy</a>  <a target="_blank" rel="noopener" href="https://github.com/pbatard/rufus">refus</a></p>
+<h4 id="ubuntu20-04"><a href="#ubuntu20-04" class="headerlink" title="ubuntu20.04"></a>ubuntu20.04</h4><p><strong>firefox</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.firefox.com.cn/">firefox cn</a> install to /opt/</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo vi /usr/share/applications/firefox.desktop<br><br>[Desktop Entry]<br>Name=firefox<br>Name[zh_CN]=firefox<br>Comment=firefox<br>Exec=/opt/firefox/firefox<br>Icon=/opt/firefox/browser/chrome/icons/default/default128.png<br>Terminal=<span class="hljs-literal">false</span><br>Type=Application<br>Categories=Application;<br>Encoding=UTF-8<br>StartupNotify=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>apt source</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bcakup<br>sudo gedit /etc/apt/sources.list<br></code></pre></td></tr></table></figure>
+
+<p>ref <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">tsinghua mirror</a></p>
+<p><strong>sogou pinyin</strong></p>
+<p>ref <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux/help.php">sogou pinyin</a></p>
+<p><strong>bashrc</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># .bash_alias</span><br><span class="hljs-built_in">alias</span> nn=<span class="hljs-string">&#x27;watch -n 1 -d nvidia-smi&#x27;</span><br><span class="hljs-built_in">alias</span> sb=<span class="hljs-string">&#x27;source ~/.bashrc&#x27;</span><br><span class="hljs-built_in">alias</span> cod=<span class="hljs-string">&#x27;conda deactivate&#x27;</span><br><span class="hljs-built_in">alias</span> coa=<span class="hljs-string">&#x27;conda activate&#x27;</span><br><span class="hljs-built_in">alias</span> pc4=<span class="hljs-string">&#x27;proxychains4 -q&#x27;</span><br><span class="hljs-built_in">alias</span> pyserver=<span class="hljs-string">&#x27;python -m http.server 8888&#x27;</span><br><span class="hljs-comment"># alias 84=&#x27;sshpass -p password ssh user@ip&#x27;</span><br><span class="hljs-built_in">alias</span> tar=<span class="hljs-string">&#x27;tar -zxvf&#x27;</span><br><span class="hljs-built_in">alias</span> tarz=<span class="hljs-string">&#x27;tar -zcvf&#x27;</span><br><span class="hljs-built_in">alias</span> hexoss=<span class="hljs-string">&#x27;hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
 
 
             </div>

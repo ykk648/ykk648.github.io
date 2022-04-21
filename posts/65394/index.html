@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211228-OreamnosAmericanus_ZH-CN6731612431_UHD.jpg">
 <meta property="article:published_time" content="2022-01-07T06:28:42.000Z">
-<meta property="article:modified_time" content="2022-03-14T09:55:00.703Z">
+<meta property="article:modified_time" content="2022-03-23T01:11:14.951Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Essays">
 <meta name="twitter:card" content="summary_large_image">
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      1.9k 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16 分钟
+      17 分钟
     </span>
   
 
@@ -285,6 +285,11 @@
 <p>用到的数据集包括  手语数据集<a target="_blank" rel="noopener" href="https://www.phonetik.uni-muenchen.de/forschung/Bas/SIGNUM/">SIGNUM</a> 运动图片 <a target="_blank" rel="noopener" href="http://sam.johnson.io/research/lsp.html">Leeds Sport Dataset </a>  <a target="_blank" rel="noopener" href="https://github.com/zhjwustc/icip17_stereo_hand_pose_dataset">STB已失效</a></p>
 <h4 id="imGHUM"><a href="#imGHUM" class="headerlink" title="imGHUM"></a>imGHUM</h4><p>google实现的，第一个同时回归全身pose和shape的模型，模型可以学术申请</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220228164644345.png" srcset="/img/loading.gif" lazyload alt="image-20220228164644345"></p>
+<h4 id="S2HAND"><a href="#S2HAND" class="headerlink" title="S2HAND"></a>S2HAND</h4><p>利用mano模型回归3d信息，然后3d映射2d，利用标注的2d joints进行监督训练。</p>
+<p>同时额外训练一个2d joints回归分支，辅助监督；一个render图片loss辅助监督</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220318102612323.png" srcset="/img/loading.gif" lazyload alt="image-20220318102612323"></p>
+<h4 id="HMR"><a href="#HMR" class="headerlink" title="HMR"></a>HMR</h4><p>CNN+SMPL，使用2D进行监督，辅助一个Discriminator分支</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/image-20220322113548990.png" srcset="/img/loading.gif" lazyload alt="image-20220322113548990"></p>
 <hr>
 <h3 id="Physics-based-Human-Motion-Estimation"><a href="#Physics-based-Human-Motion-Estimation" class="headerlink" title="Physics-based Human Motion Estimation"></a>Physics-based Human Motion Estimation</h3><p>通过运动学优化方法构建pose estimation的训练集，来代替实际动捕数据。</p>
 <p>代码未开源，实际效果较好。</p>

@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg">
 <meta property="article:published_time" content="2021-12-13T07:10:08.000Z">
-<meta property="article:modified_time" content="2022-04-19T09:32:46.672Z">
+<meta property="article:modified_time" content="2022-06-10T07:04:44.407Z">
 <meta property="article:author" content="tyler luan">
 <meta property="article:tag" content="Ubuntu">
 <meta property="article:tag" content="Linux">
@@ -202,7 +202,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.4k 字
+      4.9k 字
     </span>
   
 
@@ -211,7 +211,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      37 分钟
+      41 分钟
     </span>
   
 
@@ -254,7 +254,7 @@
               <p>所有wiki整合，便于查找。</p>
 <span id="more"></span>
 
-<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><h4 id="查找父进程并杀死"><a href="#查找父进程并杀死" class="headerlink" title="查找父进程并杀死"></a>查找父进程并杀死</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">htop # 查看PID<br>cat /proc/$PID/status | grep PPid # 父进程ID<br>kill -9 $PPid<br></code></pre></td></tr></table></figure>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><h4 id="进程杀死"><a href="#进程杀死" class="headerlink" title="进程杀死"></a>进程杀死</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">htop # 查看PID<br>cat /proc/$PID/status | grep PPid # 父进程ID<br>kill -9 $PPid<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 批量杀死进程</span><br>ps -elf |grep open-mmlab |awk &#x27;&#123;print $4&#125;&#x27;|xargs kill -9<br></code></pre></td></tr></table></figure>
 
 <h4 id="系统监测"><a href="#系统监测" class="headerlink" title="系统监测"></a>系统监测</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 磁盘</span><br>sudo iotop -oP<br><span class="hljs-meta">#</span><span class="bash"> 内存</span><br>htop<br><span class="hljs-meta">#</span><span class="bash"> GPU</span><br>nvidia-smi<br></code></pre></td></tr></table></figure>
 
@@ -266,7 +266,7 @@
 
 <h4 id="解压乱码"><a href="#解压乱码" class="headerlink" title="解压乱码"></a>解压乱码</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">unzip -O CP936 filename.zip<br></code></pre></td></tr></table></figure>
 
-
+<h4 id="项目打包上传"><a href="#项目打包上传" class="headerlink" title="项目打包上传"></a>项目打包上传</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">python setup.py sdist build<br>twine upload dist/*<br></code></pre></td></tr></table></figure>
 
 
 
@@ -296,6 +296,7 @@
 
 <h3 id="Envs"><a href="#Envs" class="headerlink" title="Envs"></a>Envs</h3><h4 id="pip-source"><a href="#pip-source" class="headerlink" title="pip source"></a>pip source</h4><p><code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></p>
 <ul>
+<li>pypi官方[ <a target="_blank" rel="noopener" href="https://pypi.org/simple]">https://pypi.org/simple]</a></li>
 <li>阿里云 [<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/pypi/simple/]">https://mirrors.aliyun.com/pypi/simple/]</a></li>
 <li>中国科技大学 [<a target="_blank" rel="noopener" href="https://pypi.mirrors.ustc.edu.cn/simple/]">https://pypi.mirrors.ustc.edu.cn/simple/]</a></li>
 <li>豆瓣(douban) [<a target="_blank" rel="noopener" href="https://pypi.douban.com/simple/]">https://pypi.douban.com/simple/]</a></li>
@@ -305,7 +306,7 @@
 <h4 id="conda-source"><a href="#conda-source" class="headerlink" title="conda source"></a>conda source</h4><ul>
 <li><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华源</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/help/anaconda/">北外源</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/help/anaconda/">北外源</a>    - recommand</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/help/anaconda.html">中科大源（conda停止服务）</a></p>
 </li>
@@ -329,8 +330,7 @@
 
 <h4 id="pathlib"><a href="#pathlib" class="headerlink" title="pathlib"></a>pathlib</h4><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/pathlib.png" srcset="/img/loading.gif" lazyload style="max-width:50%;" />
 
-<h4 id="git"><a href="#git" class="headerlink" title="git"></a>git</h4><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/git_command.jpeg" srcset="/img/loading.gif" lazyload style="max-width:50%;" />
-
+<h4 id="git"><a href="#git" class="headerlink" title="git"></a>git</h4><p>move to xmind</p>
 <hr>
 <h3 id="装机"><a href="#装机" class="headerlink" title="装机"></a>装机</h3><h4 id="bootable-device"><a href="#bootable-device" class="headerlink" title="bootable device"></a>bootable device</h4><p><a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/index.html">ventoy</a>  <a target="_blank" rel="noopener" href="https://github.com/pbatard/rufus">refus</a></p>
 <h4 id="ubuntu20-04"><a href="#ubuntu20-04" class="headerlink" title="ubuntu20.04"></a>ubuntu20.04</h4><p><strong>firefox</strong></p>
@@ -345,6 +345,9 @@
 <p>ref <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux/help.php">sogou pinyin</a></p>
 <p><strong>bashrc</strong></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># .bash_alias</span><br><span class="hljs-built_in">alias</span> nn=<span class="hljs-string">&#x27;watch -n 1 -d nvidia-smi&#x27;</span><br><span class="hljs-built_in">alias</span> sb=<span class="hljs-string">&#x27;source ~/.bashrc&#x27;</span><br><span class="hljs-built_in">alias</span> cod=<span class="hljs-string">&#x27;conda deactivate&#x27;</span><br><span class="hljs-built_in">alias</span> coa=<span class="hljs-string">&#x27;conda activate&#x27;</span><br><span class="hljs-built_in">alias</span> pc4=<span class="hljs-string">&#x27;proxychains4 -q&#x27;</span><br><span class="hljs-built_in">alias</span> pyserver=<span class="hljs-string">&#x27;python -m http.server 8888&#x27;</span><br><span class="hljs-comment"># alias 84=&#x27;sshpass -p password ssh user@ip&#x27;</span><br><span class="hljs-built_in">alias</span> tar=<span class="hljs-string">&#x27;tar -zxvf&#x27;</span><br><span class="hljs-built_in">alias</span> tarz=<span class="hljs-string">&#x27;tar -zcvf&#x27;</span><br><span class="hljs-built_in">alias</span> hexoss=<span class="hljs-string">&#x27;hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="eyeblue-网盘"><a href="#eyeblue-网盘" class="headerlink" title="eyeblue 网盘"></a>eyeblue 网盘</h4><p><a target="_blank" rel="noopener" href="https://tank-doc.eyeblue.cn/basic/install.html#docker">link</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run --name dockermysql -p 13306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=tank -e TZ=Asia/Shanghai -d mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time_zone=+8:00<br>docker run --name tank -p 6010:6010 --link dockermysql:mysql -v ~/data/dockermatter:/data/build/matter -d eyeblue/tank:3.1.6<br></code></pre></td></tr></table></figure>
 
 
 

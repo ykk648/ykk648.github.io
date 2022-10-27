@@ -15,7 +15,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="tyler luan">
+  <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
     <meta name="description" content="所有wiki整合，便于查找。">
@@ -27,12 +27,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg">
 <meta property="article:published_time" content="2021-12-13T07:10:08.000Z">
-<meta property="article:modified_time" content="2022-06-10T07:04:44.407Z">
-<meta property="article:author" content="tyler luan">
+<meta property="article:modified_time" content="2022-10-27T03:13:38.539Z">
+<meta property="article:author" content="ykk648">
 <meta property="article:tag" content="Ubuntu">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>My wiki - ykk648&#39;s hub</title>
@@ -40,25 +43,19 @@
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
-    
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
 
 
 
@@ -67,21 +64,40 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.13","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>ykk648&#39;s hub</strong>
@@ -163,6 +179,7 @@
               &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
@@ -175,65 +192,79 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="My wiki">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-13 15:10" pubdate>
-        2021年12月13日 下午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      4.9k 字
-    </span>
   
 
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      41 分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20211209-FoxDovrefjell_ZH-CN9554491452_UHD.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="My wiki"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-12-13 15:10" pubdate>
+          2021年12月13日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          7.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          61 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -242,59 +273,41 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">My wiki</h1>
             
             <div class="markdown-body">
+              
               <p>所有wiki整合，便于查找。</p>
 <span id="more"></span>
 
-<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><h4 id="进程杀死"><a href="#进程杀死" class="headerlink" title="进程杀死"></a>进程杀死</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">htop # 查看PID<br>cat /proc/$PID/status | grep PPid # 父进程ID<br>kill -9 $PPid<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 批量杀死进程</span><br>ps -elf |grep open-mmlab |awk &#x27;&#123;print $4&#125;&#x27;|xargs kill -9<br></code></pre></td></tr></table></figure>
-
-<h4 id="系统监测"><a href="#系统监测" class="headerlink" title="系统监测"></a>系统监测</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 磁盘</span><br>sudo iotop -oP<br><span class="hljs-meta">#</span><span class="bash"> 内存</span><br>htop<br><span class="hljs-meta">#</span><span class="bash"> GPU</span><br>nvidia-smi<br></code></pre></td></tr></table></figure>
-
-<h4 id="多卡"><a href="#多卡" class="headerlink" title="多卡"></a>多卡</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs py">os.environ[<span class="hljs-string">&quot;CUDA_VISIBLE_DEVICES&quot;</span>] = <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-comment"># python</span><br>export CUDA_VISIBLE_DEVICES=<span class="hljs-number">0</span> <span class="hljs-comment"># sh</span><br></code></pre></td></tr></table></figure>
-
-<h4 id="timezone"><a href="#timezone" class="headerlink" title="timezone"></a>timezone</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">tzselect<br>sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime<br>sudo hwclock --systohc<br>date<br></code></pre></td></tr></table></figure>
-
-<h4 id="无法与-nvidia-driver-通信"><a href="#无法与-nvidia-driver-通信" class="headerlink" title="无法与 nvidia driver 通信"></a>无法与 nvidia driver 通信</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 适用内核更新导致，or reinstall cuda dirver</span><br>ls /usr/src | grep nvidia<br>sudo apt install dkms<br>sudo dkms install -m nvidia -v ***.**.**<br></code></pre></td></tr></table></figure>
-
-<h4 id="解压乱码"><a href="#解压乱码" class="headerlink" title="解压乱码"></a>解压乱码</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">unzip -O CP936 filename.zip<br></code></pre></td></tr></table></figure>
-
-<h4 id="项目打包上传"><a href="#项目打包上传" class="headerlink" title="项目打包上传"></a>项目打包上传</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">python setup.py sdist build<br>twine upload dist/*<br></code></pre></td></tr></table></figure>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><h4 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h4><p>bootable device： <a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/index.html">ventoy</a>  <a target="_blank" rel="noopener" href="https://github.com/pbatard/rufus">refus</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.cfw.lbyczf.com/">clash for windows</a>    <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux/help.php">sogou pinyin</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># apt source</span><br>sudo cp /etc/apt/sources.list /etc/apt/sources.list.bcakup<br>sudo gedit /etc/apt/sources.list<br><br><span class="hljs-comment"># wechat  https://github.com/zq1997/deepin-wine</span><br>wget -O- https://deepin-wine.i-m.dev/setup.sh | sh<br>sudo apt-get install com.qq.weixin.deepin<br>sudo apt install libjpeg62:i386<br><br><span class="hljs-comment"># dingding https://alidocs.dingtalk.com/i/p/nb9XJlJ7QbxN8GyA/docs/ROGpvEna5YQWmaPgQ156W4ykmK3zoB27</span><br>wget https://dtapp-pub.dingtalk.com/dingtalk-desktop/xc_dingtalk_update/linux_deb/Release/com.alibabainc.dingtalk_1.4.0.20425_amd64.deb<br>sudo dpkg -i com.alibabainc.dingtalk_1.4.0.20425_amd64.deb<br><br><span class="hljs-comment"># proxychains4</span><br>sudo apt install proxychains4<br>sudo vim /etc/proxychains4.conf<br><span class="hljs-comment"># socks5 127.0.0.1 1081</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;alias pc4=&#x27;proxychains4 -q&#x27;&quot;</span> &gt;&gt; ~/.bash_aliases<br><span class="hljs-built_in">source</span> ~/.bash_aliases<br>pc4 ...<br><br><span class="hljs-comment"># eyeblue网盘 https://tank-doc.eyeblue.cn/basic/install.html</span><br>docker run --name dockermysql -p 13306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=tank -e TZ=Asia/Shanghai -d mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time_zone=+8:00<br>docker run --name tank -p 6010:6010 --link dockermysql:mysql -v ~/data/dockermatter:/data/build/matter -d eyeblue/tank:3.1.6<br>sudo docker start dockermysql<br>sudo docker start tank<br><br><span class="hljs-comment"># firefox https://www.firefox.com.cn/</span><br>sudo vi /usr/share/applications/firefox.desktop<br><br>[Desktop Entry]<br>Name=firefox<br>Name[zh_CN]=firefox<br>Comment=firefox<br>Exec=/opt/firefox/firefox<br>Icon=/opt/firefox/browser/chrome/icons/default/default128.png<br>Terminal=<span class="hljs-literal">false</span><br>Type=Application<br>Categories=Application;<br>Encoding=UTF-8<br>StartupNotify=<span class="hljs-literal">true</span><br><br><br></code></pre></td></tr></table></figure>
 
 
 
-<h3 id="Support"><a href="#Support" class="headerlink" title="Support"></a>Support</h3><h4 id="云服务器租用"><a href="#云服务器租用" class="headerlink" title="云服务器租用"></a>云服务器租用</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a target="_blank" rel="noopener" href="https://matpool.com/host-market">矩池云</a></td>
-<td><a target="_blank" rel="noopener" href="https://vast.ai/console/create/">vast.ai</a></td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://www.jikecloud.net/docs/inst-diffs-turtorial.html">极客云</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="http://gpu.ai-galaxy.cn/store">智星云</a></td>
-<td></td>
-</tr>
-</tbody></table>
-<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><h4 id="proxychains4"><a href="#proxychains4" class="headerlink" title="proxychains4"></a>proxychains4</h4><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">sudo apt install proxychains4<br>sudo vim <span class="hljs-string">/etc/proxychains4.conf</span><br><span class="hljs-comment"># socks5 127.0.0.1 1081</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;alias pc4=&#x27;proxychains4 -q&#x27;&quot;</span> &gt;&gt; ~<span class="hljs-string">/.bash_aliases</span><br>source ~<span class="hljs-string">/.bash_aliases</span><br>pc4 <span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
+<h4 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">htop # 查看PID<br>cat /proc/$PID/status | grep PPid # 父进程ID<br>kill -9 $PPid<br><span class="hljs-meta">#</span><span class="bash"> 批量杀死进程</span><br>ps -elf |grep open-mmlab |awk &#x27;&#123;print $4&#125;&#x27;|xargs kill -9<br><span class="hljs-meta">#</span><span class="bash"> 磁盘</span><br>sudo iotop -oP<br><span class="hljs-meta">#</span><span class="bash"> 内存</span><br>htop<br><span class="hljs-meta">#</span><span class="bash"> GPU</span><br>nvidia-smi<br><span class="hljs-meta">#</span><span class="bash"> timezone</span><br>tzselect<br>sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime<br>sudo hwclock --systohc<br>date<br></code></pre></td></tr></table></figure>
 
+<h4 id="Nvidia显卡相关"><a href="#Nvidia显卡相关" class="headerlink" title="Nvidia显卡相关"></a>Nvidia显卡相关</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 指定显卡</span><br>os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] = &#x27;0&#x27; # python<br>export CUDA_VISIBLE_DEVICES=0 # sh<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 适用内核更新导致，or reinstall cuda dirver</span><br>ls /usr/src | grep nvidia<br>sudo apt install dkms<br>sudo dkms install -m nvidia -v ***.**.**<br></code></pre></td></tr></table></figure>
 
+<h4 id="小问题合集"><a href="#小问题合集" class="headerlink" title="小问题合集"></a>小问题合集</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># unzip乱码</span><br>unzip -O CP936 filename.zip<br><br><span class="hljs-comment"># 项目打包上传</span><br>python setup.py sdist build<br>twine upload dist/*<br><br><span class="hljs-comment"># #### 百度云网盘劫持html文件打开方式</span><br>gedit ~/.config/mimeapps.list<br><br>text/html=baidunetdisk.desktop<br>text/html=firefox.desktop;org.gnome.gedit.desktop;userapp-Firefox-MEQ910.desktop;<br><br><span class="hljs-comment">#### linux下matplotlib显示中文</span><br>下载字体 [SimHei.ttf](https://www.fontpalace.com/font-download/SimHei/), 移动到 `/site-packages/matplotlib/mpl-data/fonts/ttf`<br>mv SimHei.ttf ../site-packages/matplotlib/mpl-data/fonts/ttf<br><span class="hljs-comment"># 删除缓存</span><br>rm -rf /home/tyler/.cache/matplotlib<br>gedit ../site-packages/matplotlib/mpl-data/matplotlibrc<br><br><span class="hljs-comment"># 修改为：</span><br>font.family         : sans-serif   <br><span class="hljs-comment"># 去掉前面的#     </span><br>font.sans-serif     : SimHei, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif  <br><span class="hljs-comment"># 去掉前面的#，并在冒号后面添加SimHei</span><br>axes.unicode_minus  : False<br><span class="hljs-comment"># 去掉前面的#，并将True改为False</span><br><br><span class="hljs-comment"># 去除设置字体的代码</span><br><br><span class="hljs-comment"># 自用bashrc</span><br><span class="hljs-comment"># .bash_alias</span><br><span class="hljs-built_in">alias</span> nn=<span class="hljs-string">&#x27;watch -n 1 -d nvidia-smi&#x27;</span><br><span class="hljs-built_in">alias</span> sb=<span class="hljs-string">&#x27;source ~/.bashrc&#x27;</span><br><span class="hljs-built_in">alias</span> cod=<span class="hljs-string">&#x27;conda deactivate&#x27;</span><br><span class="hljs-built_in">alias</span> coa=<span class="hljs-string">&#x27;conda activate&#x27;</span><br><span class="hljs-built_in">alias</span> pc4=<span class="hljs-string">&#x27;proxychains4 -q&#x27;</span><br><span class="hljs-built_in">alias</span> pyserver=<span class="hljs-string">&#x27;python -m http.server 8888&#x27;</span><br><span class="hljs-comment"># alias 84=&#x27;sshpass -p password ssh user@ip&#x27;</span><br><span class="hljs-built_in">alias</span> tar=<span class="hljs-string">&#x27;tar -zxvf&#x27;</span><br><span class="hljs-built_in">alias</span> tarz=<span class="hljs-string">&#x27;tar -zcvf&#x27;</span><br><span class="hljs-built_in">alias</span> hexoss=<span class="hljs-string">&#x27;hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#x27;</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="Envs"><a href="#Envs" class="headerlink" title="Envs"></a>Envs</h3><h4 id="pip-source"><a href="#pip-source" class="headerlink" title="pip source"></a>pip source</h4><p><code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></p>
+<hr>
+<h3 id="Envs"><a href="#Envs" class="headerlink" title="Envs"></a>Envs</h3><p><strong>apt source</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bcakup<br>sudo gedit /etc/apt/sources.list<br></code></pre></td></tr></table></figure>
+
+<p>ref <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">tsinghua mirror</a></p>
+<h4 id="pip-source"><a href="#pip-source" class="headerlink" title="pip source"></a>pip source</h4><p><code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></p>
 <ul>
 <li>pypi官方[ <a target="_blank" rel="noopener" href="https://pypi.org/simple]">https://pypi.org/simple]</a></li>
 <li>阿里云 [<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/pypi/simple/]">https://mirrors.aliyun.com/pypi/simple/]</a></li>
@@ -317,9 +330,12 @@
 <p>其中<code>FAST_MATH</code>两个都是加速选项， 会一定程度影响精度</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs shell">除了文档中的以外：<br>pip install opencv-python<br><br><br>coa base_py38_torch18_tf2<br><br>cmake \<br>      -D CMAKE_BUILD_TYPE=RELEASE \<br>      -D CMAKE_INSTALL_PREFIX=/usr/local \<br>      -D INSTALL_PYTHON_EXAMPLES=OFF \<br>      -D INSTALL_C_EXAMPLES=OFF \<br>      -D OPENCV_ENABLE_NONFREE=ON \<br>      -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-4.5.4/modules \<br>      -D BUILD_OPENCV_PYTHON2=OFF \<br>      -D ENABLE_FAST_MATH=ON \<br>      -D CUDA_FAST_MATH=ON \<br>      -D BUILD_OPENCV_PYTHON3=ON \<br>      -D PYTHON_DEFAULT_EXECUTABLE=$(python -c &quot;import sys; print(sys.executable)&quot;) \<br>      -D PYTHON3_EXECUTABLE=$(which python3) \<br>      -D PYTHON_INCLUDE_DIR=$(python3 -c &quot;from distutils.sysconfig import get_python_inc; print(get_python_inc())&quot;) \<br>      -D PYTHON_INCLUDE_DIR2=$(python3 -c &quot;from os.path import dirname; from distutils.sysconfig import get_config_h_filename; print(dirname(get_config_h_filename()))&quot;) \<br>      -D PYTHON_LIBRARY=$(python3 -c &quot;from distutils.sysconfig import get_config_var;from os.path import dirname,join ; print(join(dirname(get_config_var(&#x27;LIBPC&#x27;)),get_config_var(&#x27;LDLIBRARY&#x27;)))&quot;) \<br>      -D PYTHON3_NUMPY_INCLUDE_DIRS=$(python3 -c &quot;import numpy; print(numpy.get_include())&quot;) \<br>      -D PYTHON3_PACKAGES_PATH=$(python3 -c &quot;from distutils.sysconfig import get_python_lib; print(get_python_lib())&quot;) \<br>      -D BUILD_EXAMPLES=OFF \<br>      -D WITH_CUDA=ON \<br>      -D WITH_CUDNN=ON \<br>      -D OPENCV_DNN_CUDA=ON \<br>      -D WITH_CUBLAS=ON \<br>      -D CUDNN_VERSION=8.2 \<br>      -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-11.1 \<br>      -D OpenCL_LIBRARY=/usr/local/cuda-11.1/lib64/libOpenCL.so \<br>      -D OpenCL_INCLUDE_DIR=/usr/local/cuda-11.1/include/ \<br>      ..<br><br>make -j20<br>sudo make install<br>sudo ldconfig<br><br>cd /opt/anaconda3/envs/base_py38_torch18_tf2/lib/python3.8/site-packages/<br>ln -sf /usr/local/lib/python3.8/dist-packages/cv2/cv2.cpython-38-x86_64-linux-gnu.so cv2.so<br></code></pre></td></tr></table></figure>
 
-<h4 id="conda-base-env"><a href="#conda-base-env" class="headerlink" title="conda base env"></a>conda base env</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># updata 22.02.17</span><br>conda create -n base_py39x_torch1x2 python==3.9.10<br>pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html<br>pip3 install cv2box<br><br><span class="hljs-comment"># using</span><br>conda create --<span class="hljs-built_in">clone</span> base_py39x_torch1x2 --name poseviz<br></code></pre></td></tr></table></figure>
+<h4 id="conda-base-env"><a href="#conda-base-env" class="headerlink" title="conda base env"></a>conda base env</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># updata 22.02.17</span><br>conda create -n base_py39x_torch1x2 python==3.9.10<br>pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html<br>pip3 install cv2box<br><br><span class="hljs-comment"># using</span><br>conda create --<span class="hljs-built_in">clone</span> base_py39x_torch1x2 --name poseviz<br><br><span class="hljs-comment"># 还原conda base环境</span><br>conda list --revisions<br>conda install --rev 0<br><br><span class="hljs-comment"># conda bash</span><br><span class="hljs-built_in">source</span> /opt/anaconda3/etc/profile.d/conda.sh<br>conda activate full<br></code></pre></td></tr></table></figure>
 
-<h4 id="cuda"><a href="#cuda" class="headerlink" title="cuda"></a>cuda</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo chmod +x ./cuda..<br>sudo ./cuda..<br>sudo rm /usr/<span class="hljs-built_in">local</span>/cuda<br>sudo ln -s /usr/<span class="hljs-built_in">local</span>/cuda.. /usr/<span class="hljs-built_in">local</span>/cuda<br><br>tar -xzvf cudnn..<br>sudo cp cuda/include/cudnn.h /usr/<span class="hljs-built_in">local</span>/cuda/include<br>sudo cp cuda/lib64/libcudnn* /usr/<span class="hljs-built_in">local</span>/cuda/lib64<br>sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.h /usr/<span class="hljs-built_in">local</span>/cuda/lib64/libcudnn*<br></code></pre></td></tr></table></figure>
+<h4 id="cuda-cudnn安装"><a href="#cuda-cudnn安装" class="headerlink" title="cuda cudnn安装"></a>cuda cudnn安装</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># cuda</span><br>sudo chmod +x ./cuda..<br>sudo ./cuda..<br>sudo rm /usr/<span class="hljs-built_in">local</span>/cuda<br>sudo ln -s /usr/<span class="hljs-built_in">local</span>/cuda.. /usr/<span class="hljs-built_in">local</span>/cuda<br><br><span class="hljs-comment"># cudnn</span><br>tar -xzvf cudnn..<br>sudo cp ./include/cudnn*.h /usr/<span class="hljs-built_in">local</span>/cuda/include<br>sudo cp ./lib/libcudnn* /usr/<span class="hljs-built_in">local</span>/cuda/lib64<br>sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.h /usr/<span class="hljs-built_in">local</span>/cuda/lib64/libcudnn*<br><br><span class="hljs-comment"># check</span><br><br></code></pre></td></tr></table></figure>
+
+<h4 id="onnxruntime-cuda-tensorrt"><a href="#onnxruntime-cuda-tensorrt" class="headerlink" title="onnxruntime + cuda + tensorrt"></a>onnxruntime + cuda + tensorrt</h4><p><a target="_blank" rel="noopener" href="https://cmake.org/download/">cmake</a>&#x3D;3.24.0  <a target="_blank" rel="noopener" href="https://onnxruntime.ai/docs/build/eps.html">onnxruntime</a>&#x3D;1.13 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-download">cuda</a>&#x3D;11.4 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-download">cudnn</a>&#x3D;8.4.1.50 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/nvidia-tensorrt-8x-download#trt8415">tensorrt</a>&#x3D;8.4.1.5</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># prepare other env before build</span><br><span class="hljs-comment"># add --branch 1.13.1 if you need</span><br>git <span class="hljs-built_in">clone</span> --recursive https://ghproxy.com/https://github.com/microsoft/onnxruntime.git --depth 1<br>git submodule init<br>git submodule update<br><br><span class="hljs-comment"># mod ~/.bashrc</span><br>sudo cp ./TensorRT-8.4.1.5/lib/libnvinfer_builder_resource.so.8.4.1 /usr/lib<br>sudo gedit /etc/ld.so.conf<br><span class="hljs-comment"># add ./TensorRT-8.4.1.5/lib</span><br>sudo ldconfig<br><br><span class="hljs-comment"># build</span><br>./build.sh --use_cuda --cudnn_home /usr/<span class="hljs-built_in">local</span>/cuda/lib64 --cuda_home /usr/<span class="hljs-built_in">local</span>/cuda --use_tensorrt --tensorrt_home ./TensorRT-8.4.1.5 --build_wheel --parallel --skip_tests<br>pip install ./build/Linux/Debug/dist/onnxruntime_gpu-1.13.0-cp39-cp39-linux_x86_64.whl<br><br><span class="hljs-comment"># change python version</span><br>pip install -r requirements-dev.txt<br>rm -r ./build<br></code></pre></td></tr></table></figure>
 
 
 
@@ -330,64 +346,101 @@
 
 <h4 id="pathlib"><a href="#pathlib" class="headerlink" title="pathlib"></a>pathlib</h4><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/pathlib.png" srcset="/img/loading.gif" lazyload style="max-width:50%;" />
 
-<h4 id="git"><a href="#git" class="headerlink" title="git"></a>git</h4><p>move to xmind</p>
+
+
+
+
 <hr>
-<h3 id="装机"><a href="#装机" class="headerlink" title="装机"></a>装机</h3><h4 id="bootable-device"><a href="#bootable-device" class="headerlink" title="bootable device"></a>bootable device</h4><p><a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/index.html">ventoy</a>  <a target="_blank" rel="noopener" href="https://github.com/pbatard/rufus">refus</a></p>
-<h4 id="ubuntu20-04"><a href="#ubuntu20-04" class="headerlink" title="ubuntu20.04"></a>ubuntu20.04</h4><p><strong>firefox</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.firefox.com.cn/">firefox cn</a> install to /opt/</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo vi /usr/share/applications/firefox.desktop<br><br>[Desktop Entry]<br>Name=firefox<br>Name[zh_CN]=firefox<br>Comment=firefox<br>Exec=/opt/firefox/firefox<br>Icon=/opt/firefox/browser/chrome/icons/default/default128.png<br>Terminal=<span class="hljs-literal">false</span><br>Type=Application<br>Categories=Application;<br>Encoding=UTF-8<br>StartupNotify=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
 
-<p><strong>apt source</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bcakup<br>sudo gedit /etc/apt/sources.list<br></code></pre></td></tr></table></figure>
-
-<p>ref <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">tsinghua mirror</a></p>
-<p><strong>sogou pinyin</strong></p>
-<p>ref <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux/help.php">sogou pinyin</a></p>
-<p><strong>bashrc</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># .bash_alias</span><br><span class="hljs-built_in">alias</span> nn=<span class="hljs-string">&#x27;watch -n 1 -d nvidia-smi&#x27;</span><br><span class="hljs-built_in">alias</span> sb=<span class="hljs-string">&#x27;source ~/.bashrc&#x27;</span><br><span class="hljs-built_in">alias</span> cod=<span class="hljs-string">&#x27;conda deactivate&#x27;</span><br><span class="hljs-built_in">alias</span> coa=<span class="hljs-string">&#x27;conda activate&#x27;</span><br><span class="hljs-built_in">alias</span> pc4=<span class="hljs-string">&#x27;proxychains4 -q&#x27;</span><br><span class="hljs-built_in">alias</span> pyserver=<span class="hljs-string">&#x27;python -m http.server 8888&#x27;</span><br><span class="hljs-comment"># alias 84=&#x27;sshpass -p password ssh user@ip&#x27;</span><br><span class="hljs-built_in">alias</span> tar=<span class="hljs-string">&#x27;tar -zxvf&#x27;</span><br><span class="hljs-built_in">alias</span> tarz=<span class="hljs-string">&#x27;tar -zcvf&#x27;</span><br><span class="hljs-built_in">alias</span> hexoss=<span class="hljs-string">&#x27;hexo clean &amp;&amp; hexo g &amp;&amp; hexo s&#x27;</span><br></code></pre></td></tr></table></figure>
-
-<h4 id="eyeblue-网盘"><a href="#eyeblue-网盘" class="headerlink" title="eyeblue 网盘"></a>eyeblue 网盘</h4><p><a target="_blank" rel="noopener" href="https://tank-doc.eyeblue.cn/basic/install.html#docker">link</a></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run --name dockermysql -p 13306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=tank -e TZ=Asia/Shanghai -d mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time_zone=+8:00<br>docker run --name tank -p 6010:6010 --link dockermysql:mysql -v ~/data/dockermatter:/data/build/matter -d eyeblue/tank:3.1.6<br></code></pre></td></tr></table></figure>
-
-
-
-
+              
             </div>
-            <hr>
+            <hr/>
             <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Notes/">Notes</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
-                    
-                  </div>
-                
-              </div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Notes/" class="category-chain-item">Notes</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Ubuntu/">#Ubuntu</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>My wiki</div>
+      <div>http://example.com/posts/65245/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ykk648</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年12月13日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
               
-              
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/34787/">
+                      <a href="/posts/34787/" title="自用的代理方案">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">自用的代理方案</span>
                         <span class="visible-mobile">上一篇</span>
@@ -397,7 +450,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/4849/">
+                      <a href="/posts/4849/" title="麦辣鸡翅和香辣鸡腿堡">
                         <span class="hidden-mobile">麦辣鸡翅和香辣鸡腿堡</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -409,12 +462,8 @@
             </div>
 
             
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
+  <article id="comments" lazyload>
+    
   <div id="valine"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#valine', function() {
@@ -428,7 +477,9 @@
         )
         new Valine(options);
         Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
         })
       });
     });
@@ -436,25 +487,56 @@
   <noscript>Please enable JavaScript to view the comments</noscript>
 
 
-              </article>
-            
+  </article>
+
+
           </article>
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
 
 
     
@@ -479,56 +561,58 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/ykk648" target="_blank" rel="nofollow noopener"><span>ykk648</span></a> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/ykk648" target="_blank" rel="nofollow noopener"><span>ykk648</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
 
+  
+  
+  
+</div>
 
-  <!-- SCRIPTS -->
+  </footer>
+
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
@@ -547,50 +631,18 @@
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-  
-
-
-
-  
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-  
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
 
   <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
       
-        typing(title);
+        typing(text);
       
     })(window, document);
   </script>
@@ -600,18 +652,161 @@
 
 
 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
 
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

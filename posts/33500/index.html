@@ -43,15 +43,15 @@
   
   <title>利用socket实现路由表和二层帧转发 - ykk648&#39;s hub</title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -62,7 +62,7 @@
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -88,6 +88,8 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+  
+
 
   
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -227,7 +229,6 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          <!-- compatible with older versions-->
           12k 字
         
       </span>
@@ -239,7 +240,6 @@
         
         
         
-          <!-- compatible with older versions-->
           97 分钟
         
       </span>
@@ -288,9 +288,10 @@
             <!-- SEO header -->
             <h1 style="display: none">利用socket实现路由表和二层帧转发</h1>
             
-            <div class="markdown-body">
-              
-              <p>最近研究LInux下的socket编程，这里做一个基础总结和对两份代码的分析。一个是路由表转发，一个是二层帧转发。</p>
+            
+              <div class="markdown-body">
+                
+                <p>最近研究LInux下的socket编程，这里做一个基础总结和对两份代码的分析。一个是路由表转发，一个是二层帧转发。</p>
 <span id="more"></span>
 
 <hr>
@@ -326,8 +327,9 @@
 <h3 id="socket二层帧转发代码分析"><a href="#socket二层帧转发代码分析" class="headerlink" title="socket二层帧转发代码分析"></a>socket二层帧转发代码分析</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/socket.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;linux/if_packet.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;linux/if_ether.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/ioctl.h&gt;</span>	<span class="hljs-comment">//for netdevice</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;linux/if_arp.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _GNU_SOURCE </span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stddef.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;dirent.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/select.h&gt;</span>	<span class="hljs-comment">//for select()</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> max(a,b) ((a)&gt;(b)?(a):(b)) </span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ETH_FRAME_LEN  500</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NICNUM 2	<span class="hljs-comment">//要接收的网卡数量为2，默认为eth0和eth1</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RECVDEBUG</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SENDDEBUG</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">EthernetInfo</span> &#123;</span><br>	<span class="hljs-keyword">int</span> dev;		<span class="hljs-comment">//是否存在？</span><br>	<span class="hljs-keyword">int</span> active;	<span class="hljs-comment">//是否被激活；</span><br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> mac_local[<span class="hljs-number">8</span>];	<span class="hljs-comment">//本地网卡的MAC地址</span><br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> mac_next[<span class="hljs-number">8</span>];	<span class="hljs-comment">//下一跳的MAC地址</span><br>	&#125; EthernetInfo;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ipheader</span> &#123;</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_hl:<span class="hljs-number">4</span>, ip_v:<span class="hljs-number">4</span>; <span class="hljs-comment">/* this means that each member is 4 bits */</span><br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_tos;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_len;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_id;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_off;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_ttl;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ip_p;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> ip_sum;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ip_src;<br> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> ip_dst;<br>&#125;; <span class="hljs-comment">/* total ip header length: 20 bytes (=160 bits) */</span><br><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">itimerval</span> <span class="hljs-title">monitor_interval</span>;</span> 		<span class="hljs-comment">//系统定时器连续时间间隔</span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">monitor_timer</span><span class="hljs-params">()</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lookupethdev</span><span class="hljs-params">(EthernetInfo *eif)</span></span>;<br> <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i, m, n, cnt;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_ll</span> <span class="hljs-title">sockadr</span>[2], <span class="hljs-title">adrfrom</span>;</span> <span class="hljs-comment">//数据链路层使用的网络参数结构体</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ifreq</span> <span class="hljs-title">ifst</span>[2];</span><br>	<span class="hljs-keyword">int</span> sock[<span class="hljs-number">2</span>];	<span class="hljs-comment">//两个网卡上接收，这几个参数也得增加</span><br>	<span class="hljs-keyword">char</span> *devname[] = &#123;<span class="hljs-string">&quot;eth0&quot;</span>,<span class="hljs-string">&quot;eth1&quot;</span>&#125;;<br>	EthernetInfo ethinfo[NICNUM];<span class="hljs-comment">//存放本地网卡硬件地址</span><br><br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>  *buffer;<br>	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *data;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ipheader</span> *<span class="hljs-title">iphdr</span>;</span><br><br>	fd_set rset; <span class="hljs-comment">//for select()</span><br>	<span class="hljs-keyword">int</span> maxfd;<br><br>	lookupethdev(&amp;ethinfo);<br>	m = <span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;In Main ---\n Eth%d&#x27;s MAC  %x:%x:%x:%x:%x:%x\n&quot;</span>, m, ethinfo[m].mac_local[<span class="hljs-number">0</span>], ethinfo[m].mac_local[<span class="hljs-number">1</span>], ethinfo[m].mac_local[<span class="hljs-number">2</span>], ethinfo[m].mac_local[<span class="hljs-number">3</span>], ethinfo[m].mac_local[<span class="hljs-number">4</span>], ethinfo[m].mac_local[<span class="hljs-number">5</span>]);<br>	buffer = (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>*)<span class="hljs-built_in">malloc</span>(ETH_FRAME_LEN); <span class="hljs-comment">//mem for buffer</span><br>	data = buffer + <span class="hljs-number">14</span>; <span class="hljs-comment">//data in the frame</span><br><br>	<span class="hljs-keyword">for</span>(n=<span class="hljs-number">0</span>; n&lt;NICNUM; n++)&#123; <span class="hljs-comment">// 两个网卡分别socket和bind</span><br>		<span class="hljs-keyword">if</span> ((sock[n]=socket(AF_PACKET,SOCK_RAW,htons(ETH_P_ALL)))==<span class="hljs-number">-1</span>)&#123;<br>			perror(<span class="hljs-string">&quot;When creat raw socket: &quot;</span>);<br>			<span class="hljs-built_in">exit</span>(EXIT_FAILURE);<br>		&#125;<br><br>		<span class="hljs-built_in">strcpy</span>(ifst[n].ifr_name,devname[n]);<br>		ioctl(sock[n],SIOCGIFINDEX,&amp;ifst[n]);   <span class="hljs-comment">//根据名字获取网卡的index号码</span><br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; Eth%d--&gt; ifst.ifr_ifindex = %d \n&quot;</span>,n,ifst[n].ifr_ifindex);<br><br>		sockadr[n].sll_family   = AF_PACKET;<br>		sockadr[n].sll_protocol = htons(ETH_P_ALL);<br>		sockadr[n].sll_ifindex  = ifst[n].ifr_ifindex;<br><br>		<span class="hljs-comment">// socket bind</span><br>		i = bind(sock[n], &amp;(sockadr[n]), <span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br>		<span class="hljs-keyword">if</span>(i != <span class="hljs-number">0</span>)&#123;<br>			perror(<span class="hljs-string">&quot;Binding False: &quot;</span>);<br>			<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Binding Sock[%d] successfully\n&quot;</span>, n);<br>		&#125;<span class="hljs-comment">//--for--</span><br><br>		monitor_interval.it_interval.tv_sec = <span class="hljs-number">0</span>;<br>		monitor_interval.it_interval.tv_usec = <span class="hljs-number">0</span>;<br>		monitor_interval.it_value.tv_sec = <span class="hljs-number">2</span>;<br>		monitor_interval.it_value.tv_usec = <span class="hljs-number">0</span>; <span class="hljs-comment">//定时器周期</span><br>		signal(SIGALRM,monitor_timer); <span class="hljs-comment">//将定时器到达信号连接到monitor_timer子程序</span><br>		setitimer(ITIMER_REAL,&amp;monitor_interval,<span class="hljs-literal">NULL</span>); <span class="hljs-comment">//启动连续的定时器中断</span><br>	<br>		<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>			cnt++;<br>			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;---------------cnt = %d------------\n&quot;</span>, cnt);<br>			FD_ZERO(&amp;rset);<br>			maxfd = <span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">for</span>(n=<span class="hljs-number">0</span>; n&lt;NICNUM; n++)&#123;<br>				FD_SET(sock[n], &amp;rset);<br>				maxfd = max(sock[n], maxfd);<br>			&#125;<br>			maxfd = maxfd + <span class="hljs-number">1</span>;<br><br>			<span class="hljs-keyword">if</span>(select(maxfd, &amp;rset, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>)  &lt; <span class="hljs-number">1</span>)<br>				<span class="hljs-keyword">continue</span>;<span class="hljs-comment">//没有期望的接收事件发生，继续等待</span><br><br>			<span class="hljs-keyword">for</span> (n = <span class="hljs-number">0</span>; n &lt;NICNUM; n++)&#123;<br>				<span class="hljs-keyword">if</span> (FD_ISSET(sock[n], &amp;rset) == <span class="hljs-number">0</span>)<br>					<span class="hljs-keyword">continue</span>;	<span class="hljs-comment">//判断哪个套接字上发生了事件，没有，继续判断下一个</span><br><br>				recvfrom(sock[n], buffer, ETH_FRAME_LEN, <span class="hljs-number">0</span>, (struct sockaddr*)&amp;adrfrom, <span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br><br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> RECVDEBUG</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Eth%d-----ProtocAtFrom ＝ %d DestMac: &quot;</span>, n, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">6</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;   SourceMac: &quot;</span>, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">6</span>; i&lt;<span class="hljs-number">12</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  FrameType = %2x-%2x\n&quot;</span>,  buffer[<span class="hljs-number">12</span>],  buffer[<span class="hljs-number">13</span>]);<br>				<span class="hljs-keyword">if</span>(buffer[<span class="hljs-number">12</span>] != <span class="hljs-number">0x08</span> || buffer[<span class="hljs-number">13</span>] != <span class="hljs-number">0x00</span>)<br>					<span class="hljs-keyword">continue</span>; <span class="hljs-comment">//不是IP帧，不再往下执行，跳回接收</span><br>				iphdr =  (struct ipheader *)  (&amp;buffer[<span class="hljs-number">14</span>]);	<span class="hljs-comment">//确定IP首部地址</span><br>				data = (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *)&amp;(iphdr-&gt;ip_dst);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;S_IP = %8x  %d.%d.%d.%d\n&quot;</span>, iphdr-&gt;ip_dst, data[<span class="hljs-number">0</span>], data[<span class="hljs-number">1</span>], data[<span class="hljs-number">2</span>], data[<span class="hljs-number">3</span>]);<br>				<span class="hljs-comment">//注意：网络字节顺序（int==0x0b00a8c0 －&gt; 192.168.0.11）</span><br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> RECVDEBUG</span><br><br>				<span class="hljs-comment">//开始转发－－目的MAC暂且全1－－&gt;数据链路层广播方式－－仅仅对于双网卡方式！</span><br>				m = (n + <span class="hljs-number">1</span>) % <span class="hljs-number">1</span>; <span class="hljs-comment">// m=2？？？？？</span><br>				sockadr[m].sll_family   = AF_PACKET;<br>				sockadr[m].sll_protocol = htons(ETH_P_IP);<br>				sockadr[m].sll_ifindex  = ifst[m].ifr_ifindex;<br>				sockadr[m].sll_hatype   = ARPHRD_ETHER;<br>				sockadr[m].sll_pkttype  = PACKET_OTHERHOST;<br>				sockadr[m].sll_halen    = ETH_ALEN;<br>				<span class="hljs-built_in">memcpy</span>(sockadr[m].sll_addr, ethinfo[m].mac_local, ETH_ALEN);<br>				<span class="hljs-built_in">memset</span>(buffer, <span class="hljs-number">0xff</span>, ETH_ALEN); <span class="hljs-comment">// Mac全1</span><br>				<span class="hljs-built_in">memcpy</span>(buffer+ETH_ALEN,  ethinfo[m].mac_local, ETH_ALEN);<br>				buffer[<span class="hljs-number">12</span>] = <span class="hljs-number">0x08</span>;<br>				buffer[<span class="hljs-number">13</span>] = <span class="hljs-number">0x00</span>;<br><br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> SENDDEBUG</span><br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Sendto  Eth%d-----ProtocAtFrom ＝ %d DestMac: &quot;</span>, n, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">6</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;   SourceMac: &quot;</span>, adrfrom.sll_protocol);<br>				<span class="hljs-keyword">for</span>(i=<span class="hljs-number">6</span>; i&lt;<span class="hljs-number">12</span>; i++)<br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2x-&quot;</span>, buffer[i]);<br>				<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  FrameType = %2x-%2x IPSize = 0x%x\n&quot;</span>,  buffer[<span class="hljs-number">12</span>],  buffer[<span class="hljs-number">13</span>], iphdr-&gt;ip_len);<br>				<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> SENDDEBUG</span><br><br>				i = sendto(sock[m],buffer,iphdr-&gt;ip_len + <span class="hljs-number">14</span>,<span class="hljs-number">0</span>,(struct sockaddr*)&amp;sockadr[m],<span class="hljs-keyword">sizeof</span>(struct sockaddr_ll));<br>				<span class="hljs-keyword">if</span>(i ==<span class="hljs-number">-1</span>)&#123;<br>					perror(<span class="hljs-string">&quot;Error --&gt; When sendto: &quot;</span>);<br>				&#125;<br>				<span class="hljs-keyword">else</span><br>					<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Sendto Success eth%d --&gt; eth%d Size = %d\n&quot;</span>, n, m, iphdr-&gt;ip_len);<br>			&#125; <span class="hljs-comment">//---for---end---</span><br>		&#125;<span class="hljs-comment">//--while--</span><br>&#125;<br><br><span class="hljs-comment">// 查询系统配置文件以获得网卡MAC地址 不适合Ubuntu 用ioctl重写</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lookupethdev</span><span class="hljs-params">(EthernetInfo *eif)</span></span>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-comment">//----------------------------------定时器------------------------------------------</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">monitor_timer</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> i,j,k,l,m,n;<br>	<span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> timer_counter;<br>	monitor_interval.it_interval.tv_sec = <span class="hljs-number">0</span>;<br>	monitor_interval.it_interval.tv_usec = <span class="hljs-number">0</span>;<br>	monitor_interval.it_value.tv_sec = <span class="hljs-number">2</span>;<br>	monitor_interval.it_value.tv_usec = <span class="hljs-number">0</span>; <span class="hljs-comment">//定时器周期:100ms</span><br>	setitimer(ITIMER_REAL,&amp;monitor_interval,<span class="hljs-literal">NULL</span>); <br>	timer_counter++;	<br>	<span class="hljs-keyword">return</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-              
-            </div>
+                
+              </div>
+            
             <hr/>
             <div>
               <div class="post-metas my-3">
@@ -388,21 +390,23 @@
         </div>
       
       
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
             
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
             
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
+          </div>
         </div>
-      </div>
+      
     </div>
     <div class="license-icon iconfont"></div>
   </div>
@@ -441,9 +445,9 @@
   <div id="valine"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"appId":"lzlf3QD0Q6UHueruqIPwFC72-gzGzoHsz","appKey":"VdSg53GY7DQXNimQOtiPFxOo","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":null,"emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"lzlf3QD0Q6UHueruqIPwFC72-gzGzoHsz","appkey":"VdSg53GY7DQXNimQOtiPFxOo"},
+          {"appId":"lzlf3QD0Q6UHueruqIPwFC72-gzGzoHsz","appKey":"VdSg53GY7DQXNimQOtiPFxOo","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"lzlf3QD0Q6UHueruqIPwFC72-gzGzoHsz","appkey":"VdSg53GY7DQXNimQOtiPFxOo"},
           {
             el: "#valine",
             path: window.location.pathname
@@ -507,6 +511,7 @@
 
 
   
+
 
 
 
@@ -588,8 +593,8 @@
 
   <!-- Scripts -->
   
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -600,13 +605,13 @@
   </script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -624,8 +629,6 @@
 
 
 
-
-
   
     <script  src="/js/img-lazyload.js" ></script>
   
@@ -635,105 +638,52 @@
 
   
 <script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) { return; }
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init({
+    window.tocbot.init(Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
       linkClass       : 'tocbot-link',
       activeLinkClass : 'tocbot-active-link',
       listClass       : 'tocbot-list',
       isCollapsedClass: 'tocbot-is-collapsed',
       collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
       scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
   });
 </script>
 
 
-  <script>
-  (function() {
-    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
-    var enableCopy = CONFIG.copy_btn;
-    if (!enableLang && !enableCopy) {
-      return;
-    }
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
-    function getBgClass(ele) {
-      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
-    }
-
-    var copyTmpl = '';
-    copyTmpl += '<div class="code-widget">';
-    copyTmpl += 'LANG';
-    copyTmpl += '</div>';
-    jQuery('.markdown-body pre').each(function() {
-      var $pre = jQuery(this);
-      if ($pre.find('code.mermaid').length > 0) {
-        return;
-      }
-      if ($pre.find('span.line').length > 0) {
-        return;
-      }
-
-      var lang = '';
-
-      if (enableLang) {
-        lang = CONFIG.code_language.default;
-        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
-          lang = $pre[0].children[0].classList[1];
-        } else if ($pre[0].getAttribute('data-language')) {
-          lang = $pre[0].getAttribute('data-language');
-        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
-          lang = $pre[0].children[0].classList[1];
-          $pre.parent().addClass('code-wrapper');
-        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
-          $pre.wrap('<div class="code-wrapper"></div>');
-        }
-        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
-      }
-      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
-        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
-
-      if (enableCopy) {
-        Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js', function() {
-          var clipboard = new window.ClipboardJS('.copy-btn', {
-            target: function(trigger) {
-              var nodes = trigger.parentNode.childNodes;
-              for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].tagName === 'CODE') {
-                  return nodes[i];
-                }
-              }
-            }
-          });
-          clipboard.on('success', function(e) {
-            e.clearSelection();
-            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
-            setTimeout(function() {
-              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
-            }, 2000);
-          });
-        });
-      }
-    });
-  })();
-</script>
+  <script>Fluid.plugins.codeWidget();</script>
 
 
   
 <script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
     window.anchors.options = {
       placement: CONFIG.anchorjs.placement,
       visible  : CONFIG.anchorjs.visible
@@ -750,13 +700,28 @@
       window.anchors.options.class = 'anchorjs-link-left';
     }
     window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
   });
 </script>
 
 
   
 <script>
-  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
     Fluid.plugins.fancyBox();
   });
 </script>

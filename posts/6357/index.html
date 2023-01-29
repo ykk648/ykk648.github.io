@@ -18,16 +18,16 @@
   <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
-    <meta name="description" content="开发时间线点击查看思维导图  围绕DeepFaceLab训练模型&#x2F;效果提升&#x2F;实时化 围绕SimSwap效果提升&#x2F;实时化 明确HifiFace为baseline，论文复现 大规模数据搜集和模型训练&#x2F;调参 模型部署   DFL探索互联网搜集、标注组采集，建立200+ID的人脸数据库，每ID人脸数量约1k-1w不等； 标注xseg人脸分割模型数据1k+，fin">
+    <meta name="description" content="开发时间线点击查看思维导图 华智冰换脸效果（去音）  模仿 原清华 华智冰  围绕DeepFaceLab训练模型&#x2F;效果提升&#x2F;实时化 围绕SimSwap效果提升&#x2F;实时化 明确HifiFace为baseline，论文复现 大规模数据搜集和模型训练&#x2F;调参 模型部署   DFL探索互联网搜集、标注组采集，建立200+ID的人脸数据库，每ID人脸数量约1k-1w不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FaceSwap项目全回顾">
 <meta property="og:url" content="http://example.com/posts/6357/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="开发时间线点击查看思维导图  围绕DeepFaceLab训练模型&#x2F;效果提升&#x2F;实时化 围绕SimSwap效果提升&#x2F;实时化 明确HifiFace为baseline，论文复现 大规模数据搜集和模型训练&#x2F;调参 模型部署   DFL探索互联网搜集、标注组采集，建立200+ID的人脸数据库，每ID人脸数量约1k-1w不等； 标注xseg人脸分割模型数据1k+，fin">
+<meta property="og:description" content="开发时间线点击查看思维导图 华智冰换脸效果（去音）  模仿 原清华 华智冰  围绕DeepFaceLab训练模型&#x2F;效果提升&#x2F;实时化 围绕SimSwap效果提升&#x2F;实时化 明确HifiFace为baseline，论文复现 大规模数据搜集和模型训练&#x2F;调参 模型部署   DFL探索互联网搜集、标注组采集，建立200+ID的人脸数据库，每ID人脸数量约1k-1w不">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/deepfake.jpg.JPG">
 <meta property="article:published_time" content="2023-01-12T08:37:10.000Z">
-<meta property="article:modified_time" content="2023-01-19T07:02:46.562Z">
+<meta property="article:modified_time" content="2023-01-29T02:47:48.756Z">
 <meta property="article:author" content="ykk648">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/deepfake.jpg.JPG">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          3.8k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          21 分钟
+          32 分钟
         
       </span>
     
@@ -289,6 +289,7 @@
                 <span id="more"></span>
 
 <h3 id="开发时间线"><a href="#开发时间线" class="headerlink" title="开发时间线"></a>开发时间线</h3><p><a target="_blank" rel="noopener" href="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/FaceSwap.png">点击查看思维导图</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/face_swap_huazhibing_h264_out.mp4">华智冰换脸效果（去音）</a>  模仿 原清华 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19P4y1b7P3/">华智冰</a></p>
 <ul>
 <li>围绕DeepFaceLab训练模型&#x2F;效果提升&#x2F;实时化</li>
 <li>围绕SimSwap效果提升&#x2F;实时化</li>
@@ -337,7 +338,40 @@
 <p>通过mount tmpfs优化IO，multi thread优化推理速度等，实现4*A100（24G）显存下20路并行，满足了生产要求。</p>
 <p>项目在后续已废弃，但为hififace实时化提供了不错的代码模板，hififace realtime也是基于此开发的。</p>
 <hr>
-<h3 id="HifiFace复现"><a href="#HifiFace复现" class="headerlink" title="HifiFace复现"></a>HifiFace复现</h3><hr>
+<h3 id="HifiFace复现"><a href="#HifiFace复现" class="headerlink" title="HifiFace复现"></a>HifiFace复现</h3><p>HifiFace 2021年横空出世，效果惊艳，远超其他开源项目，官网并没有开源计划，于是着手复现，全项目复现完成比第三方复现开源早1-2个月，效果也远超第三方复现效果，未开源。</p>
+<h4 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h4><ul>
+<li>人脸feature ，测试了市面所有开源模型，根据论文选<a target="_blank" rel="noopener" href="https://github.com/HuangYG123/CurricularFace">CurricularFace</a>，后续由于数据集庞大，难以更换</li>
+<li>表情系数，测试了市面所有开源模型，选择<a target="_blank" rel="noopener" href="https://github.com/microsoft/Deep3DFaceReconstruction">Deep3DFace</a></li>
+</ul>
+<p>此外尝试的方案有：</p>
+<ul>
+<li>不同人脸识别模型的feature concat</li>
+<li>人脸识别模型feature提取中的mod trick</li>
+<li>face parsing ，对不同部分细粒度操作</li>
+<li>表情系数的精确化分割</li>
+<li>数据集人脸增强（超分 重建 美颜）</li>
+</ul>
+<h4 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h4><p><strong>generator</strong></p>
+<p>除复现论文结构，并在此基础上做kernel size&#x2F;batch norm&#x2F;256 lift to 512等实验外，参考<a target="_blank" rel="noopener" href="https://github.com/yl4579/StarGANv2-VC">StarGanV2</a>引进了generator结构特性：</p>
+<ul>
+<li>AdaINRes</li>
+<li>bias&#x2F;upsample inter mode&#x2F;sqrt2 tricks</li>
+</ul>
+<p><strong>discriminator</strong></p>
+<p>除复现论文结构外，参考<a target="_blank" rel="noopener" href="https://github.com/NVlabs/SPADE">SPADE</a>&#x2F;<a target="_blank" rel="noopener" href="https://github.com/neuralchen/SimSwap">SimSwap</a>做了不同尝试，包括：</p>
+<ul>
+<li>multi-layer discriminator</li>
+<li>U-net discriminator</li>
+</ul>
+<h4 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h4><p>大量loss对效果微调，包括论文的6个loss（shape loss&#x2F;id loss&#x2F;segmentation loss&#x2F;reconstruction loss&#x2F;cycle loss&#x2F;lpips loss），此外加入：</p>
+<ul>
+<li>contrastive face embedding loss （ref <a target="_blank" rel="noopener" href="https://github.com/GGGHSL/InfoSwap-master">InfoSwap</a>）</li>
+<li>iris loss</li>
+<li>eye&#x2F;mouth&#x2F;teeth loss</li>
+<li>focal loss etc.</li>
+</ul>
+<h4 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h4><p>建立了本地的训练工程，对模型通过结构进行版本更新，对loss权重调参，模型前后也有权重继承关系，毕竟调整一些层或者增加几十万数据不可能重新训练模型，渐进式训练方式获得v5版本，迭代至1000+epoch</p>
+<hr>
 <h3 id="大规模人脸数据库"><a href="#大规模人脸数据库" class="headerlink" title="大规模人脸数据库"></a>大规模人脸数据库</h3><p>最终提供的数据总规模在250w，提供性别&#x2F;图像质量分类label， 提供人脸embedding&#x2F;3d coff等信息用于训练中旁路注入信息。</p>
 <h4 id="开源数据"><a href="#开源数据" class="headerlink" title="开源数据"></a>开源数据</h4><p>大量开源数据集的搜集，分类和预处理，核心点一是人种分类，二是性别分类，人种在开源数据集时评估，性别可以后期通过人脸属性分类模型解决。</p>
 <p>典型的人脸开源数据包括FFHQ msceleb celebv celebv-hq vggface2 等，fake人脸数据集包括DigiFace1M FaceSynthetics FF++_Splice seeprettyface等，部分通过stylegan生成，部分通过UE等建模工具生成。</p>
@@ -345,11 +379,7 @@
 <h4 id="互联网数据爬取"><a href="#互联网数据爬取" class="headerlink" title="互联网数据爬取"></a>互联网数据爬取</h4><p>前期训练DeepFaceLab模型建立的大规模私有数据集，ID约200+，每个ID图像数千，经过简单人工筛选后加入人脸数据库。</p>
 <p>提供weibo baidu 等图片爬虫工具，开源代码修改后打包windows可执行文件，明确文档，交付标注组通过索引爬取数据，前期使用人工筛选数据，后期通过质量评估模型自动筛选。</p>
 <h4 id="人脸属性识别模型"><a href="#人脸属性识别模型" class="headerlink" title="人脸属性识别模型"></a>人脸属性识别模型</h4><p>大规模数据的采集带来的显著问题就是数据清洗困难，因此需要一个自动化清洗的pipeline，所以建立数据集，训练一个人脸属性分类模型。</p>
-<p>模型在测试集上的识别效果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">height</span>=<span class="hljs-string">512</span> <span class="hljs-attr">width</span>=<span class="hljs-string">512</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/%E4%BA%BA%E8%84%B8%E5%B1%9E%E6%80%A7%E6%95%88%E6%9E%9C_211222_selftrained.mp4&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-
-
+<p><a target="_blank" rel="noopener" href="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/%E4%BA%BA%E8%84%B8%E5%B1%9E%E6%80%A7%E6%95%88%E6%9E%9C_211222_selftrained.mp4">模型在测试集上的识别效果</a></p>
 <p><strong>数据标注</strong></p>
 <p>工具基于开源的labelme，为了简化标注流程，采用对半标注的方法，减少标注时间，即<code>female</code> <code>male</code> 两类只需要标注<code>male</code>，其他留空，待标注完毕后对标签数据进行批量处理。</p>
 <p>提供标注文档，分批标注，使用小批次数据训练的模型反向标注数据提供给标注组清洗，增加清洗速度，最终总数据量约7.5w。</p>
@@ -360,7 +390,28 @@
 <p>以npy格式提供face 3d coff信息，基于DeepFace3D;</p>
 <p>使用GPEN GFPGAN DFDNet等face restore方法对数据超分，建立enhance数据集；</p>
 <hr>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>前后迭代了4-5个工程，几十个版本，最终保留的几个工程包括魔改的DFL多阶段训练代码（兼容原DFL功能），SimSwap多路换脸代码（提速），人脸特征提取工程，换脸API。</p>
+<p>换脸API包括开发的不同分支，例如提供给C++的加密代码、离线换脸、实时在线换脸、单人多人锁定换脸等。</p>
+<p>复用一套核心代码，在此基础上增加功能。</p>
+<p>经过优化后可以做到1080P下单卡2人实时锁定换脸，其中各个模型batch推理，线程尽可能复用。</p>
+<h4 id="模型推理加速"><a href="#模型推理加速" class="headerlink" title="模型推理加速"></a>模型推理加速</h4><ul>
+<li><p>数值计算加速 numpy&#x2F;numexpr&#x2F;numba</p>
+</li>
+<li><p>frame smooth，包括landmark等smooth</p>
+</li>
+<li><p>模型推理，在实践中不断确立了pytorch-onnx-tensorrt的方案</p>
+</li>
+<li><p>更换更轻量级模型，例如人脸检测使用500M的scrfd模型</p>
+</li>
+<li><p>多线程推理（cv2box）</p>
+</li>
+<li><p>roi pre crop，realtime加速trick</p>
+</li>
+</ul>
+<h4 id="模型加密"><a href="#模型加密" class="headerlink" title="模型加密"></a>模型加密</h4><p>调研了市面上所有加密方案，选用pyarmor加密py代码，通过aes256加密模型，在py代码中对模型解码，打包项目提供接口。</p>
+<h4 id="平台支持"><a href="#平台支持" class="headerlink" title="平台支持"></a>平台支持</h4><p>支持linux&#x2F;windows，docker部署，支持wsl2部署，设计了基于RTMP流媒体服务器的换脸服务架构，由于研发部门能力有限无法实现。</p>
+<h4 id="MobileFaceSwap"><a href="#MobileFaceSwap" class="headerlink" title="MobileFaceSwap"></a>MobileFaceSwap</h4><p>百度出品，目的是一个ID一个模型，通过dw conv和unet减少模型体积，适合边缘设备，进行了网络复现和模型训练。</p>
+
                 
               </div>
             

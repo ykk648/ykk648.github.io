@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/deepfake.jpg.JPG">
 <meta property="article:published_time" content="2023-01-12T08:37:10.000Z">
-<meta property="article:modified_time" content="2023-01-29T02:47:48.756Z">
+<meta property="article:modified_time" content="2023-03-02T06:42:06.162Z">
 <meta property="article:author" content="ykk648">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/deepfake.jpg.JPG">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k 字
+          4.7k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          32 分钟
+          40 分钟
         
       </span>
     
@@ -301,17 +301,21 @@
 <h3 id="DFL探索"><a href="#DFL探索" class="headerlink" title="DFL探索"></a>DFL探索</h3><p>互联网搜集、标注组采集，建立200+ID的人脸数据库，每ID人脸数量约1k-1w不等；</p>
 <p>标注xseg人脸分割模型数据1k+，finetune Xseg模型；</p>
 <p>改进deepfacelab训练流程，使用二阶段训练方式，全自动化训练，训练上百明星换脸模型；</p>
-<p>建立dfl实时化pipeline，比原作者开源DeepFaceLive早半年，增加了单人人脸锁定、双人实时换脸等功能。</p>
+<p>建立dfl实时化pipeline（21年），比原作者开源DeepFaceLive早半年，增加了单人人脸锁定、双人实时换脸等功能。</p>
 <h4 id="Fake-ID"><a href="#Fake-ID" class="headerlink" title="Fake ID"></a>Fake ID</h4><p>考虑到使用明星脸做face swap的道德问题，做face morph希望生成新的不存在的人脸，测试过各大厂商的face morph API，部分使用传统方法，部分使用深度学习网络，尝试用styleganada做half mix，dlib传统方法等，效果都不是很好。</p>
 <p>考虑到deepfacelab的特性，最终从数据集mining的角度解决fake ID问题，在数据集中进行人物配比，训练中加强true face loss，实现fake ID 模型的低成本生成。</p>
+<p>后续实际生产中，还有通过face embedding合成，多次换脸等方式来生成不存在的人脸，或者明星混合脸。</p>
 <h4 id="Universal-Model"><a href="#Universal-Model" class="headerlink" title="Universal Model"></a>Universal Model</h4><p>deepfacelab是典型的1-1模型，使用dst脸替换src脸，在实际使用中肯定希望有一个universal的模型，任意src脸都可以替换为dst，也就是可以更换主播直播，但都是一个脸。</p>
-<p>一方面可以通过DF-UD模型的true face选项增加loss约束，另一方面使用最新的AMP结构，天然对多src的支持好，最后的方案还是做data distribution的调整，可以起到不错的效果。</p>
+<p>一方面可以通过DF-UD模型的true face选项增加loss约束，另一方面使用最新的AMP结构，天然对多src的支持好。</p>
+<p>也尝试了网络结构的改进，通过增加输入分支，训练N合1模型。</p>
+<p>最后的方案还是做data distribution的调整，可以起到不错的效果，实现了universal的模型，即任意src都可以换成同一个dst。</p>
 <h4 id="多阶段训练"><a href="#多阶段训练" class="headerlink" title="多阶段训练"></a>多阶段训练</h4><p>为了批量化生产换脸模型，建立了multi stage的训练脚本，对deepfacelab代码重构，基于参数需要调整的特性，总结一套通用参数，通过多stage自动加载预训练模型，自动调整参数。</p>
 <p>最终效果是可以通过配置文件，批量训练N个不同人物的换脸模型，训练速度快，模型可用率高，同时新模型不断在base模型上迭代，整体换脸效果随着ID和数据的增多变好。</p>
+<p>最终DF-UD结构迭代到70w+epoch，LIAE结构迭代到150w+epoch，使用A100*2，batchsize32。</p>
 <h4 id="实时化"><a href="#实时化" class="headerlink" title="实时化"></a>实时化</h4><p>从不同方向优化deepfacelab pipeline推理速度，最终实现1080P下30fps换脸（RTX3080），测试双人换脸也可以实时，满足生产要求。</p>
 <p><strong>模型方面</strong></p>
 <ul>
-<li><p>模型手工剪枝</p>
+<li><p>模型手工剪枝，去除冗余操作</p>
 </li>
 <li><p>mediapipe GPU替换S3FD做人脸检测</p>
 </li>
@@ -320,7 +324,7 @@
 </ul>
 <p><strong>workflow方面</strong></p>
 <ul>
-<li><p>color merge算法提速</p>
+<li><p>color merge算法提速（C++）</p>
 </li>
 <li><p>pre crop</p>
 </li>
@@ -336,7 +340,7 @@
 <hr>
 <h3 id="SimSwap并行化"><a href="#SimSwap并行化" class="headerlink" title="SimSwap并行化"></a>SimSwap并行化</h3><p>在手头没有更好的换脸模型情况下，对simswap模型并行化，进行换脸视频的快速产出。</p>
 <p>通过mount tmpfs优化IO，multi thread优化推理速度等，实现4*A100（24G）显存下20路并行，满足了生产要求。</p>
-<p>项目在后续已废弃，但为hififace实时化提供了不错的代码模板，hififace realtime也是基于此开发的。</p>
+<p>项目在后续已废弃，但为hififace实时化提供了不错的代码模板，hififace realtime就是基于此开发的。</p>
 <hr>
 <h3 id="HifiFace复现"><a href="#HifiFace复现" class="headerlink" title="HifiFace复现"></a>HifiFace复现</h3><p>HifiFace 2021年横空出世，效果惊艳，远超其他开源项目，官网并没有开源计划，于是着手复现，全项目复现完成比第三方复现开源早1-2个月，效果也远超第三方复现效果，未开源。</p>
 <h4 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h4><ul>
@@ -375,14 +379,14 @@
 <h3 id="大规模人脸数据库"><a href="#大规模人脸数据库" class="headerlink" title="大规模人脸数据库"></a>大规模人脸数据库</h3><p>最终提供的数据总规模在250w，提供性别&#x2F;图像质量分类label， 提供人脸embedding&#x2F;3d coff等信息用于训练中旁路注入信息。</p>
 <h4 id="开源数据"><a href="#开源数据" class="headerlink" title="开源数据"></a>开源数据</h4><p>大量开源数据集的搜集，分类和预处理，核心点一是人种分类，二是性别分类，人种在开源数据集时评估，性别可以后期通过人脸属性分类模型解决。</p>
 <p>典型的人脸开源数据包括FFHQ msceleb celebv celebv-hq vggface2 等，fake人脸数据集包括DigiFace1M FaceSynthetics FF++_Splice seeprettyface等，部分通过stylegan生成，部分通过UE等建模工具生成。</p>
-<p>进行人脸detect&amp;align，建立初版数据集。</p>
+<p>进行人脸detect&amp;align，提取embedding&#x2F;coff建立初版数据集。</p>
 <h4 id="互联网数据爬取"><a href="#互联网数据爬取" class="headerlink" title="互联网数据爬取"></a>互联网数据爬取</h4><p>前期训练DeepFaceLab模型建立的大规模私有数据集，ID约200+，每个ID图像数千，经过简单人工筛选后加入人脸数据库。</p>
-<p>提供weibo baidu 等图片爬虫工具，开源代码修改后打包windows可执行文件，明确文档，交付标注组通过索引爬取数据，前期使用人工筛选数据，后期通过质量评估模型自动筛选。</p>
+<p>提供weibo baidu 等图片爬虫工具，开源代码修改后打包windows可执行文件，明确使用文档，交付标注组通过索引爬取数据，前期使用人工筛选数据，后期通过质量评估模型自动筛选。</p>
 <h4 id="人脸属性识别模型"><a href="#人脸属性识别模型" class="headerlink" title="人脸属性识别模型"></a>人脸属性识别模型</h4><p>大规模数据的采集带来的显著问题就是数据清洗困难，因此需要一个自动化清洗的pipeline，所以建立数据集，训练一个人脸属性分类模型。</p>
 <p><a target="_blank" rel="noopener" href="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/%E4%BA%BA%E8%84%B8%E5%B1%9E%E6%80%A7%E6%95%88%E6%9E%9C_211222_selftrained.mp4">模型在测试集上的识别效果</a></p>
 <p><strong>数据标注</strong></p>
 <p>工具基于开源的labelme，为了简化标注流程，采用对半标注的方法，减少标注时间，即<code>female</code> <code>male</code> 两类只需要标注<code>male</code>，其他留空，待标注完毕后对标签数据进行批量处理。</p>
-<p>提供标注文档，分批标注，使用小批次数据训练的模型反向标注数据提供给标注组清洗，增加清洗速度，最终总数据量约7.5w。</p>
+<p>提供标注文档、标注环境，分批标注，使用小批次数据训练的模型反向标注数据提供给标注组清洗，增加清洗速度，最终总数据量约7.5w。</p>
 <p><strong>训练框架和训练模型</strong></p>
 <p>训练基于 <a target="_blank" rel="noopener" href="https://github.com/ykk648/mmclassification/tree/master">mmcls</a>，为了兼顾模型效果和速度，使用512大尺寸输入，mobilenetv3轻量级模型推理，基于开源代码增加了多标签分类训练和推理的支持，标签分为10类，使用0-1代表标签是否选中。</p>
 <p>划分训练集和验证集，data aug上只选择RandomFlip，保留全图人脸信息。</p>
@@ -390,16 +394,21 @@
 <p>以npy格式提供face 3d coff信息，基于DeepFace3D;</p>
 <p>使用GPEN GFPGAN DFDNet等face restore方法对数据超分，建立enhance数据集；</p>
 <hr>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>前后迭代了4-5个工程，几十个版本，最终保留的几个工程包括魔改的DFL多阶段训练代码（兼容原DFL功能），SimSwap多路换脸代码（提速），人脸特征提取工程，换脸API。</p>
-<p>换脸API包括开发的不同分支，例如提供给C++的加密代码、离线换脸、实时在线换脸、单人多人锁定换脸等。</p>
-<p>复用一套核心代码，在此基础上增加功能。</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><h4 id="四大工程"><a href="#四大工程" class="headerlink" title="四大工程"></a>四大工程</h4><p>前后迭代了4-5个工程，几十个版本，最终保留的几个工程包括魔改的DFL多阶段训练代码（兼容原DFL功能），SimSwap多路换脸代码（提速），人脸特征提取工程，换脸API。</p>
+<p><strong>DFL多阶段训练代码</strong>（兼容原DFL功能），如上</p>
+<p><strong>SimSwap多路换脸代码</strong>，如上</p>
+<p><strong>人脸特征提取工程</strong>使用先换脸，然后对cheek做特殊处理，从人脸embedding层面避免下巴或者脸型不一致带来的换脸问题；</p>
+<p>支持三种face embedding提取模型，支持web调用，字典存储；</p>
+<p><strong>换脸API</strong>包括开发的不同分支，例如提供给C++的加密代码、离线换脸、实时在线换脸、单人多人锁定换脸等。</p>
+<p>复用一套核心代码，在此基础上增加功能；</p>
+<p>锁定使用人脸embedding 1:N+bbox tracking 实现，double check逻辑，多人脸batch推理；</p>
 <p>经过优化后可以做到1080P下单卡2人实时锁定换脸，其中各个模型batch推理，线程尽可能复用。</p>
 <h4 id="模型推理加速"><a href="#模型推理加速" class="headerlink" title="模型推理加速"></a>模型推理加速</h4><ul>
-<li><p>数值计算加速 numpy&#x2F;numexpr&#x2F;numba</p>
+<li><p>数值计算加速 numpy&#x2F;numexpr&#x2F;numba （face reverse &#x2F; face tracking）</p>
 </li>
 <li><p>frame smooth，包括landmark等smooth</p>
 </li>
-<li><p>模型推理，在实践中不断确立了pytorch-onnx-tensorrt的方案</p>
+<li><p>模型推理，在实践中不断确立了pytorch-onnx-tensorrt的方案（后续直接使用编译最新的onnxruntime13 支持在线tensorrt转换）</p>
 </li>
 <li><p>更换更轻量级模型，例如人脸检测使用500M的scrfd模型</p>
 </li>
@@ -408,9 +417,11 @@
 <li><p>roi pre crop，realtime加速trick</p>
 </li>
 </ul>
-<h4 id="模型加密"><a href="#模型加密" class="headerlink" title="模型加密"></a>模型加密</h4><p>调研了市面上所有加密方案，选用pyarmor加密py代码，通过aes256加密模型，在py代码中对模型解码，打包项目提供接口。</p>
+<h4 id="模型加密"><a href="#模型加密" class="headerlink" title="模型加密"></a>模型加密</h4><p>调研了市面上所有加密方案，选用pyarmor加密py代码，通过aes256加密模型，在py代码中对模型解码，打包项目提供接口，由于工程组不会写python和C++的交互，建立了CVQueue（cv2box），完全模拟queue操作，使用sharedmemory来做单PC C++和python不同进程间通信。</p>
 <h4 id="平台支持"><a href="#平台支持" class="headerlink" title="平台支持"></a>平台支持</h4><p>支持linux&#x2F;windows，docker部署，支持wsl2部署，设计了基于RTMP流媒体服务器的换脸服务架构，由于研发部门能力有限无法实现。</p>
-<h4 id="MobileFaceSwap"><a href="#MobileFaceSwap" class="headerlink" title="MobileFaceSwap"></a>MobileFaceSwap</h4><p>百度出品，目的是一个ID一个模型，通过dw conv和unet减少模型体积，适合边缘设备，进行了网络复现和模型训练。</p>
+<h3 id="其他工作"><a href="#其他工作" class="headerlink" title="其他工作"></a>其他工作</h3><h4 id="MobileFaceSwap"><a href="#MobileFaceSwap" class="headerlink" title="MobileFaceSwap"></a><a target="_blank" rel="noopener" href="https://github.com/Seanseattle/MobileFaceSwap">MobileFaceSwap</a></h4><p>百度出品，目的是一个ID一个模型，通过dw conv和unet减少模型体积，适合边缘设备，进行了网络复现和模型训练。</p>
+<h4 id="FSLSD"><a href="#FSLSD" class="headerlink" title="FSLSD"></a><a target="_blank" rel="noopener" href="https://github.com/cnnlstm/FSLSD_HiRes">FSLSD</a></h4><p>基于psp(pixel2style2pixel)和stylegan，通过latent做face swap，效果一般。</p>
+<h4 id="AI-power"><a href="#AI-power" class="headerlink" title="AI_power"></a><a target="_blank" rel="noopener" href="https://github.com/ykk648/AI_power">AI_power</a></h4><p>在建立DFL&#x2F;HifiFace&#x2F;Simswap各类换脸pipeline过程中，建立了基于cv2box的多进程方案，发现在不同任务中可以复用模型和进程，于是建立了AI_power工程，将各类AI能力提取，建立API，实现了plug-in的AI模块，在后续换脸&#x2F;人体驱动&#x2F;表情驱动等项目开发中，使用cv2box+AI_power堆积木的方式构建工程，提供一个新功能的pipeline一般只需要1-2天，丰富了公司的AI能力库。</p>
 
                 
               </div>

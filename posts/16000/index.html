@@ -18,17 +18,19 @@
   <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TalkingHead主要分为两类：  Anime face的driving，以复现开源实现为主；  Human face的driving，FOM开先河，分为img驱动、audio驱动、半身驱动、nerf类等;">
+    <meta name="description" content="TalkingHead主要分为两类：  Anime face的driving，以复现开源实现为主，做娱乐产业；  Human face的driving，FOM开先河，分为img驱动、audio驱动、半身驱动、nerf类等，做2D数字人、数字名片、照片动起来、视频会议化身等;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TalkingHead项目全回顾">
 <meta property="og:url" content="http://example.com/posts/16000/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="TalkingHead主要分为两类：  Anime face的driving，以复现开源实现为主；  Human face的driving，FOM开先河，分为img驱动、audio驱动、半身驱动、nerf类等;">
+<meta property="og:description" content="TalkingHead主要分为两类：  Anime face的driving，以复现开源实现为主，做娱乐产业；  Human face的driving，FOM开先河，分为img驱动、audio驱动、半身驱动、nerf类等，做2D数字人、数字名片、照片动起来、视频会议化身等;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_digital_human.jpg">
 <meta property="article:published_time" content="2023-03-02T06:44:35.000Z">
-<meta property="article:modified_time" content="2023-03-13T09:49:47.797Z">
+<meta property="article:modified_time" content="2023-03-16T10:51:05.207Z">
 <meta property="article:author" content="ykk648">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="TalkingHead">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_digital_human.jpg">
   
@@ -224,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2.1k 字
         
       </span>
     
@@ -235,7 +237,7 @@
         
         
         
-          13 分钟
+          18 分钟
         
       </span>
     
@@ -288,9 +290,9 @@
                 
                 <p>TalkingHead主要分为两类：</p>
 <ol>
-<li><p>Anime face的driving，以复现开源实现为主；</p>
+<li><p>Anime face的driving，以复现开源实现为主，做娱乐产业；</p>
 </li>
-<li><p>Human face的driving，FOM开先河，分为img驱动、audio驱动、半身驱动、nerf类等;</p>
+<li><p>Human face的driving，FOM开先河，分为img驱动、audio驱动、半身驱动、nerf类等，做2D数字人、数字名片、照片动起来、视频会议化身等;</p>
 </li>
 </ol>
 <span id="more"></span>
@@ -298,28 +300,36 @@
 <p><a target="_blank" rel="noopener" href="https://cdn.guiji.ai/ows/media/ppt.84f5affa.mp4">数字人生产效果展示</a>  </p>
 <h3 id="Anime-Face-Driving"><a href="#Anime-Face-Driving" class="headerlink" title="Anime Face Driving"></a>Anime Face Driving</h3><h4 id="THA-Talking-Head-Anime-系列"><a href="#THA-Talking-Head-Anime-系列" class="headerlink" title="THA(Talking Head Anime)系列"></a>THA(Talking Head Anime)系列</h4><p>作者都是泰国小哥，<a target="_blank" rel="noopener" href="http://github.com/dragonmeteor/talking-head-anime-demo">THA</a>是使用自己标注的6 pose数据train的GAN，结构类似cyclegan，额外增加一个face rotater用于头部旋转；</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/pkhungurn/talking-head-anime-2-demo">THA2</a> 引入了<a target="_blank" rel="noopener" href="https://www.ifacialmocap.com/">ifacialmocap</a>驱动，网络输入由6 pose变为42 blendshape，增加了更多表情。</p>
+<p>两代开源代码加waifu的anime头像生成，就可以完成一个基本的动漫头像驱动，接近一些主播使用的动漫头像替身效果。</p>
 <h4 id="EasyVtuber系列"><a href="#EasyVtuber系列" class="headerlink" title="EasyVtuber系列"></a>EasyVtuber系列</h4><p><a target="_blank" rel="noopener" href="https://github.com/GunwooHan/EasyVtuber">EasyVtuber</a> 使用mediapipe提取face mesh，其余与THA类似，增加了obs功能。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/yuyuyzl/EasyVtuber">EasyVtuber2</a> 借鉴THA2，直接使用ifacialmocap提取blendshape，通过UDP发送，直接驱动动漫头像。</p>
+<p>EasyVtuber在THA基础上封装了易用的obs等功能，更接近一个初级产品形态。</p>
 <h3 id="Human-Face-Driving"><a href="#Human-Face-Driving" class="headerlink" title="Human Face Driving"></a>Human Face Driving</h3><h4 id="FOM系列"><a href="#FOM系列" class="headerlink" title="FOM系列"></a>FOM系列</h4><p><strong>介绍</strong></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/AliaksandrSiarohin/first-order-model">FOM</a>前身是monkey-net，核心是 unsupervised keypoint detector，然后通过 dense motion network提取信息。</p>
 <p>后续出的<a target="_blank" rel="noopener" href="https://github.com/yoyo-nb/Thin-Plate-Spline-Motion-Model">TPSMM</a>，提出TPS的非线性变换，通过原图和keypoint detector经过dense motion network提取optical flow，使用optical flow来做image inpaiting.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/harlanhong/CVPR2022-DaGAN">DaGAN</a> 使用self-supervised depth模型指导keypoint detector，然后将depth和原RGB输入cross attention模型，最后通过decoder解码。</p>
+<p>技术路线基本上是延续encoder-decoder的思路，只是对于输入的source+destination图像的信息提取不同，可提取的信息包括无监督关键点、深度信息、光流信息等，最后通过decoder解码，通过L1 perception等Loss进行模型训练。</p>
 <p><strong>改进</strong></p>
 <p>针对FOM&#x2F;TPSMM，转换为onnx模型，做了实时pipeline，实践中发现为了控制人物头部抖动，需要预选bbox或者平滑bbox。</p>
 <p>针对DaGAN模型，优化了best_frame的选取（pfpld 解决张嘴问题），onnx模型优化速度，<a target="_blank" rel="noopener" href="https://github.com/Rudrabha/Wav2Lip">wav2lip</a>优化嘴部等。</p>
 <p><strong>竞品</strong></p>
-<p>实际生产效果对标<a target="_blank" rel="noopener" href="https://www.d-id.com/">D-ID</a>。</p>
+<p>数字名片项目，实际生产效果对标<a target="_blank" rel="noopener" href="https://www.d-id.com/">D-ID</a>。</p>
 <h4 id="AudioDriven系列"><a href="#AudioDriven系列" class="headerlink" title="AudioDriven系列"></a>AudioDriven系列</h4><p><a target="_blank" rel="noopener" href="https://github.com/Rudrabha/Wav2Lip">wav2lip</a>是开山之作，提出了使用lip-sync expert作为loss，有强化学习的思想；</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/MRzzm/DINet">DINet</a>引入了AdaAT，将source和reference以及audio提取特征后做deformed feature，然后通过decoder生成图像；</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/vinthony/video-retalking">VideoReTalking</a>加入了emotion template，先用表情生成一个稳定视频，然后替换嘴部；</p>
-<h4 id="ADNerf"><a href="#ADNerf" class="headerlink" title="ADNerf"></a>ADNerf</h4><p>在ADNerf开源之前完成复现，原ADNerf对数据进行预处理，audio和image分别获得audio feature和landmark&#x2F;语义&#x2F;pose信息，通过泊松融合提取背景。然后进行two-stage的nerf训练，分别训练头部和肩部。</p>
-<p>生产上为了提高效果，主要从feature提取、loss设计、网络设计、调参等过程上进行优化。</p>
-<p>例如使用SynergyNet或者mediapipe提取head pose，利用wenet提取audio，引入hdr loss调整配比等。</p>
-<h4 id="数字人生产方案"><a href="#数字人生产方案" class="headerlink" title="数字人生产方案"></a>数字人生产方案</h4><p>最早基于apb2face，后面为了实现高清效果基于pix2pixHD；</p>
+<p>本质上与FOM系列类似，但引入了audio信息，特别是为了提升开口说话的效果，要做对于嘴部的特殊处理，例如利用mask单独做嘴部生成，或增加mouth loss，基本也是以关键点的形式完成。</p>
+<p>整体缺点一个是人物抖动、张嘴后的牙齿不明显（teethnet对牙齿增强），另一个关键问题是大范围动作无法还原回身体。</p>
+<h4 id="ADNerf"><a href="#ADNerf" class="headerlink" title="ADNerf"></a>ADNerf</h4><p>ADNerf是Nerf系列的产物，如果对于3D物体可以建模，那么很自然的可以想到对人体头部建模，从而驱动说话，属于novel view synthesis 新颖视图合成的类别，近年也有一些论文产出。</p>
+<p>原ADNerf对数据进行预处理，audio和image分别获得audio feature和landmark&#x2F;语义&#x2F;pose信息，通过泊松融合提取背景。然后进行two-stage的nerf训练，分别训练头部和肩部。</p>
+<p>生产上在ADNerf开源之前就完成了复现，为了提高效果，主要从feature提取、loss设计、网络设计、调参等过程上进行优化。</p>
+<p>例如使用<a target="_blank" rel="noopener" href="https://github.com/choyingw/SynergyNet">SynergyNet</a>或者mediapipe提取head pose，利用wenet提取audio，引入hdr loss调整配比等。</p>
+<p>但最后的结果一般，后续有机会跟ADNerf的作者进行了沟通，他承认本身团队达到的效果就一般，未能达到生产级别。</p>
+<h4 id="数字人生产方案"><a href="#数字人生产方案" class="headerlink" title="数字人生产方案"></a>数字人生产方案</h4><p>最早基于<a target="_blank" rel="noopener" href="https://github.com/zhangzjn/APB2Face">apb2face</a>，后面为了实现高清效果基于<a target="_blank" rel="noopener" href="https://github.com/NVIDIA/pix2pixHD">pix2pixHD</a>；</p>
 <p>需要长时间语料，对face image做区域遮挡，只对嘴型做pix2pix，输入audio feature + mask face&#x2F;reference face，参考图像是为了更稳定。</p>
-<p>loss包括perception loss(vgg) L1 loss等等。</p>
+<p>loss包括perception loss(vgg) L1 loss等等常见loss。</p>
 <p>生产上做的优化包括如何降低语料长度，TTS对中文更好的支持等等。</p>
 <p>一种比较trick的方案是使用短时长数据+FOM&#x2F;deepfake进行长时间语料生成。</p>
+<p>就说这么多。</p>
 
                 
               </div>
@@ -328,6 +338,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Notes/" class="category-chain-item">Notes</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AI/">#AI</a>
+      
+        <a href="/tags/TalkingHead/">#TalkingHead</a>
+      
+    </div>
   
 </div>
 
@@ -382,12 +422,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/16852/" title="action-mocap-2d-3d">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">action-mocap-2d-3d</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/47896/" title="AIGC_summary">
-                        <span class="hidden-mobile">AIGC_summary</span>
+                      <a href="/posts/47896/" title="AIGC项目相关全回顾">
+                        <span class="hidden-mobile">AIGC项目相关全回顾</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

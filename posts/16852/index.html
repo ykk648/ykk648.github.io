@@ -18,21 +18,25 @@
   <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="action-mocap-2d-3d">
+    <meta name="description" content="动作识别 基础概念 2D数字人驱动 3D数字人驱动竞品公司国内在单目3D数字人驱动上做的比较好的是北京的聚力维度，主打人脸表情丰富和单目动作驱动。 英国的move.ai在多目数字人驱动上效果较好，是多目的竞品对象。 其他一些竞品公司： 手部估计手部的估计模型有两种，第一种是MANO，本质上是SMPL+H，61个参数（15*3 + 10 shape + 3 cam + 3 rot），MANO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动作识别&#x2F;驱动项目全流程回顾">
 <meta property="og:url" content="http://example.com/posts/16852/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
+<meta property="og:description" content="动作识别 基础概念 2D数字人驱动 3D数字人驱动竞品公司国内在单目3D数字人驱动上做的比较好的是北京的聚力维度，主打人脸表情丰富和单目动作驱动。 英国的move.ai在多目数字人驱动上效果较好，是多目的竞品对象。 其他一些竞品公司： 手部估计手部的估计模型有两种，第一种是MANO，本质上是SMPL+H，61个参数（15*3 + 10 shape + 3 cam + 3 rot），MANO">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-21T07:53:58.000Z">
-<meta property="article:modified_time" content="2023-03-21T09:02:06.385Z">
+<meta property="article:modified_time" content="2023-03-29T10:15:36.114Z">
 <meta property="article:author" content="ykk648">
+<meta property="article:tag" content="Mocap">
+<meta property="article:tag" content="ActionRecognition">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>action-mocap-2d-3d - ykk648&#39;s hub</title>
+  <title>动作识别/驱动项目全流程回顾 - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="action-mocap-2d-3d"></span>
+            <span id="subtitle" data-typed-text="动作识别/驱动项目全流程回顾"></span>
           
         </div>
 
@@ -220,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          3k 字
         
       </span>
     
@@ -231,7 +235,7 @@
         
         
         
-          1 分钟
+          26 分钟
         
       </span>
     
@@ -277,12 +281,68 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">action-mocap-2d-3d</h1>
+            <h1 style="display: none">动作识别/驱动项目全流程回顾</h1>
             
             
               <div class="markdown-body">
                 
                 <span id="more"></span>
+
+
+
+<p>动作识别</p>
+<p>基础概念</p>
+<p>2D数字人驱动</p>
+<h3 id="3D数字人驱动"><a href="#3D数字人驱动" class="headerlink" title="3D数字人驱动"></a>3D数字人驱动</h3><h4 id="竞品公司"><a href="#竞品公司" class="headerlink" title="竞品公司"></a>竞品公司</h4><p>国内在单目3D数字人驱动上做的比较好的是北京的聚力维度，主打人脸表情丰富和单目动作驱动。</p>
+<p>英国的move.ai在多目数字人驱动上效果较好，是多目的竞品对象。</p>
+<p>其他一些竞品公司：</p>
+<h4 id="手部估计"><a href="#手部估计" class="headerlink" title="手部估计"></a>手部估计</h4><p>手部的估计模型有两种，第一种是MANO，本质上是SMPL+H，61个参数（15*3 + 10 shape + 3 cam + 3 rot），MANO又分为两种，一种是获取MANO params，也就是hand 3d pose数据，另一种是直接回归mesh。</p>
+<p><strong>MANO params 相关：</strong></p>
+<p>Minimal-Hand，以速度提升为主，为了达到实时，采用2D lift的方案，使用DetNet+IKNet，先检测2d+3d关键点，然后通过IK获得MANO参数，实际使用中速度是满足要求的，但是受限于训练数据和2D lift的方案，准确度不高，达不到生产级别；</p>
+<p>MobileHand，也是以移动端部署为核心，所以选择了MobileNetV3这样的轻量级backbone，做end2end的推理，image2mano，使用23个自由度代替MANO+PCA的方案，问题仍然是数据集，FreiHand几乎都是手部近景数据，这种paperwork在生产上效果很差；</p>
+<p>S2HAND采用自监督方式，但只要数据摆在那，无论网络结构还是训练方式玩出什么花，都无法解决生产问题。</p>
+<p><strong>MANO mesh 相关：</strong></p>
+<p>MobRecon，通过2D lifting 3D，然后通过spatial conv回归hand mesh；</p>
+<p>HandOccNet，主要针对手部遮挡的问题，使用FPN结构，通过改进transformer网络结构克服遮挡；</p>
+<p>手部估计另一种是<strong>SMPLX params</strong>，毕竟SMPLX里面也包含手部参数。</p>
+<p>FrankHand，实际上是从FrankMocap里面扒出来的手部估计模型，类HMR encoder-decoder结构，end2end从image中提取feature，然后获取SMPLX参数，FrankHand的优势在于训练数据足够丰富，几乎采用了市面上开源的所有手部数据，并将其统一格式，效果实测也是最好的。</p>
+<h4 id="人脸估计"><a href="#人脸估计" class="headerlink" title="人脸估计"></a>人脸估计</h4><p>没有较好的开源方案，主要有两条路线，一条是通过landmark或者face mesh驱动，效果不会很好，另一条是通过人脸3D重建获得3D系数，通过算法或网络转换到blendshape驱动，是工业界常用的方法。</p>
+<h4 id="身体估计"><a href="#身体估计" class="headerlink" title="身体估计"></a>身体估计</h4><p>身体估计的参数模型主要有SCAPE SMPL SMPLX STAR等，围绕这些参数模型，又可以将身体估计分为pose估计和mesh估计，从估计方法上，可以分为回归方法、混合方法、基于时序的方法等。围绕身体参数，引入外部硬件的又有基于IMU的身体估计，使用运动学算法优化的physical方法等。</p>
+<p>几乎阅读并复现了这个领域所有效果看起来可以的论文，大部分是通过魔改结构或者数据增强在human3.6m数据集上刷榜。</p>
+<p><strong>回归方法</strong></p>
+<p>HMR是人体姿态估计的开山之作，通过2D joints回归SMPL param；</p>
+<p>PyMAF使用spatial feature pyramid学习pose的dense特征，使用HRNet提取grid feature，通过反馈网络精细化mesh；</p>
+<p>Mesh Transformer使用transformer结构来学习pose特征，不经过SMPL参数，直接回归3D关键点和mesh；</p>
+<p>ROMP解决了多人实时估计的问题，使用HRNet+CoordConv，输入尺寸达到512；</p>
+<p><strong>混合方法</strong></p>
+<p>SPIN在HMR基础上加入了SMPLify先验（由CMU pose数据学习，通过不断迭代回归来逼近SMPL参数）；</p>
+<p>ETF使用比SPMLify更好的回归方式，构建大规模训练集</p>
+<p>PARE着力解决人体姿态估计中的遮挡问题，做occlusion sensitivity analysis;</p>
+<p>DynaBOA通过test-time-augmentation在Human3.6M上刷榜；</p>
+<p>HybrIK解决了3D-mesh的问题，为了提高IKNet效果，将旋转分为twist+swing两个部分处理（额外标注）；</p>
+<p>LVD使用新颖的视角，通过vertex descent从image回归mesh；</p>
+<p><strong>基于时序的方法</strong></p>
+<p>VIBE是开山之作，通过AMASS学习先验，通过GRU实现时序encoder（工程上优化到实时）；</p>
+<p>TCMR首先用r50 backbone提取所有frame的静态特征，然后基于GRU回归pose参数，通过前后帧监督调整当前帧，时间序列上更加平滑；</p>
+<p>DeciWatch解决了时间序列pose估计的效率问题，使用frame sample，类似于插帧算法，sample系数就是加速倍数；</p>
+<p><strong>基于运动学优化&#x2F;传感器的方法</strong></p>
+<p>PhysCap使用openpose提取人体2d joints，基于RBDL做运动学优化，特别是GRF（ground reaction force）的计算，优化接地效果；</p>
+<p>PIP结合IMU与RBDL运动学优化，效果较好但毕竟引入了惯性传感器；</p>
+<p>UnderPressure为了解决脚部接地的问题，建立了GRF数据集，并通过网络预测GRF，优化脚部接地效果；</p>
+<p>TransPose直接基于noitom的IMU做运动估计；</p>
+<p>rgbd-kinect使用kinect相机获取深度信息（API出pose），mediapipe估计人脸，minimal-hand估计手部，效果差；</p>
+<p>Stanford团队的<a target="_blank" rel="noopener" href="https://github.com/davrempe/contact-human-dynamics">contact-human-dynamics</a>部分借鉴CMU的MTC，引入TOWR做运动学优化，优化人物的接地效果；</p>
+<p>后续又提出<a target="_blank" rel="noopener" href="https://github.com/davrempe/humor">HuMor</a>使用vposer做先验，在测试时进行增强，不适用于实时驱动的场景；</p>
+<h4 id="Full-Body估计"><a href="#Full-Body估计" class="headerlink" title="Full Body估计"></a>Full Body估计</h4><h3 id="单目工程方案"><a href="#单目工程方案" class="headerlink" title="单目工程方案"></a>单目工程方案</h3><p>3D人物的建模与渲染，在Blender&#x2F;UE4&#x2F;Unity三个平台上都有进行，blender适合算法人员测试，Unity的开源支持更多，UE4需要专门的UE工程师协调，核心在于接收算法端发送的pose数据（终端做一些处理），最终驱动人物的骨骼模型（SMPLX）。</p>
+<p>整个方案将身体与手分开做，原因手部估计是单目估计最困难的部分：</p>
+<p>身体估计采用image2pose的方案，基于coco-annotator标注工具标注了大量本地数据（2D joints），然后通过smplify+ETF方式构建pseudo annotation，基于SPIN结构训练模型；</p>
+<p>手部训练一个区分左右手模型，训练一个手部检测器（基于100DOH+本地数据，测试发现超过了全网开源的所有手部检测器），然后使用image2pose的方案估计手部pose，对于缺失值&#x2F;异常值需要加判断逻辑；</p>
+<p>滤波器测试了kalman one-euro Savitzky-Golay等，效果类似主要看超参数的调整，最终使用多重滤波器，分别在joints&#x2F;pose&#x2F;skeleton等不同级别上通过不同参数滤波；</p>
+<p>人脸估计部分，一个简单方案是Deep3DFaceRecon回归表情系数，通过Expression2Blendshape2Arkit的pipeline，等于捡apple的剩饭吃，在限定条件下（光线、距离）还是可以取得不错的效果。</p>
+<h3 id="多目工程方案"><a href="#多目工程方案" class="headerlink" title="多目工程方案"></a>多目工程方案</h3><p>对标竞品Move.ai，同样采用gopro来搭建场地。</p>
+<p>多种人体2D关键点检测算法</p>
+<p>多种triangulation方式</p>
+<p>基于IKNet做3D joints to pose</p>
 
                 
               </div>
@@ -291,6 +351,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Notes/" class="category-chain-item">Notes</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Mocap/">#Mocap</a>
+      
+        <a href="/tags/ActionRecognition/">#ActionRecognition</a>
+      
+    </div>
   
 </div>
 
@@ -300,7 +390,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>action-mocap-2d-3d</div>
+      <div>动作识别/驱动项目全流程回顾</div>
       <div>http://example.com/posts/16852/</div>
     </div>
     <div class="license-meta">

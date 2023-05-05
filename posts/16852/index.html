@@ -18,16 +18,16 @@
   <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
-    <meta name="description" content="动作识别 基础概念 2D数字人驱动竞品公司deepmotion，基于几年自研的运动估计模型（大量cpu集群做运动优化），用户上传单目video返回bvh，效果业内领先； TDPT&#x2F;VseeFace&#x2F;Kalidokit 一类伪开源项目 3D数字人驱动竞品公司国内在单目3D数字人驱动上做的比较好的是北京的聚力维度，主打人脸表情丰富和单目动作驱动。 英国的move.ai在多目">
+    <meta name="description" content="包括最简单的2D动作识别，复杂一些的2D 3D数字人驱动，单目&#x2F;多目数字人工程方案。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动作识别&#x2F;驱动项目全流程回顾">
 <meta property="og:url" content="http://example.com/posts/16852/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="动作识别 基础概念 2D数字人驱动竞品公司deepmotion，基于几年自研的运动估计模型（大量cpu集群做运动优化），用户上传单目video返回bvh，效果业内领先； TDPT&#x2F;VseeFace&#x2F;Kalidokit 一类伪开源项目 3D数字人驱动竞品公司国内在单目3D数字人驱动上做的比较好的是北京的聚力维度，主打人脸表情丰富和单目动作驱动。 英国的move.ai在多目">
+<meta property="og:description" content="包括最简单的2D动作识别，复杂一些的2D 3D数字人驱动，单目&#x2F;多目数字人工程方案。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/3d_mocap_ue_4cam.png">
 <meta property="article:published_time" content="2023-03-21T07:53:58.000Z">
-<meta property="article:modified_time" content="2023-04-26T10:27:30.855Z">
+<meta property="article:modified_time" content="2023-05-05T07:27:15.229Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="Mocap">
 <meta property="article:tag" content="ActionRecognition">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          5k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          29 分钟
+          42 分钟
         
       </span>
     
@@ -288,14 +288,34 @@
             
               <div class="markdown-body">
                 
-                <span id="more"></span>
+                <p>包括最简单的2D动作识别，复杂一些的2D 3D数字人驱动，单目&#x2F;多目数字人工程方案。</p>
+<span id="more"></span>
 
 
 
-<p>动作识别</p>
-<p>基础概念</p>
-<h3 id="2D数字人驱动"><a href="#2D数字人驱动" class="headerlink" title="2D数字人驱动"></a>2D数字人驱动</h3><h4 id="竞品公司"><a href="#竞品公司" class="headerlink" title="竞品公司"></a>竞品公司</h4><p>deepmotion，基于几年自研的运动估计模型（大量cpu集群做运动优化），用户上传单目video返回bvh，效果业内领先；</p>
-<p>TDPT&#x2F;VseeFace&#x2F;Kalidokit 一类伪开源项目</p>
+<h3 id="全景思维导图"><a href="#全景思维导图" class="headerlink" title="全景思维导图"></a>全景思维导图</h3><p>（隐去生产部署细节</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/3D%20Mocap.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="动作识别"><a href="#动作识别" class="headerlink" title="动作识别"></a>动作识别</h3><p>动作识别用于健身大屏、虚拟拜佛等生产场景，依托于大屏（一张RTX3080，双RGB摄），深度学习+UE4的组合来实现一些生产的互娱需求，由于UE4占用比较多的计算资源，动作识别的核心痛点在于利用单目RGB做一些准确率达标的实时应用。</p>
+<p>作为应用基础，也在其上开发了一些滑雪&#x2F;切水果等互娱应用，复用一套算法pipeline、API接口即可。</p>
+<p>实现的思路很简单，单帧提取动作，多帧做滑动窗口，提取feature通过分类器进行动作分类，分类器实现了包括NN，Linear SVM，RandomForest，XGBoost等机器学习方法，，MLP等深度学习网络，也包括基础的模型集成，投票选举等功能。</p>
+<p>一些tricks包括noise的添加（data aug）,nan的处理逻辑（前帧）,feature包括哪些信息（pose 位移 速度 增加了joint angle）。</p>
+<p>项目是我中间接手的，接手后做的主要工作包括mediapipe替代老旧的openpose提速（保证精度损失）；data处理代码重构，进行提速，保留重复处理数据，减少存盘环节；增加关节角度信息丰富feature的组成等等，最终效果是数据采集完成后，单卡20min训练一个动作识别模型，提速数倍。</p>
+<p>动作识别效果：</p>
+<p><video src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/bow_results_cut_out.mp4" controls></video></p>
+<hr>
+<h3 id="数字人驱动基础概念"><a href="#数字人驱动基础概念" class="headerlink" title="数字人驱动基础概念"></a>数字人驱动基础概念</h3><p>一些基础的数学概念，思维导图：</p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/Math.png?imageView2/2/w/700" srcset="/img/loading.gif" lazyload></p>
+<h4 id="相机模型"><a href="#相机模型" class="headerlink" title="相机模型"></a>相机模型</h4><p>相机内参 外参  畸变系数</p>
+<p>张正友标定法 ChArUco 对极约束  PnP (Perspective n point  Homography matrix(单应矩阵</p>
+<p>三角化 Triangulation  DLT(Direct Linear Transform) SVD求解  RANSAC</p>
+<h4 id="IK"><a href="#IK" class="headerlink" title="IK"></a>IK</h4><p>IK Solver  IK Net  IK algorithm</p>
+<h4 id="Param-Model"><a href="#Param-Model" class="headerlink" title="Param Model"></a>Param Model</h4><p>SCAPE SMPL SMPL-X STAR</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>Filter（smooth滤波器） Rotation（4种形式和变换 ） 优化方法（梯度下降 牛顿 L-BFGS SGD EM）</p>
+<hr>
+<h3 id="2D数字人驱动"><a href="#2D数字人驱动" class="headerlink" title="2D数字人驱动"></a>2D数字人驱动</h3><h4 id="竞品公司"><a href="#竞品公司" class="headerlink" title="竞品公司"></a>竞品公司</h4><p>deepmotion，基于几年自研的运动估计模型（大量cpu集群做运动优化），用户上传单目video返回bvh，效果业内领先，偶发失误；</p>
+<p>TDPT&#x2F;VseeFace&#x2F;Kalidokit 一类伪开源项目，主要通过2D关键点lift到3D关键点，或者直接IKNet计算出关节旋转角度，缺点是关节翻转问题严重；</p>
+<h4 id="Pose提取"><a href="#Pose提取" class="headerlink" title="Pose提取"></a>Pose提取</h4><hr>
 <h3 id="3D数字人驱动"><a href="#3D数字人驱动" class="headerlink" title="3D数字人驱动"></a>3D数字人驱动</h3><h4 id="竞品公司-1"><a href="#竞品公司-1" class="headerlink" title="竞品公司"></a>竞品公司</h4><p>国内在单目3D数字人驱动上做的比较好的是北京的聚力维度，主打人脸表情丰富和单目动作驱动。</p>
 <p>英国的move.ai在多目数字人驱动上效果较好，是多目的竞品对象。</p>
 <p>其他一些竞品公司：</p>
@@ -336,12 +356,14 @@
 <p>rgbd-kinect使用kinect相机获取深度信息（API出pose），mediapipe估计人脸，minimal-hand估计手部，效果差；</p>
 <p>Stanford团队的<a target="_blank" rel="noopener" href="https://github.com/davrempe/contact-human-dynamics">contact-human-dynamics</a>部分借鉴CMU的MTC，引入TOWR做运动学优化，优化人物的接地效果；</p>
 <p>后续又提出<a target="_blank" rel="noopener" href="https://github.com/davrempe/humor">HuMor</a>使用vposer做先验，在测试时进行增强，不适用于实时驱动的场景；</p>
-<h4 id="Full-Body估计"><a href="#Full-Body估计" class="headerlink" title="Full Body估计"></a>Full Body估计</h4><h3 id="单目工程方案"><a href="#单目工程方案" class="headerlink" title="单目工程方案"></a>单目工程方案</h3><p>3D人物的建模与渲染，在Blender&#x2F;UE4&#x2F;Unity三个平台上都有进行，blender适合算法人员测试，Unity的开源支持更多，UE4需要专门的UE工程师协调，核心在于接收算法端发送的pose数据（终端做一些处理），最终驱动人物的骨骼模型（SMPLX）。</p>
+<h4 id="Full-Body估计"><a href="#Full-Body估计" class="headerlink" title="Full Body估计"></a>Full Body估计</h4><hr>
+<h3 id="单目工程方案"><a href="#单目工程方案" class="headerlink" title="单目工程方案"></a>单目工程方案</h3><p>3D人物的建模与渲染，在Blender&#x2F;UE4&#x2F;Unity三个平台上都有进行，blender适合算法人员测试，Unity的开源支持更多，UE4需要专门的UE工程师协调，核心在于接收算法端发送的pose数据（终端做一些处理），最终驱动人物的骨骼模型（SMPLX）。</p>
 <p>整个方案将身体与手分开做，原因手部估计是单目估计最困难的部分：</p>
 <p>身体估计采用image2pose的方案，基于coco-annotator标注工具标注了大量本地数据（2D joints），然后通过smplify+ETF方式构建pseudo annotation，基于SPIN结构训练模型；</p>
 <p>手部训练一个区分左右手模型，训练一个手部检测器（基于100DOH+本地数据，测试发现超过了全网开源的所有手部检测器），然后使用image2pose的方案估计手部pose，对于缺失值&#x2F;异常值需要加判断逻辑；</p>
 <p>滤波器测试了kalman one-euro Savitzky-Golay等，效果类似主要看超参数的调整，最终使用多重滤波器，分别在joints&#x2F;pose&#x2F;skeleton等不同级别上通过不同参数滤波；</p>
 <p>人脸估计部分，一个简单方案是Deep3DFaceRecon回归表情系数，通过Expression2Blendshape2Arkit的pipeline，等于捡apple的剩饭吃，在限定条件下（光线、距离）还是可以取得不错的效果。</p>
+<hr>
 <h3 id="多目工程方案"><a href="#多目工程方案" class="headerlink" title="多目工程方案"></a>多目工程方案</h3><p>对标竞品Move.ai，同样采用gopro来搭建场地。</p>
 <h4 id="gopro同步算法"><a href="#gopro同步算法" class="headerlink" title="gopro同步算法"></a>gopro同步算法</h4><p>相机同步是影响多目效果的关键因素之一，gopro基于网络提供RTMP服务，但延迟较高，且无法同步。</p>
 <p>自建一套相机同步算法，可以达到多目相机的RTMP收流秒级同步，实现无线多目同步输出：</p>
@@ -349,9 +371,14 @@
 <p>实际使用还是有线方案，RTMP依赖网络，延迟较高无法解决</p>
 <h4 id="2D人体关键点检测"><a href="#2D人体关键点检测" class="headerlink" title="2D人体关键点检测"></a>2D人体关键点检测</h4><p>多种人体2D关键点检测算法，开源项目普遍还是使用mediapipe，原因是速度快，多平台部署方便，支持移动端。实际在生产上效果不好，CPU占用率高，错误率非常高，所以编译GPU版本&#x2F;导出onnx模型（生态本身较封闭），仅适合在低需求场景下使用。</p>
 <p>mediapipe与body估计模型效果对比：</p>
-<p><video src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_body_detect_mediapipe-vitpose_compare.mp4" controls></video></p>
-<p>多种triangulation方式</p>
-<p>基于IKNet做3D joints to pose</p>
+<p><video src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_body_detect_mediapipe-vitpose_compare.mp4" width="1920" height="540" controls></video></p>
+<h4 id="多种triangulation方式"><a href="#多种triangulation方式" class="headerlink" title="多种triangulation方式"></a>多种triangulation方式</h4><p>有一部分论文使用CNN来进行triangulation，比如清华的lightcap，微软的VoxelPose，基于human3.6 mosh数据，一些体密度估计方法，加入一些heatmap HRNet等网络改进，最终通过end2end CNN来解决问题，实测效果都存在作用域受限的问题。</p>
+<p>基于几何（Algebraic）的triangulation更加靠谱，尤其是在相机同步和关键点搞定之后，基于几何三角化的效果满足生产需求。</p>
+<p>有一些开源的例如RANSAC Triangulation等，效果一般，主要速度慢，在整个实时3D估计人体的pipeline里面，留给三角化的CPU资源不算少，但在多相机条件下实时三角化还是比较苛刻。</p>
+<p>两种三角化的通用做法，一种是“from best camera”,一种是“check repro  error”，这都是我自己起的名字，核心思想都是通过reprojection（重投影）来找到误差最大的相机，从而通过不断迭代缩写reprojection误差，速度上也与代码实现有关。</p>
+<h4 id="基于IKNet做3D-joints-to-pose"><a href="#基于IKNet做3D-joints-to-pose" class="headerlink" title="基于IKNet做3D joints to pose"></a>基于IKNet做3D joints to pose</h4><p>思路来自于HyberIK，魔改HybeerIK的IKNet，先获得bone axis的旋转，再做batch  IK, 实现3d joints to rotation。</p>
+<hr>
+<h3 id="Text2Motion"><a href="#Text2Motion" class="headerlink" title="Text2Motion"></a>Text2Motion</h3><p>一个奇怪的paper分支，大概是基于HumanML3D KIT等几个text2motion数据集，做一些基于BERT&#x2F;CLIP理解文本，VAE&#x2F;diffusion&#x2F;attention推理的方案，不出意外效果都很差。</p>
 
                 
               </div>

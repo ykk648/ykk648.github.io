@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/deepfake.jpg.JPG">
 <meta property="article:published_time" content="2023-01-12T08:37:10.000Z">
-<meta property="article:modified_time" content="2023-04-26T09:16:41.383Z">
+<meta property="article:modified_time" content="2023-05-05T07:31:15.469Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="DeepFake">
@@ -424,6 +424,7 @@
 </ul>
 <h4 id="模型加密"><a href="#模型加密" class="headerlink" title="模型加密"></a>模型加密</h4><p>调研了市面上所有加密方案，选用pyarmor加密py代码，通过aes256加密模型，在py代码中对模型解码，打包项目提供接口，由于工程组不会写python和C++的交互，建立了CVQueue（cv2box），完全模拟queue操作，使用sharedmemory来做单PC C++和python不同进程间通信。</p>
 <h4 id="平台支持"><a href="#平台支持" class="headerlink" title="平台支持"></a>平台支持</h4><p>支持linux&#x2F;windows，docker部署，支持wsl2部署，设计了基于RTMP流媒体服务器的换脸服务架构，由于研发部门能力有限无法实现。</p>
+<hr>
 <h3 id="其他工作"><a href="#其他工作" class="headerlink" title="其他工作"></a>其他工作</h3><h4 id="MobileFaceSwap"><a href="#MobileFaceSwap" class="headerlink" title="MobileFaceSwap"></a><a target="_blank" rel="noopener" href="https://github.com/Seanseattle/MobileFaceSwap">MobileFaceSwap</a></h4><p>百度出品，目的是一个ID一个模型，通过dw conv和unet减少模型体积，适合边缘设备，进行了网络复现和模型训练。</p>
 <h4 id="FSLSD"><a href="#FSLSD" class="headerlink" title="FSLSD"></a><a target="_blank" rel="noopener" href="https://github.com/cnnlstm/FSLSD_HiRes">FSLSD</a></h4><p>基于psp(pixel2style2pixel)和stylegan，通过latent做face swap，效果一般。</p>
 <h4 id="AI-power"><a href="#AI-power" class="headerlink" title="AI_power"></a><a target="_blank" rel="noopener" href="https://github.com/ykk648/AI_power">AI_power</a></h4><p>在建立DFL&#x2F;HifiFace&#x2F;Simswap各类换脸pipeline过程中，建立了基于cv2box的多进程方案，发现在不同任务中可以复用模型和进程，于是建立了AI_power工程，将各类AI能力提取，建立API，实现了plug-in的AI模块，在后续换脸&#x2F;人体驱动&#x2F;表情驱动等项目开发中，使用cv2box+AI_power堆积木的方式构建工程，提供一个新功能的pipeline一般只需要1-2天，丰富了公司的AI能力库。</p>

@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_digital_human.jpg">
 <meta property="article:published_time" content="2023-03-02T06:44:35.000Z">
-<meta property="article:modified_time" content="2023-03-16T10:51:05.207Z">
+<meta property="article:modified_time" content="2023-05-05T07:28:58.914Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="TalkingHead">
@@ -297,13 +297,16 @@
 </ol>
 <span id="more"></span>
 
-<p><a target="_blank" rel="noopener" href="https://cdn.guiji.ai/ows/media/ppt.84f5affa.mp4">数字人生产效果展示</a>  </p>
+<h3 id="数字人生产效果展示"><a href="#数字人生产效果展示" class="headerlink" title="数字人生产效果展示"></a>数字人生产效果展示</h3><p>（视频来自公司官网：</p>
+<p><video src="https://cdn.guiji.ai/ows/media/ppt.84f5affa.mp4" controls></video></p>
+<hr>
 <h3 id="Anime-Face-Driving"><a href="#Anime-Face-Driving" class="headerlink" title="Anime Face Driving"></a>Anime Face Driving</h3><h4 id="THA-Talking-Head-Anime-系列"><a href="#THA-Talking-Head-Anime-系列" class="headerlink" title="THA(Talking Head Anime)系列"></a>THA(Talking Head Anime)系列</h4><p>作者都是泰国小哥，<a target="_blank" rel="noopener" href="http://github.com/dragonmeteor/talking-head-anime-demo">THA</a>是使用自己标注的6 pose数据train的GAN，结构类似cyclegan，额外增加一个face rotater用于头部旋转；</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/pkhungurn/talking-head-anime-2-demo">THA2</a> 引入了<a target="_blank" rel="noopener" href="https://www.ifacialmocap.com/">ifacialmocap</a>驱动，网络输入由6 pose变为42 blendshape，增加了更多表情。</p>
 <p>两代开源代码加waifu的anime头像生成，就可以完成一个基本的动漫头像驱动，接近一些主播使用的动漫头像替身效果。</p>
 <h4 id="EasyVtuber系列"><a href="#EasyVtuber系列" class="headerlink" title="EasyVtuber系列"></a>EasyVtuber系列</h4><p><a target="_blank" rel="noopener" href="https://github.com/GunwooHan/EasyVtuber">EasyVtuber</a> 使用mediapipe提取face mesh，其余与THA类似，增加了obs功能。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/yuyuyzl/EasyVtuber">EasyVtuber2</a> 借鉴THA2，直接使用ifacialmocap提取blendshape，通过UDP发送，直接驱动动漫头像。</p>
 <p>EasyVtuber在THA基础上封装了易用的obs等功能，更接近一个初级产品形态。</p>
+<hr>
 <h3 id="Human-Face-Driving"><a href="#Human-Face-Driving" class="headerlink" title="Human Face Driving"></a>Human Face Driving</h3><h4 id="FOM系列"><a href="#FOM系列" class="headerlink" title="FOM系列"></a>FOM系列</h4><p><strong>介绍</strong></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/AliaksandrSiarohin/first-order-model">FOM</a>前身是monkey-net，核心是 unsupervised keypoint detector，然后通过 dense motion network提取信息。</p>
 <p>后续出的<a target="_blank" rel="noopener" href="https://github.com/yoyo-nb/Thin-Plate-Spline-Motion-Model">TPSMM</a>，提出TPS的非线性变换，通过原图和keypoint detector经过dense motion network提取optical flow，使用optical flow来做image inpaiting.</p>

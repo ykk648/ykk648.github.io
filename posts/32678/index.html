@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230326-NYCClouds_ZH-CN2585785154_UHD.jpg">
 <meta property="article:published_time" content="2023-02-10T06:28:42.000Z">
-<meta property="article:modified_time" content="2023-05-05T09:33:59.044Z">
+<meta property="article:modified_time" content="2023-05-06T06:48:09.288Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="ChatGPT">
@@ -291,10 +291,10 @@
                 <p>半路出家，赶一波LLM热潮。</p>
 <span id="more"></span>
 
-<h3 id="中文大模型"><a href="#中文大模型" class="headerlink" title="中文大模型"></a>中文大模型</h3><p>ChatGLM LLAMA BLOOM</p>
+<h3 id="中文大模型"><a href="#中文大模型" class="headerlink" title="中文大模型"></a>中文大模型</h3><p>ChatGLM LLAMA BLOOM MOSS</p>
 <p>参考xmind</p>
 <hr>
-<h3 id="NLP相关工作"><a href="#NLP相关工作" class="headerlink" title="NLP相关工作"></a>NLP相关工作</h3><h4 id="Humanable-with-ChatGPT"><a href="#Humanable-with-ChatGPT" class="headerlink" title="Humanable with ChatGPT"></a>Humanable with ChatGPT</h4><p>基于 <a target="_blank" rel="noopener" href="https://github.com/llSourcell/ChatGPT_Clone">chatgpt-clone</a>，通过vecel搭建在线服务，分为nodejs的前端和openai API的后端部分，使用Operand在线服务提取知识图谱（html），在调用chatgpt时注入知识图谱搜索的信息，实现了最easy的一种拟人化回答方式，可以改写chatgpt的回答。</p>
+<h3 id="NLP实现的相关工作"><a href="#NLP实现的相关工作" class="headerlink" title="NLP实现的相关工作"></a>NLP实现的相关工作</h3><h4 id="Humanable-with-ChatGPT"><a href="#Humanable-with-ChatGPT" class="headerlink" title="Humanable with ChatGPT"></a>Humanable with ChatGPT</h4><p>基于 <a target="_blank" rel="noopener" href="https://github.com/llSourcell/ChatGPT_Clone">chatgpt-clone</a>，通过vecel搭建在线服务，分为nodejs的前端和openai API的后端部分，使用Operand在线服务提取知识图谱（html），在调用chatgpt时注入知识图谱搜索的信息，实现了最easy的一种拟人化回答方式，可以改写chatgpt的回答。</p>
 <h4 id="Dialogue-Chatbot"><a href="#Dialogue-Chatbot" class="headerlink" title="Dialogue Chatbot"></a>Dialogue Chatbot</h4><p>希望实现humanable的chatbot，围绕着复现CAI（character.ai），尝试开源的Pygmalion,KoboldAI等方案，整体采用的还是prompts engineerring方式，通过设立character简介，在prompts前注入部分dialogue，在一些经过story&#x2F;NSFW&#x2F;novel finetune过的LLM上可以进行高质量的多轮对话。</p>
 <p>此外CAI还加入了一些在线的dialogue打分机制，可能通过在线学习增强了人物的personification。</p>
 <h4 id="LangChain"><a href="#LangChain" class="headerlink" title="LangChain"></a>LangChain</h4><p>基于langchain_GLM，使用chatglm-6b作为base模型，通过text-&gt;embedding-&gt;vector database-&gt;similarity search-&gt;prompts的通用方式，实现外挂知识库查询，延伸的功能还包括本地非结构化文档分析。</p>

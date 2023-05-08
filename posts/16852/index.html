@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/3d_mocap_ue_4cam.png">
 <meta property="article:published_time" content="2023-03-21T07:53:58.000Z">
-<meta property="article:modified_time" content="2023-05-05T07:27:15.229Z">
+<meta property="article:modified_time" content="2023-05-08T06:53:15.868Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="Mocap">
 <meta property="article:tag" content="ActionRecognition">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5k 字
+          5.4k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          42 分钟
+          46 分钟
         
       </span>
     
@@ -302,7 +302,7 @@
 <p>一些tricks包括noise的添加（data aug）,nan的处理逻辑（前帧）,feature包括哪些信息（pose 位移 速度 增加了joint angle）。</p>
 <p>项目是我中间接手的，接手后做的主要工作包括mediapipe替代老旧的openpose提速（保证精度损失）；data处理代码重构，进行提速，保留重复处理数据，减少存盘环节；增加关节角度信息丰富feature的组成等等，最终效果是数据采集完成后，单卡20min训练一个动作识别模型，提速数倍。</p>
 <p>动作识别效果：</p>
-<p><video src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/bow_results_cut_out.mp4" controls></video></p>
+<p><video src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/bow_results_cut_out.mp4" width="400" height="400" controls></video></p>
 <hr>
 <h3 id="数字人驱动基础概念"><a href="#数字人驱动基础概念" class="headerlink" title="数字人驱动基础概念"></a>数字人驱动基础概念</h3><p>一些基础的数学概念，思维导图：</p>
 <p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/Math.png?imageView2/2/w/700" srcset="/img/loading.gif" lazyload></p>
@@ -356,7 +356,12 @@
 <p>rgbd-kinect使用kinect相机获取深度信息（API出pose），mediapipe估计人脸，minimal-hand估计手部，效果差；</p>
 <p>Stanford团队的<a target="_blank" rel="noopener" href="https://github.com/davrempe/contact-human-dynamics">contact-human-dynamics</a>部分借鉴CMU的MTC，引入TOWR做运动学优化，优化人物的接地效果；</p>
 <p>后续又提出<a target="_blank" rel="noopener" href="https://github.com/davrempe/humor">HuMor</a>使用vposer做先验，在测试时进行增强，不适用于实时驱动的场景；</p>
-<h4 id="Full-Body估计"><a href="#Full-Body估计" class="headerlink" title="Full Body估计"></a>Full Body估计</h4><hr>
+<h4 id="Full-Body估计"><a href="#Full-Body估计" class="headerlink" title="Full Body估计"></a>Full Body估计</h4><p>SMPL-X是full body估计的主要参数模型，原因是融合了脸部的FLAME和手部的参数，真正实现了全身模型，也包括提出了vposer的先验。<br>但是工程上很难使用SMPLX做出成果，最大的原因就是缺少数据，不像SMPLX的普朗克实验室一样可以去3D scan一些数据集，开源的数据集大部分还是在2d joints数据，即使human3.6m也是在通过mosh取的的3D pose先验。</p>
+<p>开源比较好的全身估计包括meta的<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/frankmocap">FrankMocap</a>，<a target="_blank" rel="noopener" href="https://github.com/mks0601/Hand4Whole_RELEASE">Hand4Whole</a> ，等等。</p>
+<p>FrankMocap的创造性在于将身体和手部分开预测，然后结合在一起，来解决手部姿态预测困难的问题，这部分模型也是私有数据train的，开源的<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/eft">EFT</a>也证明了meta在开源数据整合上走了很远，生产的数据生成也采用了ETF的方式。</p>
+<p>在手部和身体的结合上，frankmocap提出了两种，一种是简单的copy&amp;paste，另一种是通过2d joints优化，耗时较长。</p>
+<p>能够获得全身3D关键点的比较多，即使mediapipe加入了大量私有数据集也做不好，失误较多。</p>
+<hr>
 <h3 id="单目工程方案"><a href="#单目工程方案" class="headerlink" title="单目工程方案"></a>单目工程方案</h3><p>3D人物的建模与渲染，在Blender&#x2F;UE4&#x2F;Unity三个平台上都有进行，blender适合算法人员测试，Unity的开源支持更多，UE4需要专门的UE工程师协调，核心在于接收算法端发送的pose数据（终端做一些处理），最终驱动人物的骨骼模型（SMPLX）。</p>
 <p>整个方案将身体与手分开做，原因手部估计是单目估计最困难的部分：</p>
 <p>身体估计采用image2pose的方案，基于coco-annotator标注工具标注了大量本地数据（2D joints），然后通过smplify+ETF方式构建pseudo annotation，基于SPIN结构训练模型；</p>
@@ -367,11 +372,11 @@
 <h3 id="多目工程方案"><a href="#多目工程方案" class="headerlink" title="多目工程方案"></a>多目工程方案</h3><p>对标竞品Move.ai，同样采用gopro来搭建场地。</p>
 <h4 id="gopro同步算法"><a href="#gopro同步算法" class="headerlink" title="gopro同步算法"></a>gopro同步算法</h4><p>相机同步是影响多目效果的关键因素之一，gopro基于网络提供RTMP服务，但延迟较高，且无法同步。</p>
 <p>自建一套相机同步算法，可以达到多目相机的RTMP收流秒级同步，实现无线多目同步输出：</p>
-<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/gorpo_rtmp_sync.JPG?imageView2/2/w/700" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/gorpo_rtmp_sync.JPG?imageView2/2/w/400" srcset="/img/loading.gif" lazyload></p>
 <p>实际使用还是有线方案，RTMP依赖网络，延迟较高无法解决</p>
 <h4 id="2D人体关键点检测"><a href="#2D人体关键点检测" class="headerlink" title="2D人体关键点检测"></a>2D人体关键点检测</h4><p>多种人体2D关键点检测算法，开源项目普遍还是使用mediapipe，原因是速度快，多平台部署方便，支持移动端。实际在生产上效果不好，CPU占用率高，错误率非常高，所以编译GPU版本&#x2F;导出onnx模型（生态本身较封闭），仅适合在低需求场景下使用。</p>
 <p>mediapipe与body估计模型效果对比：</p>
-<p><video src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_body_detect_mediapipe-vitpose_compare.mp4" width="1920" height="540" controls></video></p>
+<p><video src="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_body_detect_mediapipe-vitpose_compare.mp4" width="480" height="135" controls></video></p>
 <h4 id="多种triangulation方式"><a href="#多种triangulation方式" class="headerlink" title="多种triangulation方式"></a>多种triangulation方式</h4><p>有一部分论文使用CNN来进行triangulation，比如清华的lightcap，微软的VoxelPose，基于human3.6 mosh数据，一些体密度估计方法，加入一些heatmap HRNet等网络改进，最终通过end2end CNN来解决问题，实测效果都存在作用域受限的问题。</p>
 <p>基于几何（Algebraic）的triangulation更加靠谱，尤其是在相机同步和关键点搞定之后，基于几何三角化的效果满足生产需求。</p>
 <p>有一些开源的例如RANSAC Triangulation等，效果一般，主要速度慢，在整个实时3D估计人体的pipeline里面，留给三角化的CPU资源不算少，但在多相机条件下实时三角化还是比较苛刻。</p>
@@ -470,6 +475,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/47896/" title="AIGC项目相关全回顾">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AIGC项目相关全回顾</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

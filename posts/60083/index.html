@@ -18,28 +18,28 @@
   <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在面试创业团队的时候被问到在StableDiffusion中如何解决离散图片&#x2F;视频生成视频连续性的问题，在该应用场景上我目前完整复现了开源效果，被大佬质疑如何比开源效果还好，我认为有监督才是解决的唯一方法，临时想了一些方案被否定了，这里事后整理一些设想。">
+    <meta name="description" content="面了一家北京公司，提到希望对唇形优化，测试了官方的微信小程序，背景分割有锯齿状，口型与TTS对不上，脸部超分存在色差，应该是类似wav2lip GAN的方案，这是大部分初创公司会选择的方案。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="StableDiffusion深度思考（连续性）">
-<meta property="og:url" content="http://example.com/posts/10910/index.html">
+<meta property="og:title" content="数字人深度思考（唇形优化）">
+<meta property="og:url" content="http://example.com/posts/60083/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="在面试创业团队的时候被问到在StableDiffusion中如何解决离散图片&#x2F;视频生成视频连续性的问题，在该应用场景上我目前完整复现了开源效果，被大佬质疑如何比开源效果还好，我认为有监督才是解决的唯一方法，临时想了一些方案被否定了，这里事后整理一些设想。">
+<meta property="og:description" content="面了一家北京公司，提到希望对唇形优化，测试了官方的微信小程序，背景分割有锯齿状，口型与TTS对不上，脸部超分存在色差，应该是类似wav2lip GAN的方案，这是大部分初创公司会选择的方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230508.jpg">
-<meta property="article:published_time" content="2023-05-09T08:35:02.000Z">
-<meta property="article:modified_time" content="2023-05-10T03:44:00.535Z">
+<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230509.jpg">
+<meta property="article:published_time" content="2023-05-10T06:17:02.000Z">
+<meta property="article:modified_time" content="2023-05-10T06:32:35.283Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="AIGC">
-<meta property="article:tag" content="StableDiffusion">
+<meta property="article:tag" content="数字人">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230508.jpg">
+<meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230509.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>StableDiffusion深度思考（连续性） - ykk648&#39;s hub</title>
+  <title>数字人深度思考（唇形优化） - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,13 +198,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230508.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230509.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="StableDiffusion深度思考（连续性）"></span>
+            <span id="subtitle" data-typed-text="数字人深度思考（唇形优化）"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-09 16:35" pubdate>
-          2023年5月9日 下午
+        <time datetime="2023-05-10 14:17" pubdate>
+          2023年5月10日 下午
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.7k 字
         
       </span>
     
@@ -284,51 +284,47 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">StableDiffusion深度思考（连续性）</h1>
+            <h1 style="display: none">数字人深度思考（唇形优化）</h1>
             
             
               <div class="markdown-body">
                 
-                <p>在面试创业团队的时候被问到在StableDiffusion中如何解决离散图片&#x2F;视频生成视频连续性的问题，在该应用场景上我目前完整复现了开源效果，被大佬质疑如何比开源效果还好，我认为有监督才是解决的唯一方法，临时想了一些方案被否定了，这里事后整理一些设想。</p>
+                <p>面了一家北京公司，提到希望对唇形优化，测试了官方的微信小程序，背景分割有锯齿状，口型与TTS对不上，脸部超分存在色差，应该是类似wav2lip GAN的方案，这是大部分初创公司会选择的方案。</p>
 <span id="more"></span>
 
 
 
-<h3 id="SD深度原理"><a href="#SD深度原理" class="headerlink" title="SD深度原理"></a>SD深度原理</h3><p>首先SD是在Diffusion上的进步，把图片通过Perceptual Compress方式压缩到latent层面然后做前向加噪和反向去噪过程，并且对text prompt基于CLIP生成的embedding引入了UNet中的multi head attention结构中。</p>
-<p>一些重点：</p>
+<h3 id="口型驱动背景"><a href="#口型驱动背景" class="headerlink" title="口型驱动背景"></a>口型驱动背景</h3><p>逃不开的 <a target="_blank" rel="noopener" href="https://github.com/Markfryazino/wav2lip-hq">wav2lip</a>, 第一阶段训练一个专家鉴别器，鉴别口型和audio的匹配度，第二阶段通过encoder-decoder或者GAN的方式训练，减少输入audio和ref图片生成图片与GT的差距；</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/OpenTalker/SadTalker">SadTalker</a>比较新，可以认为是集大成者，分为嘴部和头部pose两部分，对于嘴部，用3DMM（<a target="_blank" rel="noopener" href="https://github.com/microsoft/Deep3DFaceReconstruction">Deep3DRecon</a>）做中间表示，基于wav2lip的输出利用表情系数的间接表示来学习唇形运动；对于头部，使用VAE结构，输入audio+第一帧姿态+style系数，来学习t帧与第一帧的残差（更稳定）；生成上借鉴了vid2vid和PIRenderer，只使用表情系数和头部pose来生成最终结果。</p>
+<p>最大的问题在于wav2lip是在 <a target="_blank" rel="noopener" href="https://www.robots.ox.ac.uk/~vgg/data/lip_reading/lrs2.html">LRS2</a>（BBC视频）上train的，SadTalker又在VoxCeleb上train，最终的尺寸也只有256x256，这种配置在中文上不可能取得好的效果，也不可能获得高清图像。</p>
+<hr>
+<h3 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h3><p><a target="_blank" rel="noopener" href="https://github.com/zhangzjn/APB2Face">APB2Face</a>第一阶段使用audio&#x2F;pose&#x2F;eye blink生成landmark，然后用pix2pix方式生成真实人脸，基于鉴别器的方式提升图像质量，每个人脸需要训练一个模型，由于audio&#x2F;pose&#x2F;eye多分支的输入使得特征解耦，可以分别控制面部不同位置的姿态；</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zhangzjn/APB2FaceV2">APB2FaceV2</a>解决了一个模型换N脸的问题，引入了AdaIN设计的AdaConv风格化(kerner1-&gt;3)，audio经过MFCC编码，效果仅在domain内部取得不错的效果，而在domain外面的人脸显然不能cover；</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix">pix2pix</a>在基础的GAN上引入了conditionGAN，提供了一张inference图片用于计算generator(UNet)生成图像与domain的差距（L1）；</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/NVIDIA/pix2pixHD">pix2pixHD</a>引入multi scale，解决高分辨率生成问题，使网络兼顾局部和全局特征；</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix">CycleGAN</a> 克服了 pix2pix 在图像转换中必须一一配对的限制，给定两个无序图像集 X 和 Y，CycleGAN基于两个生成器+cycle loss实现了domain adaption；</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/sangwoomo/instagan">instagan</a>引入了图像实例mask，网络结构与cyclegan相似，将多个不同的实例分割标签图一起concat进入网络，实现了跨实例的生成；</p>
 <ol>
-<li>Image映射到latent的过程是通过VAE encoder&#x2F;decoder来实现的；</li>
-<li>CLIP模型的训练过程是在0.4B数据上同时对image和text编码，缩小二者embedding余弦差距；</li>
-<li>Attention引入text embedding的过程是在QKV的KV中加入经过domain encoder编码的信息（text segmention等等），Q中仍然是是基于time step的latent，就形成了所谓的Condition UNet；</li>
-<li>训练过程中通过time step控制noise强度，来让模型分别在不同的time step学习高频&#x2F;低频信息；</li>
-<li>反向去噪的采样过程中，Karras提出噪音计划表，在采样后期降低噪声影响；DPM++是DPM的二阶方法，求解SDE（随机微分方程）问题；</li>
+<li>从分辨率的角度看，256x在人头生成上不支持高清效果，至少要512x；</li>
+<li>从数据集上，要解决静音问题，</li>
+<li>从生成图像质量的角度看，主要从网络结构和Loss的方向去考虑，</li>
+<li><ol>
+<li>Loss方向：L1 L2的生成图像与domain差异loss，提高图像质量的vgg loss (perception loss)，基于鉴别器的GAN loss；</li>
+<li>网络结构：生成器 UNet&#x2F;ResNet， Multi-scale鉴别器；</li>
+</ol>
+</li>
+<li>音频输入的角度，<a target="_blank" rel="noopener" href="https://github.com/librosa/librosa">MFCC</a>&#x2F;deepspeech等开源方案可以将audio转换为feature；</li>
+<li>控制生成稳定性的方面，引入inference对G D在loss层面上进行引导；</li>
+<li>增强泛化性上（语速和音色），需要对img和audio加噪；</li>
+<li>从解决口型的问题上，关键应该是数据集mask的处理；</li>
 </ol>
 <hr>
-<h3 id="开源解法"><a href="#开源解法" class="headerlink" title="开源解法"></a>开源解法</h3><p>开源的image&#x2F;video风格化基于<a target="_blank" rel="noopener" href="https://github.com/Scholar01/sd-webui-mov2mov">mov2mov</a>的思路，每一帧通过固定参数SD生成风格化图像然后合成在一起。</p>
-<p>一些trick包括：</p>
-<ol>
-<li><p>分割前景，获得更可控方案</p>
-</li>
-<li><p>叠加controlnet，hed +openpose等，提高稳定性</p>
-</li>
-<li><p>使用第一帧的seed来生成所有图像</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://xanthius.itch.io/multi-frame-rendering-for-stablediffusion">multi frame render</a> ，使用inpainting方法，左边放前帧，右边放第一帧，中间扣mask生成，有颜色退化问题，更稳定</p>
-</li>
-<li><p>Lora单独控制面部，获得更精细和可控的面部生成细节</p>
-</li>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>基于GAN&#x2F;VAE做audio2face的路线，为了解决高清问题，256的分辨率是无法支撑的，必须要有大量中文音频512以上的数据支撑；</li>
+<li>基于一些开源实现wav2lip Deep3DFace等等，难以避免的会陷入到domain limit里面，受限于训练数据，无法在某些场景上取得好的效果；</li>
+<li>如果没有大量数据的支撑，应当尽量简化问题，例如预测更少的区域，限定在更特殊的数据背景下，限定在某种TTS音色下，等等；</li>
+<li>牙齿生成大部分开源思路还是依托于SR模型，受限制严重，<a target="_blank" rel="noopener" href="https://github.com/Mahran-xo/Teeth-Segmentation-Using-U-Nets">teethnet</a>或许是一种好的思路；</li>
 </ol>
-<p>为什么multi frame render可以取得好的效果，因为前后帧对中间帧的生成起到了reference image的作用，这在talking head的连续性解决上非常常用。</p>
-<hr>
-<h3 id="有监督方案"><a href="#有监督方案" class="headerlink" title="有监督方案"></a>有监督方案</h3><p>为了可控生成，最有名的开源有监督方案就是controlnet，类似于lora，<a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet">controlnet</a>引入了额外的网络信息，使用zero 1x1 conv初始化，然后输入不同的监督信息，控制生成的方向。</p>
-<p>我个人比较常用的openpose控制姿态，HED&#x2F;Depth控制细节。</p>
-<p>理论上为了解决离散图像&#x2F;视频到视频的连续性问题，可以通过引入具有离散时序信息的controlnet来解决，可以是光流&#x2F;motion动量，通过获取前后离散帧的该信息，通过平均的方式获取中间补帧的信息，从而有条件控制生成。</p>
-<p>当然如果是某一动漫人物，可以通过lora来控制生成该人物角色的信息。</p>
-<hr>
-<h3 id="无监督方案（称是这种）"><a href="#无监督方案（称是这种）" class="headerlink" title="无监督方案（称是这种）"></a>无监督方案（称是这种）</h3><p>首先关注picsart的<a target="_blank" rel="noopener" href="https://github.com/Picsart-AI-Research/Text2Video-Zero">Text2Video-Zero</a>， 在初始GaussianNoise上做工作，引入MotionDynamic信息，全局运动向量（类似于上文的光流），引入到每一帧的latent编码中，然后提出帧间注意力机制，在QKV的KV中引入所有帧的KV；最后结合controlnet。</p>
-<p>这是我认为最接近无监督方案的一种方案（实际上也引入了前后帧的运动向量，本身也是一种监督），而该开源方案刚出来就做了测试，效果很差不可接受。</p>
-<p>明确一点，diffusion模型就是随机模型，即使给定相同的Gaussian Noise，采样过程也是不稳定的，在时间序列（或者说前后帧）上是不相关的。</p>
-<p>所以大佬提到具体的无监督（我理解无注入信息）的连续性SD生成问题，我不知道怎么解决，可能是一些控制高斯噪声或者lora的方法吧。</p>
 
                 
               </div>
@@ -366,7 +362,7 @@
       
         <a href="/tags/AIGC/">#AIGC</a>
       
-        <a href="/tags/StableDiffusion/">#StableDiffusion</a>
+        <a href="/tags/%E6%95%B0%E5%AD%97%E4%BA%BA/">#数字人</a>
       
     </div>
   
@@ -378,8 +374,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>StableDiffusion深度思考（连续性）</div>
-      <div>http://example.com/posts/10910/</div>
+      <div>数字人深度思考（唇形优化）</div>
+      <div>http://example.com/posts/60083/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +387,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月9日</div>
+          <div>2023年5月10日</div>
         </div>
       
       
@@ -423,18 +419,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/60083/" title="数字人深度思考（唇形优化）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数字人深度思考（唇形优化）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/47896/" title="AIGC项目相关全回顾">
-                        <span class="hidden-mobile">AIGC项目相关全回顾</span>
+                      <a href="/posts/10910/" title="StableDiffusion深度思考（连续性）">
+                        <span class="hidden-mobile">StableDiffusion深度思考（连续性）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

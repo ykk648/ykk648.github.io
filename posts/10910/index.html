@@ -18,32 +18,28 @@
   <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
-    <meta name="description" content="项目是要保密的，所以只是记录一些自己项目过程里的零零碎碎。">
+    <meta name="description" content="在面试创业团队的时候被问到在StableDiffusion中如何解决离散图片&#x2F;视频生成视频连续性的问题，在该应用场景上我目前完整复现了开源效果，被大佬质疑如何比开源效果还好，我认为有监督才是解决的唯一方法，临时想了一些方案被否定了，这里事后整理一些设想。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录蜂窝网络链路聚合项目的零碎">
-<meta property="og:url" content="http://example.com/posts/50343/index.html">
+<meta property="og:title" content="StableDiffusion深度思考（连续性）">
+<meta property="og:url" content="http://example.com/posts/10910/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="项目是要保密的，所以只是记录一些自己项目过程里的零零碎碎。">
+<meta property="og:description" content="在面试创业团队的时候被问到在StableDiffusion中如何解决离散图片&#x2F;视频生成视频连续性的问题，在该应用场景上我目前完整复现了开源效果，被大佬质疑如何比开源效果还好，我认为有监督才是解决的唯一方法，临时想了一些方案被否定了，这里事后整理一些设想。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/strongswan.png">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/vpn1.png">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/vpn2.png">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/TB29215.jpg?imageView2/3/w/300/h/150/q/90">
-<meta property="article:published_time" content="2016-10-11T14:22:34.000Z">
-<meta property="article:modified_time" content="2021-05-18T11:55:56.000Z">
+<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230508.jpg">
+<meta property="article:published_time" content="2023-05-09T08:35:02.000Z">
+<meta property="article:modified_time" content="2023-05-09T09:41:03.210Z">
 <meta property="article:author" content="ykk648">
-<meta property="article:tag" content="VPN">
-<meta property="article:tag" content="LTE">
-<meta property="article:tag" content="GSM">
-<meta property="article:tag" content="IPsec">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="AIGC">
+<meta property="article:tag" content="StableDiffusion">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://o7myibfc7.bkt.clouddn.com/strongswan.png">
+<meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230508.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>记录蜂窝网络链路聚合项目的零碎 - ykk648&#39;s hub</title>
+  <title>StableDiffusion深度思考（连续性） - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,13 +198,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/vidar-nordli-mathisen-OTTIkYClEyI-unsplash.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230508.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="记录蜂窝网络链路聚合项目的零碎"></span>
+            <span id="subtitle" data-typed-text="StableDiffusion深度思考（连续性）"></span>
           
         </div>
 
@@ -219,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2016-10-11 22:22" pubdate>
-          2016年10月11日 晚上
+        <time datetime="2023-05-09 16:35" pubdate>
+          2023年5月9日 下午
         </time>
       </span>
     
@@ -231,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          1.6k 字
         
       </span>
     
@@ -242,7 +238,7 @@
         
         
         
-          19 分钟
+          14 分钟
         
       </span>
     
@@ -288,90 +284,51 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">记录蜂窝网络链路聚合项目的零碎</h1>
+            <h1 style="display: none">StableDiffusion深度思考（连续性）</h1>
             
             
               <div class="markdown-body">
                 
-                <p>项目是要保密的，所以只是记录一些自己项目过程里的零零碎碎。</p>
+                <p>在面试创业团队的时候被问到在StableDiffusion中如何解决离散图片&#x2F;视频生成视频连续性的问题，在该应用场景上我目前完整复现了开源效果，被大佬质疑如何比开源效果还好，我认为有监督才是解决的唯一方法，临时想了一些方案被否定了，这里事后整理一些设想。</p>
 <span id="more"></span>
 
-<hr>
-<h3 id="对开源IPsec-VPN的研究"><a href="#对开源IPsec-VPN的研究" class="headerlink" title="对开源IPsec VPN的研究"></a>对开源IPsec VPN的研究</h3><h4 id="StrongSwan-vs-OpenSwan-vs-Libreswan"><a href="#StrongSwan-vs-OpenSwan-vs-Libreswan" class="headerlink" title="StrongSwan vs OpenSwan vs Libreswan"></a>StrongSwan vs OpenSwan vs Libreswan</h4><p>Libreswan是OpenSwan开发者因为商标问题新开发的开源VPN工具。</p>
-<ul>
-<li>StrongSwan has much more comprehensive and developed documentation than Libreswan.</li>
-<li>StrongSwan has support for EAP authentication methods, which make it easier to integrate into heterogeneous environments (such as authenticating to Active Directory). These are less well developed or even missing from Libreswan.</li>
-<li>StrongSwan can be clustered and load balanced. Libreswan does not seem to have any support to do either.</li>
-<li>Libreswan supports more hardware crypto accelerators than StrongSwan, but requires kernel patches to do so.</li>
-</ul>
-<h4 id="OpenSwan-roadwarrior-and-net2net"><a href="#OpenSwan-roadwarrior-and-net2net" class="headerlink" title="OpenSwan roadwarrior and net2net"></a>OpenSwan roadwarrior and net2net</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs routeros">config setup<br>    <span class="hljs-attribute">dumpdir</span>=/var/run/pluto/<br>    <span class="hljs-attribute">nat_traversal</span>=<span class="hljs-literal">yes</span><br>    <span class="hljs-attribute">virtual_private</span>=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v6:fd00::/8,%v6:fe80::/10<br>    <span class="hljs-attribute">protostack</span>=netkey<br>    <br>conn L2TP-PSK-NAT<br>    <span class="hljs-attribute">rightsubnet</span>=vhost:%priv<br>    <span class="hljs-attribute">also</span>=L2TP-PSK-noNAT<br><br>conn L2TP-PSK-noNAT<br>    <span class="hljs-attribute">authby</span>=secret<br>    <span class="hljs-attribute">pfs</span>=<span class="hljs-literal">no</span><br>    <span class="hljs-attribute">auto</span>=add<br>    <span class="hljs-attribute">keyingtries</span>=3<br>    <span class="hljs-attribute">ikelifetime</span>=8h<br>    <span class="hljs-attribute">keylife</span>=1h<br>    <span class="hljs-attribute">type</span>=transport<br>    <span class="hljs-attribute">left</span>=%SERVERIP%<br>    <span class="hljs-attribute">leftprotoport</span>=17/1701<br>    <span class="hljs-attribute">right</span>=%any<br>    <span class="hljs-attribute">rightprotoport</span>=17/%any<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nix">conn net-to-net <br>    <span class="hljs-attr">left=192.168.1.10</span>              <span class="hljs-comment"># LServer外网IP地址 </span><br>    <span class="hljs-attr">leftsubnet=10.10.10.0/24</span>       <span class="hljs-comment"># LServer内网IP段</span><br>    <span class="hljs-attr">leftrsasigkey=0sAQOBIJFmj…</span>   <span class="hljs-comment"># LServer的公钥 </span><br>    <span class="hljs-attr">leftnexthop=%defaultroute</span>      <span class="hljs-comment"># LServer的下一跳指定为默认路由地址 </span><br>    <span class="hljs-attr">right=192.168.1.20</span>             <span class="hljs-comment"># RServer外网IP地址 </span><br>    <span class="hljs-attr">rightsubnet=100.10.20.0/24</span>      <span class="hljs-comment"># RServer内网IP段</span><br>    <span class="hljs-attr">rightrsasigkey=0sAQNZZZjj…</span>   <span class="hljs-comment"># Rserver的公钥 </span><br>    <span class="hljs-attr">rightnexthop=%defaultroute</span>     <span class="hljs-comment"># RServer的下一跳指定为默认路由地址 </span><br>    <span class="hljs-attr">auto=start</span>                     <span class="hljs-comment"># 添加这个链接，启动时自动连接</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="StrongSwan的HA模式"><a href="#StrongSwan的HA模式" class="headerlink" title="StrongSwan的HA模式"></a>StrongSwan的HA模式</h4><p>The roadwarriors carol and dave set up a connection each to the virtual gateway mars implemented by the two real gateways alice and moon in a High Availability (HA) setup based on ClusterIP. Depending on the hash of the IP addresses of the peers and the SPIs, the inbound and outbound CHILD_SAs are either assigned to segment 1 managed by alice or segment 2 handled by moon. The IKEv2 protocol is managed by moon exclusively with passive IKE_SAs installed on the backup gateway alice. </p>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/strongswan.png" srcset="/img/loading.gif" lazyload alt="StrongSwan的HA模式"></p>
-<h4 id="VPN链路聚合的两种方案"><a href="#VPN链路聚合的两种方案" class="headerlink" title="VPN链路聚合的两种方案"></a>VPN链路聚合的两种方案</h4><ul>
-<li>主要实现还是利用了<code>Netfilter HOOK</code></li>
-</ul>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/vpn1.png" srcset="/img/loading.gif" lazyload alt="《支持多路负载平衡的IPsec VPN 系统的设计与实现》"></p>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/vpn2.png" srcset="/img/loading.gif" lazyload alt="《高可用IPsec虚拟专用网研究》"></p>
+<h3 id="SD深度原理"><a href="#SD深度原理" class="headerlink" title="SD深度原理"></a>SD深度原理</h3><p>首先SD是在Diffusion上的进步，把图片通过Perceptual Compress方式压缩到latent层面然后做前向加噪和反向去噪过程，并且对text prompt基于CLIP生成的embedding引入了UNet中的multi head attention结构中。</p>
+<p>一些重点：</p>
+<ol>
+<li>Image映射到latent的过程是通过VAE encoder&#x2F;decoder来实现的；</li>
+<li>CLIP模型的训练过程是在0.4B数据上同时对image和text编码，缩小二者embedding余弦差距；</li>
+<li>Attention引入text embedding的过程是在QKV的KV中加入经过domain encoder编码的信息（text segmention等等），Q中仍然是是基于time step的latent，就形成了所谓的Condition UNet；</li>
+<li>训练过程中通过time step控制noise强度，来让模型分别在不同的time step学习高频&#x2F;低频信息；</li>
+<li>反向去噪的采样过程中，Karras提出噪音计划表，在采样后期降低噪声影响；DPM++是DPM的二阶方法，求解SDE（随机微分方程）问题；</li>
+</ol>
 <hr>
-<h3 id="硬件问题"><a href="#硬件问题" class="headerlink" title="硬件问题"></a>硬件问题</h3><ul>
-<li>常见天线接头类型:</li>
-</ul>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/TB29215.jpg?imageView2/3/w/300/h/150/q/90" srcset="/img/loading.gif" lazyload alt="常见天线接头类型"></p>
+<h3 id="开源解法"><a href="#开源解法" class="headerlink" title="开源解法"></a>开源解法</h3><p>开源的image&#x2F;video风格化基于<a target="_blank" rel="noopener" href="https://github.com/Scholar01/sd-webui-mov2mov">mov2mov</a>的思路，每一帧通过固定参数SD生成风格化图像然后合成在一起。</p>
+<p>一些trick包括：</p>
+<ol>
+<li><p>分割前景，获得更可控方案</p>
+</li>
+<li><p>叠加controlnet，hed +openpose等，提高稳定性</p>
+</li>
+<li><p>使用第一帧的seed来生成所有图像</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://xanthius.itch.io/multi-frame-rendering-for-stablediffusion">multi frame render</a> ，使用inpainting方法，左边放前帧，右边放第一帧，中间扣mask生成，有颜色退化问题，更稳定</p>
+</li>
+<li><p>Lora单独控制面部，获得更精细和可控的面部生成细节</p>
+</li>
+</ol>
+<p>为什么multi frame render可以取得好的效果，因为前后帧对中间帧的生成起到了reference image的作用，这在talking head的连续性解决上非常常用。</p>
 <hr>
-<h3 id="SIM7100拨号脚本"><a href="#SIM7100拨号脚本" class="headerlink" title="SIM7100拨号脚本"></a>SIM7100拨号脚本</h3><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>详见gayhub：</p>
-<div class="github-widget" data-repo="cloisonne/SIM7100-dial-script"></div>
-
-<h4 id="上网设置APN-拨号号码，帐号和密码"><a href="#上网设置APN-拨号号码，帐号和密码" class="headerlink" title="上网设置APN,拨号号码，帐号和密码"></a>上网设置APN,拨号号码，帐号和密码</h4><table>
-<thead>
-<tr>
-<th>运营商（ISP）</th>
-<th>APN</th>
-<th>拨号号码</th>
-<th>帐号</th>
-<th>密码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>中国联通WCDMA（China Unicom）</td>
-<td>3GNET</td>
-<td>*99#</td>
-<td>空</td>
-<td>空</td>
-</tr>
-<tr>
-<td>中国电信CDMA2000（China Telecom）EVDO网络</td>
-<td>空</td>
-<td>#777</td>
-<td><a href="mailto:&#99;&#x74;&#110;&#x65;&#x74;&#64;&#109;&#121;&#99;&#x64;&#x6d;&#x61;&#x2e;&#99;&#110;">&#99;&#x74;&#110;&#x65;&#x74;&#64;&#109;&#121;&#99;&#x64;&#x6d;&#x61;&#x2e;&#99;&#110;</a></td>
-<td>vnet.mobi</td>
-</tr>
-<tr>
-<td>1X网络</td>
-<td>空</td>
-<td>#777</td>
-<td>card (CARD)</td>
-<td>card（CARD）</td>
-</tr>
-<tr>
-<td>中国移动 TD-SCDMA（China Mobile）</td>
-<td>CMNET</td>
-<td><em>98</em>1#</td>
-<td>空</td>
-<td>空</td>
-</tr>
-<tr>
-<td>中国移动 GPRS（China Mobile）</td>
-<td>CMNET</td>
-<td><em>99</em>**1#</td>
-<td>空</td>
-<td>空</td>
-</tr>
-</tbody></table>
+<h3 id="有监督方案"><a href="#有监督方案" class="headerlink" title="有监督方案"></a>有监督方案</h3><p>为了可控生成，最有名的开源有监督方案就是controlnet，类似于lora，<a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet">controlnet</a>引入了额外的网络信息，使用zero 1x1 conv初始化，然后输入不同的监督信息，控制生成的方向。</p>
+<p>我个人比较常用的openpose控制姿态，HED&#x2F;Depth控制细节。</p>
+<p>理论上为了解决离散图像&#x2F;视频到视频的连续性问题，可以通过引入具有离散时序信息的controlnet来解决，可以是光流&#x2F;motion动量，通过获取前后离散帧的该信息，通过平均的方式获取中间补帧的信息，从而有条件控制生成。</p>
+<p>当然如果是某一动漫人物，可以通过lora来控制生成该人物角色的信息。</p>
 <hr>
-<h3 id="OpenSwan源码解析"><a href="#OpenSwan源码解析" class="headerlink" title="OpenSwan源码解析"></a>OpenSwan源码解析</h3><p>后面没有使用开源VPN，这里没有继续接触。</p>
+<h3 id="无监督方案（称是这种）"><a href="#无监督方案（称是这种）" class="headerlink" title="无监督方案（称是这种）"></a>无监督方案（称是这种）</h3><p>首先关注picsart的<a target="_blank" rel="noopener" href="https://github.com/Picsart-AI-Research/Text2Video-Zero">Text2Video-Zero</a>， 在初始GaussianNoise上做工作，引入MotionDynamic信息，全局运动向量（类似于上文的光流），引入到每一帧的latent编码中，然后提出帧间注意力机制，在QKV的KV中引入所有帧的KV；最后结合controlnet。</p>
+<p>这是我认为最接近无监督方案的一种方案（实际上也引入了前后帧的运动向量，本身也是一种监督），而该开源方案刚出来就做了测试，效果很差不可接受。</p>
+<p>明确一点，diffusion模型就是随机模型，即使给定相同的Gaussian Noise，采样过程也是不稳定的，在时间序列（或者说前后帧）上是不相关的。</p>
+<p>所以大佬提到具体的无监督（我理解无注入信息）的连续性SD生成问题，我不知道怎么解决，可能是一些控制高斯噪声或者lora的方法吧。</p>
 
                 
               </div>
@@ -405,13 +362,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/VPN/">#VPN</a>
+        <a href="/tags/AI/">#AI</a>
       
-        <a href="/tags/LTE/">#LTE</a>
+        <a href="/tags/AIGC/">#AIGC</a>
       
-        <a href="/tags/GSM/">#GSM</a>
-      
-        <a href="/tags/IPsec/">#IPsec</a>
+        <a href="/tags/StableDiffusion/">#StableDiffusion</a>
       
     </div>
   
@@ -423,8 +378,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>记录蜂窝网络链路聚合项目的零碎</div>
-      <div>http://example.com/posts/50343/</div>
+      <div>StableDiffusion深度思考（连续性）</div>
+      <div>http://example.com/posts/10910/</div>
     </div>
     <div class="license-meta">
       
@@ -436,7 +391,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2016年10月11日</div>
+          <div>2023年5月9日</div>
         </div>
       
       
@@ -468,18 +423,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/59760/" title="做了一些改变">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">做了一些改变</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/53056/" title="用到的sublime快捷键">
-                        <span class="hidden-mobile">用到的sublime快捷键</span>
+                      <a href="/posts/47896/" title="AIGC项目相关全回顾">
+                        <span class="hidden-mobile">AIGC项目相关全回顾</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

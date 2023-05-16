@@ -18,32 +18,27 @@
   <meta name="author" content="ykk648">
   <meta name="keywords" content="">
   
-    <meta name="description" content="项目是要保密的，所以只是记录一些自己项目过程里的零零碎碎。">
+    <meta name="description" content="大厂面试准备的DL基础概念回顾。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录蜂窝网络链路聚合项目的零碎">
-<meta property="og:url" content="http://example.com/posts/50343/index.html">
+<meta property="og:title" content="神经网络基础概念">
+<meta property="og:url" content="http://example.com/posts/59633/index.html">
 <meta property="og:site_name" content="ykk648&#39;s hub">
-<meta property="og:description" content="项目是要保密的，所以只是记录一些自己项目过程里的零零碎碎。">
+<meta property="og:description" content="大厂面试准备的DL基础概念回顾。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/strongswan.png">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/vpn1.png">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/vpn2.png">
-<meta property="og:image" content="http://o7myibfc7.bkt.clouddn.com/TB29215.jpg?imageView2/3/w/300/h/150/q/90">
-<meta property="article:published_time" content="2016-10-11T14:22:34.000Z">
-<meta property="article:modified_time" content="2021-05-18T11:55:56.000Z">
+<meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230514.jpg">
+<meta property="article:published_time" content="2023-05-15T05:44:02.000Z">
+<meta property="article:modified_time" content="2023-05-16T09:13:13.144Z">
 <meta property="article:author" content="ykk648">
-<meta property="article:tag" content="VPN">
-<meta property="article:tag" content="LTE">
-<meta property="article:tag" content="GSM">
-<meta property="article:tag" content="IPsec">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="NLP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://o7myibfc7.bkt.clouddn.com/strongswan.png">
+<meta name="twitter:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230514.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>记录蜂窝网络链路聚合项目的零碎 - ykk648&#39;s hub</title>
+  <title>神经网络基础概念 - ykk648&#39;s hub</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,13 +197,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/vidar-nordli-mathisen-OTTIkYClEyI-unsplash.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/20230514.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="记录蜂窝网络链路聚合项目的零碎"></span>
+            <span id="subtitle" data-typed-text="神经网络基础概念"></span>
           
         </div>
 
@@ -219,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2016-10-11 22:22" pubdate>
-          2016年10月11日 晚上
+        <time datetime="2023-05-15 13:44" pubdate>
+          2023年5月15日 下午
         </time>
       </span>
     
@@ -231,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          952 字
         
       </span>
     
@@ -242,7 +237,7 @@
         
         
         
-          19 分钟
+          8 分钟
         
       </span>
     
@@ -288,90 +283,68 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">记录蜂窝网络链路聚合项目的零碎</h1>
+            <h1 style="display: none">神经网络基础概念</h1>
             
             
               <div class="markdown-body">
                 
-                <p>项目是要保密的，所以只是记录一些自己项目过程里的零零碎碎。</p>
+                <p>大厂面试准备的DL基础概念回顾。</p>
 <span id="more"></span>
 
+
+
+<h3 id="网络结构相关"><a href="#网络结构相关" class="headerlink" title="网络结构相关"></a>网络结构相关</h3><h4 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h4><ul>
+<li>Resnet block</li>
+</ul>
+<h4 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h4><ul>
+<li>Standard Conv</li>
+<li>Tranpose Conv</li>
+<li>Depth-wise Conv 深度可分离卷积，每个通道进行卷积，按通道方向1x1逐点卷积</li>
+<li>Dilated Conv 空洞卷积，卷积核内部加入0值，增加感受野</li>
+<li>Deconvolution</li>
+</ul>
+<h4 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h4><ul>
+<li>SE (squeeze and excitation  GAP+FC+RELU+FC+Sigmoid</li>
+<li>SK 类SE，使用不同kernel大小（3x3 5x5）获取不同的attention并施加到channel上</li>
+<li>CBAM 类SE，除了GAP加了MP（max pooling），分别在channel和spatial（7*7 kernel）维度上attention</li>
+<li>ECA FC替换为conv，减少计算量，去掉了通道之间的注意力</li>
+<li>Self Attention ，QKt是矩阵相似度，softmax进行归一化，然后与V值相乘获得带权表示</li>
+</ul>
+<h4 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h4><ul>
+<li>BN，每个batch进行归一化，避免梯度消失和梯度爆炸，提高训练速度</li>
+<li>IN，对每个图片每个通道归一化，适合单张图片训练任务</li>
+<li>Condition BN，使用网络求解出scale&#x2F;bias，适用于CGAN VAE图像生成任务</li>
+<li>AdaIN，自适应IN，可以通过参考样本注入style（scale&#x2F;bias）</li>
+</ul>
+<h4 id="Activation"><a href="#Activation" class="headerlink" title="Activation"></a>Activation</h4><ul>
+<li>Sigmoid 实数映射到0-1</li>
+<li>Tanh 实数映射到-1-1</li>
+<li>ReLU LeakeyReLU PReLU max(0,x) max(0,ax) a可学习</li>
+<li>Softmax</li>
+</ul>
+<h4 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h4><ul>
+<li>GAP 每个通道特征图像素平均</li>
+<li>MP 按照窗口对特征图降维</li>
+</ul>
 <hr>
-<h3 id="对开源IPsec-VPN的研究"><a href="#对开源IPsec-VPN的研究" class="headerlink" title="对开源IPsec VPN的研究"></a>对开源IPsec VPN的研究</h3><h4 id="StrongSwan-vs-OpenSwan-vs-Libreswan"><a href="#StrongSwan-vs-OpenSwan-vs-Libreswan" class="headerlink" title="StrongSwan vs OpenSwan vs Libreswan"></a>StrongSwan vs OpenSwan vs Libreswan</h4><p>Libreswan是OpenSwan开发者因为商标问题新开发的开源VPN工具。</p>
+<h3 id="训练相关"><a href="#训练相关" class="headerlink" title="训练相关"></a>训练相关</h3><h4 id="Loss-x2F-Metrics"><a href="#Loss-x2F-Metrics" class="headerlink" title="Loss&#x2F;Metrics"></a>Loss&#x2F;Metrics</h4><p><strong>classificaiton</strong></p>
 <ul>
-<li>StrongSwan has much more comprehensive and developed documentation than Libreswan.</li>
-<li>StrongSwan has support for EAP authentication methods, which make it easier to integrate into heterogeneous environments (such as authenticating to Active Directory). These are less well developed or even missing from Libreswan.</li>
-<li>StrongSwan can be clustered and load balanced. Libreswan does not seem to have any support to do either.</li>
-<li>Libreswan supports more hardware crypto accelerators than StrongSwan, but requires kernel patches to do so.</li>
+<li>Softmax&#x2F;Cross Entropy  多分类的概率问题，交叉熵求导是P-Y ，概率减去label</li>
+<li>BCE loss （二进制交叉熵损失）</li>
 </ul>
-<h4 id="OpenSwan-roadwarrior-and-net2net"><a href="#OpenSwan-roadwarrior-and-net2net" class="headerlink" title="OpenSwan roadwarrior and net2net"></a>OpenSwan roadwarrior and net2net</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs routeros">config setup<br>    <span class="hljs-attribute">dumpdir</span>=/var/run/pluto/<br>    <span class="hljs-attribute">nat_traversal</span>=<span class="hljs-literal">yes</span><br>    <span class="hljs-attribute">virtual_private</span>=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v6:fd00::/8,%v6:fe80::/10<br>    <span class="hljs-attribute">protostack</span>=netkey<br>    <br>conn L2TP-PSK-NAT<br>    <span class="hljs-attribute">rightsubnet</span>=vhost:%priv<br>    <span class="hljs-attribute">also</span>=L2TP-PSK-noNAT<br><br>conn L2TP-PSK-noNAT<br>    <span class="hljs-attribute">authby</span>=secret<br>    <span class="hljs-attribute">pfs</span>=<span class="hljs-literal">no</span><br>    <span class="hljs-attribute">auto</span>=add<br>    <span class="hljs-attribute">keyingtries</span>=3<br>    <span class="hljs-attribute">ikelifetime</span>=8h<br>    <span class="hljs-attribute">keylife</span>=1h<br>    <span class="hljs-attribute">type</span>=transport<br>    <span class="hljs-attribute">left</span>=%SERVERIP%<br>    <span class="hljs-attribute">leftprotoport</span>=17/1701<br>    <span class="hljs-attribute">right</span>=%any<br>    <span class="hljs-attribute">rightprotoport</span>=17/%any<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nix">conn net-to-net <br>    <span class="hljs-attr">left=192.168.1.10</span>              <span class="hljs-comment"># LServer外网IP地址 </span><br>    <span class="hljs-attr">leftsubnet=10.10.10.0/24</span>       <span class="hljs-comment"># LServer内网IP段</span><br>    <span class="hljs-attr">leftrsasigkey=0sAQOBIJFmj…</span>   <span class="hljs-comment"># LServer的公钥 </span><br>    <span class="hljs-attr">leftnexthop=%defaultroute</span>      <span class="hljs-comment"># LServer的下一跳指定为默认路由地址 </span><br>    <span class="hljs-attr">right=192.168.1.20</span>             <span class="hljs-comment"># RServer外网IP地址 </span><br>    <span class="hljs-attr">rightsubnet=100.10.20.0/24</span>      <span class="hljs-comment"># RServer内网IP段</span><br>    <span class="hljs-attr">rightrsasigkey=0sAQNZZZjj…</span>   <span class="hljs-comment"># Rserver的公钥 </span><br>    <span class="hljs-attr">rightnexthop=%defaultroute</span>     <span class="hljs-comment"># RServer的下一跳指定为默认路由地址 </span><br>    <span class="hljs-attr">auto=start</span>                     <span class="hljs-comment"># 添加这个链接，启动时自动连接</span><br></code></pre></td></tr></table></figure>
-
-<h4 id="StrongSwan的HA模式"><a href="#StrongSwan的HA模式" class="headerlink" title="StrongSwan的HA模式"></a>StrongSwan的HA模式</h4><p>The roadwarriors carol and dave set up a connection each to the virtual gateway mars implemented by the two real gateways alice and moon in a High Availability (HA) setup based on ClusterIP. Depending on the hash of the IP addresses of the peers and the SPIs, the inbound and outbound CHILD_SAs are either assigned to segment 1 managed by alice or segment 2 handled by moon. The IKEv2 protocol is managed by moon exclusively with passive IKE_SAs installed on the backup gateway alice. </p>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/strongswan.png" srcset="/img/loading.gif" lazyload alt="StrongSwan的HA模式"></p>
-<h4 id="VPN链路聚合的两种方案"><a href="#VPN链路聚合的两种方案" class="headerlink" title="VPN链路聚合的两种方案"></a>VPN链路聚合的两种方案</h4><ul>
-<li>主要实现还是利用了<code>Netfilter HOOK</code></li>
+<p><strong>image quality</strong></p>
+<ul>
+<li>PSNR 基于像素均方误差的归一化表示</li>
+<li>SSIM 均值&#x2F;协方差，计算图像相似度</li>
+<li>LPIPS 预训练模型</li>
+<li>FID 比较生成数据和真实数据在特征空间的距离</li>
 </ul>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/vpn1.png" srcset="/img/loading.gif" lazyload alt="《支持多路负载平衡的IPsec VPN 系统的设计与实现》"></p>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/vpn2.png" srcset="/img/loading.gif" lazyload alt="《高可用IPsec虚拟专用网研究》"></p>
-<hr>
-<h3 id="硬件问题"><a href="#硬件问题" class="headerlink" title="硬件问题"></a>硬件问题</h3><ul>
-<li>常见天线接头类型:</li>
+<p><strong>GAN</strong></p>
+<ul>
+<li>Adversarial loss ，对抗损失</li>
+<li>Cycle loss ， 循环一致性损失，CycleGAN，pix2pix</li>
 </ul>
-<p><img src="http://o7myibfc7.bkt.clouddn.com/TB29215.jpg?imageView2/3/w/300/h/150/q/90" srcset="/img/loading.gif" lazyload alt="常见天线接头类型"></p>
 <hr>
-<h3 id="SIM7100拨号脚本"><a href="#SIM7100拨号脚本" class="headerlink" title="SIM7100拨号脚本"></a>SIM7100拨号脚本</h3><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>详见gayhub：</p>
-<div class="github-widget" data-repo="cloisonne/SIM7100-dial-script"></div>
-
-<h4 id="上网设置APN-拨号号码，帐号和密码"><a href="#上网设置APN-拨号号码，帐号和密码" class="headerlink" title="上网设置APN,拨号号码，帐号和密码"></a>上网设置APN,拨号号码，帐号和密码</h4><table>
-<thead>
-<tr>
-<th>运营商（ISP）</th>
-<th>APN</th>
-<th>拨号号码</th>
-<th>帐号</th>
-<th>密码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>中国联通WCDMA（China Unicom）</td>
-<td>3GNET</td>
-<td>*99#</td>
-<td>空</td>
-<td>空</td>
-</tr>
-<tr>
-<td>中国电信CDMA2000（China Telecom）EVDO网络</td>
-<td>空</td>
-<td>#777</td>
-<td><a href="mailto:&#99;&#x74;&#110;&#101;&#116;&#x40;&#x6d;&#x79;&#x63;&#100;&#x6d;&#x61;&#x2e;&#99;&#110;">&#99;&#x74;&#110;&#101;&#116;&#x40;&#x6d;&#x79;&#x63;&#100;&#x6d;&#x61;&#x2e;&#99;&#110;</a></td>
-<td>vnet.mobi</td>
-</tr>
-<tr>
-<td>1X网络</td>
-<td>空</td>
-<td>#777</td>
-<td>card (CARD)</td>
-<td>card（CARD）</td>
-</tr>
-<tr>
-<td>中国移动 TD-SCDMA（China Mobile）</td>
-<td>CMNET</td>
-<td><em>98</em>1#</td>
-<td>空</td>
-<td>空</td>
-</tr>
-<tr>
-<td>中国移动 GPRS（China Mobile）</td>
-<td>CMNET</td>
-<td><em>99</em>**1#</td>
-<td>空</td>
-<td>空</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="OpenSwan源码解析"><a href="#OpenSwan源码解析" class="headerlink" title="OpenSwan源码解析"></a>OpenSwan源码解析</h3><p>后面没有使用开源VPN，这里没有继续接触。</p>
 
                 
               </div>
@@ -405,13 +378,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/VPN/">#VPN</a>
+        <a href="/tags/AI/">#AI</a>
       
-        <a href="/tags/LTE/">#LTE</a>
-      
-        <a href="/tags/GSM/">#GSM</a>
-      
-        <a href="/tags/IPsec/">#IPsec</a>
+        <a href="/tags/NLP/">#NLP</a>
       
     </div>
   
@@ -423,8 +392,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>记录蜂窝网络链路聚合项目的零碎</div>
-      <div>http://example.com/posts/50343/</div>
+      <div>神经网络基础概念</div>
+      <div>http://example.com/posts/59633/</div>
     </div>
     <div class="license-meta">
       
@@ -436,7 +405,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2016年10月11日</div>
+          <div>2023年5月15日</div>
         </div>
       
       
@@ -468,18 +437,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/59760/" title="做了一些改变">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">做了一些改变</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/53056/" title="用到的sublime快捷键">
-                        <span class="hidden-mobile">用到的sublime快捷键</span>
+                      <a href="/posts/2259/" title="NLP大模型技术详解">
+                        <span class="hidden-mobile">NLP大模型技术详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

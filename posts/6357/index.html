@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/deepfake.jpg.JPG">
 <meta property="article:published_time" content="2023-01-12T08:37:10.000Z">
-<meta property="article:modified_time" content="2023-05-08T07:04:24.519Z">
+<meta property="article:modified_time" content="2023-05-16T10:08:45.058Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="DeepFake">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.8k 字
+          5.2k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          41 分钟
+          44 分钟
         
       </span>
     
@@ -346,6 +346,7 @@
 <h3 id="SimSwap并行化"><a href="#SimSwap并行化" class="headerlink" title="SimSwap并行化"></a>SimSwap并行化</h3><p>在手头没有更好的换脸模型情况下，对simswap模型并行化，进行换脸视频的快速产出。</p>
 <p>通过mount tmpfs优化IO，multi thread优化推理速度等，实现4*A100（24G）显存下20路并行，满足了生产要求。</p>
 <p>项目在后续已废弃，但为hififace实时化提供了不错的代码模板，hififace realtime就是基于此开发的。</p>
+<h4 id="simswap技术"><a href="#simswap技术" class="headerlink" title="simswap技术"></a>simswap技术</h4><p>eocoder-decoder结构，在中间加入了identity（insightface）的注入（AdaIN）</p>
 <hr>
 <h3 id="HifiFace复现"><a href="#HifiFace复现" class="headerlink" title="HifiFace复现"></a>HifiFace复现</h3><p>HifiFace 2021年横空出世，效果惊艳，远超其他开源项目，官网并没有开源计划，于是着手复现，全项目复现完成比第三方复现开源早1-2个月，效果也远超第三方复现效果，未开源。</p>
 <h4 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h4><ul>
@@ -361,11 +362,19 @@
 <li>数据集人脸增强（超分 重建 美颜）</li>
 </ul>
 <h4 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h4><p><strong>generator</strong></p>
+<p>原始论文结构：</p>
+<ul>
+<li>引入模型对mask的学习，学会预测人脸边缘，attention到人脸部分；</li>
+<li>multi scale分辨率的处理，低分辨率和高分辨率不公用loss，参数控制，用于属性和id解耦；</li>
+<li>使用了脸部3D信息：pose&#x2F;expression&#x2F;identity</li>
+</ul>
 <p>除复现论文结构，并在此基础上做kernel size&#x2F;batch norm&#x2F;256 lift to 512等实验外，参考<a target="_blank" rel="noopener" href="https://github.com/yl4579/StarGANv2-VC">StarGanV2</a>引进了generator结构特性：</p>
 <ul>
 <li>AdaINRes</li>
-<li>bias&#x2F;upsample inter mode&#x2F;sqrt2 tricks</li>
+<li>bias&#x2F;upsample inter mode&#x2F;sqrt2 tricks（除根2归一化（对AdaIN fuse注入模块的结构修改 （增加偏置参数</li>
 </ul>
+<p>同时也对输入特征做了一些细节化处理，包括去掉identity pose等3D人脸系数；</p>
+<p>将mask分支解耦，在预测时可以砍掉以提速等等；</p>
 <p><strong>discriminator</strong></p>
 <p>除复现论文结构外，参考<a target="_blank" rel="noopener" href="https://github.com/NVlabs/SPADE">SPADE</a>&#x2F;<a target="_blank" rel="noopener" href="https://github.com/neuralchen/SimSwap">SimSwap</a>做了不同尝试，包括：</p>
 <ul>
@@ -398,6 +407,7 @@
 <h4 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h4><p>以npy格式提供face embedding 信息，基于CurricularFace；</p>
 <p>以npy格式提供face 3d coff信息，基于DeepFace3D;</p>
 <p>使用GPEN GFPGAN DFDNet等face restore方法对数据超分，建立enhance数据集；</p>
+<p>提供丰富的数据集分类用于调参和提升模型效果，包括闭眼数据&#x2F;张嘴数据等等</p>
 <hr>
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><h4 id="四大工程"><a href="#四大工程" class="headerlink" title="四大工程"></a>四大工程</h4><p>前后迭代了4-5个工程，几十个版本，最终保留的几个工程包括魔改的DFL多阶段训练代码（兼容原DFL功能），SimSwap多路换脸代码（提速），人脸特征提取工程，换脸API。</p>
 <p><strong>DFL多阶段训练代码</strong>（兼容原DFL功能），如上</p>

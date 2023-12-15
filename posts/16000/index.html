@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog2021-1252404748.cos.ap-nanjing.myqcloud.com/2d_digital_human.jpg">
 <meta property="article:published_time" content="2023-03-02T06:44:35.000Z">
-<meta property="article:modified_time" content="2023-06-07T03:27:25.669Z">
+<meta property="article:modified_time" content="2023-12-14T02:28:04.601Z">
 <meta property="article:author" content="ykk648">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="TalkingHead">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          20 分钟
+          17 分钟
         
       </span>
     
@@ -331,13 +331,6 @@
 <p>生产上在ADNerf开源之前就完成了复现，为了提高效果，主要从feature提取、loss设计、网络设计、调参等过程上进行优化。</p>
 <p>例如使用<a target="_blank" rel="noopener" href="https://github.com/choyingw/SynergyNet">SynergyNet</a>或者mediapipe提取head pose，利用wenet提取audio，引入hdr loss调整配比等。</p>
 <p>但最后的结果一般，后续有机会跟ADNerf的作者进行了沟通，他承认本身团队达到的效果就一般，未能达到生产级别。</p>
-<h4 id="数字人生产方案"><a href="#数字人生产方案" class="headerlink" title="数字人生产方案"></a>数字人生产方案</h4><p>最早基于<a target="_blank" rel="noopener" href="https://github.com/zhangzjn/APB2Face">apb2face</a>，后面为了实现高清效果基于<a target="_blank" rel="noopener" href="https://github.com/NVIDIA/pix2pixHD">pix2pixHD</a>；</p>
-<p>需要长时间语料，对face image做区域遮挡，只对嘴型做pix2pix，输入audio feature + mask face&#x2F;reference face，参考图像是为了更稳定。</p>
-<p>loss包括perception loss(vgg) L1 loss等等常见loss。</p>
-<p>生产上做的优化包括如何降低语料长度，TTS对中文更好的支持等等。</p>
-<p>一种比较trick的方案是使用短时长数据+FOM&#x2F;deepfake进行长时间语料生成。</p>
-<p>后面两项参与的比较多，整体数字人生产迭代参与较少。</p>
-<p>生成效果一方面依靠TTS的准确性，另一方面和录制素材有关，做toB业务还好，做toC业务一般无法提供满足标准的口播素材。</p>
 
                 
               </div>
